@@ -7,4 +7,4 @@ deploy/*
 *.cache
 TestResults/
 packages/
-FHNWPrototype.Infrastructure\Repositories.EF\ProfilePics/
+FHNWPrototype.Infrastructure/Repositories.EF/ProfilePics/
