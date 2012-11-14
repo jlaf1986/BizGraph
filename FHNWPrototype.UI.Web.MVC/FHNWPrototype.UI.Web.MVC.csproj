@@ -360,13 +360,7 @@
     <Content Include="Views\Groups\Members.cshtml" />
     <Content Include="Views\OrganizationAccounts\Index.cshtml" />
     <Content Include="Views\OrganizationAccounts\OrganizationAccount.cshtml" />
-    <Content Include="Views\Organizations\Alliance.cshtml" />
-    <Content Include="Views\Organizations\Alliances.cshtml" />
-    <Content Include="Views\Organizations\Employees.cshtml" />
-    <Content Include="Views\Organizations\Index.cshtml" />
     <Content Include="Views\Organizations\Organization.cshtml" />
-    <Content Include="Views\Organizations\Partnership.cshtml" />
-    <Content Include="Views\Organizations\Partnerships.cshtml" />
     <Content Include="Views\UserAccounts\Friendship.cshtml" />
     <Content Include="Views\UserAccounts\Index.cshtml" />
     <Content Include="Views\UserAccounts\UserAccount.cshtml" />
