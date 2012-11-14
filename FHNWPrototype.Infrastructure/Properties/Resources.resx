@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="allianceHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\allianceHeader.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="allianceProfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\allianceProfile.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bill_gates" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\bill_gates.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="coop_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\coop_avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="coop_header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\coop_header.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dhl_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\dhl_avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dhl_header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\dhl_header.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="emmi_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\emmi_avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="emmi_header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\emmi_header.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="eric_schmidt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\eric_schmidt.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="erne_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\erne_avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="erne_header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\erne_header.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="galliker_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\galliker_avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="galliker_header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\galliker_header.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="groupHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\groupHeader.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="groupProfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\groupProfile.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hp_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\hp_avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hp_header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\hp_header.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="larry_ellison" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\larry_ellison.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="larry_page" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\larry_page.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="linus_torvalds" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\linus_torvalds.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="marissa_mayer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\marissa_mayer.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="marti_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\marti_avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="marti_header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\marti_header.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="migros_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\migros_avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="migros_header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\migros_header.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="montanstahl_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\montanstahl_avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="montanstahl_header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\montanstahl_header.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="nestle_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\nestle_avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="nestle_header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\nestle_header.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="paul_allen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\paul_allen.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ray_ozzie" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\ray_ozzie.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reid_hoffman" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\reid_hoffman.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scott_guthrie" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\scott_guthrie.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="scott_hanselman" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\scott_hanselman.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sergey_brin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\sergey_brin.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sheryl_sandberg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\sheryl_sandberg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="steve_ballmer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\steve_ballmer.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="steve_jobs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\steve_jobs.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="steve_wozniak" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\steve_wozniak.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="swissgovernment_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\swissgovernment_avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="swissgovernment_header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\swissgovernment_header.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="swisspost_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\swisspost_avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="swisspost_header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\swisspost_header.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="virginia_rometty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Repositories.EF\ProfilePics\virginia_rometty.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>

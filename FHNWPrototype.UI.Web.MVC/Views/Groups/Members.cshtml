@@ -1,0 +1,19 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Groups.GroupMembershipsView
+
+@{
+    ViewBag.Title = "Members";
+}
+
+<h2>Members of @Model.GroupName</h2>
+<table>
+<tr>
+<td></td>
+<td></td>
+</tr>
+@{ int i=-1;}
+   @foreach (KeyValuePair<string, string> member in Model.GroupMembershipStatuses)
+   {
+       i++;
+    <tr><td>@member.Key</td><td>@member.Value</td></tr>
+   }
+</table>

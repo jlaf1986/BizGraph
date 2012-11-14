@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA5D00E8-23C1-4FF9-92B1-719161EF7BE8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FHNWPrototype.Application</RootNamespace>
+    <AssemblyName>FHNWPrototype.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlliancesController.cs" />
+    <Compile Include="Controllers\Converters.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrganizationAccountsController.cs" />
+    <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="Controllers\PublishingController.cs" />
+    <Compile Include="Controllers\RetrieverController.cs" />
+    <Compile Include="Controllers\UIViewModels\Alliances\AlliancesView.cs" />
+    <Compile Include="Controllers\UIViewModels\Alliances\AllianceView.cs" />
+    <Compile Include="Controllers\UIViewModels\Geographics\GeoLocationView.cs" />
+    <Compile Include="Controllers\UIViewModels\Groups\GroupMembershipsView.cs" />
+    <Compile Include="Controllers\UIViewModels\Groups\GroupsView.cs" />
+    <Compile Include="Controllers\UIViewModels\Groups\GroupView.cs" />
+    <Compile Include="Controllers\UIViewModels\Home\AuthenticationViewModels.cs" />
+    <Compile Include="Controllers\UIViewModels\OrganizationAccounts\PartnershipActionResultView.cs" />
+    <Compile Include="Controllers\UIViewModels\Organizations\EmployeesView.cs" />
+    <Compile Include="Controllers\UIViewModels\OrganizationAccounts\OrganizationAccountsView.cs" />
+    <Compile Include="Controllers\UIViewModels\OrganizationAccounts\OrganizationAccountView.cs" />
+    <Compile Include="Controllers\UIViewModels\Organizations\OrganizationsView.cs" />
+    <Compile Include="Controllers\UIViewModels\Organizations\OrganizationView.cs" />
+    <Compile Include="Controllers\UIViewModels\OrganizationAccounts\PartnershipsView.cs" />
+    <Compile Include="Controllers\UIViewModels\OrganizationAccounts\PartnershipView.cs" />
+    <Compile Include="Controllers\UIViewModels\Publishing\CommentView.cs" />
+    <Compile Include="Controllers\UIViewModels\Publishing\ContentStreamView.cs" />
+    <Compile Include="Controllers\UIViewModels\Publishing\NewCommentView.cs" />
+    <Compile Include="Controllers\UIViewModels\Publishing\NewPostView.cs" />
+    <Compile Include="Controllers\UIViewModels\Publishing\PostView.cs" />
+    <Compile Include="Controllers\UIViewModels\Security\LoginSystemAccountView.cs" />
+    <Compile Include="Controllers\UIViewModels\Security\RegisterSystemAccountView.cs" />
+    <Compile Include="Controllers\UIViewModels\UserAccounts\FriendshipActionResultView.cs" />
+    <Compile Include="Controllers\UIViewModels\UserAccounts\FriendshipView.cs" />
+    <Compile Include="Controllers\UIViewModels\UserAccounts\FriendshipsView.cs" />
+    <Compile Include="Controllers\UIViewModels\UserAccounts\UserAccountsView.cs" />
+    <Compile Include="Controllers\UIViewModels\UserAccounts\UserAccountView.cs" />
+    <Compile Include="Controllers\UIViewModels\Users\UsersView.cs" />
+    <Compile Include="Controllers\UIViewModels\Users\UserView.cs" />
+    <Compile Include="Controllers\UIViewModels\_Global\BasicProfileView.cs" />
+    <Compile Include="Controllers\UIViewModels\_Global\CompleteProfileView.cs" />
+    <Compile Include="Controllers\UIViewModels\_Global\RightColumnView.cs" />
+    <Compile Include="Controllers\UserAccountsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="DomainEventHandlers\FriendshipAcceptedEventHandler.cs" />
+    <Compile Include="DomainEventHandlers\FriendshipCancelledEventHandler.cs" />
+    <Compile Include="DomainEventHandlers\FriendshipRejectedEventHandler.cs" />
+    <Compile Include="DomainEventHandlers\FriendshipRequestedEventHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services.Simple\AllianceService.cs" />
+    <Compile Include="Services.Simple\GroupService.cs" />
+    <Compile Include="Services.Simple\OrganizationAccountService.cs" />
+    <Compile Include="Services.Simple\OrganizationService.cs" />
+    <Compile Include="Services.Simple\PicturesService.cs" />
+    <Compile Include="Services.Simple\PublishingService.cs" />
+    <Compile Include="Services.Simple\RecommendationService.cs" />
+    <Compile Include="Services.Simple\SecurityService.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\AllianceMembershipStateInfoViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\AllianceViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\BasicProfileViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\CommentViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\CompleteProfileViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\ContentStreamViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\Converters.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\FriendshipStateInfoViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\GeoLocationViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\GroupMembershipStateInfoViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\GroupViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\OrganizationAccountViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\OrganizationViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\PartnershipStateInfoViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\PostViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\RecommendationType.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\RightColumnViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\SystemAuthenticationTokenViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\UserAccountViewModel.cs" />
+    <Compile Include="Services.Simple\ServicesViewModels\UserViewModel.cs" />
+    <Compile Include="Services.Simple\UserAccountService.cs" />
+    <Compile Include="Services.Simple\UserService.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FHNWPrototype.Domain\FHNWPrototype.Domain.csproj">
+      <Project>{a37e9924-b459-44f3-a736-4046ee201177}</Project>
+      <Name>FHNWPrototype.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FHNWPrototype.Infrastructure\FHNWPrototype.Infrastructure.csproj">
+      <Project>{e6a6d14e-bb42-420f-9dbb-23c9bbb3e188}</Project>
+      <Name>FHNWPrototype.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,91 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Groups.GroupView
+
+@{
+    ViewBag.Title = Model.Profile.FullName ;
+    Layout = "~/Views/Shared/_layout_3CC_three_centered_columns.cshtml";
+}
+ 
+
+@if (@Model.WallOfThisProfile  != null)
+{
+    <div id="post_zone">
+        @if(Model.IsViewerAllowedToCollaborate)
+        {
+            <section id="new_post_section">
+                <article id="new_article_post" class="post"  >
+                    <input type="text" id="newpost" value="what are you thinking?"  style="width:500px; height:20px;   text-align:center; margin-left:auto; margin-right:auto; display:block; border: 1px solid #AAAAAA"  />
+                </article>
+            </section>
+        }
+        @foreach (FHNWPrototype.Application.Controllers.UIViewModels.Publishing.PostView post in Model.WallOfThisProfile.Posts)
+        {
+            post.AllowedToDeletePost  = @Model.IsViewerAllowedToCollaborate ;
+            Html.RenderPartial("_partial_section_post", post);
+        }
+
+    </div>
+}
+ 
+@section settings{
+ <div id="logo">
+ 
+            <a href="@Url.Action("Index","UserAccounts", null,null)"><img id="logo" src="@Url.Content("~/Content/themes/designv1/images/logov2white.png")" alt="logo" /></a> 
+ 
+ 
+</div>
+<div id="links">
+    <ul>
+      
+        <li>@Html.ActionLink("My Friendships", "Friendships","UserAccounts", null,null)</li>
+   
+        <li>@Html.ActionLink("Log Off", "LogOff", "Account", null, null)</li>
+    </ul>
+</div>
+    }
+
+@section header_style{
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/_partial_3CC_header_two_images.css")" />
+}
+
+@section header{
+ 
+    <figure id="brand_background">
+        <img id="my_banner" src="@Url.Action("GetHeaderPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey , accountType= @Model.Profile.BasicProfile.AccountType  })" alt="brand" />
+        <img id="my_logo" src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey , accountType=@Model.Profile.BasicProfile.AccountType  })" alt="logo" />
+    </figure>
+
+     <div id="profile_status">
+             
+                <div id="profile_name">@Model.Profile.FullName</div>
+                <div id="working_at">coordinated by    </div>
+                <div id="connection">
+                   
+                </div>
+         
+        </div>
+ 
+}
+
+@section left_column{
+     <nav id="members">
+        <h1>MEMBERS</h1>
+        <ul>
+             @foreach( FHNWPrototype.Application.Controllers.UIViewModels._Global.CompleteProfileView item in @Model.Members)
+            {
+            <li>@Html.ActionLink(item.FullName , "UserAccount", "UserAccounts", new { id = item.BasicProfile.ReferenceKey  }, null)</li>
+            }
+        </ul>
+    </nav>
+}
+
+
+@section scripts{
+       <script type="text/javascript">
+           RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey");
+           RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")");
+           RegisterLikePostEvent("@Url.Action("LikePost","Publishing")");
+           RegisterLikeCommentEvent("@Url.Action("LikeComment","Publishing")");
+           RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");
+           RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");    
+    </script>
+}

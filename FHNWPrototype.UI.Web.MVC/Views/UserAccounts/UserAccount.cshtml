@@ -1,0 +1,179 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.UserAccounts.UserAccountView 
+
+@using FHNWPrototype.Application.Controllers.UIViewModels.Publishing
+
+@{
+    ViewBag.Title = Model.Profile.FullName;
+    Layout = "~/Views/Shared/_layout_3CC_three_centered_columns.cshtml";
+}
+
+
+@if (@Model.WallOfThisProfile  != null)
+{
+    <div id="post_zone">
+
+        <section id="new_post_section">
+            <article id="new_article_post" class="post"  >
+                <input type="text" id="newpost" value="what are you thinking?"  style="width:500px; height:20px;   text-align:center; margin-left:auto; margin-right:auto; display:block; border: 1px solid #AAAAAA"  />
+            </article>
+        </section>
+
+        @foreach (PostView post in Model.WallOfThisProfile.Posts)
+        {
+            post.AllowedToDeletePost  = Model.IsThisMyOwnProfile;
+            Html.RenderPartial("_partial_section_post", post);
+        }
+
+    </div>
+}
+
+@if (Model.ShowFriendshipButtonForThisProfile)
+{
+  
+    <div id="inprogress" style="display:none;">
+        <img src="@Url.Content("~/Content/themes/designv1/images/load.gif")" alt="loading" />
+    </div>
+}
+
+
+@section settings{
+ <div id="logo">
+ <a href="@Url.Action("Index","UserAccounts", null,null)"><img id="logo" src="@Url.Content("~/Content/themes/designv1/images/logov2white.png")" alt="logo" /></a> 
+</div>
+<div id="links">
+    <ul>
+      
+       <li>@Html.ActionLink("My Friendships", "Friendships","UserAccounts", null,null)</li>
+   
+        <li>@Html.ActionLink("Log Off", "LogOff", "Account", null, null)</li>
+    </ul>
+</div>
+    }
+
+@section header_style{
+ 
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/_partial_3CC_header_two_images.css")" />
+ 
+}
+
+@section header{
+
+    <figure id="brand_background">
+        <img id="my_banner" src="@Url.Action("GetHeaderPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey, accountType= @Model.Profile.BasicProfile.AccountType  })" alt="brand" />
+        <img id="my_logo" src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey, accountType= @Model.Profile.BasicProfile.AccountType  })" alt="logo" />
+    </figure>
+        
+    <div id="profile_status">
+             
+            <div id="profile_name">@Model.Profile.FullName</div>
+            <div id="working_at">working at @Model.Profile.Description1   </div>
+            <div id="connection">
+                @if (Model.ShowFriendshipButtonForThisProfile)
+                {
+                    if(Model.IsThisProfileAFriendOfMine){
+                        <text>Already connected: </text>
+                        if (Model.EnableFriendshipButtonForThisProfile)
+                        {
+                            @Ajax.ActionLink(@Model.FriendshipButtonCaptionForThisProfile, 
+                            @Model.FriendshipButtonActionNameForThisProfile, 
+                            new { key = @Model.Profile.BasicProfile.ReferenceKey  },
+                            new AjaxOptions(){
+                                UpdateTargetId = "friendship_action",
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace}, 
+                            new { id="friendshipButton", enabled="true" })
+                        }
+                        else
+                        {
+                            //  @Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, null, new { id="friendshipButton", enabled = "false" });
+                            //Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, new { senderAccountEmail=User.Identity.Name, receiverAccountEmail=@Model.Email  }, new { id="friendshipButton", enabled = "true" });
+                        }
+                    }
+                    else
+                    {
+                        <text>Not connected: </text>
+                        if (Model.EnableFriendshipButtonForThisProfile)
+                        {
+                            @Ajax.ActionLink(@Model.FriendshipButtonCaptionForThisProfile, 
+                            @Model.FriendshipButtonActionNameForThisProfile, 
+                            new { key = @Model.Profile.BasicProfile.ReferenceKey  },
+                            new AjaxOptions(){
+                                UpdateTargetId = "friendship_action",
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace}, 
+                            new { id="friendshipButton", enabled="true" })
+                        }
+                        else
+                        {
+                            //  @Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, null, new { id="friendshipButton", enabled = "false" });
+                            //Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, new { senderAccountEmail=User.Identity.Name, receiverAccountEmail=@Model.Email  }, new { id="friendshipButton", enabled = "true" });
+                        } 
+                    }
+                }
+            </div>
+         
+    </div>
+   
+}
+
+@section left_column{
+@if (Model.Profile.Description1  != null)
+{
+    <nav id="library">
+        <h1>LIBRARY</h1>
+        <ul>
+            @foreach (KeyValuePair<string, string> item in @Model.FoldersOfThisProfile)
+            {
+                <li>@Html.ActionLink(item.Key, "Folder", "Library", new { id = item.Value }, null)</li>
+            }
+        </ul>
+    </nav>
+    <nav id="work_contacts">
+        <h1>WORK CONTACTS</h1>
+        <ul>
+        @foreach (FHNWPrototype.Application.Controllers.UIViewModels._Global.CompleteProfileView item in @Model.WorkContactsOfThisProfile )
+        {
+        <li>@Html.ActionLink(item.FullName   , "UserAccount", "UserAccounts", new { id = item.BasicProfile.ReferenceKey  }, null)</li>
+        }
+        </ul>
+    </nav>
+    <nav id="partnership_contacts">
+        <h1>PARTNERSHIP CONTACTS</h1>
+        <ul>
+             @foreach (FHNWPrototype.Application.Controllers.UIViewModels._Global.CompleteProfileView item in @Model.PartnershipContactsOfThisProfile)
+             {
+            <li>@Html.ActionLink(item.FullName  , "UserAccount", "UserAccounts", new { id = item.BasicProfile.ReferenceKey   }, null)</li>
+             }
+        </ul>
+    </nav>
+}
+     <nav id="groups">
+        <h1>GROUPS</h1>
+        <ul>
+             @foreach (FHNWPrototype.Application.Controllers.UIViewModels._Global.CompleteProfileView item in @Model.GroupsOfThisProfile)
+             {
+            <li>@Html.ActionLink(item.FullName  , "Group", "Groups", new { id = item.BasicProfile.ReferenceKey    }, null)</li>
+             }
+        </ul>
+    </nav>
+}
+
+@section right_column{
+
+<div id="suggestions">
+ 
+ 
+
+</div>
+}
+
+@section scripts{
+      <script type="text/javascript">
+          RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey");
+          RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")");
+          RegisterLikePostEvent("@Url.Action("LikePost","Publishing")");
+          RegisterLikeCommentEvent("@Url.Action("LikeComment","Publishing")");
+          RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");
+          RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");  
+    </script>
+}

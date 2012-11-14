@@ -1,0 +1,115 @@
+﻿/*
+	Title: socialsupply.com
+	Component: Main Menu
+	Company: Social Supply
+	Author: Jorge Luis Alvarado Flores
+    Version: 0.1
+	Original Version Created: 14.September.2012
+	Current Version Updated: 14.September.2012
+*/
+
+#settings{
+	width:100%;
+	min-width:1000px;
+	height:35px;
+	/*background-color:#006699;*/
+	background-color:#0072C6;
+	top:0px;
+	left:0px;
+    display:block;
+    clear:both;
+}
+
+div#logo 
+{
+    display:block;
+    float:left;
+    width:200px;
+    /*background-color:green;*/
+    height:100%;
+}
+
+#settings #links 
+{
+    display:block;
+    float:right;
+    /*background-color:pink;*/
+    width:250px;
+    padding-top:5px;
+    height:30px;
+
+    font-weight:normal;
+
+}
+
+#links ul
+{
+    display:block;
+    width:500px;
+    background-color:red;
+}
+
+#links ul li
+{
+    display:block;
+    float:left;
+}
+
+#links a {
+    color:#FFFFFF;
+    font-size:16px;
+}
+
+img#logo
+{
+    padding-top:5px; 
+    margin-left:50px;
+}
+
+#settings ul{
+	background-repeat:repeat-x;
+	background-position:left center;
+	list-style:none;
+	list-style-type:none;
+	background-color:green;
+}
+
+#settings ul li{
+	display:block;
+	float:left;
+	height:33px;
+	/*width:150px;*/
+	margin-left:5px;
+	margin-right:5px;
+	padding-left:10px;
+	padding-right:10px;
+	text-align:center;
+	background-color:transparent;
+}
+
+#settings ul li a{
+	display:block;
+	color:#FFFFFF;
+ 	text-align:center;
+ 	margin-top:5px; 
+}
+
+#settings ul li a:hover{
+	color:#FFFFFF;
+ 	/*background-color:transparent;*/
+    font-weight:normal;
+}
+
+#settings ul li:hover{
+	/*background-image:url('images/hoverbg.png');*/
+	background-repeat:repeat-x;
+	background-position:left;
+	/*border:1px #FFFFFF solid;*/
+}
+
+.selected{
+	/*background-image:url('images/selectedbg.png');*/
+	background-repeat:repeat-x;
+	background-position:left;
+	/*border:1px #FFFFFF solid;*/
+}

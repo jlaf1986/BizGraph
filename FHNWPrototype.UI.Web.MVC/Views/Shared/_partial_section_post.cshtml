@@ -1,0 +1,25 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Publishing.PostView 
+@using FHNWPrototype.Application.Controllers.UIViewModels.Publishing
+
+@if(Model != null){
+    <section id="section_@(Model.Key)">
+        @Html.Partial("_partial_article_post",Model)
+        @if (Model.Comments != null)
+        {
+            foreach (CommentView comment in Model.Comments)
+            {
+                comment.AllowedToDeleteComment=Model.AllowedToDeletePost;
+                @Html.Partial("_partial_article_comment",comment)
+            }
+        }
+        <article  id="new_comment_post_@(Model.Key)" class="comment"  >
+            @{
+                FHNWPrototype.Domain._Base.Accounts.CompleteProfile myProfile = (FHNWPrototype.Domain._Base.Accounts.CompleteProfile)Session["myProfile"];
+    
+            }
+            <img   src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new {  key =@myProfile.BasicProfile.ReferenceKey.ToString() ,accountType= @myProfile.BasicProfile.ReferenceType   })" alt="picture"  class="profile_picture_comment" />
+            <h2>@Html.ActionLink(myProfile.FullName , "UserAccount", "UserAccounts", new { id = myProfile.BasicProfile.ReferenceKey.ToString()  }, null)</h2>
+            <input id="input_new_comment_@(Model.Key)" class="new_comment" style="width:400px; background-color:#ffffff; border: 1px solid #AAAAAA"  />
+        </article>
+    </section>
+}

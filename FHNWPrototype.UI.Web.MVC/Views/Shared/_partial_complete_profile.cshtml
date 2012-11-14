@@ -1,0 +1,18 @@
+﻿@model FHNWPrototype.Domain._Base.Accounts.CompleteProfile
+
+<article>
+     @*   <img class="advertisement" src="@Url.Action("GetHeaderPictureByBasicProfile", "Retriever", new { id = @Model. })" alt="picture"   />
+        <h3>@Html.ActionLink(Model.SisterDivisionSuggestion.Value , "GetAvatarPictureByBasicProfile", "Retriever", new { id = @Model.SisterDivisionSuggestion.Key  }, null)</h3>
+        <h4>Headquaters</h4>
+  
+        <h4 id="@(Model.SisterDivisionSuggestion.Key)_sendRequest">
+            @Ajax.ActionLink("Send Request", 
+            "RequestPartnershipTo", 
+            new { key = @Model.SisterDivisionSuggestion.Key },
+            new AjaxOptions(){
+            UpdateTargetId = @Model.SisterDivisionSuggestion.Key + "_sendRequest" ,
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace}, 
+            new { id=@Model.SisterDivisionSuggestion.Key + "_sendRequest", enabled="true" })
+        </h4>*@
+</article>

@@ -1,0 +1,13 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Organizations.OrganizationsView
+
+@{
+    ViewBag.Title = "Organizations";
+}
+
+<h2>Organizations</h2>
+
+@foreach (KeyValuePair<String,String> organization in Model.Organizations)
+{
+    <li>@Html.ActionLink(organization.Key, "Organization", "Organizations", new { id = organization.Value }, null)</li>
+}
+</ul>

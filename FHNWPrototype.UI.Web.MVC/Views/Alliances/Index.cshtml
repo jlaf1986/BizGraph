@@ -1,0 +1,13 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Alliances.AlliancesView
+
+@{
+    ViewBag.Title = "Index";
+}
+
+ <h2>Alliances</h2>
+
+@foreach (KeyValuePair<String,String> alliance in Model.Alliances)
+{
+    <li>@Html.ActionLink(alliance.Key, "Alliance", "Alliances", new { id = alliance.Value }, null)</li>
+}
+</ul>

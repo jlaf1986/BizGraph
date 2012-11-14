@@ -1,0 +1,86 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Users.UserView
+
+@{
+    ViewBag.Title = "User";
+}
+
+<h2>User</h2>
+<table>
+    <tr>
+        <td>Key</td>
+        <td>First Name</td>
+        <td>Last Name</td>
+    </tr>
+    <tr>
+        <td>@Model.Key</td>
+        <td>@Model.FirstName</td>
+        <td>@Model.LastName</td>
+    </tr>
+</table>
+    
+
+@section header{
+     <figure id="profile_picture">
+       @* <img id="my_picture" src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="MyPicture" />*@
+       <img id="my_picture" src="@Url.Action("GetUserProfilePictureByUserKey", "Users", new { id = @Model.Key })" alt="MyProfilePicture" />
+    </figure>
+@*    <nav id="tags">
+        <h1>MY TRENDS</h1>
+        <ul>
+            <li><a href="#">#chocolate</a></li>
+            <li><a href="#">#marketing</a></li>
+            <li><a href="#">#1stAugust</a></li>
+        </ul>
+    </nav>
+    <nav id="documents">
+        <h1>MY DOCUMENTS</h1>
+        <ul>
+            <li><a href="">Document 1</a></li>
+            <li><a href="">Document 2</a></li>
+            <li><a href="">Document 3</a></li>
+            <li><a href="">Document 4</a></li>
+        </ul>
+    </nav>
+    <nav id="favorites">
+        <h1>MY FAVORITES</h1>
+        <ul>
+            <li><a href="">Group A 1</a></li>
+            <li><a href="">Project X</a></li>
+            <li><a href="">Alliance 3</a></li>
+            <li><a href="">Contact Z</a></li>
+        </ul>
+    </nav>*@
+
+}
+
+@section left_column{
+@*<nav id="events">
+    <h1>EVENTS</h1>
+    <ul>
+        <li><a href="#">04.04.2012</a></li>
+        <li><a href="#">08.10.2012</a></li>
+        <li><a href="#">15.11.2012</a></li>
+    </ul>
+</nav>*@
+
+<nav id="accounts">
+  <h1>MY ACCOUNTS</h1>
+<ul>
+@foreach(KeyValuePair<string,string> accountDictionary in @Model.Accounts)
+{
+    <li>@Html.ActionLink(accountDictionary.Key, "UserAccount", "UserAccounts",  new {id=accountDictionary.Value }, null)</li>
+}
+</ul>
+</nav>
+
+@*<nav id="contacts">
+    <h1>CONTACTS</h1>
+    <ul>
+        <li><a href="#">Frequent contacts</a><span class="number"><a href="#">10</a></span></li>
+        <li><a href="#">Co-workers</a><span class="number"><a href="#">183</a></span></li>
+        <li><a href="#">External contacts</a><span class="number"><a href="#">91</a></span></li>
+    </ul>
+</nav>
+*@
+
+}

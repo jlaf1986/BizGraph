@@ -1,0 +1,13 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.OrganizationAccounts.PartnershipsView
+
+@{
+    ViewBag.Title = "Partnerships";
+}
+
+<h2>Partnerships</h2>
+<table>
+@foreach (string partner in Model.Partners)
+{
+    <tr><td>@partner</td></tr>
+}
+</table>

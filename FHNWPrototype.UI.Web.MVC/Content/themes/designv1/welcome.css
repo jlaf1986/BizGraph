@@ -1,0 +1,179 @@
+﻿ #page{
+	position:relative;
+	/*background-color:green;*/
+	width:900px;
+	height:550px;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	margin-top:50px;
+}
+
+ #content_wrapper{
+	/*background-color:orange;*/
+	/*width:100%;*/
+	height:500px;
+	/*padding-left:5px;
+	padding-right:5px;*/
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+	text-align:center;
+	/*overflow:hidden;*/
+}
+
+#welcome
+{
+ /*  background-color:yellow;*/
+    width:500px;
+    height:100%;
+    float:left;
+    color:#FFFFFF;
+    display:block;
+}
+
+#welcome figure 
+{
+    display:block;
+    margin:0px 0px 0px 0px;
+    padding:0px 0px 0px 0px;
+    clear:both;
+   /* background-color:Green;*/
+   width:100%;
+   height:350px;   
+}
+
+#welcome figure img
+{
+    width:100%;
+    height:100%;
+   
+    /*border:0px solid transparent;*/
+      margin:0px 0px 0px 0px;
+    padding:0px 0px 0px 0px;
+}
+
+#welcome article
+{
+   /* background-color:#006699;*/
+    background-color:#0072C6;
+    display:block;
+    clear:both;
+    width:100%;
+    height:140px;
+    padding-top:10px;
+    font-size:16px;
+    font-weight:normal;
+    color:#FFFFFF;
+}
+
+#welcome article h1
+{
+    font-size:28px;
+    font-weight:bolder;
+    margin:0px 0px 0px 0px;
+    color:#FFFFFF;
+}
+
+#welcome h2 
+{
+    font-size:12px;
+    color:#AAAAAA;
+} 
+
+#welcome #message a
+{
+    display:block;
+    padding-left:3px;
+    padding-right:3px;
+    /*background-color:Orange;*/
+    background-color:#FF8C00;
+    color:#FFFFFF;
+    height:20px;
+    width:150px;
+    font-size:16px;
+    font-weight:bolder;
+    text-align:right;
+   /* margin-top:15px;*/
+    float:right;
+    clear:both;
+}
+
+#sign
+{
+    display:block;
+    float:left;
+    width:370px;
+    height:100%;
+    /*background-color:red;*/
+    margin-left:5px;
+}
+
+    #sign fieldset {
+        padding-left:5px;
+        margin-top:40px;
+        border:none;
+    }
+
+#sign #logo img
+{
+ clear:both;
+}
+
+#sign span
+{
+    clear:both;
+    text-align:left;
+    width:100%;
+    margin-top:5px;
+}
+
+#sign label
+{
+    text-align:left;
+
+    float:left;
+}
+
+#sign span input
+{
+    display:block;
+    float:right;
+}
+
+#sign span label
+{
+    display:block;
+    float:left;
+}
+
+    #sign ul li {
+        text-align:left;
+        display:block;
+        width:350px;
+        height:40px;
+    }
+
+ 
+
+#signin
+{
+    width:100%;
+    height:150px;
+}
+
+#signup
+{
+   /* margin-top:80px;*/
+    width:100%;
+    height:200px;
+    
+}
+
+#signin h2 a{
+    font-size:20px;
+    color:orange;
+    font-weight:bolder;
+}
+ 

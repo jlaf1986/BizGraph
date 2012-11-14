@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A37E9924-B459-44F3-A736-4046EE201177}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FHNWPrototype.Domain</RootNamespace>
+    <AssemblyName>FHNWPrototype.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllianceMemberships\AllianceMembership.cs" />
+    <Compile Include="AllianceMemberships\EventHandlers\AllianceMembershipAcceptedEventHandler.cs" />
+    <Compile Include="AllianceMemberships\EventHandlers\AllianceMembershipAllowedEventHandler.cs" />
+    <Compile Include="AllianceMemberships\EventHandlers\AllianceMembershipCancelledEventHandler.cs" />
+    <Compile Include="AllianceMemberships\EventHandlers\AllianceMembershipOfferedEventHandler.cs" />
+    <Compile Include="AllianceMemberships\EventHandlers\AllianceMembershipRejectedEventHandler.cs" />
+    <Compile Include="AllianceMemberships\Events\AllianceMembershipAcceptedEvent.cs" />
+    <Compile Include="AllianceMemberships\Events\AllianceMembershipAllowedEvent.cs" />
+    <Compile Include="AllianceMemberships\Events\AllianceMembershipCancelledEvent.cs" />
+    <Compile Include="AllianceMemberships\Events\AllianceMembershipOfferedEvent.cs" />
+    <Compile Include="AllianceMemberships\Events\AllianceMembershipRejectedEvent.cs" />
+    <Compile Include="AllianceMemberships\Events\AllianceMembershipRequestedEvent.cs" />
+    <Compile Include="AllianceMemberships\IAllianceMembership.cs" />
+    <Compile Include="AllianceMemberships\IAllianceMembershipCapable.cs" />
+    <Compile Include="AllianceMemberships\IAllianceMembershipRepository.cs" />
+    <Compile Include="AllianceMemberships\States\AllianceMembershipAcceptedState.cs" />
+    <Compile Include="AllianceMemberships\States\AllianceMembershipAction.cs" />
+    <Compile Include="AllianceMemberships\States\AllianceMembershipAllowedState.cs" />
+    <Compile Include="AllianceMemberships\States\AllianceMembershipCancelledState.cs" />
+    <Compile Include="AllianceMemberships\States\AllianceMembershipOfferedState.cs" />
+    <Compile Include="AllianceMemberships\States\AllianceMembershipRejectedState.cs" />
+    <Compile Include="AllianceMemberships\States\AllianceMembershipState.cs" />
+    <Compile Include="AllianceMemberships\States\AllianceMembershipStateInfo.cs" />
+    <Compile Include="AllianceMemberships\States\IAllianceMembershipStateBehavior.cs" />
+    <Compile Include="AllianceMemberships\States\IAllianceMembershipStateInfo.cs" />
+    <Compile Include="Alliances\Alliance.cs" />
+    <Compile Include="Alliances\IAllianceRepository.cs" />
+    <Compile Include="Bookmarks\Bookmark.cs" />
+    <Compile Include="Bookmarks\BookmarkType.cs" />
+    <Compile Include="DTOs\FriendshipStateInfoDTO.cs" />
+    <Compile Include="DTOs\OrganizationAccountDTO.cs" />
+    <Compile Include="DTOs\OrganizationDTO.cs" />
+    <Compile Include="DTOs\PartnershipDTO.cs" />
+    <Compile Include="DTOs\UserAccountDTO.cs" />
+    <Compile Include="DTOs\UserDTO.cs" />
+    <Compile Include="Friendships\EventHandlers\FriendshipAcceptedEventHandler.cs" />
+    <Compile Include="Friendships\EventHandlers\FriendshipCancelledEventHandler.cs" />
+    <Compile Include="Friendships\EventHandlers\FriendshipRejectedEventHandler.cs" />
+    <Compile Include="Friendships\EventHandlers\FriendshipRequestedEventHandler.cs" />
+    <Compile Include="Friendships\Events\FriendshipAcceptedEvent.cs" />
+    <Compile Include="Friendships\Events\FriendshipCancelledEvent.cs" />
+    <Compile Include="Friendships\Events\FriendshipRejectedEvent.cs" />
+    <Compile Include="Friendships\Events\FriendshipRequestedEvent.cs" />
+    <Compile Include="Friendships\IFriendshipCapable.cs" />
+    <Compile Include="Friendships\IFriendshipRepository.cs" />
+    <Compile Include="Friendships\IRelationship.cs" />
+    <Compile Include="Friendships\OrganizationalPartnership.cs" />
+    <Compile Include="Friendships\PersonalAcquaintanceship.cs" />
+    <Compile Include="Friendships\Relationship.cs" />
+    <Compile Include="Friendships\States\FriendshipAcceptedState.cs" />
+    <Compile Include="Friendships\States\FriendshipCancelledState.cs" />
+    <Compile Include="Friendships\States\FriendshipNewState.cs" />
+    <Compile Include="Friendships\States\FriendshipRejectedState.cs" />
+    <Compile Include="Friendships\States\FriendshipRequestedState.cs" />
+    <Compile Include="Friendships\States\FriendshipState.cs" />
+    <Compile Include="Friendships\States\FriendshipAction.cs" />
+    <Compile Include="Friendships\States\_FriendshipState.cs" />
+    <Compile Include="Friendships\States\FriendshipStateFactory.cs" />
+    <Compile Include="Friendships\States\FriendshipStateInfo.cs" />
+    <Compile Include="Friendships\States\IFriendshipStateBehavior.cs" />
+    <Compile Include="Friendships\States\IFriendshipStateInfo.cs" />
+    <Compile Include="Geographics\Address.cs" />
+    <Compile Include="Geographics\AddressBusinessRules.cs" />
+    <Compile Include="Geographics\GeoLocation.cs" />
+    <Compile Include="Geographics\GeoLocationExtensionMethods.cs" />
+    <Compile Include="GroupMemberships\EventHandlers\GroupMembershipAcceptedEventHandler.cs" />
+    <Compile Include="GroupMemberships\EventHandlers\GroupMembershipAllowedEventHandler.cs" />
+    <Compile Include="GroupMemberships\EventHandlers\GroupMembershipCancelledEventHandler.cs" />
+    <Compile Include="GroupMemberships\EventHandlers\GroupMembershipOfferedEventHandler.cs" />
+    <Compile Include="GroupMemberships\EventHandlers\GroupMembershipRejectedEventHandler.cs" />
+    <Compile Include="GroupMemberships\EventHandlers\GroupMembershipRequestedEventHandler.cs" />
+    <Compile Include="GroupMemberships\Events\GroupMembershipAcceptedEvent.cs" />
+    <Compile Include="GroupMemberships\Events\GroupMembershipAllowedEvent.cs" />
+    <Compile Include="GroupMemberships\Events\GroupMembershipCancelledEvent.cs" />
+    <Compile Include="GroupMemberships\Events\GroupMembershipOfferedEvent.cs" />
+    <Compile Include="GroupMemberships\Events\GroupMembershipRejectedEvent.cs" />
+    <Compile Include="GroupMemberships\Events\GroupMembershipRequestedEvent.cs" />
+    <Compile Include="GroupMemberships\GroupMembership.cs" />
+    <Compile Include="GroupMemberships\IGroupMembership.cs" />
+    <Compile Include="GroupMemberships\IGroupMembershipCapable.cs" />
+    <Compile Include="GroupMemberships\IGroupMembershipRepository.cs" />
+    <Compile Include="GroupMemberships\States\GroupMembershipAcceptedState.cs" />
+    <Compile Include="GroupMemberships\States\GroupMembershipAction.cs" />
+    <Compile Include="GroupMemberships\States\GroupMembershipAllowedState.cs" />
+    <Compile Include="GroupMemberships\States\GroupMembershipCancelledState.cs" />
+    <Compile Include="GroupMemberships\States\GroupMembershipOfferedState.cs" />
+    <Compile Include="GroupMemberships\States\GroupMembershipRejectedState.cs" />
+    <Compile Include="GroupMemberships\States\GroupMembershipState.cs" />
+    <Compile Include="GroupMemberships\States\GroupMembershipStateInfo.cs" />
+    <Compile Include="GroupMemberships\States\IGroupMembershipStateBehavior.cs" />
+    <Compile Include="GroupMemberships\States\IGroupMembershipStateInfo.cs" />
+    <Compile Include="Groups\Group.cs" />
+    <Compile Include="Groups\IGroupFactory.cs" />
+    <Compile Include="Groups\IGroupRepository.cs" />
+    <Compile Include="Organizations\IOrganizationAccountRepository.cs" />
+    <Compile Include="Organizations\IOrganizationFactory.cs" />
+    <Compile Include="Organizations\IOrganizationRepository.cs" />
+    <Compile Include="Organizations\Organization.cs" />
+    <Compile Include="Organizations\OrganizationAccount.cs" />
+    <Compile Include="Partnerships\EventHandlers\PartnershipAcceptedEventHandler.cs" />
+    <Compile Include="Partnerships\EventHandlers\PartnershipCancelledEventHandler.cs" />
+    <Compile Include="Partnerships\EventHandlers\PartnershipRejectedEventHandler.cs" />
+    <Compile Include="Partnerships\EventHandlers\PartnershipRequestedEventHandler.cs" />
+    <Compile Include="Partnerships\Events\PartnershipAcceptedEvent.cs" />
+    <Compile Include="Partnerships\Events\PartnershipCancelledEvent.cs" />
+    <Compile Include="Partnerships\Events\PartnershipRejectedEvent.cs" />
+    <Compile Include="Partnerships\Events\PartnershipRequestedEvent.cs" />
+    <Compile Include="Partnerships\IPartnershipCapable.cs" />
+    <Compile Include="Partnerships\IPartnershipRepository.cs" />
+    <Compile Include="Partnerships\States\IPartnershipStateBehavior.cs" />
+    <Compile Include="Partnerships\States\IPartnershipStateInfo.cs" />
+    <Compile Include="Partnerships\States\PartnershipAcceptedState.cs" />
+    <Compile Include="Partnerships\States\PartnershipAction.cs" />
+    <Compile Include="Partnerships\States\PartnershipCancelledState.cs" />
+    <Compile Include="Partnerships\States\PartnershipNewState.cs" />
+    <Compile Include="Partnerships\States\PartnershipRejectedState.cs" />
+    <Compile Include="Partnerships\States\PartnershipRequestedState.cs" />
+    <Compile Include="Partnerships\States\PartnershipState.cs" />
+    <Compile Include="Partnerships\States\PartnershipStateFactory.cs" />
+    <Compile Include="Partnerships\States\PartnershipStateInfo.cs" />
+    <Compile Include="Projects\Project.cs" />
+    <Compile Include="Projects\WorkPackage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_Base\Accounts\BasicProfile.cs" />
+    <Compile Include="Publishing\ContentStreams\ContentStream.cs" />
+    <Compile Include="Publishing\ContentStreams\IContentStreamFactory.cs" />
+    <Compile Include="Publishing\ContentStreams\IContentStreamRepository.cs" />
+    <Compile Include="_Base\Accounts\AccountType.cs" />
+    <Compile Include="Publishing\Files\Document.cs" />
+    <Compile Include="Publishing\Files\Folder.cs" />
+    <Compile Include="Publishing\Files\Library.cs" />
+    <Compile Include="Publishing\Files\Picture.cs" />
+    <Compile Include="Publishing\IAttachmentCapable.cs" />
+    <Compile Include="Publishing\IPublishingCapable.cs" />
+    <Compile Include="Publishing\Likes\AllianceLike.cs" />
+    <Compile Include="Publishing\Likes\CommentLike.cs" />
+    <Compile Include="Publishing\Likes\DocumentLike.cs" />
+    <Compile Include="Publishing\Likes\FolderLike.cs" />
+    <Compile Include="Publishing\Likes\GroupLike.cs" />
+    <Compile Include="Publishing\Likes\Like.cs" />
+    <Compile Include="Publishing\Likes\Likeable.cs" />
+    <Compile Include="Publishing\Likes\LikeType.cs" />
+    <Compile Include="Publishing\Likes\LikeValue.cs" />
+    <Compile Include="Publishing\Likes\OrganizationLike.cs" />
+    <Compile Include="Publishing\Likes\PostLike.cs" />
+    <Compile Include="Publishing\Posts\Comment.cs" />
+    <Compile Include="Publishing\Posts\Post.cs" />
+    <Compile Include="Publishing\Tweets\Hashtag.cs" />
+    <Compile Include="Publishing\Tweets\Retweet.cs" />
+    <Compile Include="Publishing\Tweets\Tweet.cs" />
+    <Compile Include="Tags\ITagCapable.cs" />
+    <Compile Include="Tags\Tag.cs" />
+    <Compile Include="Users\EmailValidationSpecification.cs" />
+    <Compile Include="Users\IUserAccountFactory.cs" />
+    <Compile Include="Users\IUserAccountRepository.cs" />
+    <Compile Include="Users\IUserFactory.cs" />
+    <Compile Include="Users\IUserRepository.cs" />
+    <Compile Include="Users\User.cs" />
+    <Compile Include="Users\UserAccount.cs" />
+    <Compile Include="Users\UserBusinessRules.cs" />
+    <Compile Include="_Base\Accounts\CompleteProfile.cs" />
+    <Compile Include="_Base\Accounts\IAccount.cs" />
+    <Compile Include="_Base\Entities\BusinessRule.cs" />
+    <Compile Include="_Base\Entities\EntityBase.cs" />
+    <Compile Include="_Base\Entities\IAggregateRoot.cs" />
+    <Compile Include="_Base\Entities\ValueObjectBase.cs" />
+    <Compile Include="_Base\Entities\ValueObjectIsInvalidException.cs" />
+    <Compile Include="_Base\Events\DomainEvents.cs" />
+    <Compile Include="_Base\Events\IDomainEvent.cs" />
+    <Compile Include="_Base\Events\IDomainEventHandler.cs" />
+    <Compile Include="_Base\Events\IDomainEventHandlerFactory.cs" />
+    <Compile Include="_Base\Events\IEnumerableExtensions.cs" />
+    <Compile Include="_Base\Events\StructureMapDomainEventHandlerFactory.cs" />
+    <Compile Include="_Base\Querying\CriteriaOperator.cs" />
+    <Compile Include="_Base\Querying\Criterion.cs" />
+    <Compile Include="_Base\Querying\OrderByClause.cs" />
+    <Compile Include="_Base\Querying\PropertyNameHelper.cs" />
+    <Compile Include="_Base\Querying\Query.cs" />
+    <Compile Include="_Base\Querying\QueryOperator.cs" />
+    <Compile Include="_Base\Repositories\IReadOnlyRepository.cs" />
+    <Compile Include="_Base\Repositories\IRepository.cs" />
+    <Compile Include="_Base\UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="_Base\UnitOfWork\IUnitOfWorkRepository.cs" />
+    <Compile Include="_Base\UnitOfWork\UnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
