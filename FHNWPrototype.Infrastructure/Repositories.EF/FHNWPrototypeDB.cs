@@ -42,7 +42,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
         {
            // this.Configuration.LazyLoadingEnabled = false;
            // Database.DefaultConnectionFactory.CreateConnection("RemoteConnection");
-            //Database.SetInitializer(new DBContextInitializer());
+            Database.SetInitializer(new DBContextInitializer());
           
 
         }
@@ -50,7 +50,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<FHNWPrototypeDB, Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<FHNWPrototypeDB, Configuration>());
             //base.OnModelCreating(modelBuilder);
 
             //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

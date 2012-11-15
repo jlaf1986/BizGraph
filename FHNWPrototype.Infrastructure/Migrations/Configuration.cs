@@ -110,18 +110,18 @@ namespace FHNWPrototype.Infrastructure.Migrations
             //Lucerne
             GeoLocation HewlettPackardLocation = new GeoLocation { Latitude = 47.049545, Longitude = 8.304375 };
 
-
-            context.Geolocations.Add(GallikerLocation);
-            context.Geolocations.Add(EmmiLocation);
-            context.Geolocations.Add(MigrosLocation);
-            context.Geolocations.Add(SwissPostLocation);
-            context.Geolocations.Add(MartiLocation);
-            context.Geolocations.Add(NestleLocation);
-            context.Geolocations.Add(ErneLocation);
-            context.Geolocations.Add(MontanstahlLocation);
-            context.Geolocations.Add(SwissGovernmentLocation);
-            context.Geolocations.Add(DhlLocation);
-            context.Geolocations.Add(HewlettPackardLocation);
+            
+            context.Geolocations.AddOrUpdate(GallikerLocation);
+            context.Geolocations.AddOrUpdate(EmmiLocation);
+            context.Geolocations.AddOrUpdate(MigrosLocation);
+            context.Geolocations.AddOrUpdate(SwissPostLocation);
+            context.Geolocations.AddOrUpdate(MartiLocation);
+            context.Geolocations.AddOrUpdate(NestleLocation);
+            context.Geolocations.AddOrUpdate(ErneLocation);
+            context.Geolocations.AddOrUpdate(MontanstahlLocation);
+            context.Geolocations.AddOrUpdate(SwissGovernmentLocation);
+            context.Geolocations.AddOrUpdate(DhlLocation);
+            context.Geolocations.AddOrUpdate(HewlettPackardLocation);
 
 
             var Galliker = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1C0"), Name = "Galliker", Description = "We transport food", EmailSuffix = "galliker.ch", HeaderPicture = header_picture_Galliker, HeadquatersLocation = GallikerLocation };
@@ -139,17 +139,17 @@ namespace FHNWPrototype.Infrastructure.Migrations
 
 
 
-            context.Organizations.Add(Galliker);
-            context.Organizations.Add(Emmi);
-            context.Organizations.Add(Migros);
-            context.Organizations.Add(SwissPost);
-            context.Organizations.Add(Marti);
-            context.Organizations.Add(Nestle);
-            context.Organizations.Add(Erne);
-            context.Organizations.Add(Montanstahl);
-            context.Organizations.Add(SwissGovernment);
-            context.Organizations.Add(Dhl);
-            context.Organizations.Add(HewlettPackard);
+            context.Organizations.AddOrUpdate(Galliker);
+            context.Organizations.AddOrUpdate(Emmi);
+            context.Organizations.AddOrUpdate(Migros);
+            context.Organizations.AddOrUpdate(SwissPost);
+            context.Organizations.AddOrUpdate(Marti);
+            context.Organizations.AddOrUpdate(Nestle);
+            context.Organizations.AddOrUpdate(Erne);
+            context.Organizations.AddOrUpdate(Montanstahl);
+            context.Organizations.AddOrUpdate(SwissGovernment);
+            context.Organizations.AddOrUpdate(Dhl);
+            context.Organizations.AddOrUpdate(HewlettPackard);
 
 
             var GallikerAdministratorAccount = new OrganizationAccount { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308E1A0"), Name = "Galliker HQ", Description = "Galliker Organization Account", Organization = Galliker, EmailSuffix = "galliker.ch", Email = "admin@galliker.ch", AvatarPicture = avatar_picture_Galliker, Location = GallikerLocation };
@@ -165,17 +165,17 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var HewlettPackardAdministratorAccount = new OrganizationAccount { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308E1B0"), Name = "Hewlett Packard HQ", Description = "HP Organization Account", Organization = HewlettPackard, EmailSuffix = "hp.ch", Email = "admin@hp.ch", AvatarPicture = avatar_picture_HewlettPackard, Location = HewlettPackardLocation };
 
 
-            context.OrganizationAccounts.Add(GallikerAdministratorAccount);
-            context.OrganizationAccounts.Add(EmmiAdministratorAccount);
-            context.OrganizationAccounts.Add(MigrosAdministratorAccount);
-            context.OrganizationAccounts.Add(SwissPostAdministratorAccount);
-            context.OrganizationAccounts.Add(MartiAdministratorAccount);
-            context.OrganizationAccounts.Add(NestleAdministratorAccount);
-            context.OrganizationAccounts.Add(ErneAdministratorAccount);
-            context.OrganizationAccounts.Add(MontanstahlAdministratorAccount);
-            context.OrganizationAccounts.Add(SwissGovernmentAdministratorAccount);
-            context.OrganizationAccounts.Add(DhlAdministratorAccount);
-            context.OrganizationAccounts.Add(HewlettPackardAdministratorAccount);
+            context.OrganizationAccounts.AddOrUpdate(GallikerAdministratorAccount);
+            context.OrganizationAccounts.AddOrUpdate(EmmiAdministratorAccount);
+            context.OrganizationAccounts.AddOrUpdate(MigrosAdministratorAccount);
+            context.OrganizationAccounts.AddOrUpdate(SwissPostAdministratorAccount);
+            context.OrganizationAccounts.AddOrUpdate(MartiAdministratorAccount);
+            context.OrganizationAccounts.AddOrUpdate(NestleAdministratorAccount);
+            context.OrganizationAccounts.AddOrUpdate(ErneAdministratorAccount);
+            context.OrganizationAccounts.AddOrUpdate(MontanstahlAdministratorAccount);
+            context.OrganizationAccounts.AddOrUpdate(SwissGovernmentAdministratorAccount);
+            context.OrganizationAccounts.AddOrUpdate(DhlAdministratorAccount);
+            context.OrganizationAccounts.AddOrUpdate(HewlettPackardAdministratorAccount);
 
             var Galliker_BasicProfile = new BasicProfile { ReferenceKey = GallikerAdministratorAccount.Key, ReferenceType = AccountType.OrganizationAccount };
             var Emmi_BasicProfile = new BasicProfile { ReferenceKey = EmmiAdministratorAccount.Key, ReferenceType = AccountType.OrganizationAccount };
@@ -189,17 +189,17 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var Dhl_BasicProfile = new BasicProfile { ReferenceKey = DhlAdministratorAccount.Key, ReferenceType = AccountType.OrganizationAccount };
             var HewlettPackard_BasicProfile = new BasicProfile { ReferenceKey = HewlettPackardAdministratorAccount.Key, ReferenceType = AccountType.OrganizationAccount };
 
-            context.BasicProfiles.Add(Galliker_BasicProfile);
-            context.BasicProfiles.Add(Emmi_BasicProfile);
-            context.BasicProfiles.Add(Migros_BasicProfile);
-            context.BasicProfiles.Add(SwissPost_BasicProfile);
-            context.BasicProfiles.Add(Marti_BasicProfile);
-            context.BasicProfiles.Add(Nestle_BasicProfile);
-            context.BasicProfiles.Add(Erne_BasicProfile);
-            context.BasicProfiles.Add(Montanstahl_BasicProfile);
-            context.BasicProfiles.Add(SwissGovernment_BasicProfile);
-            context.BasicProfiles.Add(Dhl_BasicProfile);
-            context.BasicProfiles.Add(HewlettPackard_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(Galliker_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(Emmi_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(Migros_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(SwissPost_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(Marti_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(Nestle_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(Erne_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(Montanstahl_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(SwissGovernment_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(Dhl_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(HewlettPackard_BasicProfile);
 
             byte[] avatar_picture_bill_gates = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.bill_gates);
             byte[] avatar_picture_eric_schmidt = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.eric_schmidt);
@@ -283,23 +283,23 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var torvaldsl_BasicProfile = new BasicProfile { ReferenceKey = torvaldsl.Key, ReferenceType = AccountType.UserAccount };
             var ozzier_BasicProfile = new BasicProfile { ReferenceKey = ozzier.Key, ReferenceType = AccountType.UserAccount };
 
-            context.BasicProfiles.Add(gatesb_BasicProfile);
-            context.BasicProfiles.Add(brins_BasicProfile);
-            context.BasicProfiles.Add(pagel_BasicProfile);
-            context.BasicProfiles.Add(ellisonl_BasicProfile);
-            context.BasicProfiles.Add(mayerm_BasicProfile);
-            context.BasicProfiles.Add(schmidte_BasicProfile);
-            context.BasicProfiles.Add(jobss_BasicProfile);
-            context.BasicProfiles.Add(ballmers_BasicProfile);
-            context.BasicProfiles.Add(wozniaks_BasicProfile);
-            context.BasicProfiles.Add(allenp_BasicProfile);
-            context.BasicProfiles.Add(sandbergs_BasicProfile);
-            context.BasicProfiles.Add(hoffmanr_BasicProfile);
-            context.BasicProfiles.Add(romettyv_BasicProfile);
-            context.BasicProfiles.Add(hanselmans_BasicProfile);
-            context.BasicProfiles.Add(guthries_BasicProfile);
-            context.BasicProfiles.Add(torvaldsl_BasicProfile);
-            context.BasicProfiles.Add(ozzier_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(gatesb_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(brins_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(pagel_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(ellisonl_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(mayerm_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(schmidte_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(jobss_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(ballmers_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(wozniaks_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(allenp_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(sandbergs_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(hoffmanr_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(romettyv_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(hanselmans_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(guthries_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(torvaldsl_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(ozzier_BasicProfile);
 
             var rel_ballmers_gatesb = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F0"), Action = FriendshipAction.Accept, Sender = ballmers, Receiver = gatesb, IsActive = true, ActionDateTime = DateTime.Now.AddDays(-1) };
             var rel_gatesb_brins = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F1"), Action = FriendshipAction.Accept, Sender = gatesb, Receiver = brins, IsActive = true, ActionDateTime = DateTime.Now.AddDays(3) };
@@ -323,26 +323,26 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var rel_gatesb_hanselmans = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E3F0"), Action = FriendshipAction.Accept, Sender = gatesb, Receiver = hanselmans, IsActive = true, ActionDateTime = DateTime.Now };
 
 
-            context.Friendships.Add(rel_ballmers_gatesb);
-            context.Friendships.Add(rel_gatesb_brins);
-            context.Friendships.Add(rel_ellisonl_gatesb);
-            context.Friendships.Add(rel_pagel_romettyv);
-            context.Friendships.Add(rel_romettyv_ballmers);
-            context.Friendships.Add(rel_rometty_gatesb);
-            context.Friendships.Add(rel_mayerm_torvaldsl);
-            context.Friendships.Add(rel_ozzier_torvaldsl);
-            context.Friendships.Add(rel_pagel_brins);
-            context.Friendships.Add(rel_schmidte_mayerm);
-            context.Friendships.Add(rel_hoffmanr_sandbergs);
-            context.Friendships.Add(rel_sandbergs_allenp);
-            context.Friendships.Add(rel_guthries_sandbergs);
-            context.Friendships.Add(rel_hoffmanr_guthries);
-            context.Friendships.Add(rel_allenp_guthries);
-            context.Friendships.Add(rel_jobss_torvaldsl);
-            context.Friendships.Add(rel_jobss_ozzier);
-            context.Friendships.Add(rel_wozniaks_hanselmans);
-            //  context.Friendships.Add(rel_wozniaks_gatesb);
-            context.Friendships.Add(rel_gatesb_hanselmans);
+            context.Friendships.AddOrUpdate(rel_ballmers_gatesb);
+            context.Friendships.AddOrUpdate(rel_gatesb_brins);
+            context.Friendships.AddOrUpdate(rel_ellisonl_gatesb);
+            context.Friendships.AddOrUpdate(rel_pagel_romettyv);
+            context.Friendships.AddOrUpdate(rel_romettyv_ballmers);
+            context.Friendships.AddOrUpdate(rel_rometty_gatesb);
+            context.Friendships.AddOrUpdate(rel_mayerm_torvaldsl);
+            context.Friendships.AddOrUpdate(rel_ozzier_torvaldsl);
+            context.Friendships.AddOrUpdate(rel_pagel_brins);
+            context.Friendships.AddOrUpdate(rel_schmidte_mayerm);
+            context.Friendships.AddOrUpdate(rel_hoffmanr_sandbergs);
+            context.Friendships.AddOrUpdate(rel_sandbergs_allenp);
+            context.Friendships.AddOrUpdate(rel_guthries_sandbergs);
+            context.Friendships.AddOrUpdate(rel_hoffmanr_guthries);
+            context.Friendships.AddOrUpdate(rel_allenp_guthries);
+            context.Friendships.AddOrUpdate(rel_jobss_torvaldsl);
+            context.Friendships.AddOrUpdate(rel_jobss_ozzier);
+            context.Friendships.AddOrUpdate(rel_wozniaks_hanselmans);
+            //  context.Friendships.AddOrUpdate(rel_wozniaks_gatesb);
+            context.Friendships.AddOrUpdate(rel_gatesb_hanselmans);
 
 
 
@@ -373,61 +373,61 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var doc8 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A7"), Name = "MyDocument8.txt", ParentFolder = gatesb_library_folder_B, Author = ballmers, PublishDateTime = DateTime.Now };
 
 
-            context.Folders.Add(gatesb_library_folder_A);
-            context.Folders.Add(gatesb_library_folder_B);
-            context.Folders.Add(gatesb_library_folder_A_subfolder1);
-            context.Folders.Add(gatesb_library_folder_A_subfolder2);
-            context.Folders.Add(gatesb_library_folder_A_subfolder2_subfolder1);
-            context.Folders.Add(gatesb_library_folder_B_subfolder1);
+            context.Folders.AddOrUpdate(gatesb_library_folder_A);
+            context.Folders.AddOrUpdate(gatesb_library_folder_B);
+            context.Folders.AddOrUpdate(gatesb_library_folder_A_subfolder1);
+            context.Folders.AddOrUpdate(gatesb_library_folder_A_subfolder2);
+            context.Folders.AddOrUpdate(gatesb_library_folder_A_subfolder2_subfolder1);
+            context.Folders.AddOrUpdate(gatesb_library_folder_B_subfolder1);
 
-            context.Documents.Add(doc1);
-            context.Documents.Add(doc2);
-            context.Documents.Add(doc3);
-            context.Documents.Add(doc4);
-            context.Documents.Add(doc5);
-            context.Documents.Add(doc6);
-            context.Documents.Add(doc7);
-            context.Documents.Add(doc8);
+            context.Documents.AddOrUpdate(doc1);
+            context.Documents.AddOrUpdate(doc2);
+            context.Documents.AddOrUpdate(doc3);
+            context.Documents.AddOrUpdate(doc4);
+            context.Documents.AddOrUpdate(doc5);
+            context.Documents.AddOrUpdate(doc6);
+            context.Documents.AddOrUpdate(doc7);
+            context.Documents.AddOrUpdate(doc8);
 
             var gatesb_library = new Library() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1E0"), Folders = new List<Folder> { gatesb_library_folder_A, gatesb_library_folder_B }, Owner = gatesb };
 
-            context.Libraries.Add(gatesb_library);
+            context.Libraries.AddOrUpdate(gatesb_library);
 
 
 
             //var gatesb_workspace = new Workspace() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1D0"), Owner = gatesb, Library=gatesb_library, Wall=gatesb_wall };
             //  var gatesb_workspace = new Workspace() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1D0"), Owner = gatesb , Wall=gatesb_wall };
 
-            //context.Workspaces.Add(gatesb_workspace);
+            //context.Workspaces.AddOrUpdate(gatesb_workspace);
 
             //gatesb_library_root_folder.Files = new List<Document>();
-            //gatesb_library_root_folder.Files.Add(doc1);
-            //gatesb_library_root_folder.Files.Add(doc2);
-            //gatesb_library_root_folder_subfolder1.Files.Add(doc3);
-            //gatesb_library_root_folder_subfolder1.Files.Add(doc4);
+            //gatesb_library_root_folder.Files.AddOrUpdate(doc1);
+            //gatesb_library_root_folder.Files.AddOrUpdate(doc2);
+            //gatesb_library_root_folder_subfolder1.Files.AddOrUpdate(doc3);
+            //gatesb_library_root_folder_subfolder1.Files.AddOrUpdate(doc4);
 
 
 
 
 
 
-            context.UserAccounts.Add(gatesb);
-            context.UserAccounts.Add(brins);
-            context.UserAccounts.Add(pagel);
-            context.UserAccounts.Add(ellisonl);
-            context.UserAccounts.Add(mayerm);
-            context.UserAccounts.Add(schmidte);
-            context.UserAccounts.Add(jobss);
-            context.UserAccounts.Add(ballmers);
-            context.UserAccounts.Add(wozniaks);
-            context.UserAccounts.Add(allenp);
-            context.UserAccounts.Add(sandbergs);
-            context.UserAccounts.Add(hoffmanr);
-            context.UserAccounts.Add(romettyv);
-            context.UserAccounts.Add(hanselmans);
-            context.UserAccounts.Add(guthries);
-            context.UserAccounts.Add(torvaldsl);
-            context.UserAccounts.Add(ozzier);
+            context.UserAccounts.AddOrUpdate(gatesb);
+            context.UserAccounts.AddOrUpdate(brins);
+            context.UserAccounts.AddOrUpdate(pagel);
+            context.UserAccounts.AddOrUpdate(ellisonl);
+            context.UserAccounts.AddOrUpdate(mayerm);
+            context.UserAccounts.AddOrUpdate(schmidte);
+            context.UserAccounts.AddOrUpdate(jobss);
+            context.UserAccounts.AddOrUpdate(ballmers);
+            context.UserAccounts.AddOrUpdate(wozniaks);
+            context.UserAccounts.AddOrUpdate(allenp);
+            context.UserAccounts.AddOrUpdate(sandbergs);
+            context.UserAccounts.AddOrUpdate(hoffmanr);
+            context.UserAccounts.AddOrUpdate(romettyv);
+            context.UserAccounts.AddOrUpdate(hanselmans);
+            context.UserAccounts.AddOrUpdate(guthries);
+            context.UserAccounts.AddOrUpdate(torvaldsl);
+            context.UserAccounts.AddOrUpdate(ozzier);
 
 
             //Personal accounts
@@ -456,23 +456,23 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var PersonalRayOzzie = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A6"), Email = "rayozzie@gmail.com", User = RayOzzie };
 
             //
-            context.UserAccounts.Add(PersonalBillGates);
-            context.UserAccounts.Add(PersonalSergeyBrin);
-            context.UserAccounts.Add(PersonalLarryPage);
-            context.UserAccounts.Add(PersonalLarryEllison);
-            context.UserAccounts.Add(PersonalMarissaMayer);
-            context.UserAccounts.Add(PersonalEricSchmidt);
-            context.UserAccounts.Add(PersonalSteveJobs);
-            context.UserAccounts.Add(PersonalSteveBallmer);
-            context.UserAccounts.Add(PersonalSteveWozniak);
-            context.UserAccounts.Add(PersonalPaulAllen);
-            context.UserAccounts.Add(PersonalSherylSandberg);
-            context.UserAccounts.Add(PersonalReidHoffman);
-            context.UserAccounts.Add(PersonalVirginiaRometty);
-            context.UserAccounts.Add(PersonalScottHanselman);
-            context.UserAccounts.Add(PersonalScottGuthrie);
-            context.UserAccounts.Add(PersonalLinusTorvalds);
-            context.UserAccounts.Add(PersonalRayOzzie);
+            context.UserAccounts.AddOrUpdate(PersonalBillGates);
+            context.UserAccounts.AddOrUpdate(PersonalSergeyBrin);
+            context.UserAccounts.AddOrUpdate(PersonalLarryPage);
+            context.UserAccounts.AddOrUpdate(PersonalLarryEllison);
+            context.UserAccounts.AddOrUpdate(PersonalMarissaMayer);
+            context.UserAccounts.AddOrUpdate(PersonalEricSchmidt);
+            context.UserAccounts.AddOrUpdate(PersonalSteveJobs);
+            context.UserAccounts.AddOrUpdate(PersonalSteveBallmer);
+            context.UserAccounts.AddOrUpdate(PersonalSteveWozniak);
+            context.UserAccounts.AddOrUpdate(PersonalPaulAllen);
+            context.UserAccounts.AddOrUpdate(PersonalSherylSandberg);
+            context.UserAccounts.AddOrUpdate(PersonalReidHoffman);
+            context.UserAccounts.AddOrUpdate(PersonalVirginiaRometty);
+            context.UserAccounts.AddOrUpdate(PersonalScottHanselman);
+            context.UserAccounts.AddOrUpdate(PersonalScottGuthrie);
+            context.UserAccounts.AddOrUpdate(PersonalLinusTorvalds);
+            context.UserAccounts.AddOrUpdate(PersonalRayOzzie);
 
             //Assign corporate accounts to users
 
@@ -490,12 +490,12 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var DistributionForMilkshakeGroup = new Group { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1E4"), Name = "My Milkshake Distr", Description = "Marketing strategies", HeaderPicture = defaultGroupHeaderPicture, ProfilePicture = defaultGroupProfilePicture };//, Administrator=binkerta}; //nestle advices coop and migros           
             var SwitzerlandTransporationHPLaptopsGroup = new Group { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1E5"), Name = "My new HP Laptops", Description = "Pricing strategies", HeaderPicture = defaultGroupHeaderPicture, ProfilePicture = defaultGroupProfilePicture };//, Administrator = brins }; //pricing strategies, format and reports
 
-            context.Groups.Add(SwitzerlandIndustrialImportsGroup);
-            context.Groups.Add(FreshFoodGroup);
-            context.Groups.Add(ProductDevelopmentForMilkshakeGroup);
-            context.Groups.Add(MarketingForMilkshakeGroup);
-            context.Groups.Add(DistributionForMilkshakeGroup);
-            context.Groups.Add(SwitzerlandTransporationHPLaptopsGroup);
+            context.Groups.AddOrUpdate(SwitzerlandIndustrialImportsGroup);
+            context.Groups.AddOrUpdate(FreshFoodGroup);
+            context.Groups.AddOrUpdate(ProductDevelopmentForMilkshakeGroup);
+            context.Groups.AddOrUpdate(MarketingForMilkshakeGroup);
+            context.Groups.AddOrUpdate(DistributionForMilkshakeGroup);
+            context.Groups.AddOrUpdate(SwitzerlandTransporationHPLaptopsGroup);
 
             var SwitzerlandIndustrialImportsGroup_BasicProfile = new BasicProfile { ReferenceKey = SwitzerlandIndustrialImportsGroup.Key, ReferenceType = AccountType.Group };
             var FreshFoodGroup_BasicProfile = new BasicProfile { ReferenceKey = FreshFoodGroup.Key, ReferenceType = AccountType.Group };
@@ -505,12 +505,12 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var SwitzerlandTransporationHPLaptopsGroup_BasicProfile = new BasicProfile { ReferenceKey = SwitzerlandTransporationHPLaptopsGroup.Key, ReferenceType = AccountType.Group };
 
 
-            context.BasicProfiles.Add(SwitzerlandIndustrialImportsGroup_BasicProfile);
-            context.BasicProfiles.Add(FreshFoodGroup_BasicProfile);
-            context.BasicProfiles.Add(ProductDevelopmentForMilkshakeGroup_BasicProfile);
-            context.BasicProfiles.Add(MarketingForMilkshakeGroup_BasicProfile);
-            context.BasicProfiles.Add(DistributionForMilkshakeGroup_BasicProfile);
-            context.BasicProfiles.Add(SwitzerlandTransporationHPLaptopsGroup_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(SwitzerlandIndustrialImportsGroup_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(FreshFoodGroup_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(ProductDevelopmentForMilkshakeGroup_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(MarketingForMilkshakeGroup_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(DistributionForMilkshakeGroup_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(SwitzerlandTransporationHPLaptopsGroup_BasicProfile);
 
 
             //var group_membership_action_New = new GroupMembershipAction { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309A0A0"), Name = "New" };
@@ -521,13 +521,13 @@ namespace FHNWPrototype.Infrastructure.Migrations
             //var group_membership_action_Reject = new GroupMembershipAction { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309A0A5"), Name = "Reject" };
             //var group_membership_action_Cancel = new GroupMembershipAction { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309A0A6"), Name = "Cancel" };
 
-            //context.GroupMembershipActions.Add(group_membership_action_New);
-            //context.GroupMembershipActions.Add(group_membership_action_Offer);
-            //context.GroupMembershipActions.Add(group_membership_action_Allow);
-            //context.GroupMembershipActions.Add(group_membership_action_Request);
-            //context.GroupMembershipActions.Add(group_membership_action_Accept);
-            //context.GroupMembershipActions.Add(group_membership_action_Reject);
-            //context.GroupMembershipActions.Add(group_membership_action_Cancel);
+            //context.GroupMembershipActions.AddOrUpdate(group_membership_action_New);
+            //context.GroupMembershipActions.AddOrUpdate(group_membership_action_Offer);
+            //context.GroupMembershipActions.AddOrUpdate(group_membership_action_Allow);
+            //context.GroupMembershipActions.AddOrUpdate(group_membership_action_Request);
+            //context.GroupMembershipActions.AddOrUpdate(group_membership_action_Accept);
+            //context.GroupMembershipActions.AddOrUpdate(group_membership_action_Reject);
+            //context.GroupMembershipActions.AddOrUpdate(group_membership_action_Cancel);
 
 
 
@@ -555,22 +555,22 @@ namespace FHNWPrototype.Infrastructure.Migrations
 
 
 
-            context.GroupMemberships.Add(memb_sandberg_SwitzerlandIndustrialImportsGroup);
-            context.GroupMemberships.Add(memb_allenp_SwitzerlandIndustrialImportsGroup);
-            context.GroupMemberships.Add(memb_hoffmanr_SwitzerlandIndustrialImportsGroup);
-            context.GroupMemberships.Add(memb_guthrie_SwitzerlandIndustrialImportsGroup);
-            context.GroupMemberships.Add(memb_ellisonl_FreshFoodGroup);
-            context.GroupMemberships.Add(memb_wozniaks_FreshFoodGroup);
-            context.GroupMemberships.Add(memb_ellisonl_DistributionForMilkshakeGroup);
-            context.GroupMemberships.Add(memb_wozniaks_DistributionForMilkshakeGroup);
-            context.GroupMemberships.Add(memb_rometty_MarketingForMilkshakeGroup);
-            context.GroupMemberships.Add(memb_hanselmans_MarketingForMilkshakeGroup);
-            context.GroupMemberships.Add(memb_gatesb_ProductDevelopmentForMilkshakeGroup);
-            context.GroupMemberships.Add(memb_brins_ProductDevelopmentForMilkshakeGroup);
-            context.GroupMemberships.Add(memb_pagel_ProductDevelopmentForMilkshakeGroup);
-            context.GroupMemberships.Add(memb_mayerm_SwitzerlandTransporationHPLaptopsGroup);
-            context.GroupMemberships.Add(memb_ozzier_SwitzerlandTransporationHPLaptopsGroup);
-            context.GroupMemberships.Add(memb_torvaldsl_SwitzerlandTransporationHPLaptopsGroup);
+            context.GroupMemberships.AddOrUpdate(memb_sandberg_SwitzerlandIndustrialImportsGroup);
+            context.GroupMemberships.AddOrUpdate(memb_allenp_SwitzerlandIndustrialImportsGroup);
+            context.GroupMemberships.AddOrUpdate(memb_hoffmanr_SwitzerlandIndustrialImportsGroup);
+            context.GroupMemberships.AddOrUpdate(memb_guthrie_SwitzerlandIndustrialImportsGroup);
+            context.GroupMemberships.AddOrUpdate(memb_ellisonl_FreshFoodGroup);
+            context.GroupMemberships.AddOrUpdate(memb_wozniaks_FreshFoodGroup);
+            context.GroupMemberships.AddOrUpdate(memb_ellisonl_DistributionForMilkshakeGroup);
+            context.GroupMemberships.AddOrUpdate(memb_wozniaks_DistributionForMilkshakeGroup);
+            context.GroupMemberships.AddOrUpdate(memb_rometty_MarketingForMilkshakeGroup);
+            context.GroupMemberships.AddOrUpdate(memb_hanselmans_MarketingForMilkshakeGroup);
+            context.GroupMemberships.AddOrUpdate(memb_gatesb_ProductDevelopmentForMilkshakeGroup);
+            context.GroupMemberships.AddOrUpdate(memb_brins_ProductDevelopmentForMilkshakeGroup);
+            context.GroupMemberships.AddOrUpdate(memb_pagel_ProductDevelopmentForMilkshakeGroup);
+            context.GroupMemberships.AddOrUpdate(memb_mayerm_SwitzerlandTransporationHPLaptopsGroup);
+            context.GroupMemberships.AddOrUpdate(memb_ozzier_SwitzerlandTransporationHPLaptopsGroup);
+            context.GroupMemberships.AddOrUpdate(memb_torvaldsl_SwitzerlandTransporationHPLaptopsGroup);
 
 
             //var partnership_action_New = new PartnershipAction { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458FA08A2A0"), Name = "New" };
@@ -579,11 +579,11 @@ namespace FHNWPrototype.Infrastructure.Migrations
             //var partnership_action_Reject = new PartnershipAction { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458FA08A2A3"), Name = "Reject" };
             //var partnership_action_Cancel = new PartnershipAction { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458FA08A2A4"), Name = "Cancel" };
 
-            //context.PartnershipActions.Add(partnership_action_New);
-            //context.PartnershipActions.Add(partnership_action_Request);
-            //context.PartnershipActions.Add(partnership_action_Accept);
-            //context.PartnershipActions.Add(partnership_action_Reject);
-            //context.PartnershipActions.Add(partnership_action_Cancel);
+            //context.PartnershipActions.AddOrUpdate(partnership_action_New);
+            //context.PartnershipActions.AddOrUpdate(partnership_action_Request);
+            //context.PartnershipActions.AddOrUpdate(partnership_action_Accept);
+            //context.PartnershipActions.AddOrUpdate(partnership_action_Reject);
+            //context.PartnershipActions.AddOrUpdate(partnership_action_Cancel);
 
             var part_Migros_Nestle = new PartnershipStateInfo { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308E1A0"), Action = PartnershipAction.Accept, Sender = MigrosAdministratorAccount, Receiver = NestleAdministratorAccount, ActionDateTime = DateTime.Now };
             var part_Migros_Galliker = new PartnershipStateInfo { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308E1A1"), Action = PartnershipAction.Accept, Sender = MigrosAdministratorAccount, Receiver = GallikerAdministratorAccount, ActionDateTime = DateTime.Now };
@@ -598,17 +598,17 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var part_SwissGovernment_Montanstahl = new PartnershipStateInfo { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308E1A8"), Action = PartnershipAction.Accept, Sender = SwissGovernmentAdministratorAccount, Receiver = MontanstahlAdministratorAccount, ActionDateTime = DateTime.Now };
 
 
-            context.Partnerships.Add(part_Migros_Nestle);
-            context.Partnerships.Add(part_Migros_Galliker);
-            context.Partnerships.Add(part_Nestle_Galliker);
-            context.Partnerships.Add(part_Nestle_Emmi);
+            context.Partnerships.AddOrUpdate(part_Migros_Nestle);
+            context.Partnerships.AddOrUpdate(part_Migros_Galliker);
+            context.Partnerships.AddOrUpdate(part_Nestle_Galliker);
+            context.Partnerships.AddOrUpdate(part_Nestle_Emmi);
 
-            context.Partnerships.Add(part_SwissPost_Dhl);
-            context.Partnerships.Add(part_HP_Dhl);
+            context.Partnerships.AddOrUpdate(part_SwissPost_Dhl);
+            context.Partnerships.AddOrUpdate(part_HP_Dhl);
 
-            context.Partnerships.Add(part_SwissGovernment_Erne);
-            context.Partnerships.Add(part_SwissGovernment_Marti);
-            context.Partnerships.Add(part_SwissGovernment_Montanstahl);
+            context.Partnerships.AddOrUpdate(part_SwissGovernment_Erne);
+            context.Partnerships.AddOrUpdate(part_SwissGovernment_Marti);
+            context.Partnerships.AddOrUpdate(part_SwissGovernment_Montanstahl);
 
 
             byte[] defaultAllianceHeaderPicture = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.allianceHeader);
@@ -620,17 +620,17 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var all_ConstructionStandards = new Alliance { Key = new Guid("ACBCCE0E-99AA-4386-98AA-1458F308EBB2"), Name = "Construction Standards", Description = "We talk about construction best practices in Switzerland", Coordinator = SwissGovernmentAdministratorAccount, HeaderPicture = defaultAllianceHeaderPicture, ProfilePicture = defaultAllianceProfilePicture };
 
 
-            context.Alliances.Add(all_NewMilkshake);
-            context.Alliances.Add(all_HPLaptopDistribution);
-            context.Alliances.Add(all_ConstructionStandards);
+            context.Alliances.AddOrUpdate(all_NewMilkshake);
+            context.Alliances.AddOrUpdate(all_HPLaptopDistribution);
+            context.Alliances.AddOrUpdate(all_ConstructionStandards);
 
             var all_NewMilkshake_BasicProfile = new BasicProfile { ReferenceKey = all_NewMilkshake.Key, ReferenceType = AccountType.Alliance };
             var all_HPLaptopDistribution_BasicProfile = new BasicProfile { ReferenceKey = all_HPLaptopDistribution.Key, ReferenceType = AccountType.Alliance };
             var all_ConstructionStandards_BasicProfile = new BasicProfile { ReferenceKey = all_ConstructionStandards.Key, ReferenceType = AccountType.Alliance };
 
-            context.BasicProfiles.Add(all_NewMilkshake_BasicProfile);
-            context.BasicProfiles.Add(all_HPLaptopDistribution_BasicProfile);
-            context.BasicProfiles.Add(all_ConstructionStandards_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(all_NewMilkshake_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(all_HPLaptopDistribution_BasicProfile);
+            context.BasicProfiles.AddOrUpdate(all_ConstructionStandards_BasicProfile);
 
             //var alliance_action_New = new AllianceMembershipAction { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458A308A1A0"), Name = "New" };
             //var alliance_action_Offer = new AllianceMembershipAction { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458A308A1A1"), Name = "Offer" };
@@ -640,13 +640,13 @@ namespace FHNWPrototype.Infrastructure.Migrations
             //var alliance_action_Reject = new AllianceMembershipAction { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458A308A1A5"), Name = "Reject" };
             //var alliance_action_Cancel = new AllianceMembershipAction { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458A308A1A6"), Name = "Cancel" };
 
-            //context.AllianceMembershipActions.Add(alliance_action_New);
-            //context.AllianceMembershipActions.Add(alliance_action_Offer);
-            //context.AllianceMembershipActions.Add(alliance_action_Allow);
-            //context.AllianceMembershipActions.Add(alliance_action_Request);
-            //context.AllianceMembershipActions.Add(alliance_action_Accept);
-            //context.AllianceMembershipActions.Add(alliance_action_Reject);
-            //context.AllianceMembershipActions.Add(alliance_action_Cancel);
+            //context.AllianceMembershipActions.AddOrUpdate(alliance_action_New);
+            //context.AllianceMembershipActions.AddOrUpdate(alliance_action_Offer);
+            //context.AllianceMembershipActions.AddOrUpdate(alliance_action_Allow);
+            //context.AllianceMembershipActions.AddOrUpdate(alliance_action_Request);
+            //context.AllianceMembershipActions.AddOrUpdate(alliance_action_Accept);
+            //context.AllianceMembershipActions.AddOrUpdate(alliance_action_Reject);
+            //context.AllianceMembershipActions.AddOrUpdate(alliance_action_Cancel);
 
 
 
@@ -667,18 +667,18 @@ namespace FHNWPrototype.Infrastructure.Migrations
 
 
 
-            context.AllianceMemberships.Add(memb_Migros_NewMilkshake);
-            context.AllianceMemberships.Add(memb_Nestle_NewMilkshake);
-            context.AllianceMemberships.Add(memb_Emmi_NewMilkshake);
+            context.AllianceMemberships.AddOrUpdate(memb_Migros_NewMilkshake);
+            context.AllianceMemberships.AddOrUpdate(memb_Nestle_NewMilkshake);
+            context.AllianceMemberships.AddOrUpdate(memb_Emmi_NewMilkshake);
 
-            context.AllianceMemberships.Add(memb_SwissPost_HPLaptopDistribution);
-            context.AllianceMemberships.Add(memb_Dhl_HPLaptopDistribution);
-            context.AllianceMemberships.Add(memb_HewlettPackard_HPLaptopDistribution);
+            context.AllianceMemberships.AddOrUpdate(memb_SwissPost_HPLaptopDistribution);
+            context.AllianceMemberships.AddOrUpdate(memb_Dhl_HPLaptopDistribution);
+            context.AllianceMemberships.AddOrUpdate(memb_HewlettPackard_HPLaptopDistribution);
 
-            context.AllianceMemberships.Add(memb_Erne_ConstructionStandards);
-            context.AllianceMemberships.Add(memb_Marti_ConstructionStandards);
-            context.AllianceMemberships.Add(memb_SwissGovernment_ConstructionStandards);
-            context.AllianceMemberships.Add(memb_Montanstahl_ConstructionStandards);
+            context.AllianceMemberships.AddOrUpdate(memb_Erne_ConstructionStandards);
+            context.AllianceMemberships.AddOrUpdate(memb_Marti_ConstructionStandards);
+            context.AllianceMemberships.AddOrUpdate(memb_SwissGovernment_ConstructionStandards);
+            context.AllianceMemberships.AddOrUpdate(memb_Montanstahl_ConstructionStandards);
 
 
 
@@ -699,22 +699,22 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var Project1 = new Project { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBA0"), Name = "Project1", Description = "Description of project 1", Coordinator = NestleAdministratorAccount, WorkBreakdownStructure = wbs_0 };
 
 
-            context.WorkPackages.Add(wbs_3_2_1);
-            context.WorkPackages.Add(wbs_3_2);
-            context.WorkPackages.Add(wbs_3_1);
-            context.WorkPackages.Add(wbs_3);
+            context.WorkPackages.AddOrUpdate(wbs_3_2_1);
+            context.WorkPackages.AddOrUpdate(wbs_3_2);
+            context.WorkPackages.AddOrUpdate(wbs_3_1);
+            context.WorkPackages.AddOrUpdate(wbs_3);
 
 
-            context.WorkPackages.Add(wbs_2_1);
-            context.WorkPackages.Add(wbs_2);
+            context.WorkPackages.AddOrUpdate(wbs_2_1);
+            context.WorkPackages.AddOrUpdate(wbs_2);
 
-            context.WorkPackages.Add(wbs_1_1);
-            context.WorkPackages.Add(wbs_1_2);
-            context.WorkPackages.Add(wbs_1);
+            context.WorkPackages.AddOrUpdate(wbs_1_1);
+            context.WorkPackages.AddOrUpdate(wbs_1_2);
+            context.WorkPackages.AddOrUpdate(wbs_1);
 
-            context.WorkPackages.Add(wbs_0);
+            context.WorkPackages.AddOrUpdate(wbs_0);
 
-            context.Projects.Add(Project1);
+            context.Projects.AddOrUpdate(Project1);
 
             var trend1 = new Hashtag() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBC0"), Symbol = "Trend1", AllianceContext = all_NewMilkshake };
             var trend2 = new Hashtag() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBC1"), Symbol = "Trend2", GroupContext = DistributionForMilkshakeGroup };
@@ -732,17 +732,17 @@ namespace FHNWPrototype.Infrastructure.Migrations
             //var trend3_tweet3 = new Tweet { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBB7"), Author = ozzier, Hashtag = trend3, Text = "yeah, tell us, we are all interested",  PublishDateTime = DateTime.Now.AddDays(-12), Wall = nestle_wall };
             //var trend3_tweet4 = new Tweet { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBB8"), Author = hoffmanr, Hashtag = trend3, Text = "mmm, I'll wait for tomorrow", PublishDateTime = DateTime.Now.AddDays(-6), Wall = nestle_wall };
 
-            //context.Tweets.Add(trend1_tweet1);
-            //context.Tweets.Add(trend1_tweet2);
-            //context.Tweets.Add(trend1_tweet3);
+            //context.Tweets.AddOrUpdate(trend1_tweet1);
+            //context.Tweets.AddOrUpdate(trend1_tweet2);
+            //context.Tweets.AddOrUpdate(trend1_tweet3);
 
-            //context.Tweets.Add(trend2_tweet1);
-            //context.Tweets.Add(trend2_tweet2);
+            //context.Tweets.AddOrUpdate(trend2_tweet1);
+            //context.Tweets.AddOrUpdate(trend2_tweet2);
 
-            //context.Tweets.Add(trend3_tweet1);
-            //context.Tweets.Add(trend3_tweet2);
-            //context.Tweets.Add(trend3_tweet3);
-            //context.Tweets.Add(trend3_tweet4);
+            //context.Tweets.AddOrUpdate(trend3_tweet1);
+            //context.Tweets.AddOrUpdate(trend3_tweet2);
+            //context.Tweets.AddOrUpdate(trend3_tweet3);
+            //context.Tweets.AddOrUpdate(trend3_tweet4);
 
             var gatesb_bookmark_contact_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC0"), Owner = gatesb, Type = BookmarkType.Contact, Reference = wozniaks.Key };
             var gatesb_bookmark_contact_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC1"), Owner = gatesb, Type = BookmarkType.Contact, Reference = jobss.Key };
@@ -765,17 +765,17 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var gatesb_bookmark_group_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECD1"), Owner = gatesb, Type = BookmarkType.Group, Reference = FreshFoodGroup.Key };
             var gatesb_bookmark_group_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECD2"), Owner = gatesb, Type = BookmarkType.Group, Reference = DistributionForMilkshakeGroup.Key };
 
-            context.Bookmarks.Add(gatesb_bookmark_contact_1);
-            context.Bookmarks.Add(gatesb_bookmark_contact_2);
-            context.Bookmarks.Add(gatesb_bookmark_organization_1);
-            context.Bookmarks.Add(gatesb_bookmark_organization_2);
-            context.Bookmarks.Add(gatesb_bookmark_organization_3);
-            context.Bookmarks.Add(gatesb_bookmark_alliance_1);
-            context.Bookmarks.Add(gatesb_bookmark_alliance_2);
-            context.Bookmarks.Add(gatesb_bookmark_document_1);
-            context.Bookmarks.Add(gatesb_bookmark_folder_1);
-            context.Bookmarks.Add(gatesb_bookmark_group_1);
-            context.Bookmarks.Add(gatesb_bookmark_group_2);
+            context.Bookmarks.AddOrUpdate(gatesb_bookmark_contact_1);
+            context.Bookmarks.AddOrUpdate(gatesb_bookmark_contact_2);
+            context.Bookmarks.AddOrUpdate(gatesb_bookmark_organization_1);
+            context.Bookmarks.AddOrUpdate(gatesb_bookmark_organization_2);
+            context.Bookmarks.AddOrUpdate(gatesb_bookmark_organization_3);
+            context.Bookmarks.AddOrUpdate(gatesb_bookmark_alliance_1);
+            context.Bookmarks.AddOrUpdate(gatesb_bookmark_alliance_2);
+            context.Bookmarks.AddOrUpdate(gatesb_bookmark_document_1);
+            context.Bookmarks.AddOrUpdate(gatesb_bookmark_folder_1);
+            context.Bookmarks.AddOrUpdate(gatesb_bookmark_group_1);
+            context.Bookmarks.AddOrUpdate(gatesb_bookmark_group_2);
 
             //context.SaveChanges();
             //base.Seed(context);
@@ -812,35 +812,35 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var system_account_HewlettPackard_hq = new SystemAccount() { Email = "admin@hp.ch", Password = "login123", Holder = HewlettPackard_BasicProfile, IsConfirmed = true };
 
 
-            context.SystemAccounts.Add(system_account_gatesb);
-            context.SystemAccounts.Add(system_account_brins);
-            context.SystemAccounts.Add(system_account_pagel);
-            context.SystemAccounts.Add(system_account_ellisonl);
-            context.SystemAccounts.Add(system_account_mayerm);
-            context.SystemAccounts.Add(system_account_schmidte);
-            context.SystemAccounts.Add(system_account_jobss);
-            context.SystemAccounts.Add(system_account_ballmers);
-            context.SystemAccounts.Add(system_account_wozniaks);
-            context.SystemAccounts.Add(system_account_allenp);
-            context.SystemAccounts.Add(system_account_sandbergs);
-            context.SystemAccounts.Add(system_account_hoffmanr);
-            context.SystemAccounts.Add(system_account_romettyv);
-            context.SystemAccounts.Add(system_account_hanselmans);
-            context.SystemAccounts.Add(system_account_guthries);
-            context.SystemAccounts.Add(system_account_torvaldsl);
-            context.SystemAccounts.Add(system_account_ozzier);
+            context.SystemAccounts.AddOrUpdate(system_account_gatesb);
+            context.SystemAccounts.AddOrUpdate(system_account_brins);
+            context.SystemAccounts.AddOrUpdate(system_account_pagel);
+            context.SystemAccounts.AddOrUpdate(system_account_ellisonl);
+            context.SystemAccounts.AddOrUpdate(system_account_mayerm);
+            context.SystemAccounts.AddOrUpdate(system_account_schmidte);
+            context.SystemAccounts.AddOrUpdate(system_account_jobss);
+            context.SystemAccounts.AddOrUpdate(system_account_ballmers);
+            context.SystemAccounts.AddOrUpdate(system_account_wozniaks);
+            context.SystemAccounts.AddOrUpdate(system_account_allenp);
+            context.SystemAccounts.AddOrUpdate(system_account_sandbergs);
+            context.SystemAccounts.AddOrUpdate(system_account_hoffmanr);
+            context.SystemAccounts.AddOrUpdate(system_account_romettyv);
+            context.SystemAccounts.AddOrUpdate(system_account_hanselmans);
+            context.SystemAccounts.AddOrUpdate(system_account_guthries);
+            context.SystemAccounts.AddOrUpdate(system_account_torvaldsl);
+            context.SystemAccounts.AddOrUpdate(system_account_ozzier);
 
-            context.SystemAccounts.Add(system_account_Nestle_hq);
-            context.SystemAccounts.Add(system_account_Galliker_hq);
-            context.SystemAccounts.Add(system_account_Emmi_hq);
-            context.SystemAccounts.Add(system_account_Migros_hq);
-            context.SystemAccounts.Add(system_account_SwissPost_hq);
-            context.SystemAccounts.Add(system_account_Marti_hq);
-            context.SystemAccounts.Add(system_account_Erne_hq);
-            context.SystemAccounts.Add(system_account_Montanstahl_hq);
-            context.SystemAccounts.Add(system_account_SwissGovernment_hq);
-            context.SystemAccounts.Add(system_account_Dhl_hq);
-            context.SystemAccounts.Add(system_account_HewlettPackard_hq);
+            context.SystemAccounts.AddOrUpdate(system_account_Nestle_hq);
+            context.SystemAccounts.AddOrUpdate(system_account_Galliker_hq);
+            context.SystemAccounts.AddOrUpdate(system_account_Emmi_hq);
+            context.SystemAccounts.AddOrUpdate(system_account_Migros_hq);
+            context.SystemAccounts.AddOrUpdate(system_account_SwissPost_hq);
+            context.SystemAccounts.AddOrUpdate(system_account_Marti_hq);
+            context.SystemAccounts.AddOrUpdate(system_account_Erne_hq);
+            context.SystemAccounts.AddOrUpdate(system_account_Montanstahl_hq);
+            context.SystemAccounts.AddOrUpdate(system_account_SwissGovernment_hq);
+            context.SystemAccounts.AddOrUpdate(system_account_Dhl_hq);
+            context.SystemAccounts.AddOrUpdate(system_account_HewlettPackard_hq);
 
 
             var gatesb_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-4386-98AA-123456789001"), Owner = gatesb_BasicProfile };
@@ -867,25 +867,25 @@ namespace FHNWPrototype.Infrastructure.Migrations
 
             var gatesb_wall_post4 = new Post() { Key = new Guid("AAABBBCC-DDDD-4386-98AA-12345678900F"), Author = gatesb_BasicProfile, Text = "ok, I think I like to post!", Wall = gatesb_wall, PublishDateTime = DateTime.Now.Add(new TimeSpan(0, 24, 15)) };
 
-            context.Posts.Add(gatesb_wall_post1);
-            context.Posts.Add(gatesb_wall_post2);
-            context.Posts.Add(gatesb_wall_post3);
-            context.Posts.Add(gatesb_wall_post4);
+            context.Posts.AddOrUpdate(gatesb_wall_post1);
+            context.Posts.AddOrUpdate(gatesb_wall_post2);
+            context.Posts.AddOrUpdate(gatesb_wall_post3);
+            context.Posts.AddOrUpdate(gatesb_wall_post4);
 
-            context.Comments.Add(gatesb_wall_comment1_post1);
-            context.Comments.Add(gatesb_wall_comment2_post1);
-            context.Comments.Add(gatesb_wall_comment3_post1);
+            context.Comments.AddOrUpdate(gatesb_wall_comment1_post1);
+            context.Comments.AddOrUpdate(gatesb_wall_comment2_post1);
+            context.Comments.AddOrUpdate(gatesb_wall_comment3_post1);
 
-            context.Comments.Add(gatesb_wall_comment1_post2);
-            context.Comments.Add(gatesb_wall_comment2_post2);
+            context.Comments.AddOrUpdate(gatesb_wall_comment1_post2);
+            context.Comments.AddOrUpdate(gatesb_wall_comment2_post2);
 
-            context.Comments.Add(gatesb_wall_comment1_post3);
+            context.Comments.AddOrUpdate(gatesb_wall_comment1_post3);
 
 
-            context.PostLikes.Add(gatesb_wall_post1_like_ellisonl);
-            context.PostLikes.Add(gatesb_wall_post1_like_gatesb);
-            context.CommentLikes.Add(gatesb_wall_comment1_post1_like_mayerm);
-            context.CommentLikes.Add(gatesb_wall_comment1_post1_like_sandbergs);
+            context.PostLikes.AddOrUpdate(gatesb_wall_post1_like_ellisonl);
+            context.PostLikes.AddOrUpdate(gatesb_wall_post1_like_gatesb);
+            context.CommentLikes.AddOrUpdate(gatesb_wall_comment1_post1_like_mayerm);
+            context.CommentLikes.AddOrUpdate(gatesb_wall_comment1_post1_like_sandbergs);
 
 
             var brins_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-AABB-98AA-123456789000"), Owner = brins_BasicProfile };
@@ -903,19 +903,19 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var torvaldsl_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-AABB-98AA-12345678900C"), Owner = torvaldsl_BasicProfile };
             var ozzier_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-AABB-98AA-12345678900D"), Owner = ozzier_BasicProfile };
 
-            context.ContentStreams.Add(brins_wall);
-            context.ContentStreams.Add(schmidte_wall);
-            context.ContentStreams.Add(jobss_wall);
-            context.ContentStreams.Add(ballmers_wall);
-            context.ContentStreams.Add(wozniaks_wall);
-            context.ContentStreams.Add(allenp_wall);
-            context.ContentStreams.Add(sandbergs_wall);
-            context.ContentStreams.Add(hoffmanr_wall);
-            context.ContentStreams.Add(romettyv_wall);
-            context.ContentStreams.Add(hanselmans_wall);
-            context.ContentStreams.Add(guthries_wall);
-            context.ContentStreams.Add(torvaldsl_wall);
-            context.ContentStreams.Add(ozzier_wall);
+            context.ContentStreams.AddOrUpdate(brins_wall);
+            context.ContentStreams.AddOrUpdate(schmidte_wall);
+            context.ContentStreams.AddOrUpdate(jobss_wall);
+            context.ContentStreams.AddOrUpdate(ballmers_wall);
+            context.ContentStreams.AddOrUpdate(wozniaks_wall);
+            context.ContentStreams.AddOrUpdate(allenp_wall);
+            context.ContentStreams.AddOrUpdate(sandbergs_wall);
+            context.ContentStreams.AddOrUpdate(hoffmanr_wall);
+            context.ContentStreams.AddOrUpdate(romettyv_wall);
+            context.ContentStreams.AddOrUpdate(hanselmans_wall);
+            context.ContentStreams.AddOrUpdate(guthries_wall);
+            context.ContentStreams.AddOrUpdate(torvaldsl_wall);
+            context.ContentStreams.AddOrUpdate(ozzier_wall);
 
 
             var Galliker_wall = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A01"), Owner = Galliker_BasicProfile };
@@ -930,16 +930,16 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var HewlettPackard_wall = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A0A"), Owner = HewlettPackard_BasicProfile };
 
 
-            context.ContentStreams.Add(Galliker_wall);
-            context.ContentStreams.Add(Emmi_wall);
-            context.ContentStreams.Add(Migros_wall);
-            context.ContentStreams.Add(SwissPost_wall);
-            context.ContentStreams.Add(Marti_wall);
-            context.ContentStreams.Add(Erne_wall);
-            context.ContentStreams.Add(Montanstahl_wall);
-            context.ContentStreams.Add(SwissGovernment_wall);
-            context.ContentStreams.Add(Dhl_wall);
-            context.ContentStreams.Add(HewlettPackard_wall);
+            context.ContentStreams.AddOrUpdate(Galliker_wall);
+            context.ContentStreams.AddOrUpdate(Emmi_wall);
+            context.ContentStreams.AddOrUpdate(Migros_wall);
+            context.ContentStreams.AddOrUpdate(SwissPost_wall);
+            context.ContentStreams.AddOrUpdate(Marti_wall);
+            context.ContentStreams.AddOrUpdate(Erne_wall);
+            context.ContentStreams.AddOrUpdate(Montanstahl_wall);
+            context.ContentStreams.AddOrUpdate(SwissGovernment_wall);
+            context.ContentStreams.AddOrUpdate(Dhl_wall);
+            context.ContentStreams.AddOrUpdate(HewlettPackard_wall);
 
 
 
@@ -966,25 +966,25 @@ namespace FHNWPrototype.Infrastructure.Migrations
 
             var nestle_wall_post4 = new Post() { Key = new Guid("AAABBBCC-DDDD-4386-98AA-123456789A0F"), Author = Nestle_BasicProfile, Text = "ok, I think I like to post!", Wall = Nestle_wall, PublishDateTime = DateTime.Now.Add(new TimeSpan(-1, 45, 34)) };
 
-            context.Posts.Add(nestle_wall_post1);
-            context.Posts.Add(nestle_wall_post2);
-            context.Posts.Add(nestle_wall_post3);
-            context.Posts.Add(nestle_wall_post4);
+            context.Posts.AddOrUpdate(nestle_wall_post1);
+            context.Posts.AddOrUpdate(nestle_wall_post2);
+            context.Posts.AddOrUpdate(nestle_wall_post3);
+            context.Posts.AddOrUpdate(nestle_wall_post4);
 
-            context.Comments.Add(nestle_wall_comment1_post1);
-            context.Comments.Add(nestle_wall_comment2_post1);
-            context.Comments.Add(nestle_wall_comment3_post1);
+            context.Comments.AddOrUpdate(nestle_wall_comment1_post1);
+            context.Comments.AddOrUpdate(nestle_wall_comment2_post1);
+            context.Comments.AddOrUpdate(nestle_wall_comment3_post1);
 
-            context.Comments.Add(nestle_wall_comment1_post2);
-            context.Comments.Add(nestle_wall_comment2_post2);
+            context.Comments.AddOrUpdate(nestle_wall_comment1_post2);
+            context.Comments.AddOrUpdate(nestle_wall_comment2_post2);
 
-            context.Comments.Add(nestle_wall_comment1_post3);
+            context.Comments.AddOrUpdate(nestle_wall_comment1_post3);
 
 
-            context.PostLikes.Add(nestle_wall_post1_like_ellisonl);
-            context.PostLikes.Add(nestle_wall_post1_like_gatesb);
-            context.CommentLikes.Add(nestle_wall_comment1_post1_like_mayerm);
-            context.CommentLikes.Add(nestle_wall_comment1_post1_like_sandbergs);
+            context.PostLikes.AddOrUpdate(nestle_wall_post1_like_ellisonl);
+            context.PostLikes.AddOrUpdate(nestle_wall_post1_like_gatesb);
+            context.CommentLikes.AddOrUpdate(nestle_wall_comment1_post1_like_mayerm);
+            context.CommentLikes.AddOrUpdate(nestle_wall_comment1_post1_like_sandbergs);
 
 
             var SwitzerlandIndustrialImportsGroup_wall = new ContentStream { Key = new Guid("ADDEEEFA-EEDD-4386-98AA-123456789C01"), Owner = SwitzerlandIndustrialImportsGroup_BasicProfile };
@@ -1010,25 +1010,25 @@ namespace FHNWPrototype.Infrastructure.Migrations
 
             var SwitzerlandIndustrialImportsGroup_wall_post4 = new Post() { Key = new Guid("ADDEEEFA-EEDD-4386-98AA-123456789C0F"), Author = mayerm_BasicProfile, Text = "ok, I think I like to post!", Wall = SwitzerlandIndustrialImportsGroup_wall, PublishDateTime = DateTime.Now.Add(new TimeSpan(-3, -56, -14)) };
 
-            context.Posts.Add(SwitzerlandIndustrialImportsGroup_wall_post1);
-            context.Posts.Add(SwitzerlandIndustrialImportsGroup_wall_post2);
-            context.Posts.Add(SwitzerlandIndustrialImportsGroup_wall_post3);
-            context.Posts.Add(SwitzerlandIndustrialImportsGroup_wall_post4);
+            context.Posts.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_post1);
+            context.Posts.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_post2);
+            context.Posts.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_post3);
+            context.Posts.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_post4);
 
-            context.Comments.Add(SwitzerlandIndustrialImportsGroup_wall_comment1_post1);
-            context.Comments.Add(SwitzerlandIndustrialImportsGroup_wall_comment2_post1);
-            context.Comments.Add(SwitzerlandIndustrialImportsGroup_wall_comment3_post1);
+            context.Comments.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_comment1_post1);
+            context.Comments.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_comment2_post1);
+            context.Comments.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_comment3_post1);
 
-            context.Comments.Add(SwitzerlandIndustrialImportsGroup_wall_comment1_post2);
-            context.Comments.Add(SwitzerlandIndustrialImportsGroup_wall_comment2_post2);
+            context.Comments.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_comment1_post2);
+            context.Comments.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_comment2_post2);
 
-            context.Comments.Add(SwitzerlandIndustrialImportsGroup_wall_comment1_post3);
+            context.Comments.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_comment1_post3);
 
 
-            context.PostLikes.Add(SwitzerlandIndustrialImportsGroup_wall_post1_like_ellisonl);
-            context.PostLikes.Add(SwitzerlandIndustrialImportsGroup_wall_post1_like_gatesb);
-            context.CommentLikes.Add(SwitzerlandIndustrialImportsGroup_wall_comment1_post1_like_mayerm);
-            context.CommentLikes.Add(SwitzerlandIndustrialImportsGroup_wall_comment1_post1_like_sandbergs);
+            context.PostLikes.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_post1_like_ellisonl);
+            context.PostLikes.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_post1_like_gatesb);
+            context.CommentLikes.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_comment1_post1_like_mayerm);
+            context.CommentLikes.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall_comment1_post1_like_sandbergs);
 
 
             var FreshFoodGroup_wall = new ContentStream { Key = new Guid("DDDEEEFF-DEDA-5791-98AA-123456789C01"), Owner = FreshFoodGroup_BasicProfile };
@@ -1038,17 +1038,17 @@ namespace FHNWPrototype.Infrastructure.Migrations
             var SwitzerlandTransporationHPLaptopsGroup_wall = new ContentStream { Key = new Guid("DDDEEEFF-DEDA-5791-98AA-123456789C05"), Owner = SwitzerlandIndustrialImportsGroup_BasicProfile };
 
 
-            context.ContentStreams.Add(FreshFoodGroup_wall);
-            context.ContentStreams.Add(ProductDevelopmentForMilkshakeGroup_wall);
-            context.ContentStreams.Add(MarketingForMilkshakeGroup_wall);
-            context.ContentStreams.Add(DistributionForMilkshakeGroup_wall);
-            context.ContentStreams.Add(SwitzerlandTransporationHPLaptopsGroup_wall);
+            context.ContentStreams.AddOrUpdate(FreshFoodGroup_wall);
+            context.ContentStreams.AddOrUpdate(ProductDevelopmentForMilkshakeGroup_wall);
+            context.ContentStreams.AddOrUpdate(MarketingForMilkshakeGroup_wall);
+            context.ContentStreams.AddOrUpdate(DistributionForMilkshakeGroup_wall);
+            context.ContentStreams.AddOrUpdate(SwitzerlandTransporationHPLaptopsGroup_wall);
 
             var all_HPLaptopDistribution_wall = new ContentStream { Key = new Guid("DDDEEEFF-FAAA-1289-98BA-123456789C00"), Owner = all_HPLaptopDistribution_BasicProfile };
             var all_ConstructionStandards_wall = new ContentStream { Key = new Guid("DDDEEEFF-FAAA-1289-98BA-123456789C01"), Owner = all_ConstructionStandards_BasicProfile };
 
-            context.ContentStreams.Add(all_HPLaptopDistribution_wall);
-            context.ContentStreams.Add(all_ConstructionStandards_wall);
+            context.ContentStreams.AddOrUpdate(all_HPLaptopDistribution_wall);
+            context.ContentStreams.AddOrUpdate(all_ConstructionStandards_wall);
 
 
             var all_NewMilkshake_wall = new ContentStream { Key = new Guid("DDDEEEFF-DDDD-4386-98AA-123456789C01"), Owner = all_NewMilkshake_BasicProfile };
@@ -1074,36 +1074,36 @@ namespace FHNWPrototype.Infrastructure.Migrations
 
             var all_NewMilkshake_wall_post4 = new Post() { Key = new Guid("DDDEEEFF-DDDD-4386-98AA-123456789CA6"), Author = Nestle_BasicProfile, Text = "ok, I think I like to post!", Wall = all_NewMilkshake_wall, PublishDateTime = DateTime.Now.Add(new TimeSpan(-10, -32, -40)) };
 
-            context.Posts.Add(all_NewMilkshake_wall_post1);
-            context.Posts.Add(all_NewMilkshake_wall_post2);
-            context.Posts.Add(all_NewMilkshake_wall_post3);
-            context.Posts.Add(all_NewMilkshake_wall_post4);
+            context.Posts.AddOrUpdate(all_NewMilkshake_wall_post1);
+            context.Posts.AddOrUpdate(all_NewMilkshake_wall_post2);
+            context.Posts.AddOrUpdate(all_NewMilkshake_wall_post3);
+            context.Posts.AddOrUpdate(all_NewMilkshake_wall_post4);
 
-            context.Comments.Add(all_NewMilkshake_wall_comment1_post1);
-            context.Comments.Add(all_NewMilkshake_wall_comment2_post1);
-            context.Comments.Add(all_NewMilkshake_wall_comment3_post1);
+            context.Comments.AddOrUpdate(all_NewMilkshake_wall_comment1_post1);
+            context.Comments.AddOrUpdate(all_NewMilkshake_wall_comment2_post1);
+            context.Comments.AddOrUpdate(all_NewMilkshake_wall_comment3_post1);
 
-            context.Comments.Add(all_NewMilkshake_wall_comment1_post2);
-            context.Comments.Add(all_NewMilkshake_wall_comment2_post2);
+            context.Comments.AddOrUpdate(all_NewMilkshake_wall_comment1_post2);
+            context.Comments.AddOrUpdate(all_NewMilkshake_wall_comment2_post2);
 
-            context.Comments.Add(all_NewMilkshake_wall_comment1_post3);
-
-
-            context.PostLikes.Add(all_NewMilkshake_wall_post1_like_ellisonl);
-            context.PostLikes.Add(all_NewMilkshake_wall_post1_like_gatesb);
-            context.CommentLikes.Add(all_NewMilkshake_wall_comment1_post1_like_mayerm);
-            context.CommentLikes.Add(all_NewMilkshake_wall_comment1_post1_like_sandbergs);
+            context.Comments.AddOrUpdate(all_NewMilkshake_wall_comment1_post3);
 
 
+            context.PostLikes.AddOrUpdate(all_NewMilkshake_wall_post1_like_ellisonl);
+            context.PostLikes.AddOrUpdate(all_NewMilkshake_wall_post1_like_gatesb);
+            context.CommentLikes.AddOrUpdate(all_NewMilkshake_wall_comment1_post1_like_mayerm);
+            context.CommentLikes.AddOrUpdate(all_NewMilkshake_wall_comment1_post1_like_sandbergs);
 
 
 
 
 
-            context.ContentStreams.Add(gatesb_wall);
-            context.ContentStreams.Add(Nestle_wall);
-            context.ContentStreams.Add(SwitzerlandIndustrialImportsGroup_wall);
-            context.ContentStreams.Add(all_NewMilkshake_wall);
+
+
+            context.ContentStreams.AddOrUpdate(gatesb_wall);
+            context.ContentStreams.AddOrUpdate(Nestle_wall);
+            context.ContentStreams.AddOrUpdate(SwitzerlandIndustrialImportsGroup_wall);
+            context.ContentStreams.AddOrUpdate(all_NewMilkshake_wall);
 
 
         }
