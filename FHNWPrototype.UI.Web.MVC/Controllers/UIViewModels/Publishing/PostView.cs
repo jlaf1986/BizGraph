@@ -12,6 +12,7 @@ namespace FHNWPrototype.Application.Controllers.UIViewModels.Publishing
         //public String AuthorKey { get; set; }
         //public String AuthorName { get; set; }
         //public Boolean IsCorporateAccount { get; set; }
+        public CompleteProfileView Viewer { get; set; }
         public CompleteProfileView Author { get; set; }
         public Boolean ILikedIt { get; set; }
         public String Text { get; set; }

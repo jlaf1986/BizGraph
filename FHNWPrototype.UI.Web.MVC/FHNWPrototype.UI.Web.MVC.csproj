@@ -182,6 +182,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrganizationAccountsController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="Controllers\PartialViewUtility.cs" />
     <Compile Include="Controllers\PublishingController.cs" />
     <Compile Include="Controllers\RetrieverController.cs" />
     <Compile Include="Controllers\UIViewModels\Alliances\AlliancesView.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Controllers\UIViewModels\Chat\ChatMessageView.cs" />
     <Compile Include="Controllers\UIViewModels\Publishing\CommentView.cs" />
     <Compile Include="Controllers\UIViewModels\Publishing\ContentStreamView.cs" />
+    <Compile Include="Controllers\UIViewModels\Publishing\MyNewCommentView.cs" />
     <Compile Include="Controllers\UIViewModels\Publishing\NewCommentView.cs" />
     <Compile Include="Controllers\UIViewModels\Publishing\NewPostView.cs" />
     <Compile Include="Controllers\UIViewModels\Publishing\PostView.cs" />
@@ -452,6 +454,7 @@
     <Content Include="Views\Shared\_partial_complete_profile.cshtml" />
     <Content Include="Views\UserAccounts\Chat.cshtml" />
     <Content Include="Views\Shared\_partial_article_chat_message.cshtml" />
+    <Content Include="Views\Shared\_partial_my_new_comment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

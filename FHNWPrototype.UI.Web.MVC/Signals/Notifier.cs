@@ -24,23 +24,23 @@ namespace FHNWPrototype.UI.Web.MVC.Signals
         //    Clients.All.Notify(notification);
         //}
 
-        public void NotifyMyNewPostToEveryone(Notification data)
-        {
-            //var notification = new { key = data.key, group = data.group };
-            string[] excludeList = new string[] {  };
-            string groupName = data.Group;
-            string postKey = data.Message;
-            Clients.Group(groupName, excludeList).NewPostReceived(postKey);
-        }
+        //public void NotifyMyNewPostToEveryone(string processedHtml)
+        //{
+        //    //var notification = new { key = data.key, group = data.group };
+        //    string[] excludeList = new string[] {  };
+        //    string groupName = data.Group;
+        //    string postKey = data.Message;
+        //    Clients.Group(groupName, excludeList).NewPostReceived(processedHtml);
+        //}
 
-        public void NotifyMyNewCommentToEveryone(Notification data)
-        {
-            //var notification = new { key = data.key, group = data.group };
-            string[] excludeList = new string[] {  };
-            string commentKey = data.Message;
-            string groupName = data.Group;
-            Clients.Group(groupName, excludeList).NewCommentReceived(commentKey);
-        }
+        //public void NotifyMyNewCommentToEveryone(Notification data)
+        //{
+        //    //var notification = new { key = data.key, group = data.group };
+        //    string[] excludeList = new string[] {  };
+        //    string commentKey = data.Message;
+        //    string groupName = data.Group;
+        //    Clients.Group(groupName, excludeList).NewCommentReceived(commentKey);
+        //}
 
         public void SuscribeMe(string group)
         {

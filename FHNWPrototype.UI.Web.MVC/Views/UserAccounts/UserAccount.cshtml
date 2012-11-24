@@ -2,6 +2,11 @@
 
 @using FHNWPrototype.Application.Controllers.UIViewModels.Publishing
 
+@using FHNWPrototype.Application.Controllers.UIViewModels._Global
+
+@using FHNWPrototype.Domain._Base.Accounts
+
+
 @{
     ViewBag.Title = Model.Profile.FullName;
     Layout = "~/Views/Shared/_layout_3CC_three_centered_columns.cshtml";
@@ -17,11 +22,36 @@
                 <input type="text" id="newpost" placeholder="what are you thinking?"  style="width:500px; height:20px;   text-align:center; margin-left:auto; margin-right:auto; display:block; border: 1px solid #AAAAAA"  />
             </article>
         </section>
+        @{
+           CompleteProfile  myProfile = (CompleteProfile)Session["myProfile"];
+        }
 
         @foreach (PostView post in Model.WallOfThisProfile.Posts)
         {
             post.AllowedToDeletePost  = Model.IsThisMyOwnProfile;
-            Html.RenderPartial("_partial_section_post", post);
+                                       
+            <section id="section_@(post.Key)">
+            
+                
+            @{
+            Html.RenderPartial("_partial_article_post", post);
+            }
+
+            @foreach (CommentView comment in post.Comments)
+            {
+                comment.AllowedToDeleteComment=post.AllowedToDeletePost;
+                @Html.Partial("_partial_article_comment",comment)
+            }
+
+            @{
+                MyNewCommentView myNewComment = new MyNewCommentView { PostKey=post.Key , Viewer=new CompleteProfileView{ BasicProfile=new BasicProfileView{ ReferenceKey=@myProfile.BasicProfile.ReferenceKey.ToString(), AccountType=@myProfile.BasicProfile.ReferenceType} , FullName=@myProfile.FullName} };
+            }
+            
+            @{
+                Html.RenderPartial("_partial_my_new_comment", myNewComment);
+            }
+
+            </section>
         }
 
     </div>
@@ -175,10 +205,7 @@
 
       <script type="text/javascript" src="@Url.Content("~/signalr/hubs")" ></script>
       <script type="text/javascript">
-      
-
-          //Signals Do it baby!!!
-
+        
         $(document).ready(function () {
 
             var connection = $.hubConnection();
@@ -188,13 +215,13 @@
                       //alert('connection was succesful');
 
                     RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
-                    RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")", notifier);
+                    RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
                     RegisterLikePostEvent("@Url.Action("LikePost","Publishing")");
                     RegisterLikeCommentEvent("@Url.Action("LikeComment","Publishing")");
                     RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");
                     RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");  
-
-
+                     
+                    notifier.invoke('SuscribeMe', '@Model.Profile.BasicProfile.ReferenceKey')
 
                       @foreach(var groupProfile in Model.GroupsOfThisProfile)
                   {
@@ -236,21 +263,49 @@
                   }
 
 
-                    notifier.on('NewPostReceived', function (data1) {
-                        var postKey = { postKey: data1};
-                       // alert('notification received key is: ' + postKey);
+                   
+
+                    //previosuly
+                   @* notifier.on('NewPostReceived', function (data1) {
+                        var postKey = { postKey: data1 };
+                        // alert('notification received key is: ' + postKey);
                         $.post("@Url.Action("GetExternalPost","Publishing")", postKey, function (data2) {
 
                             $(data2).insertAfter('section#new_post_section');
-                           
+
                         });
-                   
-                    });
+
+                       });*@
+
                     })
                     .fail(function () { alert('connection failed'); });
 
                   
+            notifier.on('NewPostReceived', function (data) {
+                var postKey = data.postKey;
+                var processedHtml = data.processedHtml;
+                $(processedHtml).insertAfter('section#new_post_section');
+                var parameter = { postKey: postKey }
+                $.get("@Url.Action("CreateMyInputForThisPost","Publishing")",parameter,function(result){
+                  $(result).insertAfter('article#post_' + postKey);
+                });
 
+            });
+
+            notifier.on('NewCommentReceived', function (data) {
+
+
+                var postKey = data.postKey;
+                var processedHtml = data.processedHtml;
+                //alert(processedHtml);
+                //find the article post and alter put the comment
+                //alert('new_comment_post_' + postKey);
+                //alert($(document).find('#new_comment_post_' + postKey).length);
+                var theNewCommentArticleOfThisPost = $('#post_zone').find('#new_comment_post_' + postKey);
+                //$(processedHtml).insertBefore(closestArticle);
+                //alert(theNewCommentArticleOfThisPost.length);
+                $(processedHtml).insertBefore(theNewCommentArticleOfThisPost);
+            });
                           //var eventParameters = {
                           //    "postKey": guidExtracted,
                           //    "group": referenceKey

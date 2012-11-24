@@ -11,25 +11,25 @@ function RegisterNewPostEvent(url, referenceKey, notifierProxy){
                 //$(this).val("");
                 //alert(data);
 
-                var pointOfReference = data.indexOf('section_');
-                var initialPointOfExtraction = pointOfReference + 8;
-                var guidExtracted = data.substring(initialPointOfExtraction, initialPointOfExtraction + 36); //initial position (8) + GUID (32) + dashes (4)
+                //var pointOfReference = data.indexOf('section_');
+                //var initialPointOfExtraction = pointOfReference + 8;
+                //var guidExtracted = data.substring(initialPointOfExtraction, initialPointOfExtraction + 36); //initial position (8) + GUID (32) + dashes (4)
                   // alert('notification will be sent as: POST -> ' + referenceKey + ' GUID -> ' + guidExtracted);
 
-                var notification = {
-                    Group: referenceKey,
-                    Message: guidExtracted
-                };
+                //var notification = {
+                //    Group: referenceKey,
+                //    Message: guidExtracted
+                //};
           
-                notifierProxy.invoke('NotifyMyNewPostToEveryone', notification)
-                     .done(function () {
-                       //  alert('notification was succesful');
-                     })
-                     .fail(function () {
-                         alert('notification failed');
-                     });
+                //notifierProxy.invoke('NotifyMyNewPostToEveryone', notification)
+                //     .done(function () {
+                //       //  alert('notification was succesful');
+                //     })
+                //     .fail(function () {
+                //         alert('notification failed');
+                //     });
                 
-                $(data).insertAfter('section#new_post_section');
+                //$(data).insertAfter('section#new_post_section');
                 $(e.target).val('');
            
                // var eventParameters = {
@@ -50,32 +50,33 @@ function RegisterNewPostEvent(url, referenceKey, notifierProxy){
     });
 }
 
-function RegisterNewCommentEvent(url,notifierProxy){
+function RegisterNewCommentEvent(url, referenceKey,notifierProxy) {
     $(document).on('keypress', 'input.new_comment', function (e) {
         if (e.keyCode == 13) {
             var postId = $(this).closest("section").attr("id");
             var parameters = {
                 "postKey": postId.substring(8),
+                "wallOwnerUserAccountKey": referenceKey,
                 "text": $(e.target).val()
             }
             $.post(url, parameters, function (data) {
-                var closestArticle = $(e.target).closest("article");
-                $(data).insertBefore(closestArticle);
+                //var closestArticle = $(e.target).closest("article");
+                //$(data).insertBefore(closestArticle);
                 $(e.target).val('');
 
-                var notification = {
-                    Group : "groupDynimicallyGenerated",
-                    Message : "keyDynimicallyGenerated"
+                //var notification = {
+                //    Group : "groupDynimicallyGenerated",
+                //    Message : "keyDynimicallyGenerated"
                   
-                };
+                //};
 
-                notifierProxy.invoke('NotifyMyNewCommentToEveryone', notification)
-                   .done(function () {
-                      // alert('notification was succesful');
-                   })
-                   .fail(function () {
-                       alert('notification failed');
-                   });
+                //notifierProxy.invoke('NotifyMyNewCommentToEveryone', notification)
+                //   .done(function () {
+                //      // alert('notification was succesful');
+                //   })
+                //   .fail(function () {
+                //       alert('notification failed');
+                //   });
 
 
                 //alert(data);
@@ -90,8 +91,10 @@ function RegisterLikePostEvent(url){
         e.preventDefault();
         var parameters = { "postKey": e.target.id.substring(10) };
         $.post(url,parameters, function (data) {
-            alert('you liked the post')
+            //alert('you liked the post')
         });
+        e.target.attr('enabled', false);
+        e.target.val('Unlike');
     });
 }
 
@@ -100,8 +103,11 @@ function RegisterLikeCommentEvent(url){
         e.preventDefault();
         var parameters = { "commentKey": e.target.id.substring(13) };
         $.post(url,parameters, function (data) {
-            alert('you liked the comment')
+            //alert('you liked the comment')
+
         });
+        e.target.attr('enabled', false);
+        e.target.val('Unlike');
     });
 }
     function RegisterDeletePostEvent(url){

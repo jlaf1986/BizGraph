@@ -12,7 +12,7 @@
     <link href="@Url.Content("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
 
-
+ 
     @Stylesheet("html5base.css")
     @Stylesheet("_partial_settings.css")
     @Stylesheet("_partial_footer.css") 
@@ -67,13 +67,17 @@
         </div>
     </div>
    
+</body>
+
+    
          @Scripts.Render("~/bundles/jquery")
      @Scripts.Render("~/bundles/jqueryui")
       @Scripts.Render("~/bundles/jqueryval")
          @Scripts.Render("~/bundles/myscripts")
       <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <noscript>Sorry, your browser does not support JavaScript!</noscript>
         @RenderSection("scripts", required: false)
-</body>
+
 </html>
 
 @helper Script(string scriptName){
