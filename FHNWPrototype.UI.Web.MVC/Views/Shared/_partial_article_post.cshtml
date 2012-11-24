@@ -1,5 +1,4 @@
 ﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Publishing.PostView 
-
 <article id="post_@(Model.Key)" class="post">
     <img   src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Author.BasicProfile.ReferenceKey,accountType= @Model.Author.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_post" />
    @if(Model.Author.BasicProfile.AccountType== FHNWPrototype.Domain._Base.Accounts.AccountType.UserAccount)

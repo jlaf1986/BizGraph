@@ -14,11 +14,12 @@
 	/*display:block;*/
 	background-color:transparent;
 	color:#000000;
+    display:block;
 }
 
 html,body {
-	/*width:100%;
-	height:100%;*/
+	padding:inherit;
+    margin:inherit;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
 	font-size:12px;
 }

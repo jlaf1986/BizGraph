@@ -6,63 +6,7 @@
     float:left;
     height:auto;
     background-color:transparent;
-    overflow:hidden;
+    /*overflow:hidden;*/
     /*margin-bottom:100px;*/
 }
 
-#middle_column article
-{     
-    /*border: 1px solid #666666;*/
-    width:990px;
-    /*height:200px;*/
-    border-top: 1px solid #BBBBBB;
-    background-color:transparent;
-    color:Green;
-    display:block;
-    min-height:80px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
-    padding-top:5px;
-}
-
-#middle_column article h2
-{
-    color:#FF7D00; 
-    font-weight:bolder;
-    text-align:left;
-    width:auto;
-}
-
-#middle_column article h2 a:link
-{
-    font-size:14px;
-    width:auto;
-}
-
-img.profile_picture
-{
-    border:1px solid #EEEEEE;
-    width:50px;
-    height:50px;
-    float:left;
-    top:0px;
-    left:0px;
-}
-
-#middle_column article p
-{
-    text-align:left;
-}
-
-img#profile_picture
-{
-    width:160px;
-    height:160px;
-    border: 4px solid #CCCCCC;
-    position:relative;
-    top:0px;
-    left:0px;
-    display:block;
-    float:left;
-}

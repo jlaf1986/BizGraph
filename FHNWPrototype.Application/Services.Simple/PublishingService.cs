@@ -131,6 +131,39 @@ namespace FHNWPrototype.Application.Services.Simple
             PublishingRepository.DeleteComment(new Guid(commentKey));
         }
 
+        public static PostViewModel GetPost(string postKey)
+        {
+            Post retrievedPost = PublishingRepository.GetPost(new Guid(postKey));
+            PostViewModel newPost = new PostViewModel();
+            newPost.Key = retrievedPost.Key.ToString();
+            newPost.ILikedIt = false;
+            newPost.Likes = retrievedPost.PostLikes.Count;
+            newPost.Text = retrievedPost.Text;
+            newPost.TimeStamp = retrievedPost.PublishDateTime;
+
+            var postAuthorProfile = SecurityRepository.GetCompleteProfile(retrievedPost.Author);
+
+            newPost.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey=postAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType=postAuthorProfile.BasicProfile.ReferenceType }, FullName=postAuthorProfile.FullName, Description1=postAuthorProfile.Description1, Description2=postAuthorProfile.Description2  };
+            return newPost;
+        }
+
+        public static CommentViewModel GetComment(string commentKey)
+        {
+            Comment retrievedComment = PublishingRepository.GetComment(new Guid(commentKey));
+            CommentViewModel newComment = new CommentViewModel();
+
+            newComment.Key = retrievedComment.Key.ToString();
+            newComment.ILikedIt = false;
+            newComment.Likes = retrievedComment.CommentLikes.Count;
+            newComment.Text = retrievedComment.Text;
+            newComment.TimeStamp = retrievedComment.PublishDateTime;
+
+            var commentAuthorProfile = SecurityRepository.GetCompleteProfile(retrievedComment.Author);
+            newComment.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = commentAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = commentAuthorProfile.BasicProfile.ReferenceType }, FullName = commentAuthorProfile.FullName, Description1 = commentAuthorProfile.Description1, Description2 = commentAuthorProfile.Description2 };
+            
+            return newComment;
+        }
+
 
     }
 }

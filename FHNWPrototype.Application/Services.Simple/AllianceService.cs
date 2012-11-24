@@ -1,4 +1,4 @@
-﻿using FHNWPrototype.Application.Controllers.UIViewModels._Global;
+﻿
 using FHNWPrototype.Application.Services.Simple.ServicesViewModels;
 using FHNWPrototype.Domain._Base.Accounts;
 using FHNWPrototype.Domain.AllianceMemberships.States;

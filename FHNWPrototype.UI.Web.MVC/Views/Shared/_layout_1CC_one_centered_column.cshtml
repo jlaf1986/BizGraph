@@ -13,17 +13,13 @@
     <meta name="viewport" content="width=device-width" />
 
 
-        @Stylesheet("html5base.css")
+    @Stylesheet("html5base.css")
     @Stylesheet("_partial_settings.css")
-    @Stylesheet("_partial_footer.css")
-    @Stylesheet("mobile.css")
-
-   
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/_layout_1CC_one_centered_column.css")" />
-   
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/_partial_1CC_header.css")" />
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/_partial_1CC_middle_column.css")" />
-
+    @Stylesheet("_partial_footer.css") 
+    @Stylesheet("_layout_1CC_one_centered_column.css")
+    @Stylesheet("_partial_1CC_middle_column.css")
+    @Stylesheet("posts.css")
+ 
     @RenderSection("header_style", false)
  
  
@@ -70,6 +66,7 @@
 
         </div>
     </div>
+   
          @Scripts.Render("~/bundles/jquery")
      @Scripts.Render("~/bundles/jqueryui")
       @Scripts.Render("~/bundles/jqueryval")

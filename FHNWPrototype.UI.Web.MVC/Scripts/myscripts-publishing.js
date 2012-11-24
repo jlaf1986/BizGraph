@@ -1,27 +1,56 @@
 ﻿
-function RegisterNewPostEvent(url, referenceKey){
+function RegisterNewPostEvent(url, referenceKey, notifierProxy){
     $(document).on('keypress', 'input#newpost', function (e) {
         if (e.keyCode == 13) {
             var parameters = {
-                "wallOwnerUserAccountKey" : referenceKey,
-                "text" : $(this).val()
-            }
+                "wallOwnerUserAccountKey": referenceKey,
+                "text": $(this).val()
+            };
             $.post(url, parameters, function (data){
                 //clean the previous textbox
                 //$(this).val("");
                 //alert(data);
+
+                var pointOfReference = data.indexOf('section_');
+                var initialPointOfExtraction = pointOfReference + 8;
+                var guidExtracted = data.substring(initialPointOfExtraction, initialPointOfExtraction + 36); //initial position (8) + GUID (32) + dashes (4)
+                  // alert('notification will be sent as: POST -> ' + referenceKey + ' GUID -> ' + guidExtracted);
+
+                var notification = {
+                    Group: referenceKey,
+                    Message: guidExtracted
+                };
+          
+                notifierProxy.invoke('NotifyMyNewPostToEveryone', notification)
+                     .done(function () {
+                       //  alert('notification was succesful');
+                     })
+                     .fail(function () {
+                         alert('notification failed');
+                     });
+                
                 $(data).insertAfter('section#new_post_section');
                 $(e.target).val('');
-                //  Html.RenderPartial("_partial_post",
-                //  var newElement = "<article id='post_" + data + "' class='post'" 
-                // $('').insertBefore(this);
+           
+               // var eventParameters = {
+               //     "postKey": guidExtracted,
+               //     "group" : referenceKey
+               // }
+               // var newEvent = jQuery.Event("custom", eventParameters);
 
+               //// $("body").trigger('custom', eventParameters);
+
+               // $("body").trigger(newEvent);
+                
             });
+
+          
+
         }
     });
 }
 
-function RegisterNewCommentEvent(url){
+function RegisterNewCommentEvent(url,notifierProxy){
     $(document).on('keypress', 'input.new_comment', function (e) {
         if (e.keyCode == 13) {
             var postId = $(this).closest("section").attr("id");
@@ -33,6 +62,22 @@ function RegisterNewCommentEvent(url){
                 var closestArticle = $(e.target).closest("article");
                 $(data).insertBefore(closestArticle);
                 $(e.target).val('');
+
+                var notification = {
+                    Group : "groupDynimicallyGenerated",
+                    Message : "keyDynimicallyGenerated"
+                  
+                };
+
+                notifierProxy.invoke('NotifyMyNewCommentToEveryone', notification)
+                   .done(function () {
+                      // alert('notification was succesful');
+                   })
+                   .fail(function () {
+                       alert('notification failed');
+                   });
+
+
                 //alert(data);
                 //alert(closestArticle.toString());
             });

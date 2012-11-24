@@ -1,0 +1,108 @@
+﻿@{
+   
+    Layout = "~/Views/Shared/_layout_1CC_one_centered_column.cshtml";
+    var myProfile =(FHNWPrototype.Domain._Base.Accounts.CompleteProfile) Session["myProfile"];
+    ViewBag.Title = myProfile.FullName  + "(Chat)";
+}
+
+<section id="chat_zone">
+    <section id="new_post_section">
+        <article id="new_article_post" class="message"  >
+            <input type="text" id="newpost" placeholder="what are you thinking?"  style="width:500px; height:20px;   text-align:left; margin-left:auto; margin-right:auto; display:block; border: 1px solid #AAAAAA"  />
+        </article>
+    </section>
+</section>
+ 
+
+
+@section settings{
+<div id="logo">
+
+    <a href="@Url.Action("Index", "UserAccounts", new { })">
+        <img id="logo" src="@Url.Content("~/Content/themes/designv1/images/logov2white.png")" alt="logo" />
+    </a> 
+
+</div>
+<div id="links">
+    <ul>
+       <li>@Html.ActionLink("Chat", "Chat","UserAccounts", null,null)</li>
+       <li>@Html.ActionLink("My Friendships", "Friendships", "UserAccounts", null)</li>
+       <li>@Html.ActionLink("Log Off", "LogOff", "Account", new { }, null)</li>
+ 
+    </ul>
+</div>
+}
+
+@section header{
+
+    @{
+        
+         
+    }
+
+    <figure id="brand_background">
+        <img id="my_banner" src="@Url.Action("GetHeaderPictureByBasicProfile", "Retriever", new { key=@myProfile.BasicProfile.ReferenceKey.ToString(), accountType=@myProfile.BasicProfile.ReferenceType  })" alt="brand" />
+        <img id="my_logo" src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new {key=@myProfile.BasicProfile.ReferenceKey.ToString(), accountType=@myProfile.BasicProfile.ReferenceType })" alt="logo" />
+    </figure>
+    
+}
+
+@section header_style{
+   
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/chat.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/_partial_3CC_header_two_images.css")" />
+}
+
+
+@section scripts{
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.signalR-1.0.0-alpha2.min.js")" ></script>
+
+      <script type="text/javascript" src="@Url.Content("~/signalr/hubs")" ></script>
+      <script type="text/javascript">
+      
+
+          //Signals Do it baby!!!
+
+          $(document).ready(function () {
+
+              var connection = $.hubConnection();
+              var chat = connection.createHubProxy('chat');
+              connection.start()
+                  .done(function () {
+                      //alert('connection was succesful');
+                      $(document).on('keypress', 'input#newpost', function (e) {
+                          if (e.keyCode == 13) {
+                             
+                              var msg = { message : $(this).val()};
+                              $.post("@Url.Action("PostMessageToChat","UserAccounts")", msg, function (data) {
+                                  var success = data.success;
+                                  if (success) {
+                                 
+                                      $(e.target).val('');
+                               
+                                  }
+                                  else {
+                                      alert("The message could not be sent");
+                                  }
+                              });
+
+                             
+                          }
+                      });
+
+                     
+
+                  });
+               
+              chat.on('Received', function (data) {
+                  //alert('notification received');
+                $(data).insertAfter('section#new_post_section');
+                   
+              });
+
+
+          });
+
+      </script>
+    }

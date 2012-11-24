@@ -81,11 +81,37 @@
 
 @section scripts{
        <script type="text/javascript">
-           RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey");
-           RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")");
-           RegisterLikePostEvent("@Url.Action("LikePost","Publishing")");
-           RegisterLikeCommentEvent("@Url.Action("LikeComment","Publishing")");
-           RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");
-           RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");    
+         
+
+           $(document).ready(function () {
+
+               var connection = $.hubConnection();
+               var notifier = connection.createHubProxy('notifier');
+               connection.start()
+                   .done(function () {
+                       //alert('connection was succesful');
+
+                       RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
+                       RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")", notifier);
+                       RegisterLikePostEvent("@Url.Action("LikePost","Publishing")");
+                       RegisterLikeCommentEvent("@Url.Action("LikeComment","Publishing")");
+                       RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");
+                       RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");
+
+                       notifier.on('NewPostReceived', function (data1) {
+                           var postKey = { postKey: data1 };
+                           // alert('notification received key is: ' + postKey);
+                           $.post("@Url.Action("GetExternalPost","Publishing")", postKey, function (data2) {
+
+                               $(data2).insertAfter('section#new_post_section');
+
+                           });
+
+                       });
+                   })
+                    .fail(function () { alert('connection failed'); });
+
+           });
+
     </script>
 }

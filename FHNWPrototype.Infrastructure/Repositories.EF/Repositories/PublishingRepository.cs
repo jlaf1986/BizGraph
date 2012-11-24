@@ -233,6 +233,55 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
             }
         }
 
+        public static Post  GetPost(Guid key)
+        {
+            Post thisPost = new Post();
+
+            using (var db = new FHNWPrototypeDB())
+            {
+                var result = db.Posts
+                    .Include("Author")
+                    .Include("PostLikes.Author")
+                    .Include("Comments.CommentLikes")
+                    .Include("Wall")
+                    .SingleOrDefault(x => x.Key==key);
+
+                thisPost.Key = result.Key;
+                thisPost.PostLikes = result.PostLikes;
+                thisPost.PublishDateTime = result.PublishDateTime;
+                thisPost.Text = result.Text;
+                thisPost.Author = result.Author;
+            }
+
+            return thisPost;
+        }
+
+        public static Comment  GetComment(Guid key)
+        {
+            Comment thisComment = new Comment();
+
+            using (var db = new FHNWPrototypeDB())
+            {
+
+                var result = db.Comments 
+                   .Include("Author")
+                   .Include("CommentLikes.Author")
+                   .Include("CommentLikes")
+                   .Include("Post")
+                   .SingleOrDefault(x => x.Key == key);
+
+                thisComment.Key = result.Key;
+                thisComment.Text = result.Text;
+                thisComment.Post = result.Post;
+                thisComment.PublishDateTime = result.PublishDateTime;
+                thisComment.Author = result.Author;
+                thisComment.CommentLikes = result.CommentLikes;
+
+            }
+
+            return thisComment;
+        }
+
 
     }
 }

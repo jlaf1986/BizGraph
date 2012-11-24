@@ -37,7 +37,7 @@ footer, #footer{
     color:#AAAAAA;    
 }
 
- nav#links
+ #footerlinks
 {
     font-size:10px;
     display:block;
@@ -49,12 +49,12 @@ footer, #footer{
 
  
 
-nav#links a
+#footerlinks a
 {
-    display:inline-block;
+    /*color:pink;*/
+    display:block;
     height:20px;
     text-align:center;
-    margin-left:10px;
-    margin-right:10px;
-    width:auto;
+    padding-left:10px;
+    float:left;
 }

@@ -14,7 +14,7 @@
 
         <section id="new_post_section">
             <article id="new_article_post" class="post"  >
-                <input type="text" id="newpost" value="what are you thinking?"  style="width:500px; height:20px;   text-align:center; margin-left:auto; margin-right:auto; display:block; border: 1px solid #AAAAAA"  />
+                <input type="text" id="newpost" placeholder="what are you thinking?"  style="width:500px; height:20px;   text-align:center; margin-left:auto; margin-right:auto; display:block; border: 1px solid #AAAAAA"  />
             </article>
         </section>
 
@@ -43,6 +43,8 @@
 <div id="links">
     <ul>
       
+        <li>@Html.ActionLink("Chat", "Chat","UserAccounts", null,null)</li>
+
        <li>@Html.ActionLink("My Friendships", "Friendships","UserAccounts", null,null)</li>
    
         <li>@Html.ActionLink("Log Off", "LogOff", "Account", null, null)</li>
@@ -168,12 +170,115 @@
 }
 
 @section scripts{
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.signalR-1.0.0-alpha2.min.js")" ></script>
+
+      <script type="text/javascript" src="@Url.Content("~/signalr/hubs")" ></script>
       <script type="text/javascript">
-          RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey");
-          RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")");
-          RegisterLikePostEvent("@Url.Action("LikePost","Publishing")");
-          RegisterLikeCommentEvent("@Url.Action("LikeComment","Publishing")");
-          RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");
-          RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");  
+      
+
+          //Signals Do it baby!!!
+
+        $(document).ready(function () {
+
+            var connection = $.hubConnection();
+            var notifier = connection.createHubProxy('notifier');
+            connection.start()
+                .done(function () {
+                      //alert('connection was succesful');
+
+                    RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
+                    RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")", notifier);
+                    RegisterLikePostEvent("@Url.Action("LikePost","Publishing")");
+                    RegisterLikeCommentEvent("@Url.Action("LikeComment","Publishing")");
+                    RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");
+                    RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");  
+
+
+
+                      @foreach(var groupProfile in Model.GroupsOfThisProfile)
+                  {
+                    <text>
+                      notifier.invoke('SuscribeMe', '@groupProfile.BasicProfile.ReferenceKey')
+                      .done(function () {
+                          //alert('your suscription to group 1 was succesful');
+                      })
+                      .fail(function () {
+                          //alert('suscription failed');
+                      });
+                      </text>
+                  }
+
+                      @foreach(var workContactProfile in Model.WorkContactsOfThisProfile)
+                 {
+                    <text>
+                      notifier.invoke('SuscribeMe', '@workContactProfile.BasicProfile.ReferenceKey')
+                      .done(function () {
+                          //alert('your suscription to group 1 was succesful');
+                      })
+                      .fail(function () {
+                          //alert('suscription failed');
+                      });
+                      </text>
+                  }
+
+                @foreach(var partnershipContactProfile in Model.PartnershipContactsOfThisProfile)
+                 {
+                    <text>
+                      notifier.invoke('SuscribeMe', '@partnershipContactProfile.BasicProfile.ReferenceKey')
+                      .done(function () {
+                          //alert('your suscription to group 1 was succesful');
+                      })
+                      .fail(function () {
+                          //alert('suscription failed');
+                      });
+                    </text>
+                  }
+
+
+                    notifier.on('NewPostReceived', function (data1) {
+                        var postKey = { postKey: data1};
+                       // alert('notification received key is: ' + postKey);
+                        $.post("@Url.Action("GetExternalPost","Publishing")", postKey, function (data2) {
+
+                            $(data2).insertAfter('section#new_post_section');
+                           
+                        });
+                   
+                    });
+                    })
+                    .fail(function () { alert('connection failed'); });
+
+                  
+
+                          //var eventParameters = {
+                          //    "postKey": guidExtracted,
+                          //    "group": referenceKey
+                          //}
+                          //var newEvent = jQuery.Event("custom", eventParameters);
+
+                          //// $("body").trigger('custom', eventParameters);
+
+                          //$("body").trigger(newEvent);
+
+
+                          //$("body").on("custom", function (evp) {
+
+                          //    var msg = {
+                          //        key: evp.postKey,
+                          //        group: evp.group
+                          //    };
+
+                          //    notifier.invoke('NotifyMyNewPostToEveryone', msg)
+                          //   .done(function () { })
+                          //   .fail(function () { alert('notification broadcast failed'); });
+
+                          //});
+
+
+          
+
+          });
+
     </script>
 }

@@ -463,8 +463,18 @@ namespace FHNWPrototype.Application.Controllers.Controllers
             return Json(new { message = message, success = success });        
         }
 
-      
+        public ActionResult Chat()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public PartialViewResult  PostMessageToChat(string message)
+        {
+            PostView newPost = new PostView();
+
+            return PartialView("_partial_section_post", newPost);
+        }
       
 
     }

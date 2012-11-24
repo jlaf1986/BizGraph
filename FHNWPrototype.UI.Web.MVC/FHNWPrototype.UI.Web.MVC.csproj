@@ -41,7 +41,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.1.0.0-alpha2\lib\net40\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Hosting.AspNet">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Hosting.AspNet.1.0.0-alpha2\lib\net45\Microsoft.AspNet.SignalR.Hosting.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Hosting.Common">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Hosting.Common.1.0.0-alpha2\lib\net40\Microsoft.AspNet.SignalR.Hosting.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -68,9 +81,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
@@ -161,14 +171,60 @@
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RegisterHubs.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountController_original.cs" />
+    <Compile Include="Controllers\AlliancesController.cs" />
+    <Compile Include="Controllers\Converters.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrganizationAccountsController.cs" />
+    <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="Controllers\PublishingController.cs" />
+    <Compile Include="Controllers\RetrieverController.cs" />
+    <Compile Include="Controllers\UIViewModels\Alliances\AlliancesView.cs" />
+    <Compile Include="Controllers\UIViewModels\Alliances\AllianceView.cs" />
+    <Compile Include="Controllers\UIViewModels\Geographics\GeoLocationView.cs" />
+    <Compile Include="Controllers\UIViewModels\Groups\GroupMembershipsView.cs" />
+    <Compile Include="Controllers\UIViewModels\Groups\GroupsView.cs" />
+    <Compile Include="Controllers\UIViewModels\Groups\GroupView.cs" />
+    <Compile Include="Controllers\UIViewModels\Home\AuthenticationViewModels.cs" />
+    <Compile Include="Controllers\UIViewModels\OrganizationAccounts\OrganizationAccountsView.cs" />
+    <Compile Include="Controllers\UIViewModels\OrganizationAccounts\OrganizationAccountView.cs" />
+    <Compile Include="Controllers\UIViewModels\OrganizationAccounts\PartnershipActionResultView.cs" />
+    <Compile Include="Controllers\UIViewModels\OrganizationAccounts\PartnershipsView.cs" />
+    <Compile Include="Controllers\UIViewModels\OrganizationAccounts\PartnershipView.cs" />
+    <Compile Include="Controllers\UIViewModels\Organizations\EmployeesView.cs" />
+    <Compile Include="Controllers\UIViewModels\Organizations\OrganizationsView.cs" />
+    <Compile Include="Controllers\UIViewModels\Organizations\OrganizationView.cs" />
+    <Compile Include="Controllers\UIViewModels\Chat\ChatMessageView.cs" />
+    <Compile Include="Controllers\UIViewModels\Publishing\CommentView.cs" />
+    <Compile Include="Controllers\UIViewModels\Publishing\ContentStreamView.cs" />
+    <Compile Include="Controllers\UIViewModels\Publishing\NewCommentView.cs" />
+    <Compile Include="Controllers\UIViewModels\Publishing\NewPostView.cs" />
+    <Compile Include="Controllers\UIViewModels\Publishing\PostView.cs" />
+    <Compile Include="Controllers\UIViewModels\Security\LoginSystemAccountView.cs" />
+    <Compile Include="Controllers\UIViewModels\Security\RegisterSystemAccountView.cs" />
+    <Compile Include="Controllers\UIViewModels\UserAccounts\FriendshipActionResultView.cs" />
+    <Compile Include="Controllers\UIViewModels\UserAccounts\FriendshipsView.cs" />
+    <Compile Include="Controllers\UIViewModels\UserAccounts\FriendshipView.cs" />
+    <Compile Include="Controllers\UIViewModels\UserAccounts\UserAccountsView.cs" />
+    <Compile Include="Controllers\UIViewModels\UserAccounts\UserAccountView.cs" />
+    <Compile Include="Controllers\UIViewModels\Users\UsersView.cs" />
+    <Compile Include="Controllers\UIViewModels\Users\UserView.cs" />
+    <Compile Include="Controllers\UIViewModels\_Global\BasicProfileView.cs" />
+    <Compile Include="Controllers\UIViewModels\_Global\CompleteProfileView.cs" />
+    <Compile Include="Controllers\UIViewModels\_Global\RightColumnView.cs" />
+    <Compile Include="Controllers\UserAccountsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Signals\Chat.cs" />
+    <Compile Include="Signals\Notifier.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -228,6 +284,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\colors CSS.txt" />
+    <Content Include="Content\themes\designv1\chat.css" />
     <Content Include="Content\themes\designv1\forms.css" />
     <Content Include="Content\themes\designv1\GoogleMaps.css" />
     <Content Include="Content\themes\designv1\html5base.css" />
@@ -271,6 +328,7 @@
     <Content Include="Content\themes\designv1\images\welcome9.jpg" />
     <Content Include="Content\themes\designv1\mobile.css" />
     <Content Include="Content\themes\designv1\notifications.css" />
+    <Content Include="Content\themes\designv1\posts.css" />
     <Content Include="Content\themes\designv1\Site_.css" />
     <Content Include="Content\themes\designv1\welcome.css" />
     <Content Include="Content\themes\designv1\_layout_1CC_one_centered_column.css" />
@@ -296,6 +354,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.signalR-1.0.0-alpha2.js" />
+    <Content Include="Scripts\jquery.signalR-1.0.0-alpha2.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -307,7 +367,9 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\myscripts-chat.js" />
     <Content Include="Scripts\myscripts-friendships.js" />
+    <Content Include="Scripts\myscripts-notifier.js" />
     <Content Include="Scripts\myscripts-partnerships.js" />
     <Content Include="Scripts\myscripts-publishing.js" />
     <Content Include="Scripts\myscripts.js" />
@@ -388,6 +450,8 @@
     <Content Include="Views\Shared\_partial_article_comment.cshtml" />
     <Content Include="Views\Shared\_partial_right_column.cshtml" />
     <Content Include="Views\Shared\_partial_complete_profile.cshtml" />
+    <Content Include="Views\UserAccounts\Chat.cshtml" />
+    <Content Include="Views\Shared\_partial_article_chat_message.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
