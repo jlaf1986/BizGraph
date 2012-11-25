@@ -1,16 +1,16 @@
-﻿@model FHNWPrototype.Application.Controllers.UIViewModels.UserAccounts.UserAccountView 
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.UserAccounts.UserAccountView
+
+@{
+    ViewBag.Title = Model.Profile.FullName;
+    Layout = "~/Views/Shared/_layout_3CC_three_centered_columns.cshtml";
+}
+
 
 @using FHNWPrototype.Application.Controllers.UIViewModels.Publishing
 
 @using FHNWPrototype.Application.Controllers.UIViewModels._Global
 
 @using FHNWPrototype.Domain._Base.Accounts
-
-
-@{
-    ViewBag.Title = Model.Profile.FullName;
-    Layout = "~/Views/Shared/_layout_3CC_three_centered_columns.cshtml";
-}
 
 
 @if (@Model.WallOfThisProfile  != null)
@@ -149,45 +149,6 @@
 }
 
 @section left_column{
-@if (Model.Profile.Description1  != null)
-{
-    <nav id="library">
-        <h1>LIBRARY</h1>
-        <ul>
-            @foreach (KeyValuePair<string, string> item in @Model.FoldersOfThisProfile)
-            {
-                <li>@Html.ActionLink(item.Key, "Folder", "Library", new { id = item.Value }, null)</li>
-            }
-        </ul>
-    </nav>
-    <nav id="work_contacts">
-        <h1>WORK CONTACTS</h1>
-        <ul>
-        @foreach (FHNWPrototype.Application.Controllers.UIViewModels._Global.CompleteProfileView item in @Model.WorkContactsOfThisProfile )
-        {
-        <li>@Html.ActionLink(item.FullName   , "UserAccount", "UserAccounts", new { id = item.BasicProfile.ReferenceKey  }, null)</li>
-        }
-        </ul>
-    </nav>
-    <nav id="partnership_contacts">
-        <h1>PARTNERSHIP CONTACTS</h1>
-        <ul>
-             @foreach (FHNWPrototype.Application.Controllers.UIViewModels._Global.CompleteProfileView item in @Model.PartnershipContactsOfThisProfile)
-             {
-            <li>@Html.ActionLink(item.FullName  , "UserAccount", "UserAccounts", new { id = item.BasicProfile.ReferenceKey   }, null)</li>
-             }
-        </ul>
-    </nav>
-}
-     <nav id="groups">
-        <h1>GROUPS</h1>
-        <ul>
-             @foreach (FHNWPrototype.Application.Controllers.UIViewModels._Global.CompleteProfileView item in @Model.GroupsOfThisProfile)
-             {
-            <li>@Html.ActionLink(item.FullName  , "Group", "Groups", new { id = item.BasicProfile.ReferenceKey    }, null)</li>
-             }
-        </ul>
-    </nav>
 }
 
 @section right_column{
@@ -213,7 +174,6 @@
             connection.start()
                 .done(function () {
            
-
                     RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
                     RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
 
@@ -224,63 +184,11 @@
                     RegisterUnLikeCommentEvent("@Url.Action("UnLikeComment","Publishing")");
 
                     RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");
-                    RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");  
-                     
+                    RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");
+
                     notifier.invoke('SuscribeMe', '@Model.Profile.BasicProfile.ReferenceKey')
 
-                      @foreach(var groupProfile in Model.GroupsOfThisProfile)
-                  {
-                    <text>
-                      notifier.invoke('SuscribeMe', '@groupProfile.BasicProfile.ReferenceKey')
-                      .done(function () {
-                        
-                      })
-                      .fail(function () {
-                 
-                      });
-                      </text>
-                  }
-
-                      @foreach(var workContactProfile in Model.WorkContactsOfThisProfile)
-                 {
-                    <text>
-                      notifier.invoke('SuscribeMe', '@workContactProfile.BasicProfile.ReferenceKey')
-                      .done(function () {
-                       
-                      })
-                      .fail(function () {
-                         
-                      });
-                      </text>
-                  }
-
-                @foreach(var partnershipContactProfile in Model.PartnershipContactsOfThisProfile)
-                 {
-                    <text>
-                      notifier.invoke('SuscribeMe', '@partnershipContactProfile.BasicProfile.ReferenceKey')
-                      .done(function () {
-                        
-                      })
-                      .fail(function () {
-                       
-                      });
-                    </text>
-                  }
-
-
-                   
-
-                    //previosuly
-                   @* notifier.on('NewPostReceived', function (data1) {
-                        var postKey = { postKey: data1 };
-                        // alert('notification received key is: ' + postKey);
-                        $.post("@Url.Action("GetExternalPost","Publishing")", postKey, function (data2) {
-
-                            $(data2).insertAfter('section#new_post_section');
-
-                        });
-
-                       });*@
+               
 
                     })
                     .fail(function () { alert('connection failed'); });

@@ -157,7 +157,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                     var ua = db.UserAccounts
                                             .Include("User")
                                             .Include("OrganizationAccount.Organization")
-                                            .SingleOrDefault(x=> x.Key==profile.ReferenceKey);
+                                            .FirstOrDefault(x => x.Key == profile.ReferenceKey);
                     result.BasicProfile.ReferenceKey = ua.Key;
                     result.BasicProfile.ReferenceType = AccountType.UserAccount;
                     result.FullName = ua.User.FirstName + " " + ua.User.LastName;
@@ -168,7 +168,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                 {
                     var oa = db.OrganizationAccounts
                                                     .Include("Organization")
-                                                    .SingleOrDefault(x=> x.Key==profile.ReferenceKey);
+                                                    .FirstOrDefault(x => x.Key == profile.ReferenceKey);
                     result.BasicProfile.ReferenceKey = oa.Key;
                     result.BasicProfile.ReferenceType = AccountType.OrganizationAccount;
                     result.FullName = oa.Name;
@@ -177,7 +177,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                 }
                 if (profile.ReferenceType == AccountType.Group )
                 {
-                    var g = db.Groups.SingleOrDefault(x => x.Key == profile.ReferenceKey);
+                    var g = db.Groups.FirstOrDefault(x => x.Key == profile.ReferenceKey);
                     result.BasicProfile.ReferenceKey = g.Key;
                     result.BasicProfile.ReferenceType = AccountType.Group;
                     result.FullName = g.Name;
@@ -186,7 +186,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                 }
                 if (profile.ReferenceType == AccountType.Alliance )
                 {
-                    var al = db.Groups.SingleOrDefault(x => x.Key == profile.ReferenceKey);
+                    var al = db.Groups.FirstOrDefault(x => x.Key == profile.ReferenceKey);
                     result.BasicProfile.ReferenceKey = al.Key;
                     result.BasicProfile.ReferenceType = AccountType.Alliance;
                     result.FullName = al.Name;

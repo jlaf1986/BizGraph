@@ -26,6 +26,27 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
         //   // db = new FHNWPrototypeDB();
         //}
 
+        public static CompleteProfile GetOrganizationAccountProfileByEmployeeUserAccountKey(Guid key)
+        {
+            CompleteProfile result = new CompleteProfile();
+
+            using (var db = new FHNWPrototypeDB())
+            {
+                var org = db.UserAccounts
+                                        .Include("OrganizationAccount")
+                                        .FirstOrDefault(x => x.Key == key)
+                                        .OrganizationAccount;
+
+                result.BasicProfile = new BasicProfile { ReferenceKey=org.Key, ReferenceType= AccountType.OrganizationAccount  };
+                result.FullName = org.Name;
+                result.Description1 = org.Description;
+                result.Description2 = org.Description;
+               
+            }
+
+            return result;
+        }
+
 
         public static  IEnumerable<PartnershipStateInfoDTO> GetAllPartnershipsByOrganizationAccountKey(Guid key)
         {

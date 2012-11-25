@@ -139,7 +139,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
             byte[] results = null;
             using (var db = new FHNWPrototypeDB())
             {
-                results = db.Alliances.Single(x => x.Key == key).HeaderPicture;
+                results = db.Alliances.FirstOrDefault(x => x.Key == key).HeaderPicture;
                 return results;
             }
           
@@ -150,7 +150,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
             byte[] results = null;
             using (var db = new FHNWPrototypeDB())
             {
-                results = db.Alliances.Single(x => x.Key == key).ProfilePicture;
+                results = db.Alliances.FirstOrDefault(x => x.Key == key).ProfilePicture;
                 return results;
             }
          

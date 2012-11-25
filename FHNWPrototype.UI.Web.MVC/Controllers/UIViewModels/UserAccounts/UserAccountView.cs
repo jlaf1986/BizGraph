@@ -32,7 +32,7 @@ namespace FHNWPrototype.Application.Controllers.UIViewModels.UserAccounts
         public String FriendshipButtonControllerNameForThisProfile { get; set; }
 
        // public KeyValuePair<String,String> OrganizationAccountOfThisProfile { get; set; }
-     //   public KeyValuePair<String, String> OrganizationOfThisProfile { get; set; }
+        public CompleteProfileView OrganizationAccountOfThisProfile { get; set; }
         public List<CompleteProfileView> WorkContactsOfThisProfile { get; set; }
         public List<CompleteProfileView> PartnershipContactsOfThisProfile { get; set; } // partnership,contact
         public List<CompleteProfileView> GroupsOfThisProfile { get; set; }

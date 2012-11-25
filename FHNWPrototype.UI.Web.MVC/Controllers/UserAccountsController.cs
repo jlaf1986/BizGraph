@@ -62,9 +62,9 @@ namespace FHNWPrototype.Application.Controllers.Controllers
 
             //Im the owner and the viewer of the wall
             var thisViewerKey = myProfile.BasicProfile.ReferenceKey.ToString();
-            ContentStreamViewModel wallRetrieved = PublishingService.GetContentStreamByOwnerReferenceKey(thisViewerKey,thisViewerKey);
-            
- 
+            ContentStreamViewModel wallRetrieved = PublishingService.GetContentStreamAsNewsfeed(thisViewerKey,thisViewerKey);
+            CompleteProfileViewModel myOrganizationAccount = OrganizationAccountService.GetOrganizationAccountProfileByEmployeeUserAccountKey(thisViewerKey);
+            accountView.OrganizationAccountOfThisProfile = new CompleteProfileView { BasicProfile = new BasicProfileView  { ReferenceKey=myOrganizationAccount.BasicProfile.ReferenceKey, AccountType=myOrganizationAccount.BasicProfile.AccountType    }, FullName=myOrganizationAccount.FullName, Description1=myOrganizationAccount.Description1 , Description2=myOrganizationAccount.Description2  };
             accountView.WallOfThisProfile = new ContentStreamView();
             accountView.WallOfThisProfile.Posts = new List<PostView>();
             if (wallRetrieved.Posts.Count >0)
@@ -78,6 +78,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
                     thisPost.TimeStamp = post.TimeStamp.ToString();
                     thisPost.Text = post.Text;
                     thisPost.Likes = post.Likes;
+                    thisPost.ILikedIt = post.ILikedIt;
                        
                     thisPost.Comments = new List<CommentView>();
                     foreach (CommentViewModel comment in post.Comments)
@@ -88,14 +89,16 @@ namespace FHNWPrototype.Application.Controllers.Controllers
                         thisComment.Text = comment.Text;
                         thisComment.TimeStamp = comment.TimeStamp.ToString();
                         thisComment.Likes = comment.Likes;
+                        thisComment.ILikedIt = comment.ILikedIt;
                         thisPost.Comments.Add(thisComment);
                     }
+
                     accountView.WallOfThisProfile.Posts.Add(thisPost);
                 }
             }
 
        
-            return View("UserAccount",accountView);
+            return View("Newsfeed",accountView);
         }
 
         public ActionResult UserAccount(string id)
@@ -223,7 +226,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
             accountView.GroupsOfThisProfile = Converters.ConvertFromViewModelToView(UserAccountService.GetGroupsOfUserAccountByKey(accountRetrieved.Profile.BasicProfile.ReferenceKey));
 
             
-            return View("UserAccount", accountView);
+            return View("MyWall", accountView);
         }
 
         public ActionResult Friendships()

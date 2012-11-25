@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title</title>
+    <title>Welcome to BizGraph</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=8"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -71,14 +71,14 @@
                            <legend>Already a member? Sign In</legend>
                             <table>
                                 <tr>
-                                    <td>@Html.LabelFor(m => m.Email)</td>
-                                    <td>@Html.TextBoxFor(m => m.Email)</td>
-                                    <td>@Html.ValidationMessageFor(m => m.Email)</td>
+                                    <td  style="width:50px;">@Html.LabelFor(m => m.Email)</td>
+                                    <td  style="width:100px;">@Html.TextBoxFor(m => m.Email)</td>
+                                    <td  style="width:100px;">@Html.ValidationMessageFor(m => m.Email)</td>
                                 </tr>
-                                <tr>
-                                    <td> @Html.LabelFor(m => m.Password)</td>
-                                    <td>   @Html.PasswordFor(m => m.Password)</td>
-                                    <td> @Html.ValidationMessageFor(m => m.Password)</td>
+                                <tr >
+                                    <td style="width:50px;"> @Html.LabelFor(m => m.Password)</td>
+                                    <td style="width:100px;">   @Html.PasswordFor(m => m.Password)</td>
+                                    <td style="width:100px;"> @Html.ValidationMessageFor(m => m.Password)</td>
                                 </tr>
                               @*  <tr>
                                     <td>@Html.CheckBoxFor(m => m.RememberMe)</td>

@@ -45,7 +45,10 @@ namespace FHNWPrototype.Application.Services.Simple
                     {
                         thisPost.ILikedIt = true;
                     }
-
+                    else
+                    {
+                        thisPost.ILikedIt = false;
+                    }
                 }
                 else
                 {
@@ -74,6 +77,10 @@ namespace FHNWPrototype.Application.Services.Simple
                         {
                             thisComment.ILikedIt = true;
                         }
+                        else
+                        {
+                            thisComment.ILikedIt = false;
+                        }
                     }
 
                    // thisComment.Likes = comment.CommentLikes.Count();
@@ -85,26 +92,111 @@ namespace FHNWPrototype.Application.Services.Simple
             return result;
         }
 
-        public static void LikePost(string AuthorUserAccountKey, string postKey)
+        public static ContentStreamViewModel GetContentStreamAsNewsfeed(string ownerKey, string viewerKey)
         {
+            ContentStream retrievedWall = PublishingRepository.GetNewsfeed(new Guid(ownerKey));
 
-            PublishingRepository.LikePost(new Guid(AuthorUserAccountKey), new Guid(postKey));
+            ContentStreamViewModel result = new ContentStreamViewModel();
+            result.Posts = new List<PostViewModel>();
+            foreach (Post post in retrievedWall.Posts)
+            {
+                PostViewModel thisPost = new PostViewModel();
+                thisPost.Key = post.Key.ToString();
+                thisPost.Text = post.Text;
+
+                //thisPost.AuthorKey = post.Author.ReferenceKey.ToString();
+                //thisPost.AuthorName = SecurityRepository.GetCompleteProfile(post.Author.ReferenceKey);
+
+                var postAuthorProfile = SecurityRepository.GetCompleteProfile(post.Author);
+
+                thisPost.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = postAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = post.Author.ReferenceType }, FullName = postAuthorProfile.FullName, Description1 = postAuthorProfile.Description1, Description2 = postAuthorProfile.Description2 };
+
+                thisPost.TimeStamp = post.PublishDateTime;
+                thisPost.Comments = new List<CommentViewModel>();
+                if (post.PostLikes != null)
+                {
+                    thisPost.Likes = post.PostLikes.Count();
+
+                    var myLikeValueOnThisPost = post.PostLikes.FirstOrDefault(x => x.Author.ReferenceKey.ToString() == viewerKey);
+                    if (myLikeValueOnThisPost != null)
+                    {
+                        thisPost.ILikedIt = true;
+                    }
+                    else
+                    {
+                        thisPost.ILikedIt = false;
+                    }
+                }
+                else
+                {
+                    thisPost.Likes = 0;
+                }
+                thisPost.Likes = post.PostLikes.Count();
+                foreach (Comment comment in post.Comments)
+                {
+                    CommentViewModel thisComment = new CommentViewModel();
+                    thisComment.Key = comment.Key.ToString();
+                    thisComment.Text = comment.Text;
+                    //thisComment.AuthorKey = comment.Author.ReferenceKey.ToString();
+                    //thisComment.AuthorName = SecurityRepository.GetCompleteProfile(comment.Author.ReferenceKey);
+
+                    var commentAuthorProfile = SecurityRepository.GetCompleteProfile(comment.Author);
+                    thisComment.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = commentAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = commentAuthorProfile.BasicProfile.ReferenceType }, FullName = commentAuthorProfile.FullName, Description1 = commentAuthorProfile.Description1, Description2 = commentAuthorProfile.Description2 };
+
+
+                    thisComment.TimeStamp = comment.PublishDateTime;
+
+                    if (comment.CommentLikes != null)
+                    {
+                        thisComment.Likes = comment.CommentLikes.Count;
+                        var myLikeValueOnThisComment = comment.CommentLikes.FirstOrDefault(x => x.Author.ReferenceKey.ToString() == viewerKey);
+                        if (myLikeValueOnThisComment != null)
+                        {
+                            thisComment.ILikedIt = true;
+                        }
+                        else
+                        {
+                            thisComment.ILikedIt = false;
+                        }
+                    }
+
+                    // thisComment.Likes = comment.CommentLikes.Count();
+                    thisPost.Comments.Add(thisComment);
+                }
+                result.Posts.Add(thisPost);
+            }
+
+            return result;
         }
 
-        public static void UnLikePost(string AuthorUserAccountKey, string postKey)
+        public static int LikePost(string AuthorUserAccountKey, string postKey)
         {
-            PublishingRepository.UnLikePost(new Guid(AuthorUserAccountKey), new Guid(postKey));
+
+          var counter=  PublishingRepository.LikePost(new Guid(AuthorUserAccountKey), new Guid(postKey));
+
+          return counter;
         }
 
-        public static void LikeComment(string AuthorUserAccountKey, string commentKey)
+        public static int UnLikePost(string AuthorUserAccountKey, string postKey)
         {
-            PublishingRepository.LikeComment(new Guid(AuthorUserAccountKey), new Guid(commentKey));
+           var counter= PublishingRepository.UnLikePost(new Guid(AuthorUserAccountKey), new Guid(postKey));
+
+           return counter;
         }
 
-        public static void UnLikeComment(string AuthorUserAccountKey, string commentKey)
+        public static int LikeComment(string AuthorUserAccountKey, string commentKey)
+        {
+          var counter=  PublishingRepository.LikeComment(new Guid(AuthorUserAccountKey), new Guid(commentKey));
+
+            return counter;
+        }
+
+        public static int UnLikeComment(string AuthorUserAccountKey, string commentKey)
         {
 
-            PublishingRepository.UnLikeComment(new Guid(AuthorUserAccountKey), new Guid(commentKey));
+            var counter= PublishingRepository.UnLikeComment(new Guid(AuthorUserAccountKey), new Guid(commentKey));
+
+            return counter;
         }
 
         public static string SubmitNewPost(string AuthorUserAccountKey, string wallOwnerUserAccountKey, string text)

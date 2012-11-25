@@ -50,13 +50,13 @@
 {     
     display:block;
     clear:both;
-    background-color:EEEEEE;
+    background-color:#EEEEEE;
     text-align:left;
      font-size:11px;
  
 }
 
-#middle_column #post_zone nav.actionlinks ul li
+#middle_column #post_zone nav.actionlinks ul li 
 {     
     /*color:orange;*/
     font-weight:bolder;
@@ -65,11 +65,9 @@
     color:#888888;
 }
 
-#middle_column #post_zone nav.actionlinks ul li a
+#middle_column #post_zone nav.actionlinks ul li time
 {     
-    /*color:orange;*/
-    /*font-weight:bolder;
-    margin-left:5px;*/
+      color:#AAAAAA;
        
 }
 

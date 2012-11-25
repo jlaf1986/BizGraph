@@ -15,16 +15,16 @@
     </p>
     <nav class="actionlinks">
         <ul>
-            <li>@Model.TimeStamp</li>
-            <li>@Model.Likes Like this</li>
+            <li><time datetime="@Model.TimeStamp">@Model.TimeStamp</time></li>
+            <li id="like_counter_comment_@(Model.Key)">@Model.Likes Like this</li>
             <li>             
                 @if(!Model.ILikedIt)
                 {  
-                 <a id="like_comment_@(Model.Key)" href="@Url.Action("LikeComment")" class="like_comment">Like</a>
+                 <a id="like_comment_@(Model.Key)" href="#" class="like_comment">Like</a>
                 }
                 else
                 {
-                   <a id="unlike_comment_@(Model.Key)" href="@Url.Action("UnLikeComment")" class="like_comment">UnLike</a>  
+                   <a id="like_comment_@(Model.Key)" href="#" class="unlike_comment">UnLike</a>  
                 }
             </li>
             <li>

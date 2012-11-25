@@ -15,6 +15,20 @@ namespace FHNWPrototype.Application.Services.Simple
 {
     public static  class OrganizationAccountService
     {
+
+        public static CompleteProfileViewModel GetOrganizationAccountProfileByEmployeeUserAccountKey(string userAccountKey)
+        {
+            CompleteProfileViewModel result = new CompleteProfileViewModel();
+
+            CompleteProfile thisProfile = OrganizationAccountRepository.GetOrganizationAccountProfileByEmployeeUserAccountKey(new Guid(userAccountKey));
+
+            result.BasicProfile = new BasicProfileViewModel { ReferenceKey=thisProfile.BasicProfile.ReferenceKey.ToString(), AccountType=thisProfile.BasicProfile.ReferenceType  };
+            result.FullName = thisProfile.FullName;
+            result.Description1 = thisProfile.Description1;
+            result.Description2 = thisProfile.Description2;
+
+            return result;
+        }
  
 
         public static List<OrganizationAccountViewModel> GetAllOrganizationAccounts()

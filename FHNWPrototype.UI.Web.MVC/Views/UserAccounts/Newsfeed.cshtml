@@ -1,16 +1,16 @@
-﻿@model FHNWPrototype.Application.Controllers.UIViewModels.UserAccounts.UserAccountView 
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.UserAccounts.UserAccountView
+
+@{
+    ViewBag.Title = Model.Profile.FullName + "(Newsfeed)";
+    Layout = "~/Views/Shared/_layout_3CC_three_centered_columns.cshtml";
+}
+
 
 @using FHNWPrototype.Application.Controllers.UIViewModels.Publishing
 
 @using FHNWPrototype.Application.Controllers.UIViewModels._Global
 
 @using FHNWPrototype.Domain._Base.Accounts
-
-
-@{
-    ViewBag.Title = Model.Profile.FullName;
-    Layout = "~/Views/Shared/_layout_3CC_three_centered_columns.cshtml";
-}
 
 
 @if (@Model.WallOfThisProfile  != null)
@@ -224,9 +224,11 @@
                     RegisterUnLikeCommentEvent("@Url.Action("UnLikeComment","Publishing")");
 
                     RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");
-                    RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");  
-                     
-                    notifier.invoke('SuscribeMe', '@Model.Profile.BasicProfile.ReferenceKey')
+                    RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");
+
+                    notifier.invoke('SuscribeMe', '@Model.Profile.BasicProfile.ReferenceKey');
+
+                    notifier.invoke('SuscribeMe', '@Model.OrganizationAccountOfThisProfile.BasicProfile.ReferenceKey');
 
                       @foreach(var groupProfile in Model.GroupsOfThisProfile)
                   {

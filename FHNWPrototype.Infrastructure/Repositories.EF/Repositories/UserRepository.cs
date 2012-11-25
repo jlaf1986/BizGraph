@@ -68,7 +68,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
             Byte[] foundPicture = null;
             using (var db = new FHNWPrototypeDB())
             {
-                foundPicture = db.Users.Single(x => x.Key == key).ProfilePicture;
+                foundPicture = db.Users.FirstOrDefault(x => x.Key == key).ProfilePicture;
                 return foundPicture;
             }
            

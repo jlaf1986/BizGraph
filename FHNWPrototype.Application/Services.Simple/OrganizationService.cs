@@ -21,6 +21,8 @@ namespace FHNWPrototype.Application.Services.Simple
         //   // organizationRepository = new OrganizationRepository();
         //}
 
+     
+
         public static List<OrganizationViewModel> GetAllOrganizations()
         {
             

@@ -19,29 +19,43 @@ namespace FHNWPrototype.Application.Controllers
     public class PublishingController : Controller
     {
         [HttpPost]
-        public void LikePost(string postKey)
+        public JsonResult LikePost(string postKey)
         {
             CompleteProfile myProfile = (CompleteProfile) Session["myProfile"];
  
-            PublishingService.LikePost(myProfile.BasicProfile.ReferenceKey.ToString(), postKey);
+            var counter =  PublishingService.LikePost(myProfile.BasicProfile.ReferenceKey.ToString(), postKey);
+            var msg = new  { success=true, counter=counter };
+            return Json(msg);
+
         }
         [HttpPost]
-        public void UnLikePost(string postKey)
+        public JsonResult UnLikePost(string postKey)
         {
             CompleteProfile myProfile = (CompleteProfile)Session["myProfile"];
-            PublishingService.UnLikePost(myProfile.BasicProfile.ReferenceKey.ToString(), postKey);
+
+
+          var counter=  PublishingService.UnLikePost(myProfile.BasicProfile.ReferenceKey.ToString(), postKey);
+
+            var msg = new { success = true, counter = counter };
+            return Json(msg);
         }
         [HttpPost]
-        public void LikeComment(string commentKey)
+        public JsonResult LikeComment(string commentKey)
         {
             CompleteProfile myProfile = (CompleteProfile)Session["myProfile"];
-            PublishingService.LikeComment(myProfile.BasicProfile.ReferenceKey.ToString(), commentKey);
+           var counter= PublishingService.LikeComment(myProfile.BasicProfile.ReferenceKey.ToString(), commentKey);
+
+            var msg = new { success = true, counter = counter };
+            return Json(msg);
         }
         [HttpPost]
-        public void UnLikeComment(string commentKey)
+        public JsonResult UnLikeComment(string commentKey)
         {
             CompleteProfile myProfile = (CompleteProfile)Session["myProfile"];
-            PublishingService.UnLikeComment(myProfile.BasicProfile.ReferenceKey.ToString(), commentKey);
+           var counter= PublishingService.UnLikeComment(myProfile.BasicProfile.ReferenceKey.ToString(), commentKey);
+
+            var msg = new { success = true, counter = counter };
+            return Json(msg);
         }
 
         [HttpPost]

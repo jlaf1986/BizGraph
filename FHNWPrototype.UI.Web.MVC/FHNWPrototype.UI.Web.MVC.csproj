@@ -349,6 +349,7 @@
     <Content Include="Content\themes\designv1\_partial_footer.css" />
     <Content Include="Content\themes\designv1\_partial_settings.css" />
     <Content Include="favicon.ico" />
+    <Content Include="favicon2.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
@@ -455,6 +456,10 @@
     <Content Include="Views\UserAccounts\Chat.cshtml" />
     <Content Include="Views\Shared\_partial_article_chat_message.cshtml" />
     <Content Include="Views\Shared\_partial_my_new_comment.cshtml" />
+    <Content Include="Views\UserAccounts\Newsfeed.cshtml" />
+    <Content Include="Views\UserAccounts\MyWall.cshtml" />
+    <Content Include="Views\OrganizationAccounts\Newsfeed.cshtml" />
+    <Content Include="Views\OrganizationAccounts\MyWall.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -65,7 +65,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
             organizationAccountView.WallOfThisProfile.Posts = new List<PostView>();
 
             var thisViewerKey = myProfile.BasicProfile.ReferenceKey.ToString();
-            ContentStreamViewModel wallRetrieved = PublishingService.GetContentStreamByOwnerReferenceKey(thisViewerKey, thisViewerKey);
+            ContentStreamViewModel wallRetrieved = PublishingService.GetContentStreamAsNewsfeed(thisViewerKey, thisViewerKey);
 
 
 
@@ -107,7 +107,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
 
           
 
-            return View("OrganizationAccount",organizationAccountView);
+            return View("Newsfeed",organizationAccountView);
 
         }
 
@@ -247,7 +247,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
             organizationAccountView.AlliancesOfThisProfile = Converters.ConvertFromViewModelToView(OrganizationAccountService.GetAlliancesOfOrganizationAccountByKey(organizationAccountRetrieved.Profile.BasicProfile.ReferenceKey));
 
 
-            return View(organizationAccountView);
+            return View("MyWall",organizationAccountView);
         }
 
       

@@ -243,7 +243,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
             var allenp = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1B9"), Email = "allenp@marti.ch", User = PaulAllen, OrganizationAccount = MartiAdministratorAccount };//Marketing
             var sandbergs = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2B1"), Email = "sandbergs@montanstahl.ch", User = SherylSandberg, OrganizationAccount = MontanstahlAdministratorAccount }; //Point of Sale
             var hoffmanr = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2B2"), Email = "hoffmanr@erne.ch", User = ReidHoffman, OrganizationAccount = ErneAdministratorAccount }; //in-site logistics
-            var romettyv = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2B3"), Email = "rometty@migros.ch", User = VirginiaRometty, OrganizationAccount = MigrosAdministratorAccount }; //Marketing
+            var romettyv = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2B3"), Email = "romettyv@migros.ch", User = VirginiaRometty, OrganizationAccount = MigrosAdministratorAccount }; //Marketing
             var hanselmans = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2B4"), Email = "hanselmans@nestle.ch", User = ScottHanselman, OrganizationAccount = NestleAdministratorAccount}; //Logistics
             var guthries = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2B5"), Email = "guthries@admin.ch", User = ScottGuthrie, OrganizationAccount = SwissGovernmentAdministratorAccount }; //Logistics
             var torvaldsl = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2B6"), Email = "torvalds@dhl.ch", User = LinusTorvalds, OrganizationAccount = DhlAdministratorAccount }; //Logistics
@@ -331,52 +331,52 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
  
 
 
-            var gatesb_library_folder_A = new Folder() { Key=new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1F0") , Name="FolderA" };
+            //var gatesb_library_folder_A = new Folder() { Key=new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1F0") , Name="FolderA" };
 
-            var gatesb_library_folder_B = new Folder() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1F1"), Name = "FolderB" };
+            //var gatesb_library_folder_B = new Folder() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1F1"), Name = "FolderB" };
 
-            var gatesb_library_folder_A_subfolder1 = new Folder() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1F2"), ParentFolder = gatesb_library_folder_A, Name = "SubFolderA1" };
+            //var gatesb_library_folder_A_subfolder1 = new Folder() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1F2"), ParentFolder = gatesb_library_folder_A, Name = "SubFolderA1" };
 
-            var gatesb_library_folder_A_subfolder2 = new Folder() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1F3"), ParentFolder = gatesb_library_folder_A, Name = "SubFolderA2" };
+            //var gatesb_library_folder_A_subfolder2 = new Folder() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1F3"), ParentFolder = gatesb_library_folder_A, Name = "SubFolderA2" };
 
-            var gatesb_library_folder_A_subfolder2_subfolder1 = new Folder() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1F4"), ParentFolder = gatesb_library_folder_A_subfolder2, Name = "SubFolderA21" };
+            //var gatesb_library_folder_A_subfolder2_subfolder1 = new Folder() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1F4"), ParentFolder = gatesb_library_folder_A_subfolder2, Name = "SubFolderA21" };
            
-            var gatesb_library_folder_B_subfolder1 = new Folder() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1F5"), ParentFolder = gatesb_library_folder_B, Name = "SubFolderB1" };
+            //var gatesb_library_folder_B_subfolder1 = new Folder() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1F5"), ParentFolder = gatesb_library_folder_B, Name = "SubFolderB1" };
 
 
 
-            var doc1 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A0"), Name = "MyDocument1.docx", ParentFolder = gatesb_library_folder_A_subfolder1, Author = gatesb, PublishDateTime = DateTime.Now };
-            var doc2 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A1"), Name = "MyDocument2.xlsx", ParentFolder = gatesb_library_folder_A_subfolder1, Author = romettyv, PublishDateTime = DateTime.Now };
+            //var doc1 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A0"), Name = "MyDocument1.docx", ParentFolder = gatesb_library_folder_A_subfolder1, Author = gatesb, PublishDateTime = DateTime.Now };
+            //var doc2 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A1"), Name = "MyDocument2.xlsx", ParentFolder = gatesb_library_folder_A_subfolder1, Author = romettyv, PublishDateTime = DateTime.Now };
 
-            var doc3 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A2"), Name = "MyDocument3.docx", ParentFolder = gatesb_library_folder_A_subfolder1, Author = ballmers, PublishDateTime = DateTime.Now };
-            var doc4 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A3"), Name = "MyDocument4.xlsx", ParentFolder = gatesb_library_folder_A_subfolder2, Author = gatesb, PublishDateTime = DateTime.Now };
+            //var doc3 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A2"), Name = "MyDocument3.docx", ParentFolder = gatesb_library_folder_A_subfolder1, Author = ballmers, PublishDateTime = DateTime.Now };
+            //var doc4 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A3"), Name = "MyDocument4.xlsx", ParentFolder = gatesb_library_folder_A_subfolder2, Author = gatesb, PublishDateTime = DateTime.Now };
 
-            var doc5 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A4"), Name = "MyDocument5.pptx", ParentFolder = gatesb_library_folder_A_subfolder2, Author = mayerm, PublishDateTime = DateTime.Now };
-            var doc6 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A5"), Name = "MyDocument6.zip", ParentFolder = gatesb_library_folder_B_subfolder1, Author = brins, PublishDateTime = DateTime.Now };
+            //var doc5 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A4"), Name = "MyDocument5.pptx", ParentFolder = gatesb_library_folder_A_subfolder2, Author = mayerm, PublishDateTime = DateTime.Now };
+            //var doc6 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A5"), Name = "MyDocument6.zip", ParentFolder = gatesb_library_folder_B_subfolder1, Author = brins, PublishDateTime = DateTime.Now };
 
-            var doc7 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A6"), Name = "MyDocument7.pdf", ParentFolder = gatesb_library_folder_B, Author = schmidte, PublishDateTime = DateTime.Now };
-            var doc8 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A7"), Name = "MyDocument8.txt", ParentFolder = gatesb_library_folder_B, Author = ballmers, PublishDateTime = DateTime.Now };
+            //var doc7 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A6"), Name = "MyDocument7.pdf", ParentFolder = gatesb_library_folder_B, Author = schmidte, PublishDateTime = DateTime.Now };
+            //var doc8 = new Document() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1A7"), Name = "MyDocument8.txt", ParentFolder = gatesb_library_folder_B, Author = ballmers, PublishDateTime = DateTime.Now };
 
 
-            context.Folders.Add(gatesb_library_folder_A);
-            context.Folders.Add(gatesb_library_folder_B);
-            context.Folders.Add(gatesb_library_folder_A_subfolder1);
-            context.Folders.Add(gatesb_library_folder_A_subfolder2);
-            context.Folders.Add(gatesb_library_folder_A_subfolder2_subfolder1);
-            context.Folders.Add(gatesb_library_folder_B_subfolder1);
+            //context.Folders.Add(gatesb_library_folder_A);
+            //context.Folders.Add(gatesb_library_folder_B);
+            //context.Folders.Add(gatesb_library_folder_A_subfolder1);
+            //context.Folders.Add(gatesb_library_folder_A_subfolder2);
+            //context.Folders.Add(gatesb_library_folder_A_subfolder2_subfolder1);
+            //context.Folders.Add(gatesb_library_folder_B_subfolder1);
 
-            context.Documents.Add(doc1);
-            context.Documents.Add(doc2);
-            context.Documents.Add(doc3);
-            context.Documents.Add(doc4);
-            context.Documents.Add(doc5);
-            context.Documents.Add(doc6);
-            context.Documents.Add(doc7);
-            context.Documents.Add(doc8);
+            //context.Documents.Add(doc1);
+            //context.Documents.Add(doc2);
+            //context.Documents.Add(doc3);
+            //context.Documents.Add(doc4);
+            //context.Documents.Add(doc5);
+            //context.Documents.Add(doc6);
+            //context.Documents.Add(doc7);
+            //context.Documents.Add(doc8);
 
-            var gatesb_library = new Library() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1E0"), Folders = new List<Folder> { gatesb_library_folder_A, gatesb_library_folder_B  }, Owner = gatesb };
+            //var gatesb_library = new Library() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F309E1E0"), Folders = new List<Folder> { gatesb_library_folder_A, gatesb_library_folder_B  }, Owner = gatesb };
 
-            context.Libraries.Add(gatesb_library);
+            //context.Libraries.Add(gatesb_library);
 
          
 
@@ -416,47 +416,47 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
 
 
             //Personal accounts
-            var PersonalBillGates = new UserAccount { 
-                Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A0"), 
-                Email = "billgates@outlook.com", 
-                User = BillGates 
-                };
+            //var PersonalBillGates = new UserAccount { 
+            //    Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A0"), 
+            //    Email = "billgates@outlook.com", 
+            //    User = BillGates 
+            //    };
 
-            var PersonalSergeyBrin = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A1"), Email = "sergeybrin@gmail.com", User = SergeyBrin }; 
-            var PersonalLarryPage = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A2"), Email = "larrypage@yahoo.com", User = LarryPage }; 
-            var PersonalLarryEllison = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A3"), Email = "larryellison@hotmail.com", User = LarryEllison }; 
-            var PersonalMarissaMayer = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A4"), Email = "marissamayer@hotmail.com", User = MarissaMayer }; 
-            var PersonalEricSchmidt = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A5"), Email = "ericschmidt@gmail.com", User = EricSchmidt }; 
-            var PersonalSteveJobs = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A6"), Email = "stevejobs@yahoo.com", User = SteveJobs }; 
-            var PersonalSteveBallmer = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A7"), Email = "steveballmer@gmail.com", User = SteveBallmer }; 
-            var PersonalSteveWozniak = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A8"), Email = "stevewozniak@gmail.com", User = SteveWozniak }; 
-            var PersonalPaulAllen = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A9"), Email = "paulallen@hotmail.com", User = PaulAllen }; 
-            var PersonalSherylSandberg = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A0"), Email = "sherylsandberg@yahoo.com", User = SherylSandberg }; 
-            var PersonalReidHoffman = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A1"), Email = "reidhoffman@gmail.com", User = ReidHoffman }; 
-            var PersonalVirginiaRometty = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A2"), Email = "virginiarometty@gmail.com", User = VirginiaRometty }; 
-            var PersonalScottHanselman = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A3"), Email = "scotthanselman@gmail.com", User = ScottHanselman }; 
-            var PersonalScottGuthrie = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A4"), Email = "scottguthrie@gmail.com", User = ScottGuthrie }; 
-            var PersonalLinusTorvalds = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A5"), Email = "linustorvalds@gmail.com", User = LinusTorvalds }; 
-            var PersonalRayOzzie = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A6"), Email = "rayozzie@gmail.com", User = RayOzzie };
+            //var PersonalSergeyBrin = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A1"), Email = "sergeybrin@gmail.com", User = SergeyBrin }; 
+            //var PersonalLarryPage = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A2"), Email = "larrypage@yahoo.com", User = LarryPage }; 
+            //var PersonalLarryEllison = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A3"), Email = "larryellison@hotmail.com", User = LarryEllison }; 
+            //var PersonalMarissaMayer = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A4"), Email = "marissamayer@hotmail.com", User = MarissaMayer }; 
+            //var PersonalEricSchmidt = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A5"), Email = "ericschmidt@gmail.com", User = EricSchmidt }; 
+            //var PersonalSteveJobs = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A6"), Email = "stevejobs@yahoo.com", User = SteveJobs }; 
+            //var PersonalSteveBallmer = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A7"), Email = "steveballmer@gmail.com", User = SteveBallmer }; 
+            //var PersonalSteveWozniak = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A8"), Email = "stevewozniak@gmail.com", User = SteveWozniak }; 
+            //var PersonalPaulAllen = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1A9"), Email = "paulallen@hotmail.com", User = PaulAllen }; 
+            //var PersonalSherylSandberg = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A0"), Email = "sherylsandberg@yahoo.com", User = SherylSandberg }; 
+            //var PersonalReidHoffman = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A1"), Email = "reidhoffman@gmail.com", User = ReidHoffman }; 
+            //var PersonalVirginiaRometty = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A2"), Email = "virginiarometty@gmail.com", User = VirginiaRometty }; 
+            //var PersonalScottHanselman = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A3"), Email = "scotthanselman@gmail.com", User = ScottHanselman }; 
+            //var PersonalScottGuthrie = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A4"), Email = "scottguthrie@gmail.com", User = ScottGuthrie }; 
+            //var PersonalLinusTorvalds = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A5"), Email = "linustorvalds@gmail.com", User = LinusTorvalds }; 
+            //var PersonalRayOzzie = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2A6"), Email = "rayozzie@gmail.com", User = RayOzzie };
 
-            //
-            context.UserAccounts.Add(PersonalBillGates);
-            context.UserAccounts.Add(PersonalSergeyBrin);
-            context.UserAccounts.Add(PersonalLarryPage);
-            context.UserAccounts.Add(PersonalLarryEllison);
-            context.UserAccounts.Add(PersonalMarissaMayer);
-            context.UserAccounts.Add(PersonalEricSchmidt);
-            context.UserAccounts.Add(PersonalSteveJobs);
-            context.UserAccounts.Add(PersonalSteveBallmer);
-            context.UserAccounts.Add(PersonalSteveWozniak);
-            context.UserAccounts.Add(PersonalPaulAllen);
-            context.UserAccounts.Add(PersonalSherylSandberg);
-            context.UserAccounts.Add(PersonalReidHoffman);
-            context.UserAccounts.Add(PersonalVirginiaRometty);
-            context.UserAccounts.Add(PersonalScottHanselman);
-            context.UserAccounts.Add(PersonalScottGuthrie);
-            context.UserAccounts.Add(PersonalLinusTorvalds);
-            context.UserAccounts.Add(PersonalRayOzzie);
+            ////
+            //context.UserAccounts.Add(PersonalBillGates);
+            //context.UserAccounts.Add(PersonalSergeyBrin);
+            //context.UserAccounts.Add(PersonalLarryPage);
+            //context.UserAccounts.Add(PersonalLarryEllison);
+            //context.UserAccounts.Add(PersonalMarissaMayer);
+            //context.UserAccounts.Add(PersonalEricSchmidt);
+            //context.UserAccounts.Add(PersonalSteveJobs);
+            //context.UserAccounts.Add(PersonalSteveBallmer);
+            //context.UserAccounts.Add(PersonalSteveWozniak);
+            //context.UserAccounts.Add(PersonalPaulAllen);
+            //context.UserAccounts.Add(PersonalSherylSandberg);
+            //context.UserAccounts.Add(PersonalReidHoffman);
+            //context.UserAccounts.Add(PersonalVirginiaRometty);
+            //context.UserAccounts.Add(PersonalScottHanselman);
+            //context.UserAccounts.Add(PersonalScottGuthrie);
+            //context.UserAccounts.Add(PersonalLinusTorvalds);
+            //context.UserAccounts.Add(PersonalRayOzzie);
 
             //Assign corporate accounts to users
 
@@ -666,43 +666,43 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
 
 
 
-            var wbs_0 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA0"), WbsCorrelationToken = "0", Owner=gatesb, Title = "Task 0", Description = "Description of Task 0", Comments = "Comments of Task 0" };
+            //var wbs_0 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA0"), WbsCorrelationToken = "0", Owner=gatesb, Title = "Task 0", Description = "Description of Task 0", Comments = "Comments of Task 0" };
 
-            var wbs_1 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA1"), WbsCorrelationToken = "1", Owner = gatesb, ParentWorkPackage = wbs_0, Title = "Task 1", Description = "Description of Task 1", Comments = "Comments of Task 1" };
-            var wbs_1_1 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA2"), WbsCorrelationToken = "1.1", Owner = gatesb, ParentWorkPackage = wbs_1, Title = "Task 1.1", Description = "Description of Task 1.1", Comments = "Comments of Task 1.1" };
-            var wbs_1_2 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA3"), WbsCorrelationToken = "1.2", Owner = gatesb, ParentWorkPackage = wbs_1, Title = "Task 1.2", Description = "Description of Task 1.2", Comments = "Comments of Task 1.2" };
+            //var wbs_1 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA1"), WbsCorrelationToken = "1", Owner = gatesb, ParentWorkPackage = wbs_0, Title = "Task 1", Description = "Description of Task 1", Comments = "Comments of Task 1" };
+            //var wbs_1_1 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA2"), WbsCorrelationToken = "1.1", Owner = gatesb, ParentWorkPackage = wbs_1, Title = "Task 1.1", Description = "Description of Task 1.1", Comments = "Comments of Task 1.1" };
+            //var wbs_1_2 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA3"), WbsCorrelationToken = "1.2", Owner = gatesb, ParentWorkPackage = wbs_1, Title = "Task 1.2", Description = "Description of Task 1.2", Comments = "Comments of Task 1.2" };
 
-            var wbs_2 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA4"), WbsCorrelationToken = "2", Owner = gatesb, ParentWorkPackage = wbs_0, Title = "Task 2", Description = "Description of Task 2", Comments = "Comments of Task 2" };
-            var wbs_2_1 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA5"), WbsCorrelationToken = "2.1", Owner = gatesb, ParentWorkPackage = wbs_2, Title = "Task 2.1", Description = "Description of Task 2.1", Comments = "Comments of Task 2.1" };
+            //var wbs_2 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA4"), WbsCorrelationToken = "2", Owner = gatesb, ParentWorkPackage = wbs_0, Title = "Task 2", Description = "Description of Task 2", Comments = "Comments of Task 2" };
+            //var wbs_2_1 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA5"), WbsCorrelationToken = "2.1", Owner = gatesb, ParentWorkPackage = wbs_2, Title = "Task 2.1", Description = "Description of Task 2.1", Comments = "Comments of Task 2.1" };
 
-            var wbs_3 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA6"), WbsCorrelationToken = "3", Owner = gatesb, ParentWorkPackage = wbs_0, Title = "Task 3", Description = "Description of Task 3", Comments = "Comments of Task 3" };
-            var wbs_3_1 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA7"), WbsCorrelationToken = "3.1", Owner = gatesb, ParentWorkPackage = wbs_3, Title = "Task 3.1", Description = "Description of Task 3.1", Comments = "Comments of Task 3.1" };
-            var wbs_3_2 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA8"), WbsCorrelationToken = "3.2", Owner = gatesb, ParentWorkPackage = wbs_3, Title = "Task 3.2", Description = "Description of Task 3.2", Comments = "Comments of Task 3.2" };
-            var wbs_3_2_1 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA9"), WbsCorrelationToken = "3.2.1", Owner = gatesb, ParentWorkPackage = wbs_3_2, Title = "Task 3.2.1", Description = "Description of Task 3.2.1", Comments = "Comments of Task 3.2.1" };
+            //var wbs_3 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA6"), WbsCorrelationToken = "3", Owner = gatesb, ParentWorkPackage = wbs_0, Title = "Task 3", Description = "Description of Task 3", Comments = "Comments of Task 3" };
+            //var wbs_3_1 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA7"), WbsCorrelationToken = "3.1", Owner = gatesb, ParentWorkPackage = wbs_3, Title = "Task 3.1", Description = "Description of Task 3.1", Comments = "Comments of Task 3.1" };
+            //var wbs_3_2 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA8"), WbsCorrelationToken = "3.2", Owner = gatesb, ParentWorkPackage = wbs_3, Title = "Task 3.2", Description = "Description of Task 3.2", Comments = "Comments of Task 3.2" };
+            //var wbs_3_2_1 = new WorkPackage { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EAA9"), WbsCorrelationToken = "3.2.1", Owner = gatesb, ParentWorkPackage = wbs_3_2, Title = "Task 3.2.1", Description = "Description of Task 3.2.1", Comments = "Comments of Task 3.2.1" };
 
-            var Project1 = new Project { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBA0"), Name="Project1", Description="Description of project 1", Coordinator=NestleAdministratorAccount, WorkBreakdownStructure=wbs_0 };
+            //var Project1 = new Project { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBA0"), Name="Project1", Description="Description of project 1", Coordinator=NestleAdministratorAccount, WorkBreakdownStructure=wbs_0 };
           
            
-            context.WorkPackages.Add(wbs_3_2_1);
-            context.WorkPackages.Add(wbs_3_2);
-            context.WorkPackages.Add(wbs_3_1);
-            context.WorkPackages.Add(wbs_3);
+            //context.WorkPackages.Add(wbs_3_2_1);
+            //context.WorkPackages.Add(wbs_3_2);
+            //context.WorkPackages.Add(wbs_3_1);
+            //context.WorkPackages.Add(wbs_3);
 
 
-            context.WorkPackages.Add(wbs_2_1);
-            context.WorkPackages.Add(wbs_2);
+            //context.WorkPackages.Add(wbs_2_1);
+            //context.WorkPackages.Add(wbs_2);
 
-            context.WorkPackages.Add(wbs_1_1);
-            context.WorkPackages.Add(wbs_1_2);
-            context.WorkPackages.Add(wbs_1);
+            //context.WorkPackages.Add(wbs_1_1);
+            //context.WorkPackages.Add(wbs_1_2);
+            //context.WorkPackages.Add(wbs_1);
 
-            context.WorkPackages.Add(wbs_0);
+            //context.WorkPackages.Add(wbs_0);
 
-            context.Projects.Add(Project1);
+            //context.Projects.Add(Project1);
 
-            var trend1 = new Hashtag() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBC0"), Symbol = "Trend1", AllianceContext=all_NewMilkshake };
-            var trend2 = new Hashtag() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBC1"), Symbol = "Trend2", GroupContext=DistributionForMilkshakeGroup   };
-            var trend3 = new Hashtag() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBC2"), Symbol = "Trend3", OrganizationContext=SwissPostAdministratorAccount  };
+            //var trend1 = new Hashtag() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBC0"), Symbol = "Trend1", AllianceContext=all_NewMilkshake };
+            //var trend2 = new Hashtag() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBC1"), Symbol = "Trend2", GroupContext=DistributionForMilkshakeGroup   };
+            //var trend3 = new Hashtag() { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBC2"), Symbol = "Trend3", OrganizationContext=SwissPostAdministratorAccount  };
 
             //var trend1_tweet1 = new Tweet { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBB0"), Author = gatesb, Hashtag = trend1, Text = "We should start to plan already", PublishDateTime = DateTime.Now.AddDays(-5), Wall = all_NewMilkshake_wall   };
             //var trend1_tweet2 = new Tweet { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308EBB1"), Author = hanselmans, Hashtag = trend1, Text = "definetely, who will make the schedule", PublishDateTime = DateTime.Now.AddDays(-4), Wall = all_NewMilkshake_wall };
@@ -728,38 +728,38 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
             //context.Tweets.Add(trend3_tweet3);
             //context.Tweets.Add(trend3_tweet4);
 
-            var gatesb_bookmark_contact_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC0"), Owner = gatesb, Type = BookmarkType.Contact, Reference = wozniaks.Key };
-            var gatesb_bookmark_contact_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC1"), Owner = gatesb, Type = BookmarkType.Contact, Reference = jobss.Key};
+            //var gatesb_bookmark_contact_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC0"), Owner = gatesb, Type = BookmarkType.Contact, Reference = wozniaks.Key };
+            //var gatesb_bookmark_contact_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC1"), Owner = gatesb, Type = BookmarkType.Contact, Reference = jobss.Key};
 
-            var gatesb_bookmark_organization_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC2"), Owner = gatesb, Type = BookmarkType.Organization, Reference = Emmi.Key  };
-            var gatesb_bookmark_organization_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC3"), Owner = gatesb, Type = BookmarkType.Organization, Reference = SwissPost.Key  };
-            var gatesb_bookmark_organization_3 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC4"), Owner = gatesb, Type = BookmarkType.Organization, Reference = Galliker.Key  };
+            //var gatesb_bookmark_organization_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC2"), Owner = gatesb, Type = BookmarkType.Organization, Reference = Emmi.Key  };
+            //var gatesb_bookmark_organization_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC3"), Owner = gatesb, Type = BookmarkType.Organization, Reference = SwissPost.Key  };
+            //var gatesb_bookmark_organization_3 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC4"), Owner = gatesb, Type = BookmarkType.Organization, Reference = Galliker.Key  };
 
-            var gatesb_bookmark_alliance_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC5"), Owner = gatesb, Type = BookmarkType.Alliance, Reference = all_ConstructionStandards.Key  };
-            var gatesb_bookmark_alliance_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC6"), Owner = gatesb, Type = BookmarkType.Alliance, Reference = all_HPLaptopDistribution.Key  };
-
-
-            var gatesb_bookmark_document_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC7"), Owner = gatesb, Type = BookmarkType.Document, Reference = doc1.Key  };
-            var gatesb_bookmark_document_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC8"), Owner = gatesb, Type = BookmarkType.Document, Reference = doc2.Key  };
-
-            var gatesb_bookmark_folder_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC9"), Owner = gatesb, Type = BookmarkType.Folder, Reference =  gatesb_library_folder_A_subfolder2.Key   };
-            var gatesb_bookmark_folder_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECD0"), Owner = gatesb, Type = BookmarkType.Folder, Reference = gatesb_library_folder_A_subfolder2_subfolder1.Key  };
+            //var gatesb_bookmark_alliance_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC5"), Owner = gatesb, Type = BookmarkType.Alliance, Reference = all_ConstructionStandards.Key  };
+            //var gatesb_bookmark_alliance_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC6"), Owner = gatesb, Type = BookmarkType.Alliance, Reference = all_HPLaptopDistribution.Key  };
 
 
-            var gatesb_bookmark_group_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECD1"), Owner = gatesb, Type = BookmarkType.Group, Reference = FreshFoodGroup.Key  };
-            var gatesb_bookmark_group_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECD2"), Owner = gatesb, Type = BookmarkType.Group, Reference = DistributionForMilkshakeGroup.Key  };
+            //var gatesb_bookmark_document_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC7"), Owner = gatesb, Type = BookmarkType.Document, Reference = doc1.Key  };
+            //var gatesb_bookmark_document_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC8"), Owner = gatesb, Type = BookmarkType.Document, Reference = doc2.Key  };
 
-            context.Bookmarks.Add(gatesb_bookmark_contact_1);
-            context.Bookmarks.Add(gatesb_bookmark_contact_2);
-            context.Bookmarks.Add(gatesb_bookmark_organization_1);
-            context.Bookmarks.Add(gatesb_bookmark_organization_2);
-            context.Bookmarks.Add(gatesb_bookmark_organization_3);
-            context.Bookmarks.Add(gatesb_bookmark_alliance_1);
-            context.Bookmarks.Add(gatesb_bookmark_alliance_2);
-            context.Bookmarks.Add(gatesb_bookmark_document_1);
-            context.Bookmarks.Add(gatesb_bookmark_folder_1);
-            context.Bookmarks.Add(gatesb_bookmark_group_1);
-            context.Bookmarks.Add(gatesb_bookmark_group_2);
+            //var gatesb_bookmark_folder_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECC9"), Owner = gatesb, Type = BookmarkType.Folder, Reference =  gatesb_library_folder_A_subfolder2.Key   };
+            //var gatesb_bookmark_folder_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECD0"), Owner = gatesb, Type = BookmarkType.Folder, Reference = gatesb_library_folder_A_subfolder2_subfolder1.Key  };
+
+
+            //var gatesb_bookmark_group_1 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECD1"), Owner = gatesb, Type = BookmarkType.Group, Reference = FreshFoodGroup.Key  };
+            //var gatesb_bookmark_group_2 = new Bookmark { Key = new Guid("ACBCCE0E-7C9F-4386-98AA-1458F308ECD2"), Owner = gatesb, Type = BookmarkType.Group, Reference = DistributionForMilkshakeGroup.Key  };
+
+            //context.Bookmarks.Add(gatesb_bookmark_contact_1);
+            //context.Bookmarks.Add(gatesb_bookmark_contact_2);
+            //context.Bookmarks.Add(gatesb_bookmark_organization_1);
+            //context.Bookmarks.Add(gatesb_bookmark_organization_2);
+            //context.Bookmarks.Add(gatesb_bookmark_organization_3);
+            //context.Bookmarks.Add(gatesb_bookmark_alliance_1);
+            //context.Bookmarks.Add(gatesb_bookmark_alliance_2);
+            //context.Bookmarks.Add(gatesb_bookmark_document_1);
+            //context.Bookmarks.Add(gatesb_bookmark_folder_1);
+            //context.Bookmarks.Add(gatesb_bookmark_group_1);
+            //context.Bookmarks.Add(gatesb_bookmark_group_2);
 
             //context.SaveChanges();
             //base.Seed(context);
@@ -872,7 +872,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
             context.CommentLikes.Add(gatesb_wall_comment1_post1_like_sandbergs);
 
 
-            var brins_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-AABB-98AA-123456789000"), Owner=brins_BasicProfile  };          
+            var brins_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-AABB-98AA-123456789000"), Owner=brins_BasicProfile  };   
             var schmidte_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-AABB-98AA-123456789001"), Owner= schmidte_BasicProfile   };
             var mayerm_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-AABB-98AA-123456789002"), Owner = mayerm_BasicProfile };
             var jobss_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-AABB-98AA-123456789003"), Owner= jobss_BasicProfile  };
@@ -886,8 +886,12 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
             var guthries_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-AABB-98AA-12345678900B"), Owner=guthries_BasicProfile  };
             var torvaldsl_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-AABB-98AA-12345678900C"), Owner=torvaldsl_BasicProfile  };
             var ozzier_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-AABB-98AA-12345678900D"), Owner=ozzier_BasicProfile  };
+            var ellisonl_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-AABB-98AA-12345678900E"), Owner = ellisonl_BasicProfile  };
+            var pagel_wall = new ContentStream() { Key = new Guid("AAABBBCC-DDDD-AABB-98AA-12345678900F"), Owner = pagel_BasicProfile };
+
 
             context.ContentStreams.Add(brins_wall);
+            context.ContentStreams.Add(pagel_wall);
             context.ContentStreams.Add(schmidte_wall);
             context.ContentStreams.Add(jobss_wall);
             context.ContentStreams.Add(ballmers_wall);
@@ -900,6 +904,8 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
             context.ContentStreams.Add(guthries_wall);
             context.ContentStreams.Add(torvaldsl_wall);
             context.ContentStreams.Add(ozzier_wall);
+            context.ContentStreams.Add(ellisonl_wall);
+            context.ContentStreams.Add(mayerm_wall);
 
 
             var Galliker_wall = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A01"), Owner=Galliker_BasicProfile  };

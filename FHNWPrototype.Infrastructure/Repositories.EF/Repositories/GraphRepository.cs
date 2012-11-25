@@ -24,7 +24,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                         {
                             var ua = db.UserAccounts
                                                     .Include("OrganizationAccount.Organization")
-                                                    .SingleOrDefault(x => x.Key == basicProfile.ReferenceKey);
+                                                    .FirstOrDefault(x => x.Key == basicProfile.ReferenceKey);
 
                             completeProfile.BasicProfile = basicProfile;
                             completeProfile.FullName = ua.User.FirstName + " " + ua.User.LastName;
@@ -38,7 +38,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                         {
                             var oa = db.OrganizationAccounts 
                                                     .Include("Organization")
-                                                    .SingleOrDefault(x => x.Key == basicProfile.ReferenceKey);
+                                                    .FirstOrDefault(x => x.Key == basicProfile.ReferenceKey);
 
                             completeProfile.BasicProfile = basicProfile;
                             completeProfile.FullName = oa.Name;
@@ -51,8 +51,8 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                     case AccountType.Group:
                         using (var db = new FHNWPrototypeDB())
                         {
-                            var group = db.Groups 
-                                                    .SingleOrDefault(x => x.Key == basicProfile.ReferenceKey);
+                            var group = db.Groups
+                                                    .FirstOrDefault(x => x.Key == basicProfile.ReferenceKey);
 
                             completeProfile.BasicProfile = basicProfile;
                             completeProfile.FullName = group.Name;
@@ -65,7 +65,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                         using (var db = new FHNWPrototypeDB())
                         {
                             var alliance = db.Alliances
-                                                    .SingleOrDefault(x => x.Key == basicProfile.ReferenceKey);
+                                                    .FirstOrDefault(x => x.Key == basicProfile.ReferenceKey);
 
                             completeProfile.BasicProfile = basicProfile;
                             completeProfile.FullName = alliance.Name;

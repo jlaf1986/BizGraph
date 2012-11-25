@@ -89,27 +89,72 @@ function RegisterNewCommentEvent(url, referenceKey,notifierProxy) {
 function RegisterLikePostEvent(url){
     $(document).on('click', 'a.like_post', function (e) {
         e.preventDefault();
-        var parameters = { "postKey": e.target.id.substring(10) };
+        var thisPostKey= e.target.id.substring(10);
+        var parameters = { "postKey": thisPostKey };
         $.post(url,parameters, function (data) {
-            //alert('you liked the post')
+            $('#like_counter_post_' + thisPostKey).text(data.counter + ' Like this');
+            //alert('current counter:' + data.counter);
         });
-        e.target.attr('enabled', false);
-        e.target.val('Unlike');
+       
+        //e.target.attr('id', 'unlike_post_' + thisPostKey);
+        $(e.target).attr('class', 'unlike_post');
+        $(e.target).text('Unlike');
+
     });
 }
 
 function RegisterLikeCommentEvent(url){
     $(document).on('click', 'a.like_comment', function (e) {
         e.preventDefault();
-        var parameters = { "commentKey": e.target.id.substring(13) };
+        var thisCommentKey = e.target.id.substring(13);
+        var parameters = { "commentKey": thisCommentKey };
         $.post(url,parameters, function (data) {
-            //alert('you liked the comment')
-
+            $('#like_counter_comment_' + thisCommentKey).text(data.counter + ' Like this');
+           // alert('current counter:' + data.counter);
         });
-        e.target.attr('enabled', false);
-        e.target.val('Unlike');
+       
+        //e.target.attr('id', 'unlike_comment_' + thisCommentKey);
+        $(e.target).attr('class', 'unlike_comment');
+        $(e.target).text('Unlike');
+
     });
 }
+
+function RegisterUnLikePostEvent(url) {
+    $(document).on('click', 'a.unlike_post', function (e) {
+        e.preventDefault();
+        var thisPostKey = e.target.id.substring(10);
+        var parameters = { "postKey": thisPostKey };
+        $.post(url, parameters, function (data) {
+            $('#like_counter_post_' + thisPostKey).text(data.counter + ' Like this');
+          //  alert('current counter:' + data.counter);
+            
+        });
+        //e.target.attr('id', 'like_post_' + thisPostKey);
+        $(e.target).attr('class', 'like_post');
+        $(e.target).text('Like');
+
+    });
+}
+
+function RegisterUnLikeCommentEvent(url) {
+    $(document).on('click', 'a.unlike_comment', function (e) {
+        e.preventDefault();
+        var thisCommentKey = e.target.id.substring(13);
+        var parameters = { "commentKey": thisCommentKey };
+        $.post(url, parameters, function (data) {
+            $('#like_counter_comment_' + thisCommentKey).text(data.counter + ' Like this');
+           // alert('current counter:' + data.counter);
+        });
+     
+        //e.target.attr('id', 'like_comment_' + thisCommentKey);
+        $(e.target).attr('class', 'like_comment');
+        $(e.target).text('Like');
+    });
+}
+
+
+
     function RegisterDeletePostEvent(url){
         $(document).on('click', 'a.delete_post', function (e) {
             e.preventDefault();

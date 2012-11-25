@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using FHNWPrototype.Domain.Friendships.States;
+using FHNWPrototype.Domain.Partnerships.States;
 
 namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
 {
@@ -30,7 +32,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                               .Include("Posts.PostLikes.Author")
                               .Include("Posts.Comments.Author")
                               .Include("Posts.Comments.CommentLikes.Author")
-                              .SingleOrDefault(x => x.Owner.ReferenceKey  == OwnerKey);
+                              .FirstOrDefault(x => x.Owner.ReferenceKey == OwnerKey);
                 if (result != null)
                 {
                     var newPostList = result.Posts.OrderByDescending(x => x.PublishDateTime).ToList();
@@ -55,14 +57,143 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
           
         }
 
-        public static void LikePost(Guid AuthorKey, Guid postKey)
+        public static ContentStream GetNewsfeed(Guid OwnerKey)
+        {
+            ContentStream newsfeed  = new ContentStream();
+            newsfeed.Posts = new List<Post>();
+            newsfeed.Tweets = new List<Domain.Publishing.Tweets.Tweet>();
+
+
+            List<Post> postFromPeersReceived = new List<Post>();
+            List<Post> postFromPeersRequested = new List<Post>();
+
+            List<Post> allPostsFromNewsfeed = new List<Post>();
+
+            using (var db = new FHNWPrototypeDB())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+
+                newsfeed.Owner = db.BasicProfiles.FirstOrDefault(x => x.ReferenceKey == OwnerKey);
+
+                if (newsfeed.Owner.ReferenceType == Domain._Base.Accounts.AccountType.UserAccount)
+                {
+                    var owner = db.UserAccounts
+                                            .Include("FriendshipsReceived.Sender")
+                                            .Include("FriendshipsRequested.Receiver")
+                                            .FirstOrDefault(x => x.Key == OwnerKey);
+
+                    foreach (FriendshipStateInfo friendship in owner.FriendshipsReceived)
+                    {
+                       // var peerProfile = db.BasicProfiles.SingleOrDefault(x=>x.ReferenceKey==friendship.Sender.Key);
+
+
+                        var temp=  db.ContentStreams
+                                                            .Include("Owner")
+                                                           .Include("Posts.Author")
+                                                          .Include("Posts.PostLikes.Author")
+                                                          .Include("Posts.Comments.Author")
+                                                          .Include("Posts.Comments.CommentLikes.Author")
+                                                             .FirstOrDefault(x => x.Owner.ReferenceKey == friendship.Sender.Key)
+                                                            .Posts.Where(x => x.Author.ReferenceKey == friendship.Sender.Key)
+                                                             .OrderByDescending(y => y.PublishDateTime)
+                                                             .Take(3).ToList();
+
+                        if (temp != null) postFromPeersReceived.AddRange(temp);
+
+                        //postFromPeersReceived = db.ContentStreams
+                        //                                        .Include("Owner")
+                        //                                        .Include("Posts.Author")
+                        //                                        .SingleOrDefault(x=>x.Owner.ReferenceKey==peerProfile.ReferenceKey)
+                        //                                        .Posts.Where(x => x.Author.ReferenceKey == peerProfile.ReferenceKey)
+                        //                                        .OrderByDescending(y => y.PublishDateTime)
+                        //                                        .Take(3).ToList();
+                    }
+
+                    foreach (FriendshipStateInfo friendship in owner.FriendshipsRequested)
+                    {
+                      //  var peerProfile = db.BasicProfiles.SingleOrDefault(x => x.ReferenceKey == friendship.Receiver.Key);
+
+                        var temp = db.ContentStreams
+                                                                    .Include("Owner")
+                                                                      .Include("Posts.Author")
+                                                          .Include("Posts.PostLikes.Author")
+                                                          .Include("Posts.Comments.Author")
+                                                          .Include("Posts.Comments.CommentLikes.Author")
+                                                                    .FirstOrDefault(x => x.Owner.ReferenceKey == friendship.Receiver.Key)
+                                                                     .Posts.Where(x => x.Author.ReferenceKey == friendship.Receiver.Key)
+                                                                    .OrderByDescending(y => y.PublishDateTime)
+                                                                    .Take(3).ToList();
+
+                        if (temp != null) postFromPeersRequested.AddRange(temp);
+                    }
+
+                }
+
+                if (newsfeed.Owner.ReferenceType == Domain._Base.Accounts.AccountType.OrganizationAccount)
+                {
+                    var owner = db.OrganizationAccounts
+                                                    .Include("PartnershipsReceived.Sender")
+                                                    .Include("PartnershipsRequested.Receiver")
+                                                    .FirstOrDefault(x => x.Key == OwnerKey);
+
+                    foreach (PartnershipStateInfo partnership in owner.PartnershipsReceived)
+                    {
+
+                       // var peerProfile = db.BasicProfiles.SingleOrDefault(x => x.ReferenceKey == partnership.Sender.Key);
+
+                        var temp = db.ContentStreams
+                                                                    .Include("Owner")
+                                                                    .Include("Posts.Author")
+                                                          .Include("Posts.PostLikes.Author")
+                                                          .Include("Posts.Comments.Author")
+                                                          .Include("Posts.Comments.CommentLikes.Author")
+                                                                    .FirstOrDefault(x => x.Owner.ReferenceKey == partnership.Sender.Key)
+                                                                    .Posts.Where(x => x.Author.ReferenceKey == partnership.Sender.Key)
+                                                                    .OrderByDescending(y => y.PublishDateTime)
+                                                                    .Take(3).ToList();
+
+                        if (temp != null) postFromPeersReceived.AddRange(temp);
+                    }
+
+                    foreach (PartnershipStateInfo partnership in owner.PartnershipsRequested)
+                    {
+                       // var peerProfile = db.BasicProfiles.SingleOrDefault(x => x.ReferenceKey == partnership.Receiver.Key);
+
+                        var temp = db.ContentStreams
+                                                                    .Include("Owner")
+                                                                   .Include("Posts.Author")
+                                                          .Include("Posts.PostLikes.Author")
+                                                          .Include("Posts.Comments.Author")
+                                                          .Include("Posts.Comments.CommentLikes.Author")
+                                                                    .FirstOrDefault(x => x.Owner.ReferenceKey == partnership.Receiver.Key)
+                                                                    .Posts.Where(x => x.Author.ReferenceKey == partnership.Receiver.Key)
+                                                                    .OrderByDescending(y => y.PublishDateTime)
+                                                                    .Take(3).ToList();
+
+                        if (temp != null) postFromPeersRequested.AddRange(temp);
+                    }
+
+                }
+
+                if (postFromPeersReceived != null) newsfeed.Posts= newsfeed.Posts.Union(postFromPeersReceived).ToList();
+
+                if (postFromPeersRequested != null) newsfeed.Posts = newsfeed.Posts.Union(postFromPeersRequested).ToList();
+
+                newsfeed.Posts = newsfeed.Posts.OrderByDescending(x => x.PublishDateTime).ToList();
+ 
+                return newsfeed;
+            }
+
+        }
+
+        public static int LikePost(Guid AuthorKey, Guid postKey)
         {
             using (var db = new FHNWPrototypeDB())
             {
                 var thisPost = db.Posts
                     .Include("PostLikes")
                     .Single(x => x.Key == postKey);
-                var author= db.BasicProfiles.Single(x=> x.ReferenceKey ==AuthorKey);
+                var author = db.BasicProfiles.FirstOrDefault(x => x.ReferenceKey == AuthorKey);
                 PostLike newLike = new PostLike();
                 newLike.Author = author;
                 newLike.DateTime = DateTime.Now;
@@ -70,28 +201,32 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                 newLike.Post = thisPost;
                 db.PostLikes.Add(newLike);
                 db.SaveChanges();
+
+                return thisPost.PostLikes.Count;
             }
 
         }
 
-        public static void UnLikePost(Guid AuthorUserAccountKey, Guid postKey)
+        public static int UnLikePost(Guid AuthorUserAccountKey, Guid postKey)
         {
             using (var db = new FHNWPrototypeDB())
             {
-                var thisPost = db.Posts.Single(x => x.Key == postKey);
-                var author = db.UserAccounts.Single(x => x.Key == AuthorUserAccountKey);
-                var unlike = db.PostLikes.Single(x => x.Post.Key == postKey && x.Author.ReferenceKey == AuthorUserAccountKey);
+                var thisPost = db.Posts.FirstOrDefault(x => x.Key == postKey);
+                var author = db.UserAccounts.FirstOrDefault(x => x.Key == AuthorUserAccountKey);
+                var unlike = db.PostLikes.FirstOrDefault(x => x.Post.Key == postKey && x.Author.ReferenceKey == AuthorUserAccountKey);
                 db.PostLikes.Remove(unlike);
                 db.SaveChanges();
+
+                return thisPost.PostLikes.Count;
             }
         }
 
-        public static void LikeComment(Guid AuthorKey, Guid commentKey)
+        public static int LikeComment(Guid AuthorKey, Guid commentKey)
         {
             using (var db = new FHNWPrototypeDB())
             {
-                var thisComment = db.Comments.SingleOrDefault(x => x.Key == commentKey);
-                var author = db.BasicProfiles.SingleOrDefault(x => x.ReferenceKey == AuthorKey);
+                var thisComment = db.Comments.FirstOrDefault(x => x.Key == commentKey);
+                var author = db.BasicProfiles.FirstOrDefault(x => x.ReferenceKey == AuthorKey);
                 CommentLike newLike = new CommentLike();
                 newLike.Author = author;
                 newLike.DateTime = DateTime.Now;
@@ -99,18 +234,22 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                 newLike.Comment  = thisComment;
                 db.CommentLikes.Add(newLike);
                 db.SaveChanges();
+
+                return thisComment.CommentLikes.Count;
             }
         }
 
-        public static void UnLikeComment(Guid AuthorKey, Guid commentKey)
+        public static int UnLikeComment(Guid AuthorKey, Guid commentKey)
         {
             using (var db = new FHNWPrototypeDB())
             {
-                var thisComment = db.Posts.SingleOrDefault(x => x.Key == commentKey);
+                var thisComment = db.Comments.FirstOrDefault(x => x.Key == commentKey);
                 //var author = db.BasicProfiles.SingleOrDefault(x => x.ReferenceKey  == AuthorKey);
-                var unlike = db.CommentLikes.SingleOrDefault(x => x.Comment.Key == commentKey && x.Author.ReferenceKey  == AuthorKey);
+                var unlike = db.CommentLikes.FirstOrDefault(x => x.Comment.Key == commentKey && x.Author.ReferenceKey == AuthorKey);
                 db.CommentLikes.Remove(unlike);
                 db.SaveChanges();
+
+                return thisComment.CommentLikes.Count;
             }
         }
 
@@ -119,8 +258,8 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
             using (var db = new FHNWPrototypeDB())
             {
                 Guid newGuid = Guid.NewGuid();
-                var wall = db.ContentStreams.SingleOrDefault(x => x.Owner.ReferenceKey == wallOwnerReferenceKey);
-                var author = db.BasicProfiles.SingleOrDefault(x => x.ReferenceKey  == AuthorKey);
+                var wall = db.ContentStreams.FirstOrDefault(x => x.Owner.ReferenceKey == wallOwnerReferenceKey);
+                var author = db.BasicProfiles.FirstOrDefault(x => x.ReferenceKey == AuthorKey);
 
                 Post newPost = new Post();
                 newPost.Author = author;
@@ -140,9 +279,9 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
             using (var db = new FHNWPrototypeDB())
             {
                 Guid  newGuid = Guid.NewGuid();
-                var post = db.Posts.Single(x => x.Key == postKey);
+                var post = db.Posts.FirstOrDefault(x => x.Key == postKey);
                 // var author = db.UserAccounts.Single(x => x.Key == AuthorKey);
-                var author = db.BasicProfiles.SingleOrDefault(x => x.ReferenceKey == AuthorKey);
+                var author = db.BasicProfiles.FirstOrDefault(x => x.ReferenceKey == AuthorKey);
 
                 Comment newComment = new Comment();
                 newComment.Author = author;
@@ -244,7 +383,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                     .Include("PostLikes.Author")
                     .Include("Comments.CommentLikes")
                     .Include("Wall")
-                    .SingleOrDefault(x => x.Key==key);
+                    .FirstOrDefault(x => x.Key == key);
 
                 thisPost.Key = result.Key;
                 thisPost.PostLikes = result.PostLikes;
@@ -268,7 +407,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                    .Include("CommentLikes.Author")
                    .Include("CommentLikes")
                    .Include("Post")
-                   .SingleOrDefault(x => x.Key == key);
+                   .FirstOrDefault(x => x.Key == key);
 
                 thisComment.Key = result.Key;
                 thisComment.Text = result.Text;

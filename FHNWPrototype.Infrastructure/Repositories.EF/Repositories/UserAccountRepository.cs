@@ -131,7 +131,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                 var dbResult = db.UserAccounts
                                             .Include("GroupMemberships.RequestedGroup")
                                             .Include("User")
-                                            .Single(x => x.Key == key);
+                                            .FirstOrDefault(x => x.Key == key);
                 foreach (GroupMembershipStateInfo membership in dbResult.GroupMemberships)
                 {
 
@@ -484,11 +484,11 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                               UserAccount   sender = db.UserAccounts
                                       .Include("FriendshipsRequested")
                                       .Include("FriendshipsReceived")
-                                      .SingleOrDefault(x => x.Key == senderUserAccountKey);
+                                      .FirstOrDefault(x => x.Key == senderUserAccountKey);
                              UserAccount    receiver = db.UserAccounts
                                                         .Include("FriendshipsRequested")
                                                         .Include("FriendshipsReceived")
-                                    .SingleOrDefault(x => x.Key == receiverUserAccountKey);
+                                    .FirstOrDefault(x => x.Key == receiverUserAccountKey);
                                
                                 FriendshipStateInfo newFriendshipState = new FriendshipStateInfo();
                                 newFriendshipState.Key = Guid.NewGuid();
@@ -590,7 +590,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                                 UserAccount sender = db.UserAccounts
                                 .Include("FriendshipsRequested")
                                 .Include("FriendshipsReceived")
-                                .SingleOrDefault(x => x.Key == senderUserAccountKey);
+                                .FirstOrDefault(x => x.Key == senderUserAccountKey);
                                 UserAccount receiver = db.UserAccounts
                                                            .Include("FriendshipsRequested")
                                                            .Include("FriendshipsReceived")
@@ -643,11 +643,11 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                                 UserAccount sender = db.UserAccounts
                                 .Include("FriendshipsRequested")
                                 .Include("FriendshipsReceived")
-                                .SingleOrDefault(x => x.Key == senderUserAccountKey);
+                                .FirstOrDefault(x => x.Key == senderUserAccountKey);
                                 UserAccount receiver = db.UserAccounts
                                                            .Include("FriendshipsRequested")
                                                            .Include("FriendshipsReceived")
-                                       .SingleOrDefault(x => x.Key == receiverUserAccountKey);
+                                       .FirstOrDefault(x => x.Key == receiverUserAccountKey);
 
                                 FriendshipStateInfo newFriendshipState = new FriendshipStateInfo();
                                 newFriendshipState.Key = Guid.NewGuid();
@@ -701,7 +701,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                         UserAccount sender = db.UserAccounts
                                 .Include("FriendshipsRequested")
                                 .Include("FriendshipsReceived")
-                                .SingleOrDefault(x => x.Key == senderUserAccountKey);
+                                .FirstOrDefault(x => x.Key == senderUserAccountKey);
                         UserAccount receiver = db.UserAccounts
                                                    .Include("FriendshipsRequested")
                                                    .Include("FriendshipsReceived")
