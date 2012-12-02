@@ -22,9 +22,9 @@ namespace FHNWPrototype.Domain.Users
     /// <see cref="http://stackoverflow.com/questions/9081256/entity-framework-code-first-union-of-the-two-fields-into-one-collection"/>
     /// <seealso cref="http://stackoverflow.com/questions/710856/how-do-you-send-complex-objects-using-wcf-does-it-work-is-it-good"/>
     /// </summary>
-   
-  
-    public class UserAccount : EntityBase, IAggregateRoot, IPublishingCapable
+
+
+    public class UserAccount : EntityBase, IAggregateRoot, IPublisher
     {
 
         public UserAccount()

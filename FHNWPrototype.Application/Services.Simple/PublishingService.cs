@@ -1,7 +1,9 @@
 ﻿using FHNWPrototype.Application.Services.Simple.ServicesViewModels;
+using FHNWPrototype.Domain._Base.Accounts;
 using FHNWPrototype.Domain.Publishing;
 using FHNWPrototype.Domain.Publishing.ContentStreams;
 using FHNWPrototype.Domain.Publishing.Likes;
+using FHNWPrototype.Domain.Publishing.Tweets;
 using FHNWPrototype.Infrastructure.Repositories.EF.Repositories;
 using System;
 using System.Collections.Generic;
@@ -13,14 +15,22 @@ namespace FHNWPrototype.Application.Services.Simple
 {
     public static  class PublishingService
     {
+
+       
+
       //  ContentStreamRepository contentStreamRepository = new ContentStreamRepository();
 
-        public static ContentStreamViewModel GetContentStreamByOwnerReferenceKey(string ownerKey, string viewerKey)
+        public static ContentStreamViewModel GetContentStreamAsProfileWall(string ownerKey, string viewerKey)
         {
-            ContentStream retrievedWall = PublishingRepository.GetWallByOwnerReferenceKey(new Guid(ownerKey));
+            ContentStream retrievedWall = PublishingRepository.GetContentStreamAsProfileWall(new Guid(ownerKey));
 
             ContentStreamViewModel result = new ContentStreamViewModel();
             result.Posts = new List<PostViewModel>();
+
+            result.Tweets = new List<TweetViewModel>();
+
+            result.Retweets = new List<RetweetViewModel>();
+
             foreach (Post post in retrievedWall.Posts)
             {
                 PostViewModel thisPost = new PostViewModel();
@@ -34,7 +44,7 @@ namespace FHNWPrototype.Application.Services.Simple
 
                 thisPost.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = postAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = post.Author.ReferenceType }, FullName = postAuthorProfile.FullName, Description1 = postAuthorProfile.Description1, Description2 = postAuthorProfile.Description2 };
                        
-                thisPost.TimeStamp = post.PublishDateTime;
+                thisPost.PublishDateTime = post.PublishDateTime;
                 thisPost.Comments = new List<CommentViewModel>();
                 if (post.PostLikes != null)
                 {
@@ -67,7 +77,7 @@ namespace FHNWPrototype.Application.Services.Simple
                     thisComment.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = commentAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = commentAuthorProfile.BasicProfile.ReferenceType }, FullName = commentAuthorProfile.FullName, Description1 = commentAuthorProfile.Description1, Description2 = commentAuthorProfile.Description2 };
                          
 
-                    thisComment.TimeStamp = comment.PublishDateTime;
+                    thisComment.PublishDateTime = comment.PublishDateTime;
 
                     if (comment.CommentLikes != null)
                     {
@@ -89,15 +99,63 @@ namespace FHNWPrototype.Application.Services.Simple
                 result.Posts.Add(thisPost);
             }
 
+            foreach (Tweet tweet in retrievedWall.Tweets)
+            {
+                TweetViewModel thisTweet = new TweetViewModel();
+
+                thisTweet.Key = tweet.Key.ToString();
+
+                thisTweet.Text = tweet.Text;
+
+                thisTweet.PublishDateTime = tweet.PublishDateTime;
+
+                var tweetAuthorProfile = SecurityRepository.GetCompleteProfile(tweet.Author);
+
+                thisTweet.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = tweetAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = tweet.Author.ReferenceType }, FullName = tweetAuthorProfile.FullName, Description1 = tweetAuthorProfile.Description1, Description2 = tweetAuthorProfile.Description2 };
+
+                thisTweet.Retweets = 0;
+
+                
+
+                result.Tweets.Add(thisTweet);
+            }
+
+            foreach (Retweet retweet in retrievedWall.Retweets)
+            {
+                RetweetViewModel thisRetweet = new RetweetViewModel();
+
+                var tweetAuthorProfile = SecurityRepository.GetCompleteProfile(retweet.Tweet.Author);
+
+                var retweetAuthorProfile = SecurityRepository.GetCompleteProfile(retweet.Author);
+
+                thisRetweet.TweetAuthor = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = tweetAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = retweet.Tweet.Author.ReferenceType }, FullName = tweetAuthorProfile.FullName, Description1 = tweetAuthorProfile.Description1, Description2 = tweetAuthorProfile.Description2 };
+
+                thisRetweet.RetweetAuthor = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = retweetAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = retweet.Author.ReferenceType }, FullName = tweetAuthorProfile.FullName, Description1 = retweetAuthorProfile.Description1, Description2 = retweetAuthorProfile.Description2 };
+
+                thisRetweet.Text = retweet.Tweet.Text;
+
+                thisRetweet.RetweetKey = retweet.Key.ToString();
+                thisRetweet.TweetKey = retweet.Tweet.Key.ToString();
+
+                thisRetweet.TweetPublishDateTime = retweet.Tweet.PublishDateTime;
+
+               
+
+                result.Retweets.Add(thisRetweet);
+            }
+
             return result;
         }
 
         public static ContentStreamViewModel GetContentStreamAsNewsfeed(string ownerKey, string viewerKey)
         {
-            ContentStream retrievedWall = PublishingRepository.GetNewsfeed(new Guid(ownerKey));
+            ContentStream retrievedWall = PublishingRepository.GetContentStreamAsNewsfeed(new Guid(ownerKey));
 
             ContentStreamViewModel result = new ContentStreamViewModel();
             result.Posts = new List<PostViewModel>();
+            result.Tweets = new List<TweetViewModel>();
+            result.Retweets = new List<RetweetViewModel>();
+
             foreach (Post post in retrievedWall.Posts)
             {
                 PostViewModel thisPost = new PostViewModel();
@@ -111,7 +169,7 @@ namespace FHNWPrototype.Application.Services.Simple
 
                 thisPost.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = postAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = post.Author.ReferenceType }, FullName = postAuthorProfile.FullName, Description1 = postAuthorProfile.Description1, Description2 = postAuthorProfile.Description2 };
 
-                thisPost.TimeStamp = post.PublishDateTime;
+                thisPost.PublishDateTime = post.PublishDateTime;
                 thisPost.Comments = new List<CommentViewModel>();
                 if (post.PostLikes != null)
                 {
@@ -144,7 +202,7 @@ namespace FHNWPrototype.Application.Services.Simple
                     thisComment.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = commentAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = commentAuthorProfile.BasicProfile.ReferenceType }, FullName = commentAuthorProfile.FullName, Description1 = commentAuthorProfile.Description1, Description2 = commentAuthorProfile.Description2 };
 
 
-                    thisComment.TimeStamp = comment.PublishDateTime;
+                    thisComment.PublishDateTime = comment.PublishDateTime;
 
                     if (comment.CommentLikes != null)
                     {
@@ -164,6 +222,51 @@ namespace FHNWPrototype.Application.Services.Simple
                     thisPost.Comments.Add(thisComment);
                 }
                 result.Posts.Add(thisPost);
+            }
+
+            foreach (Tweet tweet in retrievedWall.Tweets)
+            {
+                TweetViewModel thisTweet = new TweetViewModel();
+
+                thisTweet.Key = tweet.Key.ToString();
+
+                thisTweet.Text = tweet.Text;
+
+                thisTweet.PublishDateTime = tweet.PublishDateTime;
+
+                var tweetAuthorProfile = SecurityRepository.GetCompleteProfile(tweet.Author);
+
+                thisTweet.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = tweetAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = tweet.Author.ReferenceType }, FullName = tweetAuthorProfile.FullName, Description1 = tweetAuthorProfile.Description1, Description2 = tweetAuthorProfile.Description2 };
+
+                thisTweet.Retweets = 0;
+
+
+
+                result.Tweets.Add(thisTweet);
+            }
+
+            foreach (Retweet retweet in retrievedWall.Retweets)
+            {
+                RetweetViewModel thisRetweet = new RetweetViewModel();
+
+                var tweetAuthorProfile = SecurityRepository.GetCompleteProfile(retweet.Tweet.Author);
+
+                var retweetAuthorProfile = SecurityRepository.GetCompleteProfile(retweet.Author);
+
+                thisRetweet.TweetAuthor = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = tweetAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = retweet.Tweet.Author.ReferenceType }, FullName = tweetAuthorProfile.FullName, Description1 = tweetAuthorProfile.Description1, Description2 = tweetAuthorProfile.Description2 };
+
+                thisRetweet.RetweetAuthor = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = retweetAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = retweet.Author.ReferenceType }, FullName = tweetAuthorProfile.FullName, Description1 = retweetAuthorProfile.Description1, Description2 = retweetAuthorProfile.Description2 };
+
+                thisRetweet.Text = retweet.Tweet.Text;
+
+                thisRetweet.RetweetKey = retweet.Key.ToString();
+                thisRetweet.TweetKey = retweet.Tweet.Key.ToString();
+
+                thisRetweet.TweetPublishDateTime = retweet.Tweet.PublishDateTime;
+
+
+
+                result.Retweets.Add(thisRetweet);
             }
 
             return result;
@@ -206,6 +309,13 @@ namespace FHNWPrototype.Application.Services.Simple
       
         }
 
+        public static string SubmitNewTweet(string AuthorUserAccountKey, string wallOwnerUserAccountKey, string text)
+        {
+            Guid returnGuid = PublishingRepository.SubmitNewTweet(new Guid(AuthorUserAccountKey), new Guid(wallOwnerUserAccountKey), text);
+            return returnGuid.ToString();
+
+        }
+
         public static string SubmitNewComment(string AuthorUserAccountKey, string postKey, string text)
         {
             Guid  returnedGuid =PublishingRepository.SubmitNewComment(new Guid(AuthorUserAccountKey), new Guid(postKey), text);
@@ -213,14 +323,32 @@ namespace FHNWPrototype.Application.Services.Simple
            
         }
 
+        public static string SubmitNewRetweet(string AuthorUserAccountKey, string tweetKey)
+        {
+            Guid returnedGuid = PublishingRepository.SubmitNewRetweet(new Guid(AuthorUserAccountKey), new Guid(tweetKey));
+            return returnedGuid.ToString();
+
+        }
+
+
         public static void DeletePost(string postKey)
         {
             PublishingRepository.DeletePost(new Guid(postKey));
         }
 
+        public static void DeleteTweet(string tweetKey)
+        {
+            PublishingRepository.DeleteTweet(new Guid(tweetKey));
+        }
+
         public static void DeleteComment(string commentKey)
         {
             PublishingRepository.DeleteComment(new Guid(commentKey));
+        }
+
+        public static void DeleteRetweet(string retweetKey)
+        {
+            PublishingRepository.DeleteRetweet(new Guid(retweetKey));
         }
 
         public static PostViewModel GetPost(string postKey)
@@ -231,12 +359,27 @@ namespace FHNWPrototype.Application.Services.Simple
             newPost.ILikedIt = false;
             newPost.Likes = retrievedPost.PostLikes.Count;
             newPost.Text = retrievedPost.Text;
-            newPost.TimeStamp = retrievedPost.PublishDateTime;
+            newPost.PublishDateTime = retrievedPost.PublishDateTime;
 
             var postAuthorProfile = SecurityRepository.GetCompleteProfile(retrievedPost.Author);
 
             newPost.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey=postAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType=postAuthorProfile.BasicProfile.ReferenceType }, FullName=postAuthorProfile.FullName, Description1=postAuthorProfile.Description1, Description2=postAuthorProfile.Description2  };
             return newPost;
+        }
+
+        public static TweetViewModel GetTweet(string tweetKey)
+        {
+            Tweet retrievedTweet = PublishingRepository.GetTweet(new Guid(tweetKey));
+            TweetViewModel newTweet = new TweetViewModel();
+            newTweet.Key = retrievedTweet.Key.ToString();
+            newTweet.Retweets = retrievedTweet.Retweets.Count;
+            newTweet.Text = retrievedTweet.Text;
+            newTweet.PublishDateTime = retrievedTweet.PublishDateTime;
+
+            var tweetAuthorProfile = SecurityRepository.GetCompleteProfile(retrievedTweet.Author);
+
+            newTweet.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = tweetAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = tweetAuthorProfile.BasicProfile.ReferenceType }, FullName = tweetAuthorProfile.FullName, Description1 = tweetAuthorProfile.Description1, Description2 = tweetAuthorProfile.Description2 };
+            return newTweet;
         }
 
         public static CommentViewModel GetComment(string commentKey)
@@ -248,12 +391,34 @@ namespace FHNWPrototype.Application.Services.Simple
             newComment.ILikedIt = false;
             newComment.Likes = retrievedComment.CommentLikes.Count;
             newComment.Text = retrievedComment.Text;
-            newComment.TimeStamp = retrievedComment.PublishDateTime;
+            newComment.PublishDateTime = retrievedComment.PublishDateTime;
 
             var commentAuthorProfile = SecurityRepository.GetCompleteProfile(retrievedComment.Author);
             newComment.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = commentAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = commentAuthorProfile.BasicProfile.ReferenceType }, FullName = commentAuthorProfile.FullName, Description1 = commentAuthorProfile.Description1, Description2 = commentAuthorProfile.Description2 };
             
             return newComment;
+        }
+
+        public static RetweetViewModel GetRetweet(string retweetKey)
+        {
+            Retweet retrievedRetweet = PublishingRepository.GetRetweet(new Guid(retweetKey));
+            RetweetViewModel newRetweet = new RetweetViewModel();
+
+            newRetweet.RetweetKey  = retrievedRetweet.Key.ToString();
+
+            newRetweet.TweetKey = retrievedRetweet.Tweet.Key.ToString();
+
+            var tweetAuthorProfile = SecurityRepository.GetCompleteProfile(retrievedRetweet.Tweet.Author);
+
+            newRetweet.TweetAuthor = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = tweetAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = tweetAuthorProfile.BasicProfile.ReferenceType }, FullName = tweetAuthorProfile.FullName, Description1 = tweetAuthorProfile.Description1, Description2 = tweetAuthorProfile.Description2 };
+
+            newRetweet.Text = retrievedRetweet.Tweet.Text;
+            newRetweet.PublishDateTime  = retrievedRetweet.PublishDateTime;
+
+            var retweetAuthorProfile = SecurityRepository.GetCompleteProfile(retrievedRetweet.Author);
+            newRetweet.RetweetAuthor = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = retweetAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = retweetAuthorProfile.BasicProfile.ReferenceType }, FullName = retweetAuthorProfile.FullName, Description1 = retweetAuthorProfile.Description1, Description2 = retweetAuthorProfile.Description2 };
+            newRetweet.TweetPublishDateTime = retrievedRetweet.Tweet.PublishDateTime;
+            return newRetweet;
         }
 
 

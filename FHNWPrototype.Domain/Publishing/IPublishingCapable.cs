@@ -7,6 +7,6 @@ namespace FHNWPrototype.Domain.Publishing
 {
     public interface IPublishingCapable
     {
-        
+        DateTime PublishDateTime { get; set; }
     }
 }

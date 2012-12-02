@@ -15,7 +15,7 @@
 
 @if (@Model.WallOfThisProfile  != null)
 {
-    <div id="post_zone">
+    <div id="publishing_zone">
 
         <section id="new_post_section">
             <article id="new_article_post" class="post"  >
@@ -26,7 +26,7 @@
            CompleteProfile  myProfile = (CompleteProfile)Session["myProfile"];
         }
 
-        @foreach (PostView post in Model.WallOfThisProfile.Posts)
+    @*    @foreach (PostView post in Model.WallOfThisProfile.Posts)
         {
             post.AllowedToDeletePost  = Model.IsThisMyOwnProfile;
                                        
@@ -54,6 +54,64 @@
             </section>
         }
 
+          @foreach (TweetView tweet in Model.WallOfThisProfile.Tweets)
+        {
+            @Html.Partial("_partial_section_tweet", tweet);
+        }
+
+        @foreach (RetweetView retweet in Model.WallOfThisProfile.Retweets)
+        {
+            @Html.Partial("_partial_section_retweet", retweet);
+        }*@
+
+        
+        @foreach(FHNWPrototype.UI.Web.MVC.Controllers.UIViewModels._Global.ISortingCapable item in Model.WallOfThisProfile.PublishedItems)
+        {
+            if(item.GetType() ==typeof(PostView) )
+            {
+                PostView post = (PostView)item;
+                post.AllowedToDeletePost  = Model.IsThisMyOwnProfile;
+                                       
+                <section id="section_@(post.Key)">
+            
+                
+                @{
+                Html.RenderPartial("_partial_article_post", post);
+                }
+
+                @foreach (CommentView comment in post.Comments)
+                {
+                    comment.AllowedToDeleteComment=post.AllowedToDeletePost;
+                    @Html.Partial("_partial_article_comment",comment)
+                }
+
+                @{
+                    MyNewCommentView myNewComment = new MyNewCommentView { PostKey=post.Key , Viewer=new CompleteProfileView{ BasicProfile=new BasicProfileView{ ReferenceKey=@myProfile.BasicProfile.ReferenceKey.ToString(), AccountType=@myProfile.BasicProfile.ReferenceType} , FullName=@myProfile.FullName} };
+                }
+            
+                @{
+                    Html.RenderPartial("_partial_my_new_comment", myNewComment);
+                }
+
+                </section>
+            }
+
+            if (item.GetType() == typeof(TweetView))
+            {
+                TweetView tweet = (TweetView)item;
+                tweet.AllowedToDeleteTweet = Model.IsThisMyOwnProfile;
+                @Html.Partial("_partial_section_tweet", tweet);
+            }
+
+            if (item.GetType() == typeof(RetweetView))
+            {
+                RetweetView retweet = (RetweetView)item;
+                retweet.AllowedToDeleteRetweet = Model.IsThisMyOwnProfile;
+                @Html.Partial("_partial_section_retweet", retweet);
+            }
+        }
+
+
     </div>
 }
 
@@ -67,20 +125,51 @@
 
 
 @section settings{
- <div id="logo">
- <a href="@Url.Action("Index","UserAccounts", null,null)"><img id="logo" src="@Url.Content("~/Content/themes/designv1/images/logov2white.png")" alt="logo" /></a> 
-</div>
-<div id="links">
-    <ul>
-      
-        <li>@Html.ActionLink("Chat", "Chat","UserAccounts", null,null)</li>
+ 
 
-       <li>@Html.ActionLink("My Friendships", "Friendships","UserAccounts", null,null)</li>
-   
-        <li>@Html.ActionLink("Log Off", "LogOff", "Account", null, null)</li>
-    </ul>
+
+ <div id="logo">
+ <a href="@Url.Action("Index","UserAccounts", null,null)"><img id="img_logo" src="@Url.Content("~/Content/themes/designv1/images/transparent.png")" alt="logo" /></a> 
 </div>
-    }
+
+<section id="notifications">
+
+    @*  <article id="notifications_mywall">
+        <span id="counter_notifications_mywall">5</span>
+
+    </article>*@
+
+    <article id="notifications_newsfeed">
+        <span id="counter_notifications_newsfeed">3</span>
+
+    </article>
+    
+ 
+
+     @*   <article id="notifications_groups">
+        <span id="counter_notifications_groups">3</span>
+
+    </article>*@
+   
+</section>
+
+    <section id="links_section">
+        @*
+        <article id="link_chat">
+            <span id="counter_notifications_chat">4</span>
+        </article>
+
+        <article id="link_organization">
+            <span id="counter_notifications_organization">3</span>
+        </article>*@
+        <article>
+              @Html.ActionLink("Log Off", "LogOff", "Account", null, null)
+
+        </article>
+      
+    </section>
+
+}
 
 @section header_style{
  
@@ -95,55 +184,10 @@
         <img id="my_logo" src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey, accountType= @Model.Profile.BasicProfile.AccountType  })" alt="logo" />
     </figure>
         
-    <div id="profile_status">
-             
+      <div id="newsfeed_info"> 
             <div id="profile_name">@Html.ActionLink(Model.Profile.FullName, "UserAccount", new { id=@Model.Profile.BasicProfile.ReferenceKey })</div>
             <div id="working_at">working at @Model.Profile.Description1   </div>
-            <div id="connection">
-                @if (Model.ShowFriendshipButtonForThisProfile)
-                {
-                    if(Model.IsThisProfileAFriendOfMine){
-                        <text>Already connected: </text>
-                        if (Model.EnableFriendshipButtonForThisProfile)
-                        {
-                            @Ajax.ActionLink(@Model.FriendshipButtonCaptionForThisProfile, 
-                            @Model.FriendshipButtonActionNameForThisProfile, 
-                            new { key = @Model.Profile.BasicProfile.ReferenceKey  },
-                            new AjaxOptions(){
-                                UpdateTargetId = "friendship_action",
-                                HttpMethod = "POST",
-                                InsertionMode = InsertionMode.Replace}, 
-                            new { id="friendshipButton", enabled="true" })
-                        }
-                        else
-                        {
-                            //  @Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, null, new { id="friendshipButton", enabled = "false" });
-                            //Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, new { senderAccountEmail=User.Identity.Name, receiverAccountEmail=@Model.Email  }, new { id="friendshipButton", enabled = "true" });
-                        }
-                    }
-                    else
-                    {
-                        <text>Not connected: </text>
-                        if (Model.EnableFriendshipButtonForThisProfile)
-                        {
-                            @Ajax.ActionLink(@Model.FriendshipButtonCaptionForThisProfile, 
-                            @Model.FriendshipButtonActionNameForThisProfile, 
-                            new { key = @Model.Profile.BasicProfile.ReferenceKey  },
-                            new AjaxOptions(){
-                                UpdateTargetId = "friendship_action",
-                                HttpMethod = "POST",
-                                InsertionMode = InsertionMode.Replace}, 
-                            new { id="friendshipButton", enabled="true" })
-                        }
-                        else
-                        {
-                            //  @Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, null, new { id="friendshipButton", enabled = "false" });
-                            //Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, new { senderAccountEmail=User.Identity.Name, receiverAccountEmail=@Model.Email  }, new { id="friendshipButton", enabled = "true" });
-                        } 
-                    }
-                }
-            </div>
-         
+            <div id="connection">  </div>
     </div>
    
 }
@@ -165,17 +209,25 @@
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.signalR-1.0.0-alpha2.min.js")" ></script>
 
       <script type="text/javascript" src="@Url.Content("~/signalr/hubs")" ></script>
-      <script>
-        
-        $(document).ready(function () {
+     <script>
 
-            var connection = $.hubConnection();
-            var notifier = connection.createHubProxy('notifier');
-            connection.start()
-                .done(function () {
-           
-                    RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
+
+         $(document).ready(function () {
+
+             var connection = $.hubConnection();
+             var notifier = connection.createHubProxy('notifier');
+             connection.start()
+                 .done(function () {
+
+                     RegisterAutocomplete();
+
+                     RegisterNewPostOrTweet("@Url.Action("SubmitNewPost","Publishing")", "@Url.Action("SubmitNewTweet","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
+
+
+                    // RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
                     RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
+
+                    RegisterNewRetweetEvent("@Url.Action("SubmitNewRetweet","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
 
                     RegisterLikePostEvent("@Url.Action("LikePost","Publishing")");
                     RegisterLikeCommentEvent("@Url.Action("LikeComment","Publishing")");
@@ -186,22 +238,102 @@
                     RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");
                     RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");
 
-                    notifier.invoke('SuscribeMe', '@Model.Profile.BasicProfile.ReferenceKey')
+                    RegisterDeleteTweetEvent("@Url.Action("DeleteTweet","Publishing")");
+                    RegisterDeleteRetweetEvent("@Url.Action("DeleteRetweet","Publishing")");
 
-               
-
-                    })
-                    .fail(function () { alert('connection failed'); });
+                    notifier.invoke('SuscribeMe', '@Model.Profile.BasicProfile.ReferenceKey');
 
                   
+
+                      @foreach(var groupProfile in Model.GroupsOfThisProfile)
+                  {
+                    <text>
+                    notifier.invoke('SuscribeMe', '@groupProfile.BasicProfile.ReferenceKey')
+                    .done(function () {
+
+                    })
+                    .fail(function () {
+
+                    });
+                    </text>
+                  }
+
+                      @foreach(var workContactProfile in Model.WorkContactsOfThisProfile)
+                 {
+                    <text>
+                    notifier.invoke('SuscribeMe', '@workContactProfile.BasicProfile.ReferenceKey')
+                    .done(function () {
+
+                    })
+                    .fail(function () {
+
+                    });
+                    </text>
+                  }
+
+                @foreach(var partnershipContactProfile in Model.PartnershipContactsOfThisProfile)
+                 {
+                    <text>
+                    notifier.invoke('SuscribeMe', '@partnershipContactProfile.BasicProfile.ReferenceKey')
+                    .done(function () {
+
+                    })
+                    .fail(function () {
+
+                    });
+                    </text>
+                  }
+
+                    $("#notifications_chat").click(function (e) {
+                        //e.preventDefault();
+                        e.stopPropagation();
+                        // alert('detected');
+                        $("#notification_details").removeAttr('class');
+                    });
+
+                    $("#notifications_newsfeed").click(function (e) {
+                        //e.preventDefault();
+                        e.stopPropagation();
+                        // alert('detected');
+                        $("#notification_details").removeAttr('class');
+                    });
+
+                    $(document).click(function () {
+                        //  alert('click on document detected');
+                        $("#notification_details").attr('class', 'hide');
+                    });
+
+                    //previosuly
+                   @* notifier.on('NewPostReceived', function (data1) {
+                        var postKey = { postKey: data1 };
+                        // alert('notification received key is: ' + postKey);
+                        $.post("@Url.Action("GetExternalPost","Publishing")", postKey, function (data2) {
+
+                            $(data2).insertAfter('section#new_post_section');
+
+                        });
+
+                       });*@
+
+                })
+                    .fail(function () { alert('connection failed'); });
+
+
             notifier.on('NewPostReceived', function (data) {
                 var postKey = data.postKey;
                 var processedHtml = data.processedHtml;
                 $(processedHtml).insertAfter('section#new_post_section');
                 var parameter = { postKey: postKey }
-                $.get("@Url.Action("CreateMyInputForThisPost","Publishing")",parameter,function(result){
-                  $(result).insertAfter('article#post_' + postKey);
+                $.get("@Url.Action("CreateMyInputForThisPost","Publishing")", parameter, function (result) {
+                    $(result).insertAfter('article#post_' + postKey);
                 });
+
+            });
+
+            notifier.on('NewTweetReceived', function (data) {
+                var tweetKey = data.tweetKey;
+                var processedHtml = data.processedHtml;
+                $(processedHtml).insertAfter('section#new_post_section');
 
             });
 
@@ -209,13 +341,27 @@
 
                 var postKey = data.postKey;
                 var processedHtml = data.processedHtml;
-              
-                var theNewCommentArticleOfThisPost = $('#post_zone').find('#new_comment_post_' + postKey);
+
+                var theNewCommentArticleOfThisPost = $('#publishing_zone').find('#new_comment_post_' + postKey);
 
                 $(processedHtml).insertBefore(theNewCommentArticleOfThisPost);
             });
-                       
-          });
+
+            notifier.on('NewRetweetReceived', function (data) {
+
+                var tweetKey = data.tweetKey;
+                var processedHtml = data.processedHtml;
+
+                $(processedHtml).insertAfter('section#new_post_section');
+            });
+
+
+            //jquery automcomplete
+
+
+
+
+        });
 
     </script>
 }

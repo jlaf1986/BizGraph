@@ -1,90 +1,150 @@
-﻿
-function RegisterNewPostEvent(url, referenceKey, notifierProxy){
+﻿function RegisterAutocomplete() {
+    var availableTags = [
+                   "@SameLevelPartners",
+                   "@UpstreamPartners",
+                   "@DownstreamPartners",
+                   "#BadQuality",
+                   "#NewContract2013",
+                   "#ChristmasDelivery",
+                   "#Kanban"
+
+    ];
+
+    $("input#newpost").autocomplete({
+        source: availableTags,
+        minLength:1
+    });
+
+};
+
+function RegisterNewPostOrTweet(postUrl, tweetUrl, referenceKey, notifierProxy) {
     $(document).on('keypress', 'input#newpost', function (e) {
         if (e.keyCode == 13) {
+            var textRetrieved =$(this).val();
             var parameters = {
                 "wallOwnerUserAccountKey": referenceKey,
-                "text": $(this).val()
+                "text": textRetrieved
             };
-            $.post(url, parameters, function (data){
-                //clean the previous textbox
-                //$(this).val("");
-                //alert(data);
+            if (textRetrieved.substr(0,1) == "#")
+            {
+                $.post(tweetUrl, parameters, function (data) {
+                    $(e.target).val('');
+                    //alert('a tweet has been sent');
+                });
+            }
+            else
+            {
 
-                //var pointOfReference = data.indexOf('section_');
-                //var initialPointOfExtraction = pointOfReference + 8;
-                //var guidExtracted = data.substring(initialPointOfExtraction, initialPointOfExtraction + 36); //initial position (8) + GUID (32) + dashes (4)
-                  // alert('notification will be sent as: POST -> ' + referenceKey + ' GUID -> ' + guidExtracted);
+                $.post(postUrl, parameters, function (data) {
+                    $(e.target).val('');
+                   // alert('a post has been sent');
+                });
 
-                //var notification = {
-                //    Group: referenceKey,
-                //    Message: guidExtracted
-                //};
-          
-                //notifierProxy.invoke('NotifyMyNewPostToEveryone', notification)
-                //     .done(function () {
-                //       //  alert('notification was succesful');
-                //     })
-                //     .fail(function () {
-                //         alert('notification failed');
-                //     });
-                
-                //$(data).insertAfter('section#new_post_section');
-                $(e.target).val('');
-           
-               // var eventParameters = {
-               //     "postKey": guidExtracted,
-               //     "group" : referenceKey
-               // }
-               // var newEvent = jQuery.Event("custom", eventParameters);
-
-               //// $("body").trigger('custom', eventParameters);
-
-               // $("body").trigger(newEvent);
-                
-            });
-
-          
-
+            }
         }
     });
-}
+};
+
+
+
+//function RegisterNewPostEvent(url, referenceKey, notifierProxy){
+//    $(document).on('keypress', 'input#newpost', function (e) {
+//        if (e.keyCode == 13) {
+//            var parameters = {
+//                "wallOwnerUserAccountKey": referenceKey,
+//                "text": $(this).val()
+//            };
+//            $.post(url, parameters, function (data) {
+
+                
+//                //var parms = {
+//                //    "group" : 
+//                //};
+
+//                //notifierProxy.invoke('SuscribeMe',
+
+//                //clean the previous textbox
+//                //$(this).val("");
+//                //alert(data);
+
+//                //var pointOfReference = data.indexOf('section_');
+//                //var initialPointOfExtraction = pointOfReference + 8;
+//                //var guidExtracted = data.substring(initialPointOfExtraction, initialPointOfExtraction + 36); //initial position (8) + GUID (32) + dashes (4)
+//                  // alert('notification will be sent as: POST -> ' + referenceKey + ' GUID -> ' + guidExtracted);
+
+//                //var notification = {
+//                //    Group: referenceKey,
+//                //    Message: guidExtracted
+//                //};
+          
+//                //notifierProxy.invoke('NotifyMyNewPostToEveryone', notification)
+//                //     .done(function () {
+//                //       //  alert('notification was succesful');
+//                //     })
+//                //     .fail(function () {
+//                //         alert('notification failed');
+//                //     });
+                
+//                //$(data).insertAfter('section#new_post_section');
+//                $(e.target).val('');
+           
+//               // var eventParameters = {
+//               //     "postKey": guidExtracted,
+//               //     "group" : referenceKey
+//               // }
+//               // var newEvent = jQuery.Event("custom", eventParameters);
+
+//               //// $("body").trigger('custom', eventParameters);
+
+//               // $("body").trigger(newEvent);
+                
+//            });
+
+          
+
+//        }
+//    });
+//}
+
+
+
 
 function RegisterNewCommentEvent(url, referenceKey,notifierProxy) {
     $(document).on('keypress', 'input.new_comment', function (e) {
         if (e.keyCode == 13) {
-            var postId = $(this).closest("section").attr("id");
+         
+            var postKey = $(this).closest("section").attr("id").substring(8);
+            var textRetrieved = $(e.target).val();
+           // alert('a comment will be sent: ' + postId + ' ' + textRetrieved);
             var parameters = {
-                "postKey": postId.substring(8),
-                "wallOwnerUserAccountKey": referenceKey,
-                "text": $(e.target).val()
+                "postKey": postKey,
+                "wallOwnerAccountKey": referenceKey,
+                "text": textRetrieved
             }
             $.post(url, parameters, function (data) {
-                //var closestArticle = $(e.target).closest("article");
-                //$(data).insertBefore(closestArticle);
+               
                 $(e.target).val('');
-
-                //var notification = {
-                //    Group : "groupDynimicallyGenerated",
-                //    Message : "keyDynimicallyGenerated"
-                  
-                //};
-
-                //notifierProxy.invoke('NotifyMyNewCommentToEveryone', notification)
-                //   .done(function () {
-                //      // alert('notification was succesful');
-                //   })
-                //   .fail(function () {
-                //       alert('notification failed');
-                //   });
-
-
-                //alert(data);
-                //alert(closestArticle.toString());
+ 
             });
         }
     });
 }
+
+function RegisterNewRetweetEvent(url, referenceKey, notifierProxy) {
+    $(document).on('click', 'a.retweet_tweet', function (e) {
+       
+        e.preventDefault();
+        var retrievedTweetKey = e.target.id.substring(14);
+       // alert('retweet will  be sent as ' + retrievedTweetKey + " at" + url);
+            var parameters = {
+                "wallOwnerAccountKey": referenceKey,
+                "tweetKey": retrievedTweetKey
+            };
+            $.post(url, parameters, function (data) {
+                alert('retweet has been sent');
+            });
+    });
+};
 
 function RegisterLikePostEvent(url){
     $(document).on('click', 'a.like_post', function (e) {
@@ -166,6 +226,18 @@ function RegisterUnLikeCommentEvent(url) {
         });
     }
 
+
+    function RegisterDeleteTweetEvent(url) {
+        $(document).on('click', 'a.delete_tweet', function (e) {
+            e.preventDefault();
+            var parameters = { "tweetKey": e.target.id.substring(13) };
+            $.post(url, parameters, function (data) {
+                $(e.target).closest('section').remove();
+                //alert('you deleted the post')
+            });
+        });
+    }
+
 function RegisterDeleteCommentEvent(url) {
     $(document).on('click', 'a.delete_comment', function (e) {
         e.preventDefault();
@@ -175,5 +247,16 @@ function RegisterDeleteCommentEvent(url) {
             //alert('you deleted the comment')
         });
     });    
+}
+
+function RegisterDeleteRetweetEvent(url) {
+    $(document).on('click', 'a.delete_retweet', function (e) {
+        e.preventDefault();
+        var parameters = { "retweetKey": e.target.id.substring(15) };
+        $.post(url, parameters, function (data) {
+            $(e.target).closest('article.retweet').remove();
+            //alert('you deleted the comment')
+        });
+    });
 }
 

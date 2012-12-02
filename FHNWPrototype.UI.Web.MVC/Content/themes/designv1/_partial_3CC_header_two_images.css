@@ -120,13 +120,22 @@ header, #header{
  
 
  
-
-#profile_status a 
-{
-
-    /*background-color:cyan;*/
-    font-weight:bold;
+#newsfeed_info {
+     background-color:orange;
+	/*background-image:url('themes/designv1/header.png');*/
+	background-repeat:no-repeat;
+	background-position: left top  ;
+	min-width:998px;
+	width:998px;
+	height:30px;
+    border:none;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+    display:block;
 }
+
 
 #profile_name 
 {
@@ -138,52 +147,28 @@ header, #header{
     float:left;
     /*top:0;
     left:0;*/
-    width:250px;
+    width:300px;
     height:30px;
     /*background-color:purple;*/
     z-index:200;
-    padding-left:5px;
+    padding-left:180px;
+    text-align:left;
 }
 
 #working_at 
 {
     /*background-color:darkcyan;*/
     display:block;
-    float:left;
+    float:right;
+    text-align:right;
     /*top:20;
     left:200px;*/ 
-    width:200px;
+    width:300px;
     height:20px;
     /*position:absolute;*/
     z-index:200px;
     padding-top:10px;
 }
-
-/*#working_at a 
-{
-    color:#FFFFFF;
-}*/
-
-#connection 
-{
-   /*background-color:blue;*/
-   display:block;
-   float:left;
-   /*top:10px;
-   left:350px;*/
-   width:250px;
-   height:20px;
-   /*position:absolute;*/
-   z-index:200;
-   padding-top:10px;
-}
-
-/*#friendship_action a
-{
-    color:#FFFFFF;
-    font-weight:bold;
-    text-align:left;
-}*/
 
 
  

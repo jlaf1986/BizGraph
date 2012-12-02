@@ -73,7 +73,7 @@
 <div id="links">
     <ul>
       
-        <li>@Html.ActionLink("Chat", "Chat","UserAccounts", null,null)</li>
+               <li>@Html.ActionLink("Chat", "Index","Messenger", null,null)</li>
 
        <li>@Html.ActionLink("My Friendships", "Friendships","UserAccounts", null,null)</li>
    
@@ -99,50 +99,7 @@
              
             <div id="profile_name">@Html.ActionLink(Model.Profile.FullName, "UserAccount", new { id=@Model.Profile.BasicProfile.ReferenceKey })</div>
             <div id="working_at">working at @Model.Profile.Description1   </div>
-            <div id="connection">
-                @if (Model.ShowFriendshipButtonForThisProfile)
-                {
-                    if(Model.IsThisProfileAFriendOfMine){
-                        <text>Already connected: </text>
-                        if (Model.EnableFriendshipButtonForThisProfile)
-                        {
-                            @Ajax.ActionLink(@Model.FriendshipButtonCaptionForThisProfile, 
-                            @Model.FriendshipButtonActionNameForThisProfile, 
-                            new { key = @Model.Profile.BasicProfile.ReferenceKey  },
-                            new AjaxOptions(){
-                                UpdateTargetId = "friendship_action",
-                                HttpMethod = "POST",
-                                InsertionMode = InsertionMode.Replace}, 
-                            new { id="friendshipButton", enabled="true" })
-                        }
-                        else
-                        {
-                            //  @Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, null, new { id="friendshipButton", enabled = "false" });
-                            //Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, new { senderAccountEmail=User.Identity.Name, receiverAccountEmail=@Model.Email  }, new { id="friendshipButton", enabled = "true" });
-                        }
-                    }
-                    else
-                    {
-                        <text>Not connected: </text>
-                        if (Model.EnableFriendshipButtonForThisProfile)
-                        {
-                            @Ajax.ActionLink(@Model.FriendshipButtonCaptionForThisProfile, 
-                            @Model.FriendshipButtonActionNameForThisProfile, 
-                            new { key = @Model.Profile.BasicProfile.ReferenceKey  },
-                            new AjaxOptions(){
-                                UpdateTargetId = "friendship_action",
-                                HttpMethod = "POST",
-                                InsertionMode = InsertionMode.Replace}, 
-                            new { id="friendshipButton", enabled="true" })
-                        }
-                        else
-                        {
-                            //  @Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, null, new { id="friendshipButton", enabled = "false" });
-                            //Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, new { senderAccountEmail=User.Identity.Name, receiverAccountEmail=@Model.Email  }, new { id="friendshipButton", enabled = "true" });
-                        } 
-                    }
-                }
-            </div>
+           
          
     </div>
    
@@ -227,6 +184,7 @@
                     RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");  
                      
                     notifier.invoke('SuscribeMe', '@Model.Profile.BasicProfile.ReferenceKey')
+                     
 
                       @foreach(var groupProfile in Model.GroupsOfThisProfile)
                   {

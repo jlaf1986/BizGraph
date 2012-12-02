@@ -13,6 +13,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.TypeConfigurations
         {
             HasMany(x => x.Posts).WithOptional(y => y.Wall);
             HasMany(x => x.Tweets).WithOptional(y => y.Wall);
+            HasMany(x => x.Retweets).WithOptional(y => y.Wall);
             //HasOptional(x => x.Workspace).WithOptionalDependent(y=>y.Wall);
             //HasOptional(x => x.Owner).WithOptionalDependent(y=>y.Wall);
         }

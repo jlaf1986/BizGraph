@@ -6,13 +6,16 @@
 <head>
     <title>@ViewBag.Title</title>
 
-    <meta http-equiv="X-UA-Compatible" content="IE=8"/>
+   @* <meta http-equiv="X-UA-Compatible" content="IE=8"/>*@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Expires" content="0"/>
     <link href="@Url.Content("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
 
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/GoogleMaps.css")" />
+@*    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/GoogleMaps.css")" />*@
+
+
+       <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/base/css" )" />
 
     @Stylesheet("html5base.css")
     @Stylesheet("_partial_settings.css")
@@ -25,7 +28,10 @@
     @Stylesheet("_partial_3CC_middle_column.css")
     @Stylesheet("_partial_3CC_right_column.css")
 
+     @Stylesheet("notification_details.css")
+
     @Stylesheet("posts.css")
+    @Stylesheet("tweets.css")
 
     @RenderSection("header_style",false)
  

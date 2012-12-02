@@ -1,7 +1,9 @@
-﻿using FHNWPrototype.Application.Controllers.UIViewModels.Security;
+﻿using FHNWPrototype.Application.Controllers.UIViewModels._Global;
+using FHNWPrototype.Application.Controllers.UIViewModels.Security;
 using FHNWPrototype.Application.Services.Simple;
 using FHNWPrototype.Application.Services.Simple.ServicesViewModels;
 using FHNWPrototype.Domain._Base.Accounts;
+using FHNWPrototype.UI.Web.MVC.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +17,12 @@ namespace FHNWPrototype.Application.Controllers.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private SecurityService securityService = null;
+        //private SecurityService securityService = null;
 
-        public AccountController()
-        {
-            securityService = new SecurityService(); 
-        }
+        //public AccountController()
+        //{
+        //    securityService = new SecurityService(); 
+        //}
 
         public ActionResult Index()
         {
@@ -53,7 +55,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
 
             if (ModelState.IsValid)
             {
-                SystemAuthenticationTokenViewModel tokenVM = securityService.AttemptAuthentication(model.Email, model.Password);
+                SystemAuthenticationTokenViewModel tokenVM = SecurityService.AttemptAuthentication(model.Email, model.Password);
                 if (tokenVM.IsAuthenticated)
                 {
 
@@ -93,10 +95,30 @@ namespace FHNWPrototype.Application.Controllers.Controllers
             }
             else
             {
+         
                 ModelState.AddModelError("", "The email or password provided is incorrect.");
                 return View(model);
             }
 
+        }
+
+        [HttpPost]
+        public JsonResult GetProfileLinkFromUserEmail(string email)
+        {
+             CompleteProfileView profile = new CompleteProfileView();
+             CompleteProfileViewModel retrievedProfile = SecurityService.GetCompleteProfileFromUserEmail(email);
+
+             profile.BasicProfile = new BasicProfileView { ReferenceKey=retrievedProfile.BasicProfile.ReferenceKey, AccountType=retrievedProfile.BasicProfile.AccountType  };
+             profile.FullName = retrievedProfile.FullName;
+             profile.Description1 = retrievedProfile.Description1;
+             profile.Description2 = retrievedProfile.Description2;
+             
+             string processedHtml = PartialViewUtility.RenderPartialToString("_partial_profile_link", profile, ControllerContext);
+
+             var msg = new { success=true, userKey=profile.BasicProfile.ReferenceKey,  processedHtml = processedHtml };
+
+             return Json(msg);
+             
         }
 
         

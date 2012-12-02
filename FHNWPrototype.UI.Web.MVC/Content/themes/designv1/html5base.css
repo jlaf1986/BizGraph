@@ -153,3 +153,18 @@ script, title
 {
     display:none;
 }
+
+.ui-widget *{
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif !important;
+	font-size:12px !important;
+    background-image:none !important;
+    
+}
+
+.ui-widget *:hover{
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif !important;
+	font-size:12px !important;
+    background-image:none !important;
+    background-color:orange;
+    color:white;
+}

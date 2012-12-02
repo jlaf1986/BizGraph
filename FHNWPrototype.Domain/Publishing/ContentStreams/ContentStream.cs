@@ -17,10 +17,7 @@ namespace FHNWPrototype.Domain.Publishing.ContentStreams
     {
         public virtual List<Post> Posts { get; set; }
         public virtual List<Tweet> Tweets { get; set; }
-        //public virtual int? OwnerId { get; set; }
-        //public virtual AccountType OwnerType { get; set; }
-        //public virtual Guid OwnerReference { get; set; }
-        //public virtual Workspace Workspace { get; set; }
+        public virtual List<Retweet> Retweets { get; set; } 
         public virtual BasicProfile Owner { get; set; }
 
         protected override void Validate()

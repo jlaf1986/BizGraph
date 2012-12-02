@@ -19,6 +19,47 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
         //    //db = new FHNWPrototypeDB();
         //}
 
+        public static CompleteProfile GetCompleteProfileFromUserEmail(string userEmail)
+        {
+            CompleteProfile result = new CompleteProfile();
+            result.BasicProfile = new BasicProfile();
+
+            using (var db = new FHNWPrototypeDB())
+            {
+                BasicProfile  profile = db.SystemAccounts.Include("Holder").FirstOrDefault(x => x.Email == userEmail).Holder;
+
+                if (profile.ReferenceType == AccountType.UserAccount)
+                {
+                    var ua = db.UserAccounts
+                                            .Include("User")
+                                            .Include("OrganizationAccount.Organization")
+                                            .FirstOrDefault(x => x.Key == profile.ReferenceKey);
+                    result.BasicProfile.ReferenceKey = ua.Key;
+                    result.BasicProfile.ReferenceType = AccountType.UserAccount;
+                    result.FullName = ua.User.FirstName + " " + ua.User.LastName;
+                    result.Description1 = ua.OrganizationAccount.Name;
+                    result.Description2 = ua.OrganizationAccount.Organization.Name;
+                }
+                if (profile.ReferenceType == AccountType.OrganizationAccount)
+                {
+                    var oa = db.OrganizationAccounts
+                                                    .Include("Organization")
+                                                    .FirstOrDefault(x => x.Key == profile.ReferenceKey);
+                    result.BasicProfile.ReferenceKey = oa.Key;
+                    result.BasicProfile.ReferenceType = AccountType.OrganizationAccount;
+                    result.FullName = oa.Name;
+                    result.Description1 = oa.Description;
+                    result.Description2 = oa.Organization.Name;
+                }
+
+                return result;
+
+            }
+
+           
+
+        }
+
         public static void RegisterNewSystemAccount(string email, string password, bool isCorporateAccount)
         {
             if (!UserAlreadyExists(email))

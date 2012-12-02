@@ -168,6 +168,8 @@
     <Compile Include="Projects\Project.cs" />
     <Compile Include="Projects\WorkPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Messenger\MessengerPost.cs" />
+    <Compile Include="Publishing\IPublisher.cs" />
     <Compile Include="_Base\Accounts\BasicProfile.cs" />
     <Compile Include="Publishing\ContentStreams\ContentStream.cs" />
     <Compile Include="Publishing\ContentStreams\IContentStreamFactory.cs" />
@@ -226,6 +228,7 @@
     <Compile Include="_Base\Querying\QueryOperator.cs" />
     <Compile Include="_Base\Repositories\IReadOnlyRepository.cs" />
     <Compile Include="_Base\Repositories\IRepository.cs" />
+    <Compile Include="_Base\SCMRelationships\SCMRelationship.cs" />
     <Compile Include="_Base\UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="_Base\UnitOfWork\IUnitOfWorkRepository.cs" />
     <Compile Include="_Base\UnitOfWork\UnitOfWork.cs" />

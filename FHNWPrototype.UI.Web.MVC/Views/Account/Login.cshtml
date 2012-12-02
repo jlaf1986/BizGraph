@@ -7,7 +7,7 @@
 <head>
     <title>Welcome to BizGraph</title>
 
-    <meta http-equiv="X-UA-Compatible" content="IE=8"/>
+   @* <meta http-equiv="X-UA-Compatible" content="IE=8"/>*@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Expires" content="0"/>
     <link href="@Url.Content("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
@@ -56,10 +56,10 @@
             </div>
             <div id="sign">
                 <figure id="logo">
-                    <img src="@Url.Content("~/Content/themes/designv1/images/logov2small.png")"  alt="logo" />
+                    <img src="@Url.Content("~/Content/themes/designv1/images/transparent.png")"  alt="logo" />
                 </figure>
                 <div id="signin">
-                    <h2>@Html.ActionLink("Sign up now!", "Register", null, new { enabled=false })</h2>
+                    <h2><a href="#">Sign up now!</a></h2>
                     <br />
                    
 
@@ -75,7 +75,7 @@
                                     <td  style="width:100px;">@Html.TextBoxFor(m => m.Email)</td>
                                     <td  style="width:100px;">@Html.ValidationMessageFor(m => m.Email)</td>
                                 </tr>
-                                <tr >
+                                <tr>
                                     <td style="width:50px;"> @Html.LabelFor(m => m.Password)</td>
                                     <td style="width:100px;">   @Html.PasswordFor(m => m.Password)</td>
                                     <td style="width:100px;"> @Html.ValidationMessageFor(m => m.Password)</td>
@@ -91,7 +91,7 @@
                                     <td></td>
                                 </tr>*@
                             </table>
-                            
+                            <br />
                             <input type="submit" value="Log in" /><br />
 
                         </fieldset>

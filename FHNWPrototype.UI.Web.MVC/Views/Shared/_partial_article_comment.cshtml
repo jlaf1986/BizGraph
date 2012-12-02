@@ -1,8 +1,11 @@
 ﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Publishing.CommentView 
 
 <article  id="comment_@(Model.Key)"  class="comment">
+    <div class="comment_avatar">
     <img   src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Author.BasicProfile.ReferenceKey, accountType=@Model.Author.BasicProfile.AccountType  })" alt="picture"  class="profile_picture_comment" />
-    @if(Model.Author.BasicProfile.AccountType== FHNWPrototype.Domain._Base.Accounts.AccountType.UserAccount)
+  </div>
+    <div class="comment_content">
+      @if(Model.Author.BasicProfile.AccountType== FHNWPrototype.Domain._Base.Accounts.AccountType.UserAccount)
     {
       <h2>@Html.ActionLink(Model.Author.FullName , "UserAccount", "UserAccounts", new { id = Model.Author.BasicProfile.ReferenceKey  }, null)</h2>
     }
@@ -10,12 +13,12 @@
     {
          <h2>@Html.ActionLink(Model.Author.FullName , "OrganizationAccount", "OrganizationAccounts", new { id = Model.Author.BasicProfile.ReferenceKey  }, null)</h2> 
     }
-    <p>
+    <p class="comment_text">
         @Model.Text
     </p>
     <nav class="actionlinks">
         <ul>
-            <li><time datetime="@Model.TimeStamp">@Model.TimeStamp</time></li>
+            <li><time datetime="@Model.PublishDateTime ">@Model.PublishDateTime </time></li>
             <li id="like_counter_comment_@(Model.Key)">@Model.Likes Like this</li>
             <li>             
                 @if(!Model.ILikedIt)
@@ -34,4 +37,5 @@
             </li>
         </ul>
     </nav>
+        </div>
 </article>

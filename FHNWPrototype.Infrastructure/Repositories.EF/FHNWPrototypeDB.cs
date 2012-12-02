@@ -25,6 +25,7 @@ using FHNWPrototype.Domain.Bookmarks;
 using FHNWPrototype.Infrastructure.Security;
 using FHNWPrototype.Domain._Base.Accounts;
 using FHNWPrototype.Infrastructure.Migrations;
+using FHNWPrototype.Domain.Messenger;
  
 
 namespace FHNWPrototype.Infrastructure.Repositories.EF
@@ -152,6 +153,8 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
        // public DbSet<LoginAccount> LoginAccounts { get; set; }
 
         public DbSet<BasicProfile> BasicProfiles { get; set; }
+
+        public DbSet<MessengerPost> MessengerPosts { get; set; }
 
     }
 }

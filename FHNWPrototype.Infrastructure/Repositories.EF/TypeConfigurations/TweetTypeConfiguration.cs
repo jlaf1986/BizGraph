@@ -12,7 +12,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.TypeConfigurations
         public TweetTypeConfiguration() 
         {
             HasOptional(x => x.Author).WithMany();
-            HasOptional(x => x.Hashtag).WithMany();
+          //  HasOptional(x => x.Hashtag).WithMany();
 
             HasMany(x => x.Retweets).WithOptional();
 

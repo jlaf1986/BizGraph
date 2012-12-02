@@ -25,7 +25,7 @@
     text-align:left;
     font-size:12px;
     clear:both;
-   
+    cursor:pointer;
 }
 
 #left_column li a
@@ -73,11 +73,17 @@
  #left_column ul li span a
 {
     background-color:orange; 
-    width:21px; 
+    width:20px; 
     font-size:10px; 
     color:#FFFFFF;
     text-align:center;
     float:right;
+    margin-right:1px;
+}
+
+  #left_column ul li span a:hover
+{
+     text-decoration:none;
 }
 
 

@@ -12,7 +12,7 @@ namespace FHNWPrototype.Application.Services.Simple.ServicesViewModels
         //public String AuthorKey { get; set; }
         //public String AuthorName { get; set; }
         public CompleteProfileViewModel Author { get; set; }
-        public DateTime TimeStamp { get; set; }
+        public DateTime PublishDateTime { get; set; }
         public String Text { get; set; }
         public Int32 Likes { get; set; }
         public Boolean ILikedIt { get; set; }

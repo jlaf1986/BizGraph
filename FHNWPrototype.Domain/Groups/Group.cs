@@ -10,7 +10,7 @@ using FHNWPrototype.Domain.Publishing.Likes;
 
 namespace FHNWPrototype.Domain.Groups
 {
-    public class Group : EntityBase , IPublishingCapable , IAggregateRoot, ITagCapable 
+    public class Group : EntityBase , IPublisher , IAggregateRoot, ITagCapable 
     {
 
         public Group()

@@ -19,7 +19,7 @@ using FHNWPrototype.Domain.Publishing.Likes;
 
 namespace FHNWPrototype.Domain.Organizations
 {
-    public class Organization : EntityBase , IPublishingCapable , IAggregateRoot, ITagCapable  
+    public class Organization : EntityBase, IPublisher, IAggregateRoot, ITagCapable  
     {
 
         public Organization()

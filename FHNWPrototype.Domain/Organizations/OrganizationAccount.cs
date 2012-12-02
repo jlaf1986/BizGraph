@@ -12,7 +12,7 @@ using FHNWPrototype.Domain.Publishing.ContentStreams;
 
 namespace FHNWPrototype.Domain.Organizations
 {
-    public class OrganizationAccount : EntityBase, IAggregateRoot, IPublishingCapable
+    public class OrganizationAccount : EntityBase, IAggregateRoot, IPublisher
     {
 
         public OrganizationAccount() 

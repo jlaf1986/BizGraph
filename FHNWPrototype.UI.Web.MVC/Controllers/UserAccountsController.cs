@@ -17,6 +17,7 @@ using Microsoft.AspNet.SignalR;
 using FHNWPrototype.UI.Web.MVC.Signals;
 using FHNWPrototype.Application.Controllers.UIViewModels.Chat;
 using System.Web.Routing;
+using FHNWPrototype.UI.Web.MVC.Controllers.UIViewModels._Global;
 
 namespace FHNWPrototype.Application.Controllers.Controllers
 {
@@ -37,6 +38,9 @@ namespace FHNWPrototype.Application.Controllers.Controllers
             UserAccountView accountView = new UserAccountView();
        
             accountView.IsThisMyOwnProfile = true;
+            //accountView.WallOfThisProfile.Posts = new List<PostView>();
+            //accountView.WallOfThisProfile.Tweets = new List<TweetView>();
+            //accountView.WallOfThisProfile.Retweets = new List<RetweetView>();
 
             CompleteProfileView completeProfile = new CompleteProfileView();
             BasicProfileView basicProfile = new BasicProfileView();
@@ -55,6 +59,8 @@ namespace FHNWPrototype.Application.Controllers.Controllers
             accountView.FoldersOfThisProfile = new Dictionary<string, string>();
             accountView.WallOfThisProfile = new ContentStreamView();
             accountView.WallOfThisProfile.Posts = new List<PostView>();
+            accountView.WallOfThisProfile.Tweets = new List<TweetView>();
+            accountView.WallOfThisProfile.Retweets = new List<RetweetView>();
 
             accountView.WorkContactsOfThisProfile = Converters.ConvertFromViewModelToView(UserAccountService.GetWorkContactsOfUserAccountByKey( myProfile.BasicProfile.ReferenceKey.ToString() ));
             accountView.PartnershipContactsOfThisProfile =Converters.ConvertFromViewModelToView(UserAccountService.GetPartnershipContactsOfUserAccountByKey( myProfile.BasicProfile.ReferenceKey.ToString()));
@@ -65,8 +71,8 @@ namespace FHNWPrototype.Application.Controllers.Controllers
             ContentStreamViewModel wallRetrieved = PublishingService.GetContentStreamAsNewsfeed(thisViewerKey,thisViewerKey);
             CompleteProfileViewModel myOrganizationAccount = OrganizationAccountService.GetOrganizationAccountProfileByEmployeeUserAccountKey(thisViewerKey);
             accountView.OrganizationAccountOfThisProfile = new CompleteProfileView { BasicProfile = new BasicProfileView  { ReferenceKey=myOrganizationAccount.BasicProfile.ReferenceKey, AccountType=myOrganizationAccount.BasicProfile.AccountType    }, FullName=myOrganizationAccount.FullName, Description1=myOrganizationAccount.Description1 , Description2=myOrganizationAccount.Description2  };
-            accountView.WallOfThisProfile = new ContentStreamView();
-            accountView.WallOfThisProfile.Posts = new List<PostView>();
+           // accountView.WallOfThisProfile = new ContentStreamView();
+           // accountView.WallOfThisProfile.Posts = new List<PostView>();
             if (wallRetrieved.Posts.Count >0)
             {
         
@@ -75,7 +81,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
                     PostView thisPost = new PostView();
                     thisPost.Key = post.Key;
                     thisPost.Author = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey=post.Author.BasicProfile.ReferenceKey  , AccountType= post.Author.BasicProfile.AccountType  }, FullName=post.Author.FullName, Description1= post.Author.Description1 , Description2= post.Author.Description2  };
-                    thisPost.TimeStamp = post.TimeStamp.ToString();
+                    thisPost.PublishDateTime = post.PublishDateTime;
                     thisPost.Text = post.Text;
                     thisPost.Likes = post.Likes;
                     thisPost.ILikedIt = post.ILikedIt;
@@ -87,7 +93,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
                         thisComment.Key = comment.Key;
                         thisComment.Author = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = comment.Author.BasicProfile.ReferenceKey, AccountType = comment.Author.BasicProfile.AccountType }, FullName = comment.Author.FullName, Description1 = comment.Author.Description1, Description2 = comment.Author.Description2 };
                         thisComment.Text = comment.Text;
-                        thisComment.TimeStamp = comment.TimeStamp.ToString();
+                        thisComment.PublishDateTime = comment.PublishDateTime;
                         thisComment.Likes = comment.Likes;
                         thisComment.ILikedIt = comment.ILikedIt;
                         thisPost.Comments.Add(thisComment);
@@ -96,6 +102,51 @@ namespace FHNWPrototype.Application.Controllers.Controllers
                     accountView.WallOfThisProfile.Posts.Add(thisPost);
                 }
             }
+
+            if (wallRetrieved.Tweets.Count > 0)
+            {
+                foreach (TweetViewModel tweet in wallRetrieved.Tweets)
+                {
+                    TweetView thisTweet = new TweetView();
+
+                    thisTweet.Key = tweet.Key;
+                    thisTweet.Text = tweet.Text;
+                    thisTweet.PublishDateTime = tweet.PublishDateTime;
+                    thisTweet.Author = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = tweet.Author.BasicProfile.ReferenceKey, AccountType = tweet.Author.BasicProfile.AccountType }, FullName = tweet.Author.FullName, Description1 = tweet.Author.Description1, Description2 = tweet.Author.Description2 }; 
+                    
+                    accountView.WallOfThisProfile.Tweets.Add(thisTweet);
+                }
+            }
+
+            if (wallRetrieved.Retweets.Count > 0)
+            {
+                foreach (RetweetViewModel retweet in wallRetrieved.Retweets)
+                {
+                    RetweetView thisRetweet = new RetweetView();
+
+                    thisRetweet.RetweetKey = retweet.RetweetKey;
+                    thisRetweet.TweetKey = retweet.TweetKey;
+
+                    thisRetweet.Text = retweet.Text;
+                    thisRetweet.PublishDateTime = retweet.PublishDateTime;
+                    thisRetweet.TweetPublishDateTime = retweet.TweetPublishDateTime.ToString();
+
+                    thisRetweet.RetweetAuthor = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = retweet.RetweetAuthor.BasicProfile.ReferenceKey, AccountType = retweet.RetweetAuthor.BasicProfile.AccountType }, FullName = retweet.RetweetAuthor.FullName, Description1 = retweet.RetweetAuthor.Description1, Description2 = retweet.RetweetAuthor.Description2 };
+
+                    thisRetweet.TweetAuthor = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = retweet.TweetAuthor.BasicProfile.ReferenceKey, AccountType = retweet.TweetAuthor.BasicProfile.AccountType }, FullName = retweet.TweetAuthor.FullName, Description1 = retweet.TweetAuthor.Description1, Description2 = retweet.TweetAuthor.Description2 }; 
+                    
+                    
+                    accountView.WallOfThisProfile.Retweets.Add(thisRetweet);
+                }
+            }
+
+            accountView.WallOfThisProfile.PublishedItems = new List<ISortingCapable>();
+
+            accountView.WallOfThisProfile.PublishedItems.AddRange(accountView.WallOfThisProfile.Posts);
+            accountView.WallOfThisProfile.PublishedItems.AddRange(accountView.WallOfThisProfile.Tweets);
+            accountView.WallOfThisProfile.PublishedItems.AddRange(accountView.WallOfThisProfile.Retweets);
+
+             accountView.WallOfThisProfile.PublishedItems= accountView.WallOfThisProfile.PublishedItems.OrderByDescending(x => x.PublishDateTime).ToList();
 
        
             return View("Newsfeed",accountView);
@@ -119,6 +170,8 @@ namespace FHNWPrototype.Application.Controllers.Controllers
             accountView.FoldersOfThisProfile = new Dictionary<string, string>();
             accountView.WallOfThisProfile = new ContentStreamView();
             accountView.WallOfThisProfile.Posts = new List<PostView>();
+            accountView.WallOfThisProfile.Tweets = new List<TweetView>();
+            accountView.WallOfThisProfile.Retweets = new List<RetweetView>();
 
             if (User.Identity.Name == accountRetrieved.Email)
             {
@@ -178,8 +231,10 @@ namespace FHNWPrototype.Application.Controllers.Controllers
             }
 
             var thisViewerKey = myProfile.BasicProfile.ReferenceKey.ToString();
-            ContentStreamViewModel wallRetrieved = PublishingService.GetContentStreamByOwnerReferenceKey(id,thisViewerKey);
+            ContentStreamViewModel wallRetrieved = PublishingService.GetContentStreamAsProfileWall(id,thisViewerKey);
 
+
+           
 
 
             if (wallRetrieved.Posts.Count>0)
@@ -194,7 +249,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
                         thisPost.Author = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey=post.Author.BasicProfile.ReferenceKey , AccountType=post.Author.BasicProfile.AccountType  }, FullName= post.Author.FullName , Description1= post.Author.Description1 , Description2= post.Author.Description2  };
                      
                         thisPost.Text = post.Text;
-                        thisPost.TimeStamp = post.TimeStamp.ToString();
+                        thisPost.PublishDateTime = post.PublishDateTime;
                         thisPost.Likes = post.Likes;
                         thisPost.ILikedIt = post.ILikedIt;
                         thisPost.Comments = new List<CommentView>();
@@ -206,7 +261,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
                          
                             thisComment.Text = comment.Text;
                             thisComment.ILikedIt = comment.ILikedIt;
-                            thisComment.TimeStamp = comment.TimeStamp.ToString();
+                            thisComment.PublishDateTime = comment.PublishDateTime;
                             thisComment.Likes = comment.Likes;
                             thisPost.Comments.Add(thisComment);
                         }
@@ -215,15 +270,58 @@ namespace FHNWPrototype.Application.Controllers.Controllers
                 }
 
             }
-            else
+          
+
+
+            if (wallRetrieved.Tweets.Count > 0)
             {
-                accountView.WallOfThisProfile = new ContentStreamView();
-                accountView.WallOfThisProfile.Posts = new List<PostView>();
+                foreach (TweetViewModel tweet in wallRetrieved.Tweets)
+                {
+                    TweetView thisTweet = new TweetView();
+
+                    thisTweet.Key = tweet.Key;
+                    thisTweet.Text = tweet.Text;
+                    thisTweet.PublishDateTime = tweet.PublishDateTime;
+                    thisTweet.Author = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = tweet.Author.BasicProfile.ReferenceKey, AccountType = tweet.Author.BasicProfile.AccountType }, FullName = tweet.Author.FullName, Description1 = tweet.Author.Description1, Description2 = tweet.Author.Description2 };
+
+                    accountView.WallOfThisProfile.Tweets.Add(thisTweet);
+                }
+            }
+
+            if (wallRetrieved.Retweets.Count > 0)
+            {
+                foreach (RetweetViewModel retweet in wallRetrieved.Retweets)
+                {
+                    RetweetView thisRetweet = new RetweetView();
+
+                    thisRetweet.RetweetKey = retweet.RetweetKey;
+                    thisRetweet.TweetKey = retweet.TweetKey;
+
+                    thisRetweet.Text = retweet.Text;
+                    thisRetweet.PublishDateTime = retweet.PublishDateTime;
+                    thisRetweet.TweetPublishDateTime = retweet.TweetPublishDateTime.ToString();
+
+                    thisRetweet.RetweetAuthor = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = retweet.RetweetAuthor.BasicProfile.ReferenceKey, AccountType = retweet.RetweetAuthor.BasicProfile.AccountType }, FullName = retweet.RetweetAuthor.FullName, Description1 = retweet.RetweetAuthor.Description1, Description2 = retweet.RetweetAuthor.Description2 };
+
+                    thisRetweet.TweetAuthor = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = retweet.TweetAuthor.BasicProfile.ReferenceKey, AccountType = retweet.TweetAuthor.BasicProfile.AccountType }, FullName = retweet.TweetAuthor.FullName, Description1 = retweet.TweetAuthor.Description1, Description2 = retweet.TweetAuthor.Description2 };
+
+
+                    accountView.WallOfThisProfile.Retweets.Add(thisRetweet);
+                }
             }
 
             accountView.WorkContactsOfThisProfile = Converters.ConvertFromViewModelToView(UserAccountService.GetWorkContactsOfUserAccountByKey(accountRetrieved.Profile.BasicProfile.ReferenceKey  ));
             accountView.PartnershipContactsOfThisProfile = Converters.ConvertFromViewModelToView(UserAccountService.GetPartnershipContactsOfUserAccountByKey(accountRetrieved.Profile.BasicProfile.ReferenceKey));
             accountView.GroupsOfThisProfile = Converters.ConvertFromViewModelToView(UserAccountService.GetGroupsOfUserAccountByKey(accountRetrieved.Profile.BasicProfile.ReferenceKey));
+
+
+            accountView.WallOfThisProfile.PublishedItems = new List<ISortingCapable>();
+
+            accountView.WallOfThisProfile.PublishedItems.AddRange(accountView.WallOfThisProfile.Posts);
+            accountView.WallOfThisProfile.PublishedItems.AddRange(accountView.WallOfThisProfile.Tweets);
+            accountView.WallOfThisProfile.PublishedItems.AddRange(accountView.WallOfThisProfile.Retweets);
+
+            accountView.WallOfThisProfile.PublishedItems = accountView.WallOfThisProfile.PublishedItems.OrderByDescending(x => x.PublishDateTime).ToList();
 
             
             return View("MyWall", accountView);

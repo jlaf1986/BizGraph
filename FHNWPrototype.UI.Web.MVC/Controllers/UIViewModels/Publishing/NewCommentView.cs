@@ -16,7 +16,7 @@ namespace FHNWPrototype.Application.Controllers.UIViewModels.Publishing
         //public String AuthorName { get; set; }
         public CompleteProfileView Author { get; set; }
         public String Text { get; set; }
-        public String TimeStamp { get; set; }
+        public DateTime PublishDateTime { get; set; }
 
     }
 }

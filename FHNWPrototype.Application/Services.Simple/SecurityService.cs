@@ -1,5 +1,6 @@
 ﻿
 using FHNWPrototype.Application.Services.Simple.ServicesViewModels;
+using FHNWPrototype.Domain._Base.Accounts;
 using FHNWPrototype.Infrastructure.Repositories.EF.Repositories;
 using FHNWPrototype.Infrastructure.Security;
 using System;
@@ -10,15 +11,43 @@ using System.Threading.Tasks;
 
 namespace FHNWPrototype.Application.Services.Simple
 {
-    public class SecurityService
+    public static  class SecurityService
     {
 
-        public bool UserAlreadyExists(string email)
+        public static bool UserAlreadyExists(string email)
         {
             return SecurityRepository.UserAlreadyExists(email);
         }
 
-        public SystemAuthenticationTokenViewModel AttemptAuthentication(string email, string password)
+        public static CompleteProfileViewModel GetCompleteProfileFromUserEmail(String userEmail)
+        {
+            CompleteProfileViewModel result = new CompleteProfileViewModel();
+
+            CompleteProfile profile = SecurityRepository.GetCompleteProfileFromUserEmail(userEmail);
+
+            result.BasicProfile = new BasicProfileViewModel { ReferenceKey=profile.BasicProfile.ReferenceKey.ToString(), AccountType=profile.BasicProfile.ReferenceType  };
+            result.FullName = profile.FullName;
+            result.Description1 = profile.Description1;
+            result.Description2 = profile.Description2;
+
+            return result;
+        }
+
+        public static CompleteProfileViewModel GetCompleteProfileFromBasicProfile(BasicProfile thisProfile)
+        {
+            CompleteProfileViewModel result = new CompleteProfileViewModel();
+
+            CompleteProfile profile = SecurityRepository.GetCompleteProfile(thisProfile);
+
+            result.BasicProfile = new BasicProfileViewModel { ReferenceKey = profile.BasicProfile.ReferenceKey.ToString(), AccountType = profile.BasicProfile.ReferenceType };
+            result.FullName = profile.FullName;
+            result.Description1 = profile.Description1;
+            result.Description2 = profile.Description2;
+
+            return result;
+        }
+
+        public static SystemAuthenticationTokenViewModel AttemptAuthentication(string email, string password)
         {
             SystemAuthenticationTokenViewModel systemAuthenticationTokenVM = new SystemAuthenticationTokenViewModel();
             SystemAuthenticationToken token = SecurityRepository.AttemptAuthentication(email, password);
@@ -43,7 +72,7 @@ namespace FHNWPrototype.Application.Services.Simple
             return systemAuthenticationTokenVM;
         }
 
-        public void RegisterNewSystemAccount(string email, string password, bool isCorporateAccount)
+        public static void RegisterNewSystemAccount(string email, string password, bool isCorporateAccount)
         {
             SecurityRepository.RegisterNewSystemAccount(email, password, isCorporateAccount); 
         }

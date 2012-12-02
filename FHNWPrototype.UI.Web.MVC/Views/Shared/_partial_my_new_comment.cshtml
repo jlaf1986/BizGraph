@@ -1,8 +1,13 @@
 ﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Publishing.MyNewCommentView
+  
+ <article  id="new_comment_post_@(Model.PostKey)" class="comment"  >
+    <div class="comment_avatar">
+        <img   src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new {  key =@Model.Viewer.BasicProfile.ReferenceKey ,accountType= @Model.Viewer.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_comment" />
+    </div>
+    <div class="comment_content">
+        <h2>@Html.ActionLink(@Model.Viewer.FullName , "UserAccount", "UserAccounts", new { id = @Model.Viewer.BasicProfile.ReferenceKey  }, null)</h2>
+        <input id="input_new_comment_@(Model.PostKey)" placeholder="write something" class="new_comment" style="width:400px; background-color:#ffffff; border: 1px solid #AAAAAA"  />
+    </div>
 
-<article  id="new_comment_post_@(Model.PostKey)" class="comment"  >
-    <img   src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new {  key =@Model.Viewer.BasicProfile.ReferenceKey ,accountType= @Model.Viewer.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_comment" />
-    <h2>@Html.ActionLink(@Model.Viewer.FullName , "UserAccount", "UserAccounts", new { id = @Model.Viewer.BasicProfile.ReferenceKey  }, null)</h2>
-    <input id="input_new_comment_@(Model.PostKey)" class="new_comment" style="width:400px; background-color:#ffffff; border: 1px solid #AAAAAA"  />
 </article>
-
+ 

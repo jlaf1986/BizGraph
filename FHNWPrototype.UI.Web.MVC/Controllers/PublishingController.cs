@@ -3,6 +3,7 @@ using FHNWPrototype.Application.Controllers.UIViewModels.Publishing;
 using FHNWPrototype.Application.Services.Simple;
 using FHNWPrototype.Application.Services.Simple.ServicesViewModels;
 using FHNWPrototype.Domain._Base.Accounts;
+using FHNWPrototype.UI.Web.MVC;
 using FHNWPrototype.UI.Web.MVC.Controllers;
 using FHNWPrototype.UI.Web.MVC.Signals;
 using Microsoft.AspNet.SignalR;
@@ -24,6 +25,13 @@ namespace FHNWPrototype.Application.Controllers
             CompleteProfile myProfile = (CompleteProfile) Session["myProfile"];
  
             var counter =  PublishingService.LikePost(myProfile.BasicProfile.ReferenceKey.ToString(), postKey);
+
+            var context = GlobalHost.ConnectionManager.GetHubContext<Notifier>();
+
+            context.Clients.Group(postKey).LikedPost( myProfile.FullName + " liked this post");
+
+            context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), postKey); 
+
             var msg = new  { success=true, counter=counter };
             return Json(msg);
 
@@ -45,6 +53,9 @@ namespace FHNWPrototype.Application.Controllers
             CompleteProfile myProfile = (CompleteProfile)Session["myProfile"];
            var counter= PublishingService.LikeComment(myProfile.BasicProfile.ReferenceKey.ToString(), commentKey);
 
+
+      
+
             var msg = new { success = true, counter = counter };
             return Json(msg);
         }
@@ -62,27 +73,67 @@ namespace FHNWPrototype.Application.Controllers
         public JsonResult SubmitNewPost(string wallOwnerUserAccountKey, string text)
         {
             CompleteProfile myProfile = (CompleteProfile)Session["myProfile"];
-          
+            String returnedGuid = null;
+            String processedHtml = null;
+            var msg = new { success = true };
 
+   
             PostView newPost = new PostView();
-            newPost.Key = PublishingService.SubmitNewPost(myProfile.BasicProfile.ReferenceKey.ToString(), wallOwnerUserAccountKey, text);
-          
+            returnedGuid = PublishingService.SubmitNewPost(myProfile.BasicProfile.ReferenceKey.ToString(), wallOwnerUserAccountKey, text);
+            newPost.Key = returnedGuid;
             newPost.Author = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = myProfile.BasicProfile.ReferenceKey.ToString(), AccountType = myProfile.BasicProfile.ReferenceType }, FullName = myProfile.FullName, Description1 = myProfile.Description1, Description2 = myProfile.Description2 };
             newPost.Comments = new List<CommentView>();
             newPost.Likes = 0;
             newPost.Text = text;
-            newPost.TimeStamp = DateTime.Now.ToString();
+            newPost.PublishDateTime = DateTime.Now;
+                 
+            processedHtml = PartialViewUtility.RenderPartialToString("_partial_section_post", newPost, ControllerContext);
 
-            var msg = new { success=true };
-
-            string processedHtml = PartialViewUtility.RenderPartialToString("_partial_section_post", newPost, ControllerContext);
+      
 
             var context = GlobalHost.ConnectionManager.GetHubContext<Notifier>();
             string[] excluded = null;
-            var result = new { postKey=newPost.Key, processedHtml=processedHtml };
-            context.Clients.Group(wallOwnerUserAccountKey,excluded).NewPostReceived(result);
+            var result = new { postKey = returnedGuid, processedHtml = processedHtml, author = myProfile.FullName };
+            context.Clients.Group(wallOwnerUserAccountKey, excluded).NewPostReceived(result);
 
-            return Json(msg) ;
+
+
+            context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), returnedGuid);
+
+            return Json(msg);
+           
+        }
+
+        [HttpPost]
+        public JsonResult SubmitNewTweet(string wallOwnerUserAccountKey, string text)
+        {
+            CompleteProfile myProfile = (CompleteProfile)Session["myProfile"];
+            String returnedGuid = null;
+            String processedHtml = null;
+            var msg = new { success = true };
+
+          
+            TweetView newTweet = new TweetView();
+            returnedGuid = PublishingService.SubmitNewTweet(myProfile.BasicProfile.ReferenceKey.ToString(), wallOwnerUserAccountKey, text);
+            newTweet.Key = returnedGuid;
+            newTweet.Author = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = myProfile.BasicProfile.ReferenceKey.ToString(), AccountType = myProfile.BasicProfile.ReferenceType }, FullName = myProfile.FullName, Description1 = myProfile.Description1, Description2 = myProfile.Description2 };
+            newTweet.Text = text;
+            newTweet.PublishDateTime = DateTime.Now;
+
+            processedHtml = PartialViewUtility.RenderPartialToString("_partial_section_tweet", newTweet, ControllerContext);
+ 
+
+            var context = GlobalHost.ConnectionManager.GetHubContext<Notifier>();
+            string[] excluded = null;
+            var result = new { tweetKey = returnedGuid, processedHtml = processedHtml, author = myProfile.FullName };
+            context.Clients.Group(wallOwnerUserAccountKey, excluded).NewTweetReceived(result);
+
+
+
+            context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), returnedGuid);
+
+            return Json(msg);
+
         }
 
 
@@ -119,7 +170,7 @@ namespace FHNWPrototype.Application.Controllers
         }
 
         [HttpPost]
-        public JsonResult SubmitNewComment(string postKey,string wallOwnerUserAccountKey, string text)
+        public JsonResult SubmitNewComment(string postKey,string wallOwnerAccountKey, string text)
         {
             CompleteProfile myProfile = (CompleteProfile)Session["myProfile"];
 
@@ -130,7 +181,7 @@ namespace FHNWPrototype.Application.Controllers
 
             newComment.Likes = 0;
             newComment.Text = text;
-            newComment.TimeStamp = DateTime.Now.ToString();
+            newComment.PublishDateTime = DateTime.Now;
 
 
           
@@ -141,13 +192,54 @@ namespace FHNWPrototype.Application.Controllers
 
             var msg = new { success = true };
 
-            var result = new { postKey=postKey, processedHtml=processedHtml };
+            var result = new { postKey=postKey, processedHtml=processedHtml, author=myProfile.FullName };
             string[] excluded = null;
-            context.Clients.Group(wallOwnerUserAccountKey,excluded).NewCommentReceived(result);
+            context.Clients.Group(wallOwnerAccountKey,excluded).NewCommentReceived(result);
+
+            context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), postKey); 
+
 
             return Json(msg);
 
  
+        }
+
+
+        [HttpPost]
+        public JsonResult SubmitNewRetweet(string tweetKey, string wallOwnerAccountKey)
+        {
+            CompleteProfile myProfile = (CompleteProfile)Session["myProfile"];
+
+            TweetViewModel retrievedTweet = PublishingService.GetTweet(tweetKey);
+
+            RetweetView newRetweet = new RetweetView();
+            newRetweet.RetweetKey = PublishingService.SubmitNewRetweet(myProfile.BasicProfile.ReferenceKey.ToString(), tweetKey);
+            newRetweet.RetweetAuthor = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = myProfile.BasicProfile.ReferenceKey.ToString(), AccountType = myProfile.BasicProfile.ReferenceType }, FullName = myProfile.FullName, Description1 = myProfile.Description1, Description2 = myProfile.Description2 };
+            newRetweet.TweetKey = retrievedTweet.Key;
+
+            newRetweet.TweetAuthor = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey=retrievedTweet.Author.BasicProfile.ReferenceKey , AccountType=retrievedTweet.Author.BasicProfile.AccountType  }, FullName=retrievedTweet.Author.FullName , Description1=retrievedTweet.Author.Description1, Description2=retrievedTweet.Author.Description2  };
+            newRetweet.PublishDateTime = DateTime.Now;
+            newRetweet.Text = retrievedTweet.Text;
+            newRetweet.TweetPublishDateTime = retrievedTweet.PublishDateTime.ToString();
+
+
+
+            string processedHtml = PartialViewUtility.RenderPartialToString("_partial_section_retweet", newRetweet, ControllerContext);
+
+            var context = GlobalHost.ConnectionManager.GetHubContext<Notifier>();
+
+            var msg = new { success = true };
+
+            var result = new { retweetKey = tweetKey, processedHtml = processedHtml, author = myProfile.FullName };
+            string[] excluded = null;
+            context.Clients.Group(wallOwnerAccountKey, excluded).NewRetweetReceived(result);
+
+            context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), tweetKey);
+
+
+            return Json(msg);
+
+
         }
 
         //[HttpPost]
@@ -177,7 +269,7 @@ namespace FHNWPrototype.Application.Controllers
             newPost.Comments = new List<CommentView>();
             newPost.Likes = retrievedPost.Likes;
             newPost.Text = retrievedPost.Text;
-            newPost.TimeStamp = retrievedPost.TimeStamp.ToString();
+            newPost.PublishDateTime = retrievedPost.PublishDateTime;
             return PartialView("_partial_section_post", newPost);
         }
 
@@ -190,7 +282,7 @@ namespace FHNWPrototype.Application.Controllers
 
             newComment.Likes = retrievedComment.Likes;
             newComment.Text = retrievedComment.Text;
-            newComment.TimeStamp = retrievedComment.TimeStamp.ToString();
+            newComment.PublishDateTime = retrievedComment.PublishDateTime;
             return PartialView("_partial_article_comment", newComment);
         }
 
@@ -202,10 +294,25 @@ namespace FHNWPrototype.Application.Controllers
         }
 
         [HttpPost]
+        public void DeleteTweet(string tweetKey)
+        {
+
+            PublishingService.DeleteTweet(tweetKey);
+        }
+
+        [HttpPost]
         public void DeleteComment(string commentKey)
         {
     
             PublishingService.DeleteComment(commentKey);
         }
+
+        [HttpPost]
+        public void DeleteRetweet(string retweetKey)
+        {
+
+            PublishingService.DeleteRetweet(retweetKey);
+        }
+
     }
 }

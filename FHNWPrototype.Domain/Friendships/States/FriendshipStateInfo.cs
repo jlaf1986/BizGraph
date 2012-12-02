@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using FHNWPrototype.Domain._Base.Entities;
 using FHNWPrototype.Domain.Users;
+using FHNWPrototype.Domain._Base.SCMRelationships;
 
 namespace FHNWPrototype.Domain.Friendships.States
 {
@@ -28,7 +29,7 @@ namespace FHNWPrototype.Domain.Friendships.States
         //    this.ActionDateTime = state.GetActionDateTime();
         //}
 
-    
+        public virtual SCMRelationship SCMRelationshipType { get; set; }
 
         public virtual FriendshipAction Action { get; set; }
 

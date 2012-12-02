@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Microsoft.AspNet.SignalR;
 
 namespace FHNWPrototype.UI.Web.MVC
 {
@@ -23,6 +24,10 @@ namespace FHNWPrototype.UI.Web.MVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            //to change timeout in SignalR
+           // GlobalHost.Configuration.ConnectionTimeout = TimeSpan.FromSeconds(50);
+
         }
     }
 }

@@ -40,7 +40,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
 
 
             var thisViewerKey = myProfile.BasicProfile.ReferenceKey.ToString();
-            ContentStreamViewModel wallRetrieved = PublishingService.GetContentStreamByOwnerReferenceKey(id, thisViewerKey);
+            ContentStreamViewModel wallRetrieved = PublishingService.GetContentStreamAsProfileWall(id, thisViewerKey);
 
 
             allianceView.WallOfThisProfile = new ContentStreamView();
@@ -53,7 +53,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
                     PostView thisPost = new PostView();
                     thisPost.Key = post.Key;
                     thisPost.Author = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey=post.Author.BasicProfile.ReferenceKey  , AccountType= post.Author.BasicProfile.AccountType  }, FullName=post.Author.FullName, Description1= post.Author.Description1 , Description2= post.Author.Description2  };
-                    thisPost.TimeStamp = post.TimeStamp.ToString();
+                    thisPost.PublishDateTime = post.PublishDateTime;
                     thisPost.Text = post.Text;
                     thisPost.Likes = post.Likes;
                        
@@ -64,7 +64,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
                         thisComment.Key = comment.Key;
                         thisComment.Author = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = comment.Author.BasicProfile.ReferenceKey, AccountType = comment.Author.BasicProfile.AccountType }, FullName = comment.Author.FullName, Description1 = comment.Author.Description1, Description2 = comment.Author.Description2 };
                         thisComment.Text = comment.Text;
-                        thisComment.TimeStamp = comment.TimeStamp.ToString();
+                        thisComment.PublishDateTime = comment.PublishDateTime;
                         thisComment.Likes = comment.Likes;
                         thisPost.Comments.Add(thisComment);
                     }

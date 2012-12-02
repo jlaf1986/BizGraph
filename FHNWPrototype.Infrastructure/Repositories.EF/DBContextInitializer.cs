@@ -27,6 +27,7 @@ using FHNWPrototype.Domain.Bookmarks;
 using FHNWPrototype.Infrastructure;
 using FHNWPrototype.Infrastructure.Security;
 using FHNWPrototype.Domain._Base.Accounts;
+using FHNWPrototype.Domain._Base.SCMRelationships;
 
 namespace FHNWPrototype.Infrastructure.Repositories.EF
 {
@@ -286,26 +287,26 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
             context.BasicProfiles.Add(torvaldsl_BasicProfile);
             context.BasicProfiles.Add(ozzier_BasicProfile);
 
-            var rel_ballmers_gatesb = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F0"), Action = FriendshipAction.Accept , Sender = ballmers, Receiver = gatesb, IsActive=true , ActionDateTime = DateTime.Now.AddDays(-1) };
-            var rel_gatesb_brins = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F1"), Action = FriendshipAction.Accept, Sender = gatesb, Receiver = brins, IsActive = true, ActionDateTime = DateTime.Now.AddDays(3) };
-            var rel_ellisonl_gatesb = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F2"), Action = FriendshipAction.Accept, Sender = ellisonl, Receiver = gatesb, IsActive = true, ActionDateTime = DateTime.Now.AddDays(-2) };
-            var rel_pagel_romettyv = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F3"), Action = FriendshipAction.Accept, Sender = pagel, Receiver = romettyv, IsActive = true, ActionDateTime = DateTime.Now.AddDays(1) };
-            var rel_romettyv_ballmers = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F4"), Action = FriendshipAction.Accept, Sender = romettyv, Receiver = ballmers, IsActive = true, ActionDateTime = DateTime.Now.AddDays(1) };
-            var rel_rometty_gatesb = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F5"), Action = FriendshipAction.Accept, Sender = romettyv, Receiver = gatesb, IsActive = true, ActionDateTime = DateTime.Now };
-            var rel_mayerm_torvaldsl = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F7"), Action = FriendshipAction.Accept, Sender = mayerm, Receiver = torvaldsl, IsActive = true, ActionDateTime = DateTime.Now.AddDays(4) };
-            var rel_ozzier_torvaldsl = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F8"), Action = FriendshipAction.Accept, Sender = ozzier, Receiver = torvaldsl, IsActive = true, ActionDateTime = DateTime.Now };
-            var rel_pagel_brins = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F9"), Action = FriendshipAction.Accept, Sender = pagel, Receiver = brins, IsActive = true, ActionDateTime = DateTime.Now.AddDays(1) };
-            var rel_schmidte_mayerm = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F0"), Action = FriendshipAction.Accept, Sender = schmidte, Receiver = mayerm, IsActive = true, ActionDateTime = DateTime.Now };
-            var rel_hoffmanr_sandbergs = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F1"), Action = FriendshipAction.Accept, Sender = hoffmanr, Receiver = sandbergs, IsActive = true, ActionDateTime = DateTime.Now };
-            var rel_sandbergs_allenp = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F2"), Action = FriendshipAction.Accept, Sender = sandbergs, Receiver = allenp, IsActive = true, ActionDateTime = DateTime.Now };
-            var rel_guthries_sandbergs = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F3"), Action = FriendshipAction.Accept, Sender = guthries, Receiver = sandbergs, IsActive = true, ActionDateTime = DateTime.Now };
-            var rel_hoffmanr_guthries = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F4"), Action = FriendshipAction.Accept, Sender = hoffmanr, Receiver = guthries, IsActive = true, ActionDateTime = DateTime.Now };
-            var rel_allenp_guthries = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F5"), Action = FriendshipAction.Accept, Sender = allenp, Receiver = guthries, IsActive = true, ActionDateTime = DateTime.Now };
-            var rel_jobss_torvaldsl = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F6"), Action = FriendshipAction.Accept, Sender = jobss, Receiver = torvaldsl, IsActive = true, ActionDateTime = DateTime.Now };
-            var rel_jobss_ozzier = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F7"), Action = FriendshipAction.Accept, Sender = jobss, Receiver = ozzier, IsActive = true, ActionDateTime = DateTime.Now };
-            var rel_wozniaks_hanselmans = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F8"), Action = FriendshipAction.Accept, Sender = wozniaks, Receiver = hanselmans, IsActive = true, ActionDateTime = DateTime.Now };
+            var rel_ballmers_gatesb = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F0"), Action = FriendshipAction.Accept , Sender = ballmers, Receiver = gatesb, SCMRelationshipType=SCMRelationship.Downstream, IsActive=true , ActionDateTime = DateTime.Now.AddDays(-1) };
+            var rel_gatesb_brins = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F1"), Action = FriendshipAction.Accept, Sender = gatesb, Receiver = brins, SCMRelationshipType=SCMRelationship.Upstream, IsActive = true, ActionDateTime = DateTime.Now.AddDays(3) };
+            var rel_ellisonl_gatesb = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F2"), Action = FriendshipAction.Accept, Sender = ellisonl, Receiver = gatesb, SCMRelationshipType=SCMRelationship.Downstream , IsActive = true, ActionDateTime = DateTime.Now.AddDays(-2) };
+            var rel_pagel_romettyv = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F3"), Action = FriendshipAction.Accept, Sender = pagel, Receiver = romettyv, SCMRelationshipType=SCMRelationship.Upstream , IsActive = true, ActionDateTime = DateTime.Now.AddDays(1) };
+            var rel_romettyv_ballmers = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F4"), Action = FriendshipAction.Accept, Sender = romettyv, Receiver = ballmers, SCMRelationshipType=SCMRelationship.Upstream, IsActive = true, ActionDateTime = DateTime.Now.AddDays(1) };
+            var rel_rometty_gatesb = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F5"), Action = FriendshipAction.Accept, Sender = romettyv, Receiver = gatesb, SCMRelationshipType=SCMRelationship.Upstream , IsActive = true, ActionDateTime = DateTime.Now };
+            var rel_mayerm_torvaldsl = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F7"), Action = FriendshipAction.Accept, Sender = mayerm, Receiver = torvaldsl, SCMRelationshipType=SCMRelationship.SameLevel , IsActive = true, ActionDateTime = DateTime.Now.AddDays(4) };
+            var rel_ozzier_torvaldsl = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F8"), Action = FriendshipAction.Accept, Sender = ozzier, Receiver = torvaldsl, SCMRelationshipType=SCMRelationship.Upstream , IsActive = true, ActionDateTime = DateTime.Now };
+            var rel_pagel_brins = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E1F9"), Action = FriendshipAction.Accept, Sender = pagel, Receiver = brins, SCMRelationshipType=SCMRelationship.SameLevel , IsActive = true, ActionDateTime = DateTime.Now.AddDays(1) };
+            var rel_schmidte_mayerm = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F0"), Action = FriendshipAction.Accept, Sender = schmidte, Receiver = mayerm, SCMRelationshipType=SCMRelationship.SameLevel , IsActive = true, ActionDateTime = DateTime.Now };
+            var rel_hoffmanr_sandbergs = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F1"), Action = FriendshipAction.Accept, Sender = hoffmanr, Receiver = sandbergs, SCMRelationshipType=SCMRelationship.Upstream , IsActive = true, ActionDateTime = DateTime.Now };
+            var rel_sandbergs_allenp = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F2"), Action = FriendshipAction.Accept, Sender = sandbergs, Receiver = allenp, SCMRelationshipType=SCMRelationship.Downstream, IsActive = true, ActionDateTime = DateTime.Now };
+            var rel_guthries_sandbergs = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F3"), Action = FriendshipAction.Accept, Sender = guthries, Receiver = sandbergs, SCMRelationshipType=SCMRelationship.Downstream, IsActive = true, ActionDateTime = DateTime.Now };
+            var rel_hoffmanr_guthries = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F4"), Action = FriendshipAction.Accept, Sender = hoffmanr, Receiver = guthries, SCMRelationshipType=SCMRelationship.Downstream, IsActive = true, ActionDateTime = DateTime.Now };
+            var rel_allenp_guthries = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F5"), Action = FriendshipAction.Accept, Sender = allenp, Receiver = guthries, SCMRelationshipType=SCMRelationship.Downstream, IsActive = true, ActionDateTime = DateTime.Now };
+            var rel_jobss_torvaldsl = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F6"), Action = FriendshipAction.Accept, Sender = jobss, Receiver = torvaldsl, SCMRelationshipType=SCMRelationship.SameLevel , IsActive = true, ActionDateTime = DateTime.Now };
+            var rel_jobss_ozzier = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F7"), Action = FriendshipAction.Accept, Sender = jobss, Receiver = ozzier, SCMRelationshipType=SCMRelationship.Downstream , IsActive = true, ActionDateTime = DateTime.Now };
+            var rel_wozniaks_hanselmans = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F8"), Action = FriendshipAction.Accept, Sender = wozniaks, Receiver = hanselmans, SCMRelationshipType=SCMRelationship.SameLevel , IsActive = true, ActionDateTime = DateTime.Now };
            // var rel_wozniaks_gatesb = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E2F9"), Action = FriendshipAction.Accept, Sender = wozniaks, Receiver = gatesb, ActionDateTime = DateTime.Now };
-            var rel_gatesb_hanselmans = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E3F0"), Action = FriendshipAction.Accept, Sender = gatesb, Receiver = hanselmans, IsActive = true, ActionDateTime = DateTime.Now };
+            var rel_gatesb_hanselmans = new FriendshipStateInfo { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E3F0"), Action = FriendshipAction.Accept, Sender = gatesb, Receiver = hanselmans, SCMRelationshipType=SCMRelationship.SameLevel , IsActive = true, ActionDateTime = DateTime.Now };
 
 
             context.Friendships.Add(rel_ballmers_gatesb);
@@ -1094,6 +1095,8 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
             context.ContentStreams.Add(Nestle_wall);
             context.ContentStreams.Add(SwitzerlandIndustrialImportsGroup_wall);
             context.ContentStreams.Add(all_NewMilkshake_wall);
+
+            
 
 
 

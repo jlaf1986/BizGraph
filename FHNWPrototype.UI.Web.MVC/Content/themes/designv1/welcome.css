@@ -116,9 +116,17 @@
         border:none;
     }
 
-#sign #logo img
+#logo img
 {
- clear:both;
+    clear:both;
+    width:260px;
+    height:60px;
+    background-image:url('images/finallogos_others.png');
+    background-repeat:no-repeat;
+    background-position:0px -70px;
+    /*border:0px solid transparent;*/
+    margin:0px 0px 0px 0px;
+    padding:0px 0px 0px 0px;
 }
 
 #sign span

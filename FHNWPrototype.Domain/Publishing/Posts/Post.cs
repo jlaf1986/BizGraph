@@ -14,7 +14,7 @@ namespace FHNWPrototype.Domain.Publishing
     /// <summary>
     /// to scan a url and provide a preview in the post <see cref="http://nsoup.codeplex.com/"/>
     /// </summary>
-    public class Post : EntityBase , IAggregateRoot, Likeable 
+    public class Post : EntityBase , IAggregateRoot, Likeable , IPublishingCapable 
     {
 
         public Post()
@@ -27,7 +27,7 @@ namespace FHNWPrototype.Domain.Publishing
         //public virtual int? AttachmentId { get; set; }
         //public IAttachmentCapable Attachment { get; set; }
         public virtual IList<Comment> Comments { get; set; }
-        public virtual DateTime PublishDateTime { get; set; }
+        public DateTime PublishDateTime { get; set; }
         
         //public virtual int? AuthorId { get; set; }
         //public virtual UserAccount Author { get; set; }

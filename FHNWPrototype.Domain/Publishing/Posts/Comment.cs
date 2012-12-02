@@ -10,7 +10,7 @@ using FHNWPrototype.Domain._Base.Accounts;
 
 namespace FHNWPrototype.Domain.Publishing
 {
-    public class Comment:  EntityBase, Likeable 
+    public class Comment:  EntityBase, Likeable , IPublishingCapable 
     {
 
         public Comment()
@@ -23,7 +23,7 @@ namespace FHNWPrototype.Domain.Publishing
         //public virtual int? AuthorId { get; set; }
         //public virtual UserAccount Author { get; set; }
         public virtual BasicProfile Author { get; set; }
-        public virtual DateTime PublishDateTime { get; set; }
+        public DateTime PublishDateTime { get; set; }
         public virtual Post Post { get; set; }
 
         public virtual IList<CommentLike> CommentLikes { get; set; }

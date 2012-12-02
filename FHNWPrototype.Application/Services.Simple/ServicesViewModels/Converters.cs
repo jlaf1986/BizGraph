@@ -103,7 +103,7 @@ namespace FHNWPrototype.Application.Services.Simple.ServicesViewModels
                     thisPost.Author = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = postAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = post.Author.ReferenceType }, FullName = postAuthorProfile.FullName, Description1 = postAuthorProfile.Description1, Description2 = postAuthorProfile.Description2 };
                        
                     thisPost.Text = post.Text;
-                    thisPost.TimeStamp = post.PublishDateTime;
+                    thisPost.PublishDateTime = post.PublishDateTime;
                     thisPost.Comments = new List<CommentViewModel>();
                     if (post.PostLikes != null)
                     {
@@ -124,7 +124,7 @@ namespace FHNWPrototype.Application.Services.Simple.ServicesViewModels
                        
 
                         thisComment.Text = comment.Text;
-                        thisComment.TimeStamp = comment.PublishDateTime;
+                        thisComment.PublishDateTime = comment.PublishDateTime;
                         if (comment.CommentLikes != null)
                         {
                             thisComment.Likes = comment.CommentLikes.Count();
@@ -203,7 +203,7 @@ namespace FHNWPrototype.Application.Services.Simple.ServicesViewModels
                   
 
                     thisPost.Text = post.Text;
-                    thisPost.TimeStamp = post.PublishDateTime;
+                    thisPost.PublishDateTime = post.PublishDateTime;
                     thisPost.Comments = new List<CommentViewModel>();
                     foreach (var comment in post.Comments)
                     {
@@ -217,7 +217,7 @@ namespace FHNWPrototype.Application.Services.Simple.ServicesViewModels
                          
 
                         thisComment.Text = comment.Text;
-                        thisComment.TimeStamp = comment.PublishDateTime;
+                        thisComment.PublishDateTime = comment.PublishDateTime;
                         thisPost.Comments.Add(thisComment);
                     }
                     organizationAccountView.Wall.Posts.Add(thisPost);

@@ -61,6 +61,7 @@
     <Compile Include="Repositories.EF\FHNWPrototypeDB.cs" />
     <Compile Include="Repositories.EF\Repositories\AllianceRepository.cs" />
     <Compile Include="Repositories.EF\Repositories\GraphRepository.cs" />
+    <Compile Include="Repositories.EF\Repositories\MessengerRepository.cs" />
     <Compile Include="Repositories.EF\Repositories\PublishingRepository.cs" />
     <Compile Include="Repositories.EF\Repositories\GroupRepository.cs" />
     <Compile Include="Repositories.EF\Repositories\OrganizationAccountRepository.cs" />
