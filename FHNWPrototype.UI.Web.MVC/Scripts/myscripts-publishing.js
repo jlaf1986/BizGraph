@@ -1,12 +1,30 @@
 ﻿function RegisterAutocomplete() {
     var availableTags = [
-                   "@SameLevelPartners",
-                   "@UpstreamPartners",
-                   "@DownstreamPartners",
-                   "#BadQuality",
-                   "#NewContract2013",
-                   "#ChristmasDelivery",
-                   "#Kanban"
+                   "@InvolvedCoworkers",
+                   "@UpstreamPartnersLevel1",
+                   "@UpstreamPartnersLevel2",
+                   "@DownstreamPartnersLevel1",
+                   "@DownstreamPartnersLevel2",
+                   "#EngineAssembler",
+                   "#PistonsManufacturer",
+                   "#SteelManufacturer",
+                   "#ElectronicsManufacturer",
+                   "#InteriorComponentsProcurement",
+                   "#AirConditionerManufacturer",
+                   "#ElectricSystemProvider",
+                   "#SeatsAssembler",
+                   "#FabricsProvider",
+                   "#ChassisAssembler",
+                   "#LightningSystemAssembler",
+                   "#SteeringSystemAssembler",
+                   "#SuspensionProvider",
+                   "#WheelsProvider",
+                   "#TiresProvider",
+                   "#Brakes",
+                   "#SalesAndDistribution",
+                   "#RegionalSales",
+                   "#Retailer",
+                   "#AutoSparePartsReseller"
 
     ];
 

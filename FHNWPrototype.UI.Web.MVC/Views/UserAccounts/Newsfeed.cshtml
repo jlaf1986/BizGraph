@@ -228,9 +228,15 @@
         <article id="link_organization">
             <span id="counter_notifications_organization">3</span>
         </article>*@
+
+            
         <article>
               @Html.ActionLink("Log Off", "LogOff", "Account", null, null)
 
+        </article>
+
+         <article id="link_graph">
+                @Html.ActionLink("Graph", "Graph", "UserAccounts", null, null)
         </article>
       
     </section>
@@ -296,9 +302,51 @@
 @section right_column{
 
 <div id="suggestions">
- 
- 
+    <section>
+        <h1>CO-WORKERS SUGGESTIONS</h1>
+         <article class="recommendation">
+           <div class="recommendation_avatar">
+                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = "BCBCCE0E-7C9F-4386-98AA-1458F308E201",accountType= AccountType.UserAccount  })" alt="picture"  class="profile_picture_recommendation" />
+           </div>
+           <div class="recommendation_content">
+                <h2>@Html.ActionLink("Bill Gates" , "UserAccount", "UserAccounts", new { id = "BCBCCE0E-7C9F-4386-98AA-1458F308E201"  }, null)</h2>
 
+                <a href="#">Send Request</a>
+           </div>
+       </article>
+    </section>
+    <section>
+        <h1>UPSTREAM SUGGESTIONS</h1>
+         <article class="recommendation">
+           <div class="recommendation_avatar">
+                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = "BCBCCE0E-7C9F-4386-98AA-1458F308E213",accountType= AccountType.UserAccount  })" alt="picture"  class="profile_picture_recommendation" />
+           </div>
+           <div class="recommendation_content">
+                <h2>@Html.ActionLink("Max Sulser" , "UserAccount", "UserAccounts", new { id = "BCBCCE0E-7C9F-4386-98AA-1458F308E213"  }, null)</h2>
+
+                <a href="#">Send Request</a>
+           </div>
+       </article>
+    </section>
+    <section>
+        <h1>DOWNSTREAM SUGGESTIONS</h1>
+        <article class="recommendation">
+           <div class="recommendation_avatar">
+                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = "BCBCCE0E-7C9F-4386-98AA-1458F308E111",accountType= AccountType.UserAccount  })" alt="picture"  class="profile_picture_recommendation" />
+           </div>
+           <div class="recommendation_content">
+                <h2>@Html.ActionLink("Steve Jobs" , "UserAccount", "UserAccounts", new { id = "BCBCCE0E-7C9F-4386-98AA-1458F308E111"  }, null)</h2>
+
+                <a href="#">Send Request</a>
+           </div>
+       </article>
+    </section>
+    <section>
+        <h1>GROUP SUGGESTIONS</h1>
+        <article>
+
+        </article>
+    </section>
 </div>
 }
 

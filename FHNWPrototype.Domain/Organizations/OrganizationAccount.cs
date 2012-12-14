@@ -40,6 +40,8 @@ namespace FHNWPrototype.Domain.Organizations
 
         public virtual ContentStream Wall { get; set; }
 
+        public virtual String Tag { get; set; }
+
         public virtual byte[] AvatarPicture { get; set; }
 
         protected override void Validate()

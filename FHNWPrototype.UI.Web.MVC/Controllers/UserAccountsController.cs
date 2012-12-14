@@ -18,6 +18,8 @@ using FHNWPrototype.UI.Web.MVC.Signals;
 using FHNWPrototype.Application.Controllers.UIViewModels.Chat;
 using System.Web.Routing;
 using FHNWPrototype.UI.Web.MVC.Controllers.UIViewModels._Global;
+using System.IO;
+using System.Web.Hosting;
 
 namespace FHNWPrototype.Application.Controllers.Controllers
 {
@@ -610,7 +612,23 @@ namespace FHNWPrototype.Application.Controllers.Controllers
             //return PartialView("_partial_artiche_chat_message",cmv);
         }
 
-      
+        [HttpGet]
+        public ActionResult Graph()
+        {
+//            CompleteProfile myProfile = (CompleteProfile)Session["myProfile"];
+
+  //          CompleteProfileView thisProfile = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = myProfile.BasicProfile.ReferenceKey.ToString(), AccountType = myProfile.BasicProfile.ReferenceType }, FullName = myProfile.FullName, Description1 = myProfile.Description1, Description2 = myProfile.Description2 };
+
+            return View("_standalone_visualization");
+        }
+
+        [HttpGet]
+        public ActionResult visualizationdata(string format)
+        {
+            FileInfo  file= new FileInfo(Path.Combine( HostingEnvironment.ApplicationPhysicalPath , @"Content\visualizationdata.json"));
+
+            return File(file.Open(FileMode.Open, FileAccess.Read), "application/json", "visualizationdata.json");
+        }
 
     }
 }

@@ -71,7 +71,9 @@ namespace FHNWPrototype.Domain.Users
 
         public virtual Library DocumentLibrary { get; set; }
 
-        public virtual List<Bookmark> Bookmarks { get; set; } 
+        //public virtual List<Bookmark> Bookmarks { get; set; } 
+
+        public virtual String Tag { get; set; }
 
         //public Workspace Workspace { get; set; }
         //public List<Workspace> PartnershipWorkspaces { get; set; }

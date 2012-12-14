@@ -294,6 +294,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\colors CSS.txt" />
     <Content Include="Content\themes\designv1\chat.css" />
+    <Content Include="Content\themes\designv1\d3.css" />
     <Content Include="Content\themes\designv1\forms.css" />
     <Content Include="Content\themes\designv1\GoogleMaps.css" />
     <Content Include="Content\themes\designv1\html5base.css" />
@@ -331,7 +332,10 @@
     <Content Include="favicon.ico" />
     <Content Include="favicon2.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Controllers\visualizationdata.json" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Scripts\d3.v2.js" />
+    <Content Include="Scripts\d3.v2.min.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -356,6 +360,7 @@
     <Content Include="Scripts\myscripts-partnerships.js" />
     <Content Include="Scripts\myscripts-publishing.js" />
     <Content Include="Scripts\myscripts.js" />
+    <None Include="Content\visualizationdata.json" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -433,6 +438,8 @@
     <Content Include="Views\Shared\_partial_section_tweet.cshtml" />
     <Content Include="Views\Shared\_partial_section_retweet.cshtml" />
     <Content Include="Views\Shared\_partial_notifications.cshtml" />
+    <Content Include="Views\Shared\_standalone_visualization.cshtml" />
+    <Content Include="Views\UserAccounts\visualizationdata.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
