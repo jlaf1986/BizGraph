@@ -20,6 +20,7 @@ using System.Web.Routing;
 using FHNWPrototype.UI.Web.MVC.Controllers.UIViewModels._Global;
 using System.IO;
 using System.Web.Hosting;
+using System.Web;
 
 namespace FHNWPrototype.Application.Controllers.Controllers
 {
@@ -625,7 +626,8 @@ namespace FHNWPrototype.Application.Controllers.Controllers
         [HttpGet]
         public ActionResult visualizationdata(string format)
         {
-            FileInfo  file= new FileInfo(Path.Combine( HostingEnvironment.ApplicationPhysicalPath , @"Content\visualizationdata.json"));
+           // FileInfo  file= new FileInfo(Path.Combine( HostingEnvironment.ApplicationPhysicalPath , @"Content\visualizationdata.json"));
+            FileInfo file = new FileInfo(Path.Combine(HttpRuntime.AppDomainAppPath, @"Content\visualizationdata.json"));
 
             return File(file.Open(FileMode.Open, FileAccess.Read), "application/json", "visualizationdata.json");
         }
