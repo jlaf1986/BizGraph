@@ -626,8 +626,10 @@ namespace FHNWPrototype.Application.Controllers.Controllers
         [HttpGet]
         public ActionResult visualizationdata(string format)
         {
+            string path = System.AppDomain.CurrentDomain.BaseDirectory.Substring(0, System.AppDomain.CurrentDomain.BaseDirectory.Length - 1);
            // FileInfo  file= new FileInfo(Path.Combine( HostingEnvironment.ApplicationPhysicalPath , @"Content\visualizationdata.json"));
-            FileInfo file = new FileInfo(Path.Combine(HttpRuntime.AppDomainAppPath, @"Content\visualizationdata.json"));
+            //FileInfo file = new FileInfo(Path.Combine(HttpRuntime.AppDomainAppPath, @"Content\visualizationdata.json"));
+            FileInfo file = new FileInfo(Path.Combine(path, @"Content\visualizationdata.json"));
 
             return File(file.Open(FileMode.Open, FileAccess.Read), "application/json", "visualizationdata.json");
         }
