@@ -49,8 +49,10 @@ namespace FHNWPrototype.UI.Web.MVC
             bundles.Add(new ScriptBundle("~/bundles/myscripts")
             .Include(
             "~/Scripts/myscripts.js","~/Scripts/myscripts-publishing.js",
-             "~/Scripts/myscripts.js", "~/Scripts/myscripts-friendships.js",
-              "~/Scripts/myscripts.js","~/Scripts/myscripts-partnerships.js"
+            "~/Scripts/myscripts.js","~/Scripts/myscripts-friendships.js",
+            "~/Scripts/myscripts.js","~/Scripts/myscripts-recommendations.js",
+            "~/Scripts/myscripts.js","~/Scripts/myscripts-partnerships.js"
+          
             ));
 
         }

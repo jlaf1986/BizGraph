@@ -302,20 +302,46 @@
 @section right_column{
 
 <div id="suggestions">
-    <section>
-        <h1>CO-WORKERS SUGGESTIONS</h1>
-         <article class="recommendation">
+    <section id="coworker_recommendation">
+        <h1>CO-WORKERS</h1>
+        @* <article class="recommendation">
            <div class="recommendation_avatar">
-                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = "BCBCCE0E-7C9F-4386-98AA-1458F308E201",accountType= AccountType.UserAccount  })" alt="picture"  class="profile_picture_recommendation" />
+                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = Model.CoworkerSuggestion.BasicProfile.ReferenceKey ,accountType= Model.CoworkerSuggestion.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_recommendation" />
            </div>
            <div class="recommendation_content">
-                <h2>@Html.ActionLink("Bill Gates" , "UserAccount", "UserAccounts", new { id = "BCBCCE0E-7C9F-4386-98AA-1458F308E201"  }, null)</h2>
+                <h2>@Html.ActionLink(Model.CoworkerSuggestion.FullName , "UserAccount", "UserAccounts", new { id = Model.CoworkerSuggestion.BasicProfile.ReferenceKey   }, null)</h2>
 
                 <a href="#">Send Request</a>
            </div>
-       </article>
+       </article>*@
     </section>
-    <section>
+     <section id="partner_recommendation">
+        <h1>PARTNERS</h1>
+        @*<article class="recommendation">
+           <div class="recommendation_avatar">
+                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = Model.PartnerSuggestion.BasicProfile.ReferenceKey ,accountType= Model.PartnerSuggestion.BasicProfile.AccountType  })" alt="picture"  class="profile_picture_recommendation" />
+           </div>
+           <div class="recommendation_content">
+                <h2>@Html.ActionLink(Model.PartnerSuggestion.FullName  , "UserAccount", "UserAccounts", new { id = Model.PartnerSuggestion.BasicProfile.ReferenceKey  }, null)</h2>
+
+                <a href="#">Send Request</a>
+           </div>
+       </article>*@
+    </section>
+    <section id="group_recommendation">
+        <h1>GROUPS</h1>
+       @* <article class="recommendation">
+           <div class="recommendation_avatar">
+                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = Model.GroupSuggestion.BasicProfile.ReferenceKey ,accountType= Model.GroupSuggestion.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_recommendation" />
+           </div>
+           <div class="recommendation_content">
+                <h2>@Html.ActionLink(Model.GroupSuggestion.FullName.Substring(0,14) + "..."  , "Group", "Groups", new { id =Model.GroupSuggestion.BasicProfile.ReferenceKey  }, null)</h2>
+
+                <a href="#">Send Request</a>
+           </div>
+       </article>*@
+    </section>
+  @*  <section>
         <h1>UPSTREAM SUGGESTIONS</h1>
          <article class="recommendation">
            <div class="recommendation_avatar">
@@ -327,8 +353,8 @@
                 <a href="#">Send Request</a>
            </div>
        </article>
-    </section>
-    <section>
+    </section>*@
+   @* <section>
         <h1>DOWNSTREAM SUGGESTIONS</h1>
         <article class="recommendation">
            <div class="recommendation_avatar">
@@ -340,13 +366,8 @@
                 <a href="#">Send Request</a>
            </div>
        </article>
-    </section>
-    <section>
-        <h1>GROUP SUGGESTIONS</h1>
-        <article>
-
-        </article>
-    </section>
+    </section>*@
+    
 </div>
 }
 
@@ -359,7 +380,11 @@
         
           $(document).ready(function () {
 
-              
+            GetWorkFriendshipRecommendation("@Url.Action("GetWorkContactSuggestion","Retriever")", "@Model.Profile.BasicProfile.ReferenceKey");
+
+            GetPartnershipRecommendation("@Url.Action("GetPartnershipContactSuggestion","Retriever")", "@Model.Profile.BasicProfile.ReferenceKey");
+
+            GetGroupRecommendation("@Url.Action("GetGroupSuggestion","Retriever")", "@Model.Profile.BasicProfile.ReferenceKey");
 
             var connection = $.hubConnection();
             var notifier = connection.createHubProxy('notifier');

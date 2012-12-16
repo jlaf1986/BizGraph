@@ -151,6 +151,13 @@ namespace FHNWPrototype.Application.Controllers.Controllers
 
              accountView.WallOfThisProfile.PublishedItems= accountView.WallOfThisProfile.PublishedItems.OrderByDescending(x => x.PublishDateTime).ToList();
 
+             CompleteProfileView groupView = new CompleteProfileView() { BasicProfile = new BasicProfileView() { ReferenceKey = "ACBCCE0E-7C9F-4386-99AA-1458F308EBB0", AccountType = AccountType.Group }, FullName = "Electric Providers Group" };
+             CompleteProfileView coworkerView = new CompleteProfileView() { BasicProfile = new BasicProfileView() { ReferenceKey = "BCBCCE0E-7C9F-4386-98AA-1458F308E205", AccountType = AccountType.UserAccount  }, FullName = "Larry Page" };
+             CompleteProfileView partnerView = new CompleteProfileView() { BasicProfile = new BasicProfileView() { ReferenceKey = "BCBCCE0E-7C9F-4386-98AA-1458F308E203", AccountType = AccountType.UserAccount }, FullName = "Allie Opper" };
+
+             accountView.GroupSuggestion = groupView;
+             accountView.PartnerSuggestion = partnerView;
+             accountView.CoworkerSuggestion = coworkerView;
        
             return View("Newsfeed",accountView);
         }
@@ -626,11 +633,12 @@ namespace FHNWPrototype.Application.Controllers.Controllers
         [HttpGet]
         public ActionResult visualizationdata(string format)
         {
-            string path = System.AppDomain.CurrentDomain.BaseDirectory.Substring(0, System.AppDomain.CurrentDomain.BaseDirectory.Length - 1);
-            FileInfo  file= new FileInfo(Path.Combine( HostingEnvironment.ApplicationPhysicalPath , @"Content\visualizationdata.json"));
+           // string path = System.AppDomain.CurrentDomain.BaseDirectory.Substring(0, System.AppDomain.CurrentDomain.BaseDirectory.Length - 1);
+           // FileInfo  file= new FileInfo(Path.Combine( HostingEnvironment.ApplicationPhysicalPath , @"Content\visualizationdata.json"));
             //FileInfo file = new FileInfo(Path.Combine(HttpRuntime.AppDomainAppPath, @"Content\visualizationdata.json"));
            // FileInfo file = new FileInfo(Path.Combine(path, @"Content\visualizationdata.json"));
            // FileInfo file = new FileInfo(Server.MapPath("/Content/visualizationdata.json"));
+            FileInfo file = new FileInfo(Server.MapPath("~/Content/visualizationdata.json"));
             return File(file.Open(FileMode.Open, FileAccess.Read), "application/json", "visualizationdata.json");
         }
 

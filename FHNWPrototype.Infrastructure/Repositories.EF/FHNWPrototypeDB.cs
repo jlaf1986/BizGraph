@@ -39,7 +39,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
            
         //}
 
-        public FHNWPrototypeDB() :base("name=RemoteConnection")
+        public FHNWPrototypeDB() :base("name=DefaultConnection")
         {
            // this.Configuration.LazyLoadingEnabled = false;
            // Database.DefaultConnectionFactory.CreateConnection("RemoteConnection");

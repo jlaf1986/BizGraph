@@ -1,18 +1,39 @@
-﻿@model FHNWPrototype.Domain._Base.Accounts.CompleteProfile
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels._Global.CompleteProfileView 
 
 <article>
-     @*   <img class="advertisement" src="@Url.Action("GetHeaderPictureByBasicProfile", "Retriever", new { id = @Model. })" alt="picture"   />
-        <h3>@Html.ActionLink(Model.SisterDivisionSuggestion.Value , "GetAvatarPictureByBasicProfile", "Retriever", new { id = @Model.SisterDivisionSuggestion.Key  }, null)</h3>
-        <h4>Headquaters</h4>
-  
-        <h4 id="@(Model.SisterDivisionSuggestion.Key)_sendRequest">
-            @Ajax.ActionLink("Send Request", 
-            "RequestPartnershipTo", 
-            new { key = @Model.SisterDivisionSuggestion.Key },
-            new AjaxOptions(){
-            UpdateTargetId = @Model.SisterDivisionSuggestion.Key + "_sendRequest" ,
-            HttpMethod = "POST",
-            InsertionMode = InsertionMode.Replace}, 
-            new { id=@Model.SisterDivisionSuggestion.Key + "_sendRequest", enabled="true" })
-        </h4>*@
+    @if(Model!=null){
+     <article class="recommendation">
+           <div class="recommendation_avatar">
+                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = Model.BasicProfile.ReferenceKey ,accountType= Model.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_recommendation" />
+           </div>
+           <div class="recommendation_content">
+               @{
+                string name = null;
+                if(Model.FullName.Length>14){
+                    name = Model.FullName.Substring(0, 14) + "...";
+                }
+                else{
+                    name = Model.FullName;
+                }
+               }
+               @if(Model.BasicProfile.AccountType== FHNWPrototype.Domain._Base.Accounts.AccountType.UserAccount){
+                <h2>@Html.ActionLink(name  , "UserAccount", "UserAccounts", new { id =Model.BasicProfile.ReferenceKey  }, null)</h2>
+               }
+               else{
+                     if(Model.BasicProfile.AccountType== FHNWPrototype.Domain._Base.Accounts.AccountType.OrganizationAccount){
+                        <h2>@Html.ActionLink(name  , "Organization", "OrganizationAccounts", new { id =Model.BasicProfile.ReferenceKey  }, null)</h2>
+                    }
+                    else{
+                           if(Model.BasicProfile.AccountType== FHNWPrototype.Domain._Base.Accounts.AccountType.Group){
+                                <h2>@Html.ActionLink(name  , "Group", "Groups", new { id =Model.BasicProfile.ReferenceKey  }, null)</h2>
+                            }
+                     }         
+               }
+                <a href="#">Send Request</a>
+           </div>
+       </article>
+    }
+    else{
+        <p>You have no recommendations for now</p>
+    }
 </article>

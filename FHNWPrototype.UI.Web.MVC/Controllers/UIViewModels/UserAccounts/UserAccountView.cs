@@ -40,6 +40,9 @@ namespace FHNWPrototype.Application.Controllers.UIViewModels.UserAccounts
         public ContentStreamView WallOfThisProfile { get; set; }
         public Boolean IsThisProfileStillActive { get; set; }
 
+        public CompleteProfileView CoworkerSuggestion { get; set; }
+        public CompleteProfileView PartnerSuggestion { get; set; }
+        public CompleteProfileView GroupSuggestion { get; set; }
         //public IEnumerable<Access> AccessHistory { get; set; }
         //public Guid AutheticationToken { get; set; }
     }

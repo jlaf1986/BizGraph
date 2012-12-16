@@ -143,7 +143,7 @@
     <Content Include="Repositories.EF\ImagesV2\73.png" />
     <Content Include="Repositories.EF\ImagesV2\74.png" />
     <Content Include="Repositories.EF\ImagesV2\logo_company.png" />
-    <Content Include="Repositories.EF\ImagesV2\user_icon.jpg" />
+    <Content Include="Repositories.EF\ImagesV2\user_icon.png" />
     <Content Include="Repositories.EF\ProfilePics\allianceHeader.jpg" />
     <Content Include="Repositories.EF\ProfilePics\bill_gates.jpg" />
     <Content Include="Repositories.EF\ProfilePics\eric_schmidt.jpg" />

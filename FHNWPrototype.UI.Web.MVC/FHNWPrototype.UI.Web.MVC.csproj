@@ -332,7 +332,6 @@
     <Content Include="favicon.ico" />
     <Content Include="favicon2.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Controllers\visualizationdata.json" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\d3.v2.js" />
     <Content Include="Scripts\d3.v2.min.js" />
@@ -354,13 +353,16 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\myscripts-recommendations.js" />
     <Content Include="Scripts\myscripts-chat.js" />
     <Content Include="Scripts\myscripts-friendships.js" />
     <Content Include="Scripts\myscripts-notifier.js" />
     <Content Include="Scripts\myscripts-partnerships.js" />
     <Content Include="Scripts\myscripts-publishing.js" />
     <Content Include="Scripts\myscripts.js" />
-    <None Include="Content\visualizationdata.json" />
+    <Content Include="Content\visualizationdata.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
