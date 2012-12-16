@@ -116,7 +116,7 @@ namespace FHNWPrototype.Application.Services.Simple
 
             CypherQuery query = new CypherQuery();
 
-            query.query = "START origin=node(" + "17" + ") " +
+            query.query = "START origin=node(" + "10" + ") " +
                             "MATCH origin-[:has_downstream_friend|has_upstream_friend]-my_partner, " +
                             "my_partner-[:is_known_for]->tag, " +
                             "coworker-[:works_at]->company<-[:works_at]-origin, " +

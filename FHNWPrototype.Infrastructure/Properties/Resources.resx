@@ -121,65 +121,14 @@
   <data name="allianceHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Repositories.EF\ProfilePics\allianceHeader.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bill_gates" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\bill_gates.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="eric_schmidt" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\eric_schmidt.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="groupHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Repositories.EF\ProfilePics\groupHeader.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="groupProfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Repositories.EF\ProfilePics\groupProfile.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="larry_ellison" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\larry_ellison.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="larry_page" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\larry_page.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="linus_torvalds" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\linus_torvalds.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="logo_company" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Repositories.EF\ImagesV2\logo_company.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="marissa_mayer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\marissa_mayer.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="paul_allen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\paul_allen.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ray_ozzie" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\ray_ozzie.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="reid_hoffman" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\reid_hoffman.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="scott_guthrie" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\scott_guthrie.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="scott_hanselman" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\scott_hanselman.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sergey_brin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\sergey_brin.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sheryl_sandberg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\sheryl_sandberg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="steve_ballmer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\steve_ballmer.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="steve_jobs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\steve_jobs.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="steve_wozniak" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\steve_wozniak.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="virginia_rometty" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Repositories.EF\ProfilePics\virginia_rometty.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_41" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Repositories.EF\ImagesV2\41.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
