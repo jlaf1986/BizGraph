@@ -1,0 +1,67 @@
+﻿header, #header{
+	/*background-color:#0072C6;*/
+    background-color:transparent;
+	/*background-image:url('themes/designv1/header.png');*/
+	background-repeat:no-repeat;
+	background-position: left top  ;
+	min-width:998px;
+	width:998px;
+	height:35px;
+    border:none;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+    display:block;
+    /*border-bottom: 2px solid #FFFFFF;*/
+}
+
+#newsfeed_info {
+     background-color:orange;
+	/*background-image:url('themes/designv1/header.png');*/
+	background-repeat:no-repeat;
+	background-position: left top  ;
+	min-width:998px;
+	width:998px;
+	height:30px;
+    border:none;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+    display:block;
+}
+
+
+#profile_name 
+{
+    color:#FFFFFF;
+    font-size:18px;
+    font-weight:bolder;
+    display:block;
+    /*position:absolute;*/
+    float:left;
+    /*top:0;
+    left:0;*/
+    width:300px;
+    height:30px;
+    /*background-color:purple;*/
+    z-index:200;
+    padding-left:5px;
+    text-align:left;
+}
+
+#working_at 
+{
+    /*background-color:darkcyan;*/
+    display:block;
+    float:right;
+    text-align:right;
+    /*top:20;
+    left:200px;*/ 
+    width:300px;
+    height:20px;
+    /*position:absolute;*/
+    z-index:200px;
+    padding-top:10px;
+}

@@ -1,0 +1,14 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.UserAccounts.UserAccountsView
+
+@{
+    ViewBag.Title = "UserAccounts";
+    Layout = "~/Views/Shared/_layout_3CC_three_centered_columns.cshtml";
+}
+
+<h2>Accounts</h2>
+<ul>
+@foreach (KeyValuePair<String,String> account in Model.UserAccounts)
+{
+    <li>@Html.ActionLink(account.Key, "UserAccount", "UserAccounts", new { id = account.Value }, null)</li>
+}
+</ul>

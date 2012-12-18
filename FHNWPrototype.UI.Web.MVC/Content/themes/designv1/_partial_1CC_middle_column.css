@@ -1,0 +1,12 @@
+﻿
+#middle_column
+{
+    display:block;
+    width:1000px;
+    float:left;
+    height:auto;
+    background-color:transparent;
+    /*overflow:hidden;*/
+    /*margin-bottom:100px;*/
+}
+

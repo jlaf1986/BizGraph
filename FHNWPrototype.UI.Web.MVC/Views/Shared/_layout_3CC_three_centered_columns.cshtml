@@ -1,0 +1,103 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+
+   @* <meta http-equiv="X-UA-Compatible" content="IE=8"/>*@
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Expires" content="0"/>
+    <link href="@Url.Content("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+@*    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/GoogleMaps.css")" />*@
+
+
+       <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/base/css" )" />
+
+    @Stylesheet("html5base.css")
+    @Stylesheet("_partial_settings.css")
+    @Stylesheet("_partial_footer.css")
+    @Stylesheet("mobile.css")
+
+    @Stylesheet("_layout_3CC_three_centered_columns.css")
+    @Stylesheet("_partial_3CC_header_one_image.css")
+    @Stylesheet("_partial_3CC_left_column.css")
+    @Stylesheet("_partial_3CC_middle_column.css")
+    @Stylesheet("_partial_3CC_right_column.css")
+
+     @Stylesheet("notification_details.css")
+
+    @Stylesheet("posts.css")
+    @Stylesheet("tweets.css")
+
+    @RenderSection("header_style",false)
+ 
+    <!--[if lt IE 9]>  
+    <script>    
+        document.createElement("header");    
+        document.createElement("footer");    
+        document.createElement("section");     
+        document.createElement("aside");    
+        document.createElement("nav");    
+        document.createElement("article");     
+        document.createElement("figure");     
+        document.createElement("hgroup");     
+        document.createElement("time");  
+    </script>
+    <noscript>     
+        <strong>Warning !</strong>     
+        Because your browser does not support HTML5, some elements are simulated using JScript.     
+        Unfortunately your browser has disabled scripting. 
+        Please enable it in order to display this page.  
+    </noscript>
+    <![endif]-->
+
+</head>
+<body>
+    <div id="page">
+        <div id="settings">
+           @*@Html.Partial("_partial_settings")*@
+            @RenderSection("settings", false)
+        </div>
+        <header id="header">
+           @RenderSection("header",false)
+        </header>
+       
+        <div id="content_wrapper">
+            <aside id="left_column">
+               @* @Html.Partial("_partial_3CC_left_column")*@
+                @RenderSection("left_column",false)
+                <footer id="footer">
+                    @Html.Partial("_partial_footer")
+                </footer>
+                
+            </aside>
+            <div id="middle_column">
+                @RenderBody()
+            </div> 
+            <aside id="right_column">
+             @*   @Html.Partial("_partial_3CC_right_column")*@
+                @RenderSection("right_column", false)
+            </aside>
+        </div>
+    </div>
+        @Scripts.Render("~/bundles/jquery")
+     @Scripts.Render("~/bundles/jqueryui")
+      @Scripts.Render("~/bundles/jqueryval")
+         @Scripts.Render("~/bundles/myscripts")
+      <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <noscript>Sorry, your browser does not support JavaScript!</noscript>
+        @RenderSection("scripts", required: false)
+</body>
+</html>
+
+@helper Script(string scriptName){
+    <script src="@Url.Content("~/Scripts/" + scriptName )" type="text/javascript"></script>
+}
+
+@helper Stylesheet(string styleSheetName){
+     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/" + styleSheetName )" />
+}

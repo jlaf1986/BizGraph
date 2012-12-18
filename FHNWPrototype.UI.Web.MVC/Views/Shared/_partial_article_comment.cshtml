@@ -1,0 +1,41 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Publishing.CommentView 
+
+<article  id="comment_@(Model.Key)"  class="comment">
+    <div class="comment_avatar">
+    <img   src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Author.BasicProfile.ReferenceKey, accountType=@Model.Author.BasicProfile.AccountType  })" alt="picture"  class="profile_picture_comment" />
+  </div>
+    <div class="comment_content">
+      @if(Model.Author.BasicProfile.AccountType== FHNWPrototype.Domain._Base.Accounts.AccountType.UserAccount)
+    {
+      <h2>@Html.ActionLink(Model.Author.FullName , "UserAccount", "UserAccounts", new { id = Model.Author.BasicProfile.ReferenceKey  }, null)</h2>
+    }
+    else
+    {
+         <h2>@Html.ActionLink(Model.Author.FullName , "OrganizationAccount", "OrganizationAccounts", new { id = Model.Author.BasicProfile.ReferenceKey  }, null)</h2> 
+    }
+    <p class="comment_text">
+        @Model.Text
+    </p>
+    <nav class="actionlinks">
+        <ul>
+            <li><time datetime="@Model.PublishDateTime ">@Model.PublishDateTime </time></li>
+            <li id="like_counter_comment_@(Model.Key)">@Model.Likes Like this</li>
+            <li>             
+                @if(!Model.ILikedIt)
+                {  
+                 <a id="like_comment_@(Model.Key)" href="#" class="like_comment">Like</a>
+                }
+                else
+                {
+                   <a id="like_comment_@(Model.Key)" href="#" class="unlike_comment">UnLike</a>  
+                }
+            </li>
+            <li>
+                @if((Model.Author.BasicProfile.ReferenceKey ==((FHNWPrototype.Domain._Base.Accounts.CompleteProfile) Session["myProfile"]).BasicProfile.ReferenceKey.ToString()) || Model.AllowedToDeleteComment){
+                   <a id="delete_comment_@(Model.Key)" href="@Url.Action("DeleteComment")" class="delete_comment">Delete</a>
+                }
+            </li>
+        </ul>
+    </nav>
+        </div>
+</article>

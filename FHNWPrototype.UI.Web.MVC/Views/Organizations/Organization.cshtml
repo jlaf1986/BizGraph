@@ -1,0 +1,162 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Organizations.OrganizationView
+
+@{
+    ViewBag.Title = Model.Name;
+
+}
+
+<h2>Organization</h2>
+
+<ul>
+<li>Key: @Model.Key</li>
+<li>Name: @Model.Name</li>
+<li>Description: @Model.Description</li>
+<li>Latitude:@Model.Latitude - Longitude:@Model.Longitude</li>
+</ul>
+<div id="map_canvas"></div>
+
+@section header_style{
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/_partial_3CC_header_two_images.css")" />
+
+
+    
+    <script>
+
+        //var goldStar = { path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z', fillColor: "yellow", fillOpacity: 0.8, scale: 1, strokeColor: "gold", strokeWeight: 14 };
+
+        $(document).ready(function () {
+            var my_position = new google.maps.LatLng(47.548807, 7.587820);
+ 
+            var partner1_position = new google.maps.LatLng(46.225285, 8.771115);
+            var partner2_position = new google.maps.LatLng(46.948432, 7.440461);
+            var partner3_position = new google.maps.LatLng(46.519595, 6.632335);
+                 var partner4_position = new google.maps.LatLng(47.049545, 8.304375);
+                      var partner5_position = new google.maps.LatLng(47.316540,  7.920925);
+
+            var mapOptions = { zoom: 7, center: my_position, mapTypeId: google.maps.MapTypeId.ROADMAP }
+            var map = new google.maps.Map($('#map_canvas').get(0), mapOptions);
+
+
+            var my_marker = new google.maps.Marker({ position: my_position, title: "My Location" });
+            var partner1_marker = new google.maps.Marker({ position: partner1_position, title: "Partner 1" });
+            var partner2_marker = new google.maps.Marker({ position: partner2_position, title: "Partner 2" });
+            var partner3_marker = new google.maps.Marker({ position: partner3_position, title: "Partner 3" });
+                        var partner4_marker = new google.maps.Marker({ position: partner4_position, title: "Partner 4" });
+
+                                    var partner5_marker = new google.maps.Marker({ position: partner5_position, title: "Partner 5" });
+
+            my_marker.setMap(map);
+            partner1_marker.setMap(map);
+            partner2_marker.setMap(map);
+            partner3_marker.setMap(map);
+               partner4_marker.setMap(map);
+            partner5_marker.setMap(map);
+
+            var firstConnection = [my_position,
+                                    partner1_position];
+
+            var secondConnection = [my_position,
+                                    partner2_position];
+
+            var thirdConnection = [my_position,
+                                    partner3_position];
+
+                                         var forthConnection = [my_position,
+                                    partner3_position];
+
+                                         var fifthConnection = [my_position,
+                                    partner4_position];
+
+            var firstPath = new google.maps.Polyline({
+                path: firstConnection,
+                strokeColor: "#0000FF",
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            var secondPath = new google.maps.Polyline({
+                path: secondConnection,
+                strokeColor: "#0000FF",
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            var thirdPath = new google.maps.Polyline({
+                path: thirdConnection,
+                strokeColor: "#FF0000",
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+                  var forthPath = new google.maps.Polyline({
+                path: forthConnection,
+                strokeColor: "#FF0000",
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+                  var fifthPath = new google.maps.Polyline({
+                path: fifthConnection,
+                strokeColor: "#FF0000",
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            firstPath.setMap(map);
+            secondPath.setMap(map);
+            thirdPath.setMap(map);
+             forthPath.setMap(map);
+            fifthPath.setMap(map);
+
+            var hotSpot1 = {
+                strokeColor: "#00FF00",
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: "#00FF00",
+                fillOpacity: 0.35,
+                map: map,
+                center: new google.maps.LatLng(47.339870, 7.901985),
+                radius: 10000
+            };
+
+            var hotSpot2 = {
+                strokeColor: "#00FF00",
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: "#00FF00",
+                fillOpacity: 0.35,
+                map: map,
+                center: new google.maps.LatLng(47.600000, 7.902000),
+                radius: 10000
+            };
+
+
+            var hotSpot3 = {
+                strokeColor: "#00FF00",
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: "#00FF00",
+                fillOpacity: 0.35,
+                map: map,
+                center: new google.maps.LatLng(47.430800, 7.401985),
+                radius: 10000
+            };
+
+            cityCircle = new google.maps.Circle(hotSpot1);
+            cityCircle = new google.maps.Circle(hotSpot2);
+            cityCircle = new google.maps.Circle(hotSpot3);
+
+        });
+
+        
+
+    
+    </script>
+}
+
+@section header{
+    
+    <figure id="brand_background">
+    <img id="my_banner" src="@Url.Action("GetOrganizationHeaderPicture", "Organizations", new { id = @Model.Key })" alt="brand" />
+    </figure>
+}

@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    ViewBag.User = User.Identity.Name;
+}
+<div>
+    @ViewBag.Message
+</div>
+<div>
+   @this.ApplicationInstance.User.Identity.AuthenticationType 
+    <br />@this.ApplicationInstance.User.Identity.Name 
+    <br />@this.ApplicationInstance.User.Identity.IsAuthenticated 
+    @foreach (string s in @ViewBag.Claims)
+    {
+        @s
+        <br />
+    }
+</div>
+@*
+<article style="background-color:#DDDDDD;">
+    <img   src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture" class="profile_picture" /> 
+</article>
+              
+<article>
+    <img   src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">First title of post</a></h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    </p>
+</article>
+
+<article>
+    <img src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">First title of post</a></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</article>
+               
+<article>
+    <img src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">First title of post</a></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</article>
+
+<article>
+    <img src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">First title of post</a></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</article>
+            
+<article>
+    <img src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">First title of post</a></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</article>
+
+<article >
+    <img src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">First title of post</a></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</article>
+         
+<article>
+    <img src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">First title of post</a></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</article>
+
+<article>
+    <img src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">First title of post</a></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</article>
+         
+<article>
+    <img src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">First title of post</a></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</article>
+           
+<article>
+    <img src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">First title of post</a></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</article>
+            
+<article>
+    <img src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">First title of post</a></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</article>
+            
+<article>
+    <img src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">First title of post</a></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</article>
+              
+<article>
+    <img src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">First title of post</a></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</article>
+             
+<article>
+    <img src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="picture"  class="profile_picture" />
+    <h2><a href="#">Last title of post</a></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</article>*@
+
+
+@section header{
+     <figure id="profile_picture">
+      <img id="my_picture" src="@Url.Content("~/Content/themes/designv1/images/profileMen.jpg")" alt="MyPicture" />
+     @*  <img id="my_picture" src="@Url.Action("GetImage", "Users", new { id = @Model.Key })" alt="MyProfilePicture" />*@
+    </figure>
+}

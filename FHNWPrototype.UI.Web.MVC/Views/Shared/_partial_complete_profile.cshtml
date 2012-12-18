@@ -1,0 +1,39 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels._Global.CompleteProfileView 
+
+<article>
+    @if(Model!=null){
+     <article class="recommendation">
+           <div class="recommendation_avatar">
+                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = Model.BasicProfile.ReferenceKey ,accountType= Model.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_recommendation" />
+           </div>
+           <div class="recommendation_content">
+               @{
+                string name = null;
+                if(Model.FullName.Length>14){
+                    name = Model.FullName.Substring(0, 14) + "...";
+                }
+                else{
+                    name = Model.FullName;
+                }
+               }
+               @if(Model.BasicProfile.AccountType== FHNWPrototype.Domain._Base.Accounts.AccountType.UserAccount){
+                <h2>@Html.ActionLink(name  , "UserAccount", "UserAccounts", new { id =Model.BasicProfile.ReferenceKey  }, null)</h2>
+               }
+               else{
+                     if(Model.BasicProfile.AccountType== FHNWPrototype.Domain._Base.Accounts.AccountType.OrganizationAccount){
+                        <h2>@Html.ActionLink(name  , "Organization", "OrganizationAccounts", new { id =Model.BasicProfile.ReferenceKey  }, null)</h2>
+                    }
+                    else{
+                           if(Model.BasicProfile.AccountType== FHNWPrototype.Domain._Base.Accounts.AccountType.Group){
+                                <h2>@Html.ActionLink(name  , "Group", "Groups", new { id =Model.BasicProfile.ReferenceKey  }, null)</h2>
+                            }
+                     }         
+               }
+                <a href="#">Send Request</a>
+           </div>
+       </article>
+    }
+    else{
+        <p>You have no recommendations for now</p>
+    }
+</article>

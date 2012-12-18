@@ -1,0 +1,13 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Groups.GroupsView
+
+@{
+    ViewBag.Title = "Group";
+}
+
+<h2>Groups</h2>
+
+@foreach (KeyValuePair<String,String> group in Model.Groups)
+{
+    <li>@Html.ActionLink(group.Key, "Group", "Groups", new { id = group.Value }, null)</li>
+}
+</ul>

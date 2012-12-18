@@ -1,0 +1,322 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.OrganizationAccounts.OrganizationAccountView
+
+
+@{
+    ViewBag.Title = Model.Profile.FullName + "(Newsfeed)";
+    Layout = "~/Views/Shared/_layout_3CC_three_centered_columns.cshtml";
+}
+
+@using FHNWPrototype.Application.Controllers.UIViewModels.Publishing
+
+@using FHNWPrototype.Application.Controllers.UIViewModels._Global
+
+@using FHNWPrototype.Domain._Base.Accounts
+
+
+@if (@Model.WallOfThisProfile != null)
+{
+    <div id="post_zone">
+
+        <section id="new_post_section">
+            <article id="new_article_post" class="post"  >
+                <input type="text" id="newpost" placeholder="what are you thinking?"  style="width:500px; height:20px;   text-align:center; margin-left:auto; margin-right:auto; display:block; border: 1px solid #AAAAAA"  />
+            </article>
+        </section>
+
+          @{
+    CompleteProfile myProfile = (CompleteProfile)Session["myProfile"];
+        }
+
+        @foreach (PostView post in Model.WallOfThisProfile.Posts)
+        {
+            post.AllowedToDeletePost = Model.IsThisMyOwnProfile;
+           
+              <section id="section_@(post.Key)">
+            
+                
+            @{
+            Html.RenderPartial("_partial_article_post", post);
+            }
+
+            @foreach (CommentView comment in post.Comments)
+            {
+                comment.AllowedToDeleteComment = post.AllowedToDeletePost;
+                @Html.Partial("_partial_article_comment", comment)
+            }
+
+            @{
+            MyNewCommentView myNewComment = new MyNewCommentView { PostKey = post.Key, Viewer = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = @myProfile.BasicProfile.ReferenceKey.ToString(), AccountType = @myProfile.BasicProfile.ReferenceType }, FullName = @myProfile.FullName } };
+            }
+            
+            @{
+            Html.RenderPartial("_partial_my_new_comment", myNewComment);
+            }
+
+            </section>
+            
+            
+        }
+
+    </div>
+}
+
+@if (Model.ShowPartnershipButtonForThisProfile)
+{
+  
+    <div id="inprogress" style="display:none;">
+        <img src="@Url.Content("~/Content/themes/designv1/images/load.gif")" alt="loading" />
+    </div>
+}
+
+@section settings{
+ <div id="logo">
+ <a href="@Url.Action("Index", "OrganizationAccounts", null, null)"><img id="logo" src="@Url.Content("~/Content/themes/designv1/images/logov2white.png")" alt="logo" /></a> 
+</div>
+<div id="links">
+    <ul>
+      
+       <li>@Html.ActionLink("My Partnerships", "Partnerships", "OrganizationAccounts", null, null)</li>
+   
+        <li>@Html.ActionLink("Log Off", "LogOff", "Account", null, null)</li>
+    </ul>
+</div>
+}
+
+@section header_style{
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/_partial_3CC_header_two_images.css")" />
+}
+
+@section header{
+
+         <figure id="brand_background">
+            <img id="my_banner" src="@Url.Action("GetHeaderPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey, accountType = @Model.Profile.BasicProfile.AccountType })" alt="brand" />
+            <img id="my_logo" src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey, accountType = @Model.Profile.BasicProfile.AccountType })" alt="logo" />
+        </figure>
+        
+        <div id="profile_status">
+             
+                <div id="profile_name"> @Html.ActionLink(Model.Profile.FullName, "OrganizationAccount", new { id=@Model.Profile.BasicProfile.ReferenceKey })  </div>
+                <div id="working_at">a division of @Model.Profile.Description2  </div>
+                <div id="connection">
+                    @if (Model.ShowPartnershipButtonForThisProfile)
+                    {
+                        if (Model.IsThisProfileAPartnerOfMine)
+                        {
+                            <text>Already connected: </text>
+                            if (Model.EnablePartnershipButtonForThisProfile)
+                            {
+                                @Ajax.ActionLink(@Model.PartnershipButtonCaptionForThisProfile,
+                                @Model.PartnershipButtonActionNameForThisProfile,
+                                new { key = @Model.Profile.BasicProfile.ReferenceKey },
+                                new AjaxOptions()
+                                {
+                                    UpdateTargetId = "friendship_action",
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace
+                                },
+                                new { id = "friendshipButton", enabled = "true" })
+                            }
+                            else
+                            {
+                                //  @Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, null, new { id="friendshipButton", enabled = "false" });
+                                //Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, new { senderAccountEmail=User.Identity.Name, receiverAccountEmail=@Model.Email  }, new { id="friendshipButton", enabled = "true" });
+                            }
+                        }
+                        else
+                        {
+                            <text>Not connected: </text>
+                            if (Model.EnablePartnershipButtonForThisProfile)
+                            {
+                                @Ajax.ActionLink(@Model.PartnershipButtonCaptionForThisProfile,
+                                @Model.PartnershipButtonActionNameForThisProfile,
+                                new { key = @Model.Profile.BasicProfile.ReferenceKey },
+                                new AjaxOptions()
+                                {
+                                    UpdateTargetId = "friendship_action",
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace
+                                },
+                                new { id = "friendshipButton", enabled = "true" })
+                            }
+                            else
+                            {
+                                //  @Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, null, new { id="friendshipButton", enabled = "false" });
+                                //Html.ActionLink(@Model.FriendshipButtonCaption, @Model.FriendshipButtonActionName, new { senderAccountEmail=User.Identity.Name, receiverAccountEmail=@Model.Email  }, new { id="friendshipButton", enabled = "true" });
+                            }
+                        }
+                    }
+                </div>
+         
+        </div>
+
+}
+
+
+@section left_column{
+   @* <nav id="employees">
+        <h1>EMPLOYEES</h1>
+        <ul>
+        @foreach (FHNWPrototype.Application.Controllers.UIViewModels._Global.CompleteProfileView item in @Model.EmployeesOfThisProfile)
+        {
+        <li>@Html.ActionLink(item.FullName, "UserAccount", "UserAccounts", new { id = item.BasicProfile.ReferenceKey }, null)</li>
+        }
+        </ul>
+    </nav>*@
+     <nav id="partnerships">
+        <h1>PARTNERS</h1>
+        <ul>
+             @foreach (FHNWPrototype.Application.Controllers.UIViewModels._Global.CompleteProfileView item in @Model.PartnersOfThisProfile)
+             {
+            <li>@Html.ActionLink(item.FullName, "OrganizationAccount", "OrganizationAccounts", new { id = item.BasicProfile.ReferenceKey }, null)</li>
+             }
+        </ul>
+    </nav>
+    <nav id="alliances">
+        <h1>ALLIANCES</h1>
+        <ul>
+             @foreach (FHNWPrototype.Application.Controllers.UIViewModels._Global.CompleteProfileView item in @Model.AlliancesOfThisProfile)
+             {
+            <li>@Html.ActionLink(item.FullName, "Alliance", "Alliances", new { id = item.BasicProfile.ReferenceKey }, null)</li>
+             }
+        </ul>
+    </nav>
+   
+}
+
+
+@section right_column{
+
+ <div id="suggestions">
+ 
+ 
+
+</div>
+}
+
+
+@section scripts{
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.signalR-1.0.0-alpha2.min.js")" ></script>
+
+      <script type="text/javascript" src="@Url.Content("~/signalr/hubs")" ></script>
+      <script>
+
+          $(document).ready(function () {
+
+              var connection = $.hubConnection();
+              var notifier = connection.createHubProxy('notifier');
+              connection.start()
+                  .done(function () {
+
+
+                      RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
+                    RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
+
+                    RegisterLikePostEvent("@Url.Action("LikePost","Publishing")");
+                    RegisterLikeCommentEvent("@Url.Action("LikeComment","Publishing")");
+
+                    RegisterUnLikePostEvent("@Url.Action("UnLikePost","Publishing")");
+                    RegisterUnLikeCommentEvent("@Url.Action("UnLikeComment","Publishing")");
+
+                    RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");
+                    RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");
+
+                      notifier.invoke('SuscribeMe', '@Model.Profile.BasicProfile.ReferenceKey');
+
+                      @foreach(var employeeProfile in Model.EmployeesOfThisProfile)
+                  {
+                    <text>
+                      notifier.invoke('SuscribeMe', '@employeeProfile.BasicProfile.ReferenceKey')
+                      .done(function () {
+
+                      })
+                      .fail(function () {
+
+                      });
+                    </text>
+                  }
+
+
+                      @foreach(var groupProfile in Model.AlliancesOfThisProfile)
+                  {
+                    <text>
+                    notifier.invoke('SuscribeMe', '@groupProfile.BasicProfile.ReferenceKey')
+                    .done(function () {
+
+                    })
+                    .fail(function () {
+
+                    });
+                    </text>
+                  }
+
+                      @foreach(var workContactProfile in Model.SisterDivisionsOfThisProfile)
+                 {
+                    <text>
+                    notifier.invoke('SuscribeMe', '@workContactProfile.BasicProfile.ReferenceKey')
+                    .done(function () {
+
+                    })
+                    .fail(function () {
+
+                    });
+                    </text>
+                  }
+
+                @foreach(var partnershipContactProfile in Model.PartnersOfThisProfile)
+                 {
+                    <text>
+                    notifier.invoke('SuscribeMe', '@partnershipContactProfile.BasicProfile.ReferenceKey')
+                    .done(function () {
+
+                    })
+                    .fail(function () {
+
+                    });
+                    </text>
+                  }
+
+
+
+
+                    //previosuly
+                   @* notifier.on('NewPostReceived', function (data1) {
+                        var postKey = { postKey: data1 };
+                        // alert('notification received key is: ' + postKey);
+                        $.post("@Url.Action("GetExternalPost","Publishing")", postKey, function (data2) {
+
+                            $(data2).insertAfter('section#new_post_section');
+
+                        });
+
+                       });*@
+
+                })
+                    .fail(function () { alert('connection failed'); });
+
+
+            notifier.on('NewPostReceived', function (data) {
+                var postKey = data.postKey;
+                var processedHtml = data.processedHtml;
+                $(processedHtml).insertAfter('section#new_post_section');
+                var parameter = { postKey: postKey }
+                $.get("@Url.Action("CreateMyInputForThisPost","Publishing")", parameter, function (result) {
+                    $(result).insertAfter('article#post_' + postKey);
+                });
+
+            });
+
+            notifier.on('NewCommentReceived', function (data) {
+
+                var postKey = data.postKey;
+                var processedHtml = data.processedHtml;
+
+                var theNewCommentArticleOfThisPost = $('#post_zone').find('#new_comment_post_' + postKey);
+
+                $(processedHtml).insertBefore(theNewCommentArticleOfThisPost);
+            });
+
+        });
+
+    </script>
+}

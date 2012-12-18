@@ -1,0 +1,108 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.UserAccounts.FriendshipsView 
+@using FHNWPrototype.Application.Controllers.UIViewModels.UserAccounts 
+@using FHNWPrototype.Application.Controllers.UIViewModels._Global
+
+@{
+    ViewBag.Title = ((FHNWPrototype.Domain._Base.Accounts.CompleteProfile) Session["myProfile"]).FullName  + "(Friendships)";
+    Layout = "~/Views/Shared/_layout_1CC_one_centered_column.cshtml";
+}
+ <div id="requests">
+<section id="workContactsNotifications">
+<h2>Work Contacts</h2>
+
+     @foreach ( CompleteProfileView profile in @Model.RequestorWorkContacts)
+    {
+<article>
+    <img class="advertisement" src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @profile.BasicProfile.ReferenceKey, accountType=@profile.BasicProfile.AccountType   })" alt="picture"   />
+    <h3>@Html.ActionLink(profile.FullName  , "UserAccount", "UserAccounts", new { id = @profile.BasicProfile.ReferenceKey   }, null)</h3>
+    <h4>@profile.Description1</h4>
+    <h4><a id="accept_request_from_@profile.BasicProfile.ReferenceKey" class="accept_request_from" href="#">Accept Request</a></h4>
+    <h4><a id="reject_request_from_@profile.BasicProfile.ReferenceKey" class="reject_request_from" href="#">Reject Request</a></h4>
+</article>
+   }
+
+   @foreach (CompleteProfileView profile in @Model.AcceptedWorkContacts)
+    {
+<article>
+    <img class="advertisement" src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @profile.BasicProfile.ReferenceKey, accountType=@profile.BasicProfile.AccountType   })" alt="picture"   />
+    <h3>@Html.ActionLink(profile.FullName  , "UserAccount", "UserAccounts", new { id = @profile.BasicProfile.ReferenceKey   }, null)</h3>
+    <h4>@profile.Description1 </h4>
+    <h4><a id="cancel_friendship_with_@profile.BasicProfile.ReferenceKey" class="cancel_friendship_with" href="#">Cancel Friendship</a></h4>
+</article>
+   }
+</section>
+
+<section id="partnershipContactsNotifications">
+<h2>Partnership Contacts</h2>
+
+       @foreach (CompleteProfileView profile in @Model.RequestorPartnershipContacts)
+    {
+<article>
+    <img class="advertisement" src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @profile.BasicProfile.ReferenceKey, accountType=@profile.BasicProfile.AccountType   })" alt="picture"   />
+    <h3>@Html.ActionLink(profile.FullName  , "UserAccount", "UserAccounts", new { id = @profile.BasicProfile.ReferenceKey   }, null)</h3>
+    <h4>@profile.Description1 </h4>
+    <h4><a id="accept_request_from_@profile.BasicProfile.ReferenceKey" class="accept_request_from" href="#">Accept Request</a></h4>
+    <h4><a id="reject_request_from_@profile.BasicProfile.ReferenceKey" class="reject_request_from" href="#">Reject Request</a></h4>
+</article>
+   }
+
+   @foreach (CompleteProfileView profile in @Model.AcceptedPartnershipContacts)
+    {
+<article>
+    <img class="advertisement" src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @profile.BasicProfile.ReferenceKey, accountType= @profile.BasicProfile.AccountType   })" alt="picture"   />
+    <h3>@Html.ActionLink(profile.FullName  , "UserAccount", "UserAccounts", new { id = @profile.BasicProfile.ReferenceKey   }, null)</h3>
+    <h4>@profile.Description1 </h4>
+    <h4><a id="cancel_friendship_with_@profile.BasicProfile.ReferenceKey" class="cancel_friendship_with" href="#">Cancel Friendship</a></h4>
+</article>
+   }
+</section>
+</div>
+
+@section settings{
+<div id="logo">
+
+    <a href="@Url.Action("Index", "UserAccounts", new { })">
+        <img id="logo" src="@Url.Content("~/Content/themes/designv1/images/logov2white.png")" alt="logo" />
+    </a> 
+
+</div>
+<div id="links">
+    <ul>
+       <li>@Html.ActionLink("Chat", "Chat","UserAccounts", null,null)</li>
+       <li>@Html.ActionLink("My Friendships", "Friendships", "UserAccounts", null)</li>
+       <li>@Html.ActionLink("Log Off", "LogOff", "Account", new { }, null)</li>
+ 
+    </ul>
+</div>
+}
+
+@section header{
+
+    @{
+        var myProfile = (FHNWPrototype.Domain._Base.Accounts.CompleteProfile)  Session["myProfile"];
+         
+    }
+
+    <figure id="brand_background">
+        <img id="my_banner" src="@Url.Action("GetHeaderPictureByBasicProfile", "Retriever", new { key=@myProfile.BasicProfile.ReferenceKey.ToString(), accountType=@myProfile.BasicProfile.ReferenceType  })" alt="brand" />
+        <img id="my_logo" src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new {key=@myProfile.BasicProfile.ReferenceKey.ToString(), accountType=@myProfile.BasicProfile.ReferenceType })" alt="logo" />
+    </figure>
+    
+}
+
+@section header_style{
+   
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/notifications.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/_partial_3CC_header_two_images.css")" />
+}
+
+@section scripts
+{
+     <script type="text/javascript">
+         RegisterRequestFriendshipTo("@Url.Action("RequestFriendshipTo","UserAccounts")");
+         RegisterCancelRequestTo("@Url.Action("CancelRequestTo","UserAccounts")");
+         RegisterAcceptRequestFrom("@Url.Action("AcceptRequestFrom","UserAccounts")");
+         RegisterRejectRequestFrom("@Url.Action("RejectRequestFrom","UserAccounts")");
+         RegisterCancelFriendshipWith("@Url.Action("CancelFriendshipWith","UserAccounts")");
+    </script>
+}

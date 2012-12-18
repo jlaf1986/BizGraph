@@ -1,0 +1,146 @@
+﻿
+img.post_icon 
+{
+    width:11px;
+    height:11px;
+    background-image:url(images/finallogos_others.png);
+    background-position:0px -20px;
+    float:right;
+}
+
+#publishing_zone section 
+{
+    /*background-color:pink;*/
+    padding-top:5px;
+    border-top:1px solid #CCCCCC;
+    width:550px;
+    /*margin-left:5px;*/
+}
+
+#publishing_zone section article.post
+{
+    min-height:60px;
+}
+
+#publishing_zone section article.comment
+{
+    min-height:50px;
+}
+
+div.post_avatar
+{
+    width:55px;
+    /*background-color:green;*/
+    display:block;
+    float:left;
+    margin-right:5px;
+}
+
+div.post_content
+{
+    width:480px;
+    /*background-color:brown;*/
+    display:block;
+    float:left;
+    text-align:left;
+}
+
+div.post_content article.post
+{
+    width:430px;
+    /*background-color:#FFFFFF;*/
+    color:#444444;
+    margin-bottom:10px;
+    margin-top:10px;
+    display:block;
+    clear:both;
+}
+
+p.post_text
+{
+    text-align:left;
+    text-wrap:normal;
+    word-wrap:break-word;
+    display:block;
+    /*background-color:purple;*/
+    width:100%;
+}
+
+div.comment_avatar
+{
+    width:45px;
+    height:100%;
+    /*background-color:beige;*/
+    display:block;
+    float:left;
+}
+
+div.comment_content
+{
+    width:410px;
+    height:auto;
+    /*background-color:aliceblue;*/
+    display:block;
+    float:left;
+    text-align:left;
+}
+
+article.comment 
+{     
+    display:block;
+    /*background-color:red;*/
+    padding-left:60px;
+    width:490px;
+    clear:both;
+    min-height:50px;
+    margin-top:5px;
+}
+
+p.comment_text
+{
+    display:block;
+    text-align:left;
+    clear:both;
+    /*background-color:yellow;*/
+    text-wrap:normal;
+    word-wrap:break-word;
+    width:100%;
+    height:auto;
+}
+
+
+
+
+#publishing_zone article.post h2 a:link
+{
+    font-size:14px;
+    width:auto;
+}
+
+#publishing_zone article.comment h2 a:link
+{
+    font-size:12px;
+    width:auto;
+}
+
+img.profile_picture_post
+{
+    border:1px solid #EEEEEE;
+    width:50px;
+    height:50px;
+    float:left;
+    top:0px;
+    left:0px;
+    margin-left:5px;
+}
+
+img.profile_picture_comment
+{
+    border:1px solid #EEEEEE;
+    width:35px;
+    height:35px;
+    float:left;
+    top:0px;
+    left:0px;
+
+

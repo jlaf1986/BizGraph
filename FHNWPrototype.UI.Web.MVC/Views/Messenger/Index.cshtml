@@ -1,0 +1,189 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Messenger.MessengerView 
+
+@{
+
+    Layout = "~/Views/Shared/_layout_3CC_three_centered_columns.cshtml";
+    var myProfile = (FHNWPrototype.Domain._Base.Accounts.CompleteProfile)Session["myProfile"];
+    ViewBag.Title = myProfile.FullName + "(Messenger)";
+}
+
+<div id="publishing_zone">
+
+   <section id="new_post_section">
+    <article id="new_article_post" class="post">
+        <input type="text" id="new_messenger_post" placeholder="what are you thinking?"  style="width:500px; height:20px;   text-align:center; margin-left:auto; margin-right:auto; display:block; border: 1px solid #AAAAAA"  />
+    </article> 
+        </section>
+    @foreach (var post in Model.Posts)
+    {
+        @Html.Partial("_partial_article_messenger_post", post)
+    }
+
+
+</div>
+
+
+
+@section header_style{
+ 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/newsfeed.css")" />
+}
+
+@section header{
+        
+    <div id="newsfeed_info">
+             
+            <div id="profile_name">@Html.ActionLink(Model.Profile.FullName, "UserAccount","UserAccounts", new { id=@Model.Profile.BasicProfile.ReferenceKey },null)</div>
+            <div id="working_at">working at @Model.Profile.Description1   </div>
+         
+    </div>
+   
+}
+
+@section settings{
+
+
+ <div id="logo">
+ <a href="@Url.Action("Index","UserAccounts", null,null)"><img id="img_logo" src="@Url.Content("~/Content/themes/designv1/images/transparent.png")" alt="logo" /></a> 
+</div>
+
+<section id="notifications">
+
+    @*  <article id="notifications_mywall">
+        <span id="counter_notifications_mywall">5</span>
+
+    </article>*@
+
+    <article id="notifications_newsfeed">
+        <span id="counter_notifications_newsfeed">3</span>
+
+    </article>
+    
+ 
+
+     @*   <article id="notifications_groups">
+        <span id="counter_notifications_groups">3</span>
+
+    </article>*@
+   
+</section>
+
+     <section id="links_section">
+        @*
+        <article id="link_chat">
+            <span id="counter_notifications_chat">4</span>
+        </article>
+
+        <article id="link_organization">
+            <span id="counter_notifications_organization">3</span>
+        </article>*@
+        <article>
+              @Html.ActionLink("Log Off", "LogOff", "Account", null, null)
+
+        </article>
+
+          <article id="link_graph">
+                @Html.ActionLink("Graph", "Graph", "UserAccounts", null, null)
+        </article>
+      
+    </section>
+}
+
+
+@section left_column{
+@if (Model.Profile.Description1  != null)
+{
+    <nav id="connected">
+        <h1>CONNECTED</h1>
+        <ul id="connected_users">
+            @foreach (var user in Model.Users)
+            {
+                <li id="user_@(user.BasicProfile.ReferenceKey)">@Html.Partial("_partial_profile_link",user)</li>
+            }
+        </ul>
+    </nav>
+    
+}
+}
+
+@section scripts{
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.signalR-1.0.0-alpha2.min.js")" ></script>
+
+    <script type="text/javascript" src="@Url.Content("~/signalr/hubs")" ></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/myscripts-notifier.js")" ></script>
+    <script>
+         
+          $(document).ready(function () {
+
+              var connection = $.hubConnection();
+              var notifier = connection.createHubProxy('notifier');
+              connection.start()
+                  .done(function () {
+
+                      notifier.invoke('SuscribeMe', '@Model.ChatRoom');
+
+                      RegisterNewMessengerPostEvent("@Url.Action("SubmitMessengerPost")", "@Model.ChatRoom", notifier);
+                  });
+
+
+              notifier.on('UserConnected', function (data) {
+                 
+                  var email = data.email;
+                //  alert('attempting to refresh connected users: ' + email);
+                  var msg = { "email" : email};
+                  $.post("@Url.Action("GetProfileLinkFromUserEmail","Account")", msg, function (result) {
+
+                      var success = result.success;
+                      if (success)
+                      {
+                          var key = result.userKey;
+                          var processedHtml = result.processedHtml;
+
+                          $("<li id='user_" + key + "'>" + processedHtml + "</li>").appendTo("ul#connected_users");
+                      }
+                  });
+
+              });
+
+              
+
+            notifier.on('Disconnected', function (data) {
+                var userKey = data.userKey;
+                
+                $("li#user_" + userKey).remove();
+                });
+
+            notifier.on('Reconnected', function (data) {
+               
+              //  alert("reconnected:" + data);
+
+            });
+
+            notifier.on('NewMessengerPostReceived', function (data) {
+               // alert('notification received');
+                var success=data.success;
+                if(success)
+                {
+                    var processedHtml = data.processedHtml;
+                   // alert(processedHtml);
+                    $(processedHtml).insertAfter("#new_post_section");
+                }
+
+                connection.connectionSlow(function () {
+                   // alert('Your connection seems to be very slow, you may have problems receiving messages. Sorry for that');
+                });
+
+                connection.disconnected(function () {
+                  //  alert('The server somehow disconnected, you may have problems receiving messages. Sorry for that');
+                });
+
+                //connection.stateChanged(function () {
+
+                //});
+
+        });
+
+          });
+    </script>
+}

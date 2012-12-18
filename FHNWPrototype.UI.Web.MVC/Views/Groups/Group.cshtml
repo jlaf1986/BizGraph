@@ -1,0 +1,364 @@
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Groups.GroupView
+
+@using FHNWPrototype.Application.Controllers.UIViewModels.Publishing
+@using FHNWPrototype.Application.Controllers.UIViewModels._Global
+@using FHNWPrototype.Domain._Base.Accounts
+
+@{
+    ViewBag.Title = Model.Profile.FullName ;
+    Layout = "~/Views/Shared/_layout_3CC_three_centered_columns.cshtml";
+}
+ 
+
+@if (@Model.WallOfThisProfile  != null)
+{
+    <div id="publishing_zone">
+
+        @if(Model.IsViewerAllowedToCollaborate)
+        {
+            <section id="new_post_section">
+                <article id="new_article_post" class="post"  >
+                    <input type="text" id="newpost" placeholder="what are you thinking?"  style="width:500px; height:20px;   text-align:center; margin-left:auto; margin-right:auto; display:block; border: 1px solid #AAAAAA"  />
+                </article>
+            </section>
+        }
+
+          @{
+           CompleteProfile  myProfile = (CompleteProfile)Session["myProfile"];
+        }
+
+        @foreach (FHNWPrototype.Application.Controllers.UIViewModels.Publishing.PostView post in Model.WallOfThisProfile.Posts)
+        {
+               <section id="section_@(post.Key)">
+                
+                @{
+                Html.RenderPartial("_partial_article_post", post);
+                }
+
+                @foreach (CommentView comment in post.Comments)
+                {
+                    comment.AllowedToDeleteComment=post.AllowedToDeletePost;
+                    @Html.Partial("_partial_article_comment",comment)
+                }
+
+                @{
+                    MyNewCommentView myNewComment = new MyNewCommentView { PostKey=post.Key , Viewer=new CompleteProfileView{ BasicProfile=new BasicProfileView{ ReferenceKey=@myProfile.BasicProfile.ReferenceKey.ToString(), AccountType=@myProfile.BasicProfile.ReferenceType} , FullName=@myProfile.FullName} };
+                }
+            
+                @{
+                    Html.RenderPartial("_partial_my_new_comment", myNewComment);
+                }
+
+                </section>
+        }
+
+    </div>
+}
+
+<div id="notification_details" class="hide">
+   <h2>Notifications</h2>
+    <section id="last_notifications_posts">
+       <article class="notification_detail">
+           <div class="notification_avatar">
+                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey,accountType= @Model.Profile.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_notification" />
+           </div>
+           <div class="notification_content">
+                <h2>@Html.ActionLink(Model.Profile.FullName , "UserAccount", "UserAccounts", new { id = Model.Profile.BasicProfile.ReferenceKey  }, null)</h2>
+
+                <p class="notification_text">
+                 Someone posted something in your wall
+                </p>
+           </div>
+       </article>
+   </section>
+      <section id="last_notifications_posts_likes">
+             <article class="notification_detail">
+           <div class="notification_avatar">
+                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey,accountType= @Model.Profile.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_notification" />
+           </div>
+           <div class="notification_content">
+                <h2>@Html.ActionLink(Model.Profile.FullName , "UserAccount", "UserAccounts", new { id = Model.Profile.BasicProfile.ReferenceKey  }, null)</h2>
+
+                <p class="notification_text">
+                 Someone liked your post on someones wall
+                </p>
+           </div>
+       </article>
+   </section>
+      <section id="last_notifications_comment_likes">
+             <article class="notification_detail">
+           <div class="notification_avatar">
+                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey,accountType= @Model.Profile.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_notification" />
+           </div>
+           <div class="notification_content">
+                <h2>@Html.ActionLink(Model.Profile.FullName , "UserAccount", "UserAccounts", new { id = Model.Profile.BasicProfile.ReferenceKey  }, null)</h2>
+
+                <p class="notification_text">
+                 Someone liked your comment on someones wall
+                </p>
+           </div>
+       </article>
+   </section>
+      <section id="last_notifications_groups">
+             <article class="notification_detail">
+           <div class="notification_avatar">
+                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey,accountType= @Model.Profile.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_notification" />
+           </div>
+           <div class="notification_content">
+                <h2>@Html.ActionLink(Model.Profile.FullName , "UserAccount", "UserAccounts", new { id = Model.Profile.BasicProfile.ReferenceKey  }, null)</h2>
+
+                <p class="notification_text">
+                 someone wrote something in a group
+                </p>
+           </div>
+       </article>
+   </section>
+      <section id="last_notifications_organization">
+             <article class="notification_detail">
+           <div class="notification_avatar">
+                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey,accountType= @Model.Profile.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_notification" />
+           </div>
+           <div class="notification_content">
+                <h2>@Html.ActionLink(Model.Profile.FullName , "UserAccount", "UserAccounts", new { id = Model.Profile.BasicProfile.ReferenceKey  }, null)</h2>
+
+                <p class="notification_text">
+                 This is a text of the notification
+                </p>
+           </div>
+       </article>
+   </section>
+    
+</div>
+ 
+@section settings{
+ 
+    
+
+ <div id="logo">
+ <a href="@Url.Action("Index","UserAccounts", null,null)"><img id="img_logo" src="@Url.Content("~/Content/themes/designv1/images/transparent.png")" alt="logo" /></a> 
+</div>
+
+<section id="notifications">
+     
+    <article id="notifications_newsfeed">
+        <span id="counter_notifications_newsfeed">3</span>
+
+    </article>
+     
+</section>
+
+    <section id="links_section">
+        @*
+        <article id="link_chat">
+            <span id="counter_notifications_chat">4</span>
+        </article>
+
+        <article id="link_organization">
+            <span id="counter_notifications_organization">3</span>
+        </article>*@
+        <article>
+              @Html.ActionLink("Log Off", "LogOff", "Account", null, null)
+
+        </article>
+      
+    </section>
+
+    }
+
+@section header_style{
+ @*   <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/_partial_3CC_header_two_images.css")" />*@
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/themes/designv1/newsfeed.css")" />
+}
+
+@section header{
+ 
+ @{
+           CompleteProfile  myProfile = (CompleteProfile)Session["myProfile"];
+        }
+
+     <div id="newsfeed_info">
+          
+          <div id="profile_name">@Html.ActionLink(myProfile.FullName, "UserAccount", "UserAccounts", new { id=@myProfile.BasicProfile.ReferenceKey.ToString()},null)</div>
+            <div id="working_at">working at @myProfile.Description1  </div>
+               
+        </div>
+ 
+}
+
+@section left_column{
+     <nav id="members">
+        <h1>MEMBERS</h1>
+        <ul>
+             @foreach( FHNWPrototype.Application.Controllers.UIViewModels._Global.CompleteProfileView item in @Model.Members)
+            {
+            <li>@Html.ActionLink(item.FullName , "UserAccount", "UserAccounts", new { id = item.BasicProfile.ReferenceKey  }, null)</li>
+            }
+        </ul>
+    </nav>
+}
+
+
+@section scripts{
+       
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.signalR-1.0.0-alpha2.min.js")" ></script>
+
+      <script type="text/javascript" src="@Url.Content("~/signalr/hubs")" ></script>
+      <script>
+        
+          $(document).ready(function () {
+
+              
+
+            var connection = $.hubConnection();
+            var notifier = connection.createHubProxy('notifier');
+            connection.start()
+                .done(function () {
+
+             
+
+                    RegisterNewPostOrTweet("@Url.Action("SubmitNewPost","Publishing")", "@Url.Action("SubmitNewTweet","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
+           
+
+                   // RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
+                    RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
+
+                    RegisterNewRetweetEvent("@Url.Action("SubmitNewRetweet","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
+
+                    RegisterLikePostEvent("@Url.Action("LikePost","Publishing")");
+                    RegisterLikeCommentEvent("@Url.Action("LikeComment","Publishing")");
+
+                    RegisterUnLikePostEvent("@Url.Action("UnLikePost","Publishing")");
+                    RegisterUnLikeCommentEvent("@Url.Action("UnLikeComment","Publishing")");
+
+                    RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");
+                    RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");
+
+                    RegisterDeleteTweetEvent("@Url.Action("DeleteTweet","Publishing")");
+                    RegisterDeleteRetweetEvent("@Url.Action("DeleteRetweet","Publishing")");
+
+                    notifier.invoke('SuscribeMe', '@Model.Profile.BasicProfile.ReferenceKey');
+
+@*                    notifier.invoke('SuscribeMe', '@Model.Profile.BasicProfile.ReferenceKey');*@
+
+              @*      notifier.invoke('SuscribeMe', '@Model.OrganizationAccountOfThisProfile.BasicProfile.ReferenceKey');*@
+
+               @*       @foreach(var groupProfile in Model.GroupsOfThisProfile)
+                  {
+                    <text>
+                      notifier.invoke('SuscribeMe', '@groupProfile.BasicProfile.ReferenceKey')
+                      .done(function () {
+                        
+                      })
+                      .fail(function () {
+                 
+                      });
+                      </text>
+                  }*@
+
+                  @*    @foreach(var workContactProfile in Model.WorkContactsOfThisProfile)
+                 {
+                    <text>
+                      notifier.invoke('SuscribeMe', '@workContactProfile.BasicProfile.ReferenceKey')
+                      .done(function () {
+                       
+                      })
+                      .fail(function () {
+                         
+                      });
+                      </text>
+                  }*@
+
+            @*    @foreach(var partnershipContactProfile in Model.PartnershipContactsOfThisProfile)
+                 {
+                    <text>
+                      notifier.invoke('SuscribeMe', '@partnershipContactProfile.BasicProfile.ReferenceKey')
+                      .done(function () {
+                        
+                      })
+                      .fail(function () {
+                       
+                      });
+                    </text>
+                  }*@
+
+                    $("#notifications_chat").click(function (e) {
+                        //e.preventDefault();
+                        e.stopPropagation();
+                       // alert('detected');
+                        $("#notification_details").removeAttr('class');
+                    });
+
+                    $("#notifications_newsfeed").click(function (e) {
+                        //e.preventDefault();
+                        e.stopPropagation();
+                        // alert('detected');
+                        $("#notification_details").removeAttr('class');
+                    });
+                   
+                    $(document).click(function () {
+                      //  alert('click on document detected');
+                        $("#notification_details").attr('class', 'hide');
+                    });
+
+                    //previosuly
+                   @* notifier.on('NewPostReceived', function (data1) {
+                        var postKey = { postKey: data1 };
+                        // alert('notification received key is: ' + postKey);
+                        $.post("@Url.Action("GetExternalPost","Publishing")", postKey, function (data2) {
+
+                            $(data2).insertAfter('section#new_post_section');
+
+                        });
+
+                       });*@
+
+                    })
+                    .fail(function () { alert('connection failed'); });
+
+                  
+            notifier.on('NewPostReceived', function (data) {
+                var postKey = data.postKey;
+                var processedHtml = data.processedHtml;
+                $(processedHtml).insertAfter('section#new_post_section');
+                var parameter = { postKey: postKey }
+                $.get("@Url.Action("CreateMyInputForThisPost","Publishing")",parameter,function(result){
+                  $(result).insertAfter('article#post_' + postKey);
+                });
+
+            });
+
+            notifier.on('NewTweetReceived', function (data) {
+                var tweetKey = data.tweetKey;
+                var processedHtml = data.processedHtml;
+                $(processedHtml).insertAfter('section#new_post_section');
+               
+               });
+
+            notifier.on('NewCommentReceived', function (data) {
+
+                var postKey = data.postKey;
+                var processedHtml = data.processedHtml;
+              
+                var theNewCommentArticleOfThisPost = $('#publishing_zone').find('#new_comment_post_' + postKey);
+
+                $(processedHtml).insertBefore(theNewCommentArticleOfThisPost);
+            });
+
+            notifier.on('NewRetweetReceived', function (data) {
+
+                var tweetKey = data.tweetKey;
+                var processedHtml = data.processedHtml;
+                 
+                $(processedHtml).insertAfter('section#new_post_section');
+            });
+
+
+            //jquery automcomplete
+
+            
+
+                       
+          });
+
+    </script>
+}
