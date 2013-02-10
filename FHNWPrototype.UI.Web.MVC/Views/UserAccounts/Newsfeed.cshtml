@@ -129,77 +129,7 @@
 }
 
 <div id="notification_details" class="hide">
-   <h2>Notifications</h2>
-    <section id="last_notifications_posts">
-       <article class="notification_detail">
-           <div class="notification_avatar">
-                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey,accountType= @Model.Profile.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_notification" />
-           </div>
-           <div class="notification_content">
-                <h2>@Html.ActionLink(Model.Profile.FullName , "UserAccount", "UserAccounts", new { id = Model.Profile.BasicProfile.ReferenceKey  }, null)</h2>
-
-                <p class="notification_text">
-                 Someone posted something in your wall
-                </p>
-           </div>
-       </article>
-   </section>
-      <section id="last_notifications_posts_likes">
-             <article class="notification_detail">
-           <div class="notification_avatar">
-                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey,accountType= @Model.Profile.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_notification" />
-           </div>
-           <div class="notification_content">
-                <h2>@Html.ActionLink(Model.Profile.FullName , "UserAccount", "UserAccounts", new { id = Model.Profile.BasicProfile.ReferenceKey  }, null)</h2>
-
-                <p class="notification_text">
-                 Someone liked your post on someones wall
-                </p>
-           </div>
-       </article>
-   </section>
-      <section id="last_notifications_comment_likes">
-             <article class="notification_detail">
-           <div class="notification_avatar">
-                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey,accountType= @Model.Profile.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_notification" />
-           </div>
-           <div class="notification_content">
-                <h2>@Html.ActionLink(Model.Profile.FullName , "UserAccount", "UserAccounts", new { id = Model.Profile.BasicProfile.ReferenceKey  }, null)</h2>
-
-                <p class="notification_text">
-                 Someone liked your comment on someones wall
-                </p>
-           </div>
-       </article>
-   </section>
-      <section id="last_notifications_groups">
-             <article class="notification_detail">
-           <div class="notification_avatar">
-                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey,accountType= @Model.Profile.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_notification" />
-           </div>
-           <div class="notification_content">
-                <h2>@Html.ActionLink(Model.Profile.FullName , "UserAccount", "UserAccounts", new { id = Model.Profile.BasicProfile.ReferenceKey  }, null)</h2>
-
-                <p class="notification_text">
-                 someone wrote something in a group
-                </p>
-           </div>
-       </article>
-   </section>
-      <section id="last_notifications_organization">
-             <article class="notification_detail">
-           <div class="notification_avatar">
-                  <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @Model.Profile.BasicProfile.ReferenceKey,accountType= @Model.Profile.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_notification" />
-           </div>
-           <div class="notification_content">
-                <h2>@Html.ActionLink(Model.Profile.FullName , "UserAccount", "UserAccounts", new { id = Model.Profile.BasicProfile.ReferenceKey  }, null)</h2>
-
-                <p class="notification_text">
-                 This is a text of the notification
-                </p>
-           </div>
-       </article>
-   </section>
+   
     
 </div>
 
@@ -213,7 +143,7 @@
 <section id="notifications">
      
     <article id="notifications_newsfeed">
-        <span id="counter_notifications_newsfeed">3</span>
+        <span id="counter_notifications_newsfeed" class="hide">0</span>
 
     </article>
      
@@ -380,6 +310,10 @@
         
           $(document).ready(function () {
 
+            var notificationsAreAlreadyChecked = false;
+
+            CheckCounterRecentNotifications("@Url.Action("GetCountOfNewNotifications","Notification")");
+
             GetWorkFriendshipRecommendation("@Url.Action("GetWorkContactSuggestion","Retriever")", "@Model.Profile.BasicProfile.ReferenceKey");
 
             GetPartnershipRecommendation("@Url.Action("GetPartnershipContactSuggestion","Retriever")", "@Model.Profile.BasicProfile.ReferenceKey");
@@ -394,7 +328,7 @@
                     RegisterAutocomplete();
 
                     RegisterNewPostOrTweet("@Url.Action("SubmitNewPost","Publishing")", "@Url.Action("SubmitNewTweet","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
-           
+                    
 
                    // RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
                     RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
@@ -467,12 +401,18 @@
                         //e.preventDefault();
                         e.stopPropagation();
                         // alert('detected');
+                        notificationsAreAlreadyChecked = true;
+                        CheckRecentNotifications("@Url.Action("GetCountOfNewNotifications","Notification")", "@Url.Action("GetLatestNotifications","Notification")");
+                        $('#counter_notifications_newsfeed').attr('class', 'hide');
                         $("#notification_details").removeAttr('class');
                     });
                    
                     $(document).click(function () {
-                      //  alert('click on document detected');
+                        //  alert('click on document detected');
                         $("#notification_details").attr('class', 'hide');
+                        if (notificationsAreAlreadyChecked==true) {
+                        $("#counter_notifications_newsfeed").attr('class', 'hide');
+                        }
                     });
 
                     //previosuly
@@ -489,6 +429,13 @@
 
                     })
                     .fail(function () { alert('connection failed'); });
+
+              notifier.on('NotificationReceived', function (e) {
+                  //alert('notification received');
+                  notificationsAreAlreadyChecked = false;
+                  CheckCounterRecentNotifications("@Url.Action("GetCountOfNewNotifications","Notification")");
+                  //CheckRecentNotifications("@Url.Action("GetCountOfNewNotifications","Notification")", "@Url.Action("GetLatestNotifications","Notification")");
+              });
 
                   
             notifier.on('NewPostReceived', function (data) {
@@ -527,11 +474,48 @@
                 $(processedHtml).insertAfter('section#new_post_section');
             });
 
+            notifier.on('LikedPost', function (data) {
+               
+                var postKey = data.postKey;
+                var counter = data.counter;
+             
+                $("#publishing_zone").find('li#like_counter_post_' + postKey).text(counter + ' Like this');
+            });
 
-            //jquery automcomplete
+            notifier.on('UnLikedPost', function (data) {
 
-            
+                var postKey = data.postKey;
+                var counter = data.counter;
+               
+                $("#publishing_zone").find('li#like_counter_post_' + postKey).text(counter + ' Like this');
+            });
 
+            notifier.on('LikedComment', function (data) {
+
+                var commentKey = data.commentKey;
+                var counter = data.counter;
+             
+                $("#publishing_zone").find('li#like_counter_comment_' + commentKey).text(counter + ' Like this');
+            });
+
+            notifier.on('UnLikedComment', function (data) {
+
+                var commentKey = data.commentKey;
+                var counter = data.counter;
+               
+                $("#publishing_zone").find('li#like_counter_comment_' + commentKey).text(counter + ' Like this');
+            });
+
+            //notifier.on('NotificationReceived', function (data) {
+            //    alert('a notification has been received');
+            //    var profileKey = data.profileKey;
+            //    var text = data.text;
+            //    var reference = data.reference;
+
+            //    $("#counter_notifications_newsfeed").removeAttr('class');
+
+            //    $("#notification_details").append('li#like_counter_comment_' + commentKey).text(counter + ' Like this');
+            //});
                        
           });
 

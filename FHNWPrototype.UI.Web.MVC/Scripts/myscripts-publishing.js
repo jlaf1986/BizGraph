@@ -1,30 +1,12 @@
 ﻿function RegisterAutocomplete() {
     var availableTags = [
-                   "@InvolvedCoworkers",
-                   "@UpstreamPartnersLevel1",
-                   "@UpstreamPartnersLevel2",
-                   "@DownstreamPartnersLevel1",
-                   "@DownstreamPartnersLevel2",
-                   "#EngineAssembler",
-                   "#PistonsManufacturer",
-                   "#SteelManufacturer",
-                   "#ElectronicsManufacturer",
-                   "#InteriorComponentsProcurement",
-                   "#AirConditionerManufacturer",
-                   "#ElectricSystemProvider",
-                   "#SeatsAssembler",
-                   "#FabricsProvider",
-                   "#ChassisAssembler",
-                   "#LightningSystemAssembler",
-                   "#SteeringSystemAssembler",
-                   "#SuspensionProvider",
-                   "#WheelsProvider",
-                   "#TiresProvider",
-                   "#Brakes",
-                   "#SalesAndDistribution",
-                   "#RegionalSales",
-                   "#Retailer",
-                   "#AutoSparePartsReseller"
+                   "@Coworkers",
+                   "@UpstreamTier1",
+                   "@UpstreamTier2",
+                   "@DownstreamTier1",
+                   "@DownstreamTier1",
+                   "#MaterialFlow",
+                   "#Contract2013"
 
     ];
 
@@ -159,7 +141,7 @@ function RegisterNewRetweetEvent(url, referenceKey, notifierProxy) {
                 "tweetKey": retrievedTweetKey
             };
             $.post(url, parameters, function (data) {
-                alert('retweet has been sent');
+                //alert('retweet has been sent');
             });
     });
 };

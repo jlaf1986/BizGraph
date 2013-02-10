@@ -51,8 +51,8 @@ namespace FHNWPrototype.UI.Web.MVC
             "~/Scripts/myscripts.js","~/Scripts/myscripts-publishing.js",
             "~/Scripts/myscripts.js","~/Scripts/myscripts-friendships.js",
             "~/Scripts/myscripts.js","~/Scripts/myscripts-recommendations.js",
-            "~/Scripts/myscripts.js","~/Scripts/myscripts-partnerships.js"
-          
+            "~/Scripts/myscripts.js","~/Scripts/myscripts-partnerships.js",
+            "~/Scripts/myscripts.js","~/Scripts/myscripts-notifications.js"
             ));
 
         }

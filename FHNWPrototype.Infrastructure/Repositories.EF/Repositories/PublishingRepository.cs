@@ -11,6 +11,7 @@ using FHNWPrototype.Domain.Friendships.States;
 using FHNWPrototype.Domain.Partnerships.States;
 using FHNWPrototype.Domain._Base.Accounts;
 using FHNWPrototype.Domain.Publishing.Tweets;
+using FHNWPrototype.Domain.Notifications;
 
 namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
 {
@@ -190,6 +191,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                         var retweetsFromWallOfReceived = db.ContentStreams
                                                              .Include("Owner")
                                                            .Include("Retweets.Author")
+                                                             .Include("Retweets.Tweet.Author")
                                                               .FirstOrDefault(x => x.Owner.ReferenceKey == friendship.Sender.Key)
 
                                                              .Retweets.Where(x => x.Author.ReferenceKey == friendship.Sender.Key)
@@ -356,16 +358,43 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
             {
                 var thisPost = db.Posts
                     .Include("PostLikes")
+                    .Include("Author")
                     .Single(x => x.Key == postKey);
                 var author = db.BasicProfiles.FirstOrDefault(x => x.ReferenceKey == AuthorKey);
                 PostLike newLike = new PostLike();
+                Guid newGuid = Guid.NewGuid();
+                newLike.Key = newGuid;
                 newLike.Author = author;
                 newLike.DateTime = DateTime.Now;
                 newLike.Value = LikeValue.Positive;
                 newLike.Post = thisPost;
                 db.PostLikes.Add(newLike);
-                db.SaveChanges();
 
+                Suscription thisSuscription = null;
+                Event thisEvent = null;
+                Notification notification = null;
+
+                //suscribe the author to receive notifications from this post, from now on
+                if (AuthorKey != author.ReferenceKey)
+                {
+                     thisSuscription = new Suscription { Key = Guid.NewGuid(), Type = SuscriptionType.PostILiked, Suscriber = author, ReferencePoint = newGuid };
+
+                    db.Suscriptions.Add(thisSuscription);
+               
+                //register the event of liking the post
+               
+                     thisEvent = new Event { Key = Guid.NewGuid(), PostOrComment = newGuid, Type = EventType.LikedMyPost, TriggeredBy = author, TriggeredOn = DateTime.Now };
+
+                    db.Events.Add(thisEvent);
+                
+                //dont notify if its yourself
+               
+                    notification = new Notification { Key = Guid.NewGuid(), Event = thisEvent, NotifiedTo = thisPost.Author };
+
+                    db.Notifications.Add(notification);
+                }
+
+                db.SaveChanges();
                 return thisPost.PostLikes.Count;
             }
 
@@ -379,6 +408,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                 var author = db.UserAccounts.FirstOrDefault(x => x.Key == AuthorUserAccountKey);
                 var unlike = db.PostLikes.FirstOrDefault(x => x.Post.Key == postKey && x.Author.ReferenceKey == AuthorUserAccountKey);
                 db.PostLikes.Remove(unlike);
+
                 db.SaveChanges();
 
                 return thisPost.PostLikes.Count;
@@ -389,14 +419,36 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
         {
             using (var db = new FHNWPrototypeDB())
             {
-                var thisComment = db.Comments.FirstOrDefault(x => x.Key == commentKey);
+                var thisComment = db.Comments
+                    .Include("CommentLikes")
+                    .FirstOrDefault(x => x.Key == commentKey);
                 var author = db.BasicProfiles.FirstOrDefault(x => x.ReferenceKey == AuthorKey);
                 CommentLike newLike = new CommentLike();
                 newLike.Author = author;
+                Guid newGuid = Guid.NewGuid();
+                newLike.Key = newGuid;
                 newLike.DateTime = DateTime.Now;
                 newLike.Value = LikeValue.Positive;
                 newLike.Comment  = thisComment;
                 db.CommentLikes.Add(newLike);
+
+
+                //suscribe the author to receive notifications from this post, from now on
+                //Suscription thisSuscription = new Suscription { Key = Guid.NewGuid(), Type = SuscriptionType., Suscriber = author, ReferencePoint = newGuid };
+
+                //db.Suscriptions.Add(thisSuscription);
+                //register the event of liking the post
+                if (AuthorKey != thisComment.Author.ReferenceKey)
+                {
+                    Event thisEvent = new Event { Key = Guid.NewGuid(), PostOrComment = newGuid, Type = EventType.LikedMyComment, TriggeredBy = author, TriggeredOn = DateTime.Now };
+
+                    db.Events.Add(thisEvent);
+
+                    Notification notification = new Notification { Key = Guid.NewGuid(), Event = thisEvent, NotifiedTo = thisComment.Author };
+
+                    db.Notifications.Add(notification);
+                }
+
                 db.SaveChanges();
 
                 return thisComment.CommentLikes.Count;
@@ -424,9 +476,11 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
             using (var db = new FHNWPrototypeDB())
             {
                 Guid newGuid = Guid.NewGuid();
-                var wall = db.ContentStreams.FirstOrDefault(x => x.Owner.ReferenceKey == wallOwnerReferenceKey);
+                var wall = db.ContentStreams
+                    .Include("Owner")
+                    .FirstOrDefault(x => x.Owner.ReferenceKey == wallOwnerReferenceKey);
                 var author = db.BasicProfiles.FirstOrDefault(x => x.ReferenceKey == AuthorKey);
-
+                
                 Tweet newTweet = new Tweet();
                 newTweet.Author = author;
                 newTweet.Key = newGuid;
@@ -435,6 +489,28 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                 newTweet.Wall = wall;
 
                 db.Tweets.Add(newTweet);
+
+                var hashtag = text.Substring(0,text.IndexOf(" "));
+                var tag = db.Tags.FirstOrDefault(x=>x.Name==hashtag);
+                var suscriptions = db.Suscriptions.Where(x=>x.ReferencePoint==tag.Key).ToList();
+
+                //suscribe the author to receive notifications from this post, from now on
+                //Suscription thisSuscription = new Suscription { Key = Guid.NewGuid(), Type = SuscriptionType.TweetOnTagIBelong, Suscriber = author, ReferencePoint = newGuid };
+
+                //db.Suscriptions.Add(thisSuscription);
+
+                //register the event of liking the post
+                if (AuthorKey != wallOwnerReferenceKey)
+                {
+                    Event thisEvent = new Event { Key = Guid.NewGuid(), PostOrComment = newGuid, Type = EventType.LikedMyPost, TriggeredBy = author, TriggeredOn = DateTime.Now };
+
+                    db.Events.Add(thisEvent);
+
+                    Notification notification = new Notification { Key = Guid.NewGuid(), Event = thisEvent, NotifiedTo = wall.Owner };
+
+                    db.Notifications.Add(notification);
+                }
+
                 db.SaveChanges();
                 return newGuid;
             }
@@ -447,7 +523,9 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
             using (var db = new FHNWPrototypeDB())
             {
                 Guid newGuid = Guid.NewGuid();
-                var wall = db.ContentStreams.FirstOrDefault(x => x.Owner.ReferenceKey == wallOwnerReferenceKey);
+                var wall = db.ContentStreams
+                    .Include("Owner")
+                    .FirstOrDefault(x => x.Owner.ReferenceKey == wallOwnerReferenceKey);
                 var author = db.BasicProfiles.FirstOrDefault(x => x.ReferenceKey == AuthorKey);
 
                 Post newPost = new Post();
@@ -458,6 +536,35 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                 newPost.Wall = wall;
 
                 db.Posts.Add(newPost);
+
+                Suscription thisSuscription = null;
+                Suscription thisSuscription2 = null;
+                Event thisEvent = null;
+                Notification notification = null;
+
+                //suscribe the author to receive notifications from this post, from now on
+                if (AuthorKey != wallOwnerReferenceKey)
+                {
+                    thisSuscription = new Suscription { Key = Guid.NewGuid(), Type = SuscriptionType.MyPost  , Suscriber = author, ReferencePoint = newGuid };
+                    thisSuscription2 = new Suscription { Key = Guid.NewGuid(), Type = SuscriptionType.PostOnMyWall , Suscriber = wall.Owner, ReferencePoint = newGuid };
+
+                    db.Suscriptions.Add(thisSuscription);
+                    db.Suscriptions.Add(thisSuscription2);
+
+                    //register the event of liking the post
+
+                    thisEvent = new Event { Key = Guid.NewGuid(), PostOrComment = newGuid, Type = EventType.NewPostOnMyWall , TriggeredBy = author, TriggeredOn = DateTime.Now };
+
+                    db.Events.Add(thisEvent);
+
+                    //dont notify if its yourself
+
+                    notification = new Notification { Key = Guid.NewGuid(), Event = thisEvent, NotifiedTo = wall.Owner };
+
+                    db.Notifications.Add(notification);
+                }
+
+
                 db.SaveChanges();
                 return newGuid;
             }
@@ -468,7 +575,10 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
             using (var db = new FHNWPrototypeDB())
             {
                 Guid  newGuid = Guid.NewGuid();
-                var post = db.Posts.FirstOrDefault(x => x.Key == postKey);
+                var post = db.Posts
+                    .Include("Author")
+                    .Include("Wall.Owner")
+                    .FirstOrDefault(x => x.Key == postKey);
                 // var author = db.UserAccounts.Single(x => x.Key == AuthorKey);
                 var author = db.BasicProfiles.FirstOrDefault(x => x.ReferenceKey == AuthorKey);
 
@@ -480,6 +590,46 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                 newComment.Post = post;
 
                 db.Comments.Add(newComment);
+
+                Suscription thisSuscription = null;
+                Suscription thisSuscription2 = null;
+                Event thisEvent = null;
+                Event thisEvent2 = null;
+                Notification notification = null;
+
+                //suscribe the author to receive notifications from this post, from now on
+                if (AuthorKey != post.Wall.Owner.ReferenceKey)
+                {
+                    thisSuscription = new Suscription { Key = Guid.NewGuid(), Type = SuscriptionType.MyComment , Suscriber = author, ReferencePoint = newGuid };
+                    thisSuscription2 = new Suscription { Key = Guid.NewGuid(), Type = SuscriptionType.CommentOnPostOnMyWall, Suscriber = post.Wall.Owner, ReferencePoint = newGuid };
+
+                    db.Suscriptions.Add(thisSuscription);
+                    db.Suscriptions.Add(thisSuscription2);
+
+                    //register the event of liking the post
+
+                    thisEvent = new Event { Key = Guid.NewGuid(), PostOrComment = newGuid, Type = EventType.NewCommentOnPostOnMyWall , TriggeredBy = author, TriggeredOn = DateTime.Now };
+                    thisEvent2 = new Event { Key = Guid.NewGuid(), PostOrComment = newGuid, Type = EventType.NewCommentOnPostILiked,  TriggeredBy = author, TriggeredOn = DateTime.Now };
+
+                    db.Events.Add(thisEvent);
+                    db.Events.Add(thisEvent2);
+
+                    //dont notify if its yourself
+
+                    notification = new Notification { Key = Guid.NewGuid(), Event = thisEvent, NotifiedTo = post.Wall.Owner };
+                    db.Notifications.Add(notification);
+
+                    var suscriptions = db.Suscriptions.Where(x => x.ReferencePoint == post.Key && x.Type == SuscriptionType.PostILiked).ToList();
+
+                    foreach (Suscription suscription in suscriptions)
+                    {
+                        db.Notifications.Add(new Notification { Key=Guid.NewGuid(), Event=thisEvent2 , NotifiedTo = suscription.Suscriber   });
+                    }
+
+                    
+                }
+
+
                 db.SaveChanges();
                 return newGuid;
             }  

@@ -121,6 +121,8 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                     if (result.Password == password)
                     {
                         
+                       
+
                         SystemAuthenticationToken token = new SystemAuthenticationToken();
                         token.IsAuthenticated = true;
                         CompleteProfile completeProfile = new CompleteProfile();
@@ -152,7 +154,9 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                         token.MyProfile = completeProfile;
                         token.Email = email;
                         token.LastSuccesfulLogin = DateTime.Now;
-
+                        //register the new check
+                        //result.LastCheck = DateTime.Now;
+                        //db.SaveChanges(); 
                         return token;
                     }
                     else
@@ -160,6 +164,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                         SystemAuthenticationToken token = new SystemAuthenticationToken() { Email = email, IsAuthenticated = false };
                         return token;
                     }
+                    
                 }
             }
             else
@@ -238,6 +243,17 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
             }
             return result;
         }
+
+        public static void RegisterLastCheck(BasicProfile profile)
+        {
+            using (var db = new FHNWPrototypeDB())
+            {
+                var account = db.SystemAccounts.FirstOrDefault(x => x.Holder.ReferenceKey == profile.ReferenceKey);
+                account.LastCheck = DateTime.Now;
+                db.SaveChanges();
+            }
+        }
+
 
     }
 }

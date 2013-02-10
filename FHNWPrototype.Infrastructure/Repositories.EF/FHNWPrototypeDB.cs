@@ -24,8 +24,9 @@ using FHNWPrototype.Domain.Publishing.Likes;
 using FHNWPrototype.Domain.Bookmarks;
 using FHNWPrototype.Infrastructure.Security;
 using FHNWPrototype.Domain._Base.Accounts;
-using FHNWPrototype.Infrastructure.Migrations;
 using FHNWPrototype.Domain.Messenger;
+using FHNWPrototype.Domain.Notifications;
+using FHNWPrototype.Domain.Tags;
  
 
 namespace FHNWPrototype.Infrastructure.Repositories.EF
@@ -43,7 +44,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
         {
            // this.Configuration.LazyLoadingEnabled = false;
            // Database.DefaultConnectionFactory.CreateConnection("RemoteConnection");
-            Database.SetInitializer(new DBContextInitializer());
+            Database.SetInitializer(new DBContextInitializerV2());
           
 
         }
@@ -94,6 +95,10 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
 
             modelBuilder.Configurations.Add(new ProjectTypeConfiguration());
             modelBuilder.Configurations.Add(new WorkPackageTypeConfiguration());
+
+            modelBuilder.Configurations.Add(new SuscriptionTypeConfiguration());
+            modelBuilder.Configurations.Add(new EventTypeConfiguration());
+            modelBuilder.Configurations.Add(new NotificationTypeConfiguration());
 
 
             //modelBuilder.Entity<Person>().
@@ -155,6 +160,14 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
         public DbSet<BasicProfile> BasicProfiles { get; set; }
 
         public DbSet<MessengerPost> MessengerPosts { get; set; }
+
+        public DbSet<Notification> Notifications { get; set; }
+
+        public DbSet<Suscription> Suscriptions { get; set; }
+
+        public DbSet<Event> Events { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
 
     }
 }

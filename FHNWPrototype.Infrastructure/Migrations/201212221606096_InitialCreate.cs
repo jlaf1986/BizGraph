@@ -43,6 +43,8 @@ namespace FHNWPrototype.Infrastructure.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Email = c.String(),
+                        LastAccessOnNotifications = c.DateTime(nullable: false),
+                        Tag = c.String(),
                         Key = c.Guid(nullable: false),
                         OrganizationAccountID = c.Int(),
                         Wall_ID = c.Int(),
@@ -65,6 +67,7 @@ namespace FHNWPrototype.Infrastructure.Migrations
                         Description = c.String(),
                         EmailSuffix = c.String(),
                         Email = c.String(),
+                        Tag = c.String(),
                         AvatarPicture = c.Binary(),
                         Key = c.Guid(nullable: false),
                         Organization_ID = c.Int(),
@@ -193,39 +196,70 @@ namespace FHNWPrototype.Infrastructure.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        AuthorID = c.Int(),
                         Text = c.String(),
                         PublishDateTime = c.DateTime(nullable: false),
                         Key = c.Guid(nullable: false),
-                        Hashtag_ID = c.Int(),
+                        Author_ID = c.Int(),
                         Wall_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.UserAccounts", t => t.AuthorID)
-                .ForeignKey("dbo.Hashtags", t => t.Hashtag_ID)
+                .ForeignKey("dbo.BasicProfiles", t => t.Author_ID)
                 .ForeignKey("dbo.ContentStreams", t => t.Wall_ID)
-                .Index(t => t.AuthorID)
-                .Index(t => t.Hashtag_ID)
+                .Index(t => t.Author_ID)
                 .Index(t => t.Wall_ID);
             
             CreateTable(
-                "dbo.Hashtags",
+                "dbo.Retweets",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        Symbol = c.String(),
+                        PublishDateTime = c.DateTime(nullable: false),
                         Key = c.Guid(nullable: false),
-                        AllianceContext_ID = c.Int(),
-                        OrganizationContext_ID = c.Int(),
-                        GroupContext_ID = c.Int(),
+                        Author_ID = c.Int(),
+                        Tweet_ID = c.Int(),
+                        Wall_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Alliances", t => t.AllianceContext_ID)
-                .ForeignKey("dbo.OrganizationAccounts", t => t.OrganizationContext_ID)
-                .ForeignKey("dbo.Groups", t => t.GroupContext_ID)
-                .Index(t => t.AllianceContext_ID)
-                .Index(t => t.OrganizationContext_ID)
-                .Index(t => t.GroupContext_ID);
+                .ForeignKey("dbo.BasicProfiles", t => t.Author_ID)
+                .ForeignKey("dbo.Tweets", t => t.Tweet_ID)
+                .ForeignKey("dbo.ContentStreams", t => t.Wall_ID)
+                .Index(t => t.Author_ID)
+                .Index(t => t.Tweet_ID)
+                .Index(t => t.Wall_ID);
+            
+            CreateTable(
+                "dbo.PartnershipStateInfoes",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Action = c.Int(nullable: false),
+                        SenderID = c.Int(),
+                        ReceiverID = c.Int(),
+                        ActionDateTime = c.DateTime(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
+                        Key = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.OrganizationAccounts", t => t.SenderID)
+                .ForeignKey("dbo.OrganizationAccounts", t => t.ReceiverID)
+                .Index(t => t.SenderID)
+                .Index(t => t.ReceiverID);
+            
+            CreateTable(
+                "dbo.AllianceMembershipStateInfoes",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        AllianceRequestedID = c.Int(),
+                        AllianceMembershipAction = c.Int(nullable: false),
+                        OrganizationRequestorID = c.Int(),
+                        Key = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Alliances", t => t.AllianceRequestedID)
+                .ForeignKey("dbo.OrganizationAccounts", t => t.OrganizationRequestorID)
+                .Index(t => t.AllianceRequestedID)
+                .Index(t => t.OrganizationRequestorID);
             
             CreateTable(
                 "dbo.Alliances",
@@ -247,36 +281,23 @@ namespace FHNWPrototype.Infrastructure.Migrations
                 .Index(t => t.Wall_ID);
             
             CreateTable(
-                "dbo.AllianceMembershipStateInfoes",
+                "dbo.FriendshipStateInfoes",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        AllianceRequestedID = c.Int(),
-                        AllianceMembershipAction = c.Int(nullable: false),
-                        OrganizationRequestorID = c.Int(),
+                        SCMRelationshipType = c.Int(nullable: false),
+                        Action = c.Int(nullable: false),
+                        SenderID = c.Int(),
+                        ReceiverID = c.Int(),
+                        ActionDateTime = c.DateTime(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
                         Key = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Alliances", t => t.AllianceRequestedID)
-                .ForeignKey("dbo.OrganizationAccounts", t => t.OrganizationRequestorID)
-                .Index(t => t.AllianceRequestedID)
-                .Index(t => t.OrganizationRequestorID);
-            
-            CreateTable(
-                "dbo.Groups",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Description = c.String(),
-                        HeaderPicture = c.Binary(),
-                        ProfilePicture = c.Binary(),
-                        Key = c.Guid(nullable: false),
-                        Wall_ID = c.Int(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.ContentStreams", t => t.Wall_ID)
-                .Index(t => t.Wall_ID);
+                .ForeignKey("dbo.UserAccounts", t => t.SenderID)
+                .ForeignKey("dbo.UserAccounts", t => t.ReceiverID)
+                .Index(t => t.SenderID)
+                .Index(t => t.ReceiverID);
             
             CreateTable(
                 "dbo.GroupMembershipStateInfoes",
@@ -295,56 +316,20 @@ namespace FHNWPrototype.Infrastructure.Migrations
                 .Index(t => t.RequestorAccountID);
             
             CreateTable(
-                "dbo.Retweets",
+                "dbo.Groups",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        DateTime = c.DateTime(nullable: false),
+                        Name = c.String(),
+                        Description = c.String(),
+                        HeaderPicture = c.Binary(),
+                        ProfilePicture = c.Binary(),
                         Key = c.Guid(nullable: false),
-                        Retweeter_ID = c.Int(),
-                        Tweet_ID = c.Int(),
+                        Wall_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.UserAccounts", t => t.Retweeter_ID)
-                .ForeignKey("dbo.Tweets", t => t.Tweet_ID)
-                .Index(t => t.Retweeter_ID)
-                .Index(t => t.Tweet_ID);
-            
-            CreateTable(
-                "dbo.PartnershipStateInfoes",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Action = c.Int(nullable: false),
-                        SenderID = c.Int(),
-                        ReceiverID = c.Int(),
-                        ActionDateTime = c.DateTime(nullable: false),
-                        IsActive = c.Boolean(nullable: false),
-                        Key = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.OrganizationAccounts", t => t.SenderID)
-                .ForeignKey("dbo.OrganizationAccounts", t => t.ReceiverID)
-                .Index(t => t.SenderID)
-                .Index(t => t.ReceiverID);
-            
-            CreateTable(
-                "dbo.FriendshipStateInfoes",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Action = c.Int(nullable: false),
-                        SenderID = c.Int(),
-                        ReceiverID = c.Int(),
-                        ActionDateTime = c.DateTime(nullable: false),
-                        IsActive = c.Boolean(nullable: false),
-                        Key = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.UserAccounts", t => t.SenderID)
-                .ForeignKey("dbo.UserAccounts", t => t.ReceiverID)
-                .Index(t => t.SenderID)
-                .Index(t => t.ReceiverID);
+                .ForeignKey("dbo.ContentStreams", t => t.Wall_ID)
+                .Index(t => t.Wall_ID);
             
             CreateTable(
                 "dbo.Libraries",
@@ -392,20 +377,6 @@ namespace FHNWPrototype.Infrastructure.Migrations
                 .Index(t => t.ParentFolder_ID);
             
             CreateTable(
-                "dbo.Bookmarks",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Type = c.Int(nullable: false),
-                        Reference = c.Guid(nullable: false),
-                        Key = c.Guid(nullable: false),
-                        Owner_ID = c.Int(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.UserAccounts", t => t.Owner_ID)
-                .Index(t => t.Owner_ID);
-            
-            CreateTable(
                 "dbo.Projects",
                 c => new
                     {
@@ -443,6 +414,20 @@ namespace FHNWPrototype.Infrastructure.Migrations
                 .Index(t => t.Project_ID);
             
             CreateTable(
+                "dbo.Bookmarks",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Type = c.Int(nullable: false),
+                        Reference = c.Guid(nullable: false),
+                        Key = c.Guid(nullable: false),
+                        Owner_ID = c.Int(),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.UserAccounts", t => t.Owner_ID)
+                .Index(t => t.Owner_ID);
+            
+            CreateTable(
                 "dbo.SystemAccounts",
                 c => new
                     {
@@ -450,46 +435,118 @@ namespace FHNWPrototype.Infrastructure.Migrations
                         Email = c.String(),
                         Password = c.String(),
                         IsConfirmed = c.Boolean(nullable: false),
+                        LastCheck = c.DateTime(nullable: false),
                         Holder_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.BasicProfiles", t => t.Holder_ID)
                 .Index(t => t.Holder_ID);
             
+            CreateTable(
+                "dbo.MessengerPosts",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ChatRoom = c.Guid(nullable: false),
+                        Text = c.String(),
+                        PublishDateTime = c.DateTime(nullable: false),
+                        Key = c.Guid(nullable: false),
+                        Author_ID = c.Int(),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.BasicProfiles", t => t.Author_ID)
+                .Index(t => t.Author_ID);
+            
+            CreateTable(
+                "dbo.Notifications",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Key = c.Guid(nullable: false),
+                        Event_ID = c.Int(),
+                        NotifiedTo_ID = c.Int(),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Events", t => t.Event_ID)
+                .ForeignKey("dbo.BasicProfiles", t => t.NotifiedTo_ID)
+                .Index(t => t.Event_ID)
+                .Index(t => t.NotifiedTo_ID);
+            
+            CreateTable(
+                "dbo.Events",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Type = c.Int(nullable: false),
+                        TriggeredOn = c.DateTime(nullable: false),
+                        PostOrComment = c.Guid(nullable: false),
+                        Key = c.Guid(nullable: false),
+                        TriggeredBy_ID = c.Int(),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.BasicProfiles", t => t.TriggeredBy_ID)
+                .Index(t => t.TriggeredBy_ID);
+            
+            CreateTable(
+                "dbo.Suscriptions",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ReferencePoint = c.Guid(nullable: false),
+                        Type = c.Int(nullable: false),
+                        Key = c.Guid(nullable: false),
+                        Suscriber_ID = c.Int(),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.BasicProfiles", t => t.Suscriber_ID)
+                .Index(t => t.Suscriber_ID);
+            
+            CreateTable(
+                "dbo.Tags",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Key = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
         }
         
         public override void Down()
         {
+            DropIndex("dbo.Suscriptions", new[] { "Suscriber_ID" });
+            DropIndex("dbo.Events", new[] { "TriggeredBy_ID" });
+            DropIndex("dbo.Notifications", new[] { "NotifiedTo_ID" });
+            DropIndex("dbo.Notifications", new[] { "Event_ID" });
+            DropIndex("dbo.MessengerPosts", new[] { "Author_ID" });
             DropIndex("dbo.SystemAccounts", new[] { "Holder_ID" });
+            DropIndex("dbo.Bookmarks", new[] { "Owner_ID" });
             DropIndex("dbo.WorkPackages", new[] { "Project_ID" });
             DropIndex("dbo.WorkPackages", new[] { "ParentWorkPackageID" });
             DropIndex("dbo.WorkPackages", new[] { "Owner_ID" });
             DropIndex("dbo.Projects", new[] { "Coordinator_ID" });
-            DropIndex("dbo.Bookmarks", new[] { "Owner_ID" });
             DropIndex("dbo.Documents", new[] { "ParentFolder_ID" });
             DropIndex("dbo.Documents", new[] { "Author_ID" });
             DropIndex("dbo.Folders", new[] { "LibraryID" });
             DropIndex("dbo.Folders", new[] { "ParentFolderID" });
             DropIndex("dbo.Libraries", new[] { "Owner_ID" });
-            DropIndex("dbo.FriendshipStateInfoes", new[] { "ReceiverID" });
-            DropIndex("dbo.FriendshipStateInfoes", new[] { "SenderID" });
-            DropIndex("dbo.PartnershipStateInfoes", new[] { "ReceiverID" });
-            DropIndex("dbo.PartnershipStateInfoes", new[] { "SenderID" });
-            DropIndex("dbo.Retweets", new[] { "Tweet_ID" });
-            DropIndex("dbo.Retweets", new[] { "Retweeter_ID" });
+            DropIndex("dbo.Groups", new[] { "Wall_ID" });
             DropIndex("dbo.GroupMembershipStateInfoes", new[] { "RequestorAccountID" });
             DropIndex("dbo.GroupMembershipStateInfoes", new[] { "RequestedGroupID" });
-            DropIndex("dbo.Groups", new[] { "Wall_ID" });
-            DropIndex("dbo.AllianceMembershipStateInfoes", new[] { "OrganizationRequestorID" });
-            DropIndex("dbo.AllianceMembershipStateInfoes", new[] { "AllianceRequestedID" });
+            DropIndex("dbo.FriendshipStateInfoes", new[] { "ReceiverID" });
+            DropIndex("dbo.FriendshipStateInfoes", new[] { "SenderID" });
             DropIndex("dbo.Alliances", new[] { "Wall_ID" });
             DropIndex("dbo.Alliances", new[] { "Coordinator_ID" });
-            DropIndex("dbo.Hashtags", new[] { "GroupContext_ID" });
-            DropIndex("dbo.Hashtags", new[] { "OrganizationContext_ID" });
-            DropIndex("dbo.Hashtags", new[] { "AllianceContext_ID" });
+            DropIndex("dbo.AllianceMembershipStateInfoes", new[] { "OrganizationRequestorID" });
+            DropIndex("dbo.AllianceMembershipStateInfoes", new[] { "AllianceRequestedID" });
+            DropIndex("dbo.PartnershipStateInfoes", new[] { "ReceiverID" });
+            DropIndex("dbo.PartnershipStateInfoes", new[] { "SenderID" });
+            DropIndex("dbo.Retweets", new[] { "Wall_ID" });
+            DropIndex("dbo.Retweets", new[] { "Tweet_ID" });
+            DropIndex("dbo.Retweets", new[] { "Author_ID" });
             DropIndex("dbo.Tweets", new[] { "Wall_ID" });
-            DropIndex("dbo.Tweets", new[] { "Hashtag_ID" });
-            DropIndex("dbo.Tweets", new[] { "AuthorID" });
+            DropIndex("dbo.Tweets", new[] { "Author_ID" });
             DropIndex("dbo.PostLikes", new[] { "Post_ID" });
             DropIndex("dbo.PostLikes", new[] { "Author_ID" });
             DropIndex("dbo.CommentLikes", new[] { "Comment_ID" });
@@ -508,36 +565,38 @@ namespace FHNWPrototype.Infrastructure.Migrations
             DropIndex("dbo.UserAccounts", new[] { "Wall_ID" });
             DropIndex("dbo.UserAccounts", new[] { "OrganizationAccountID" });
             DropIndex("dbo.Users", new[] { "GeoLocation_GeoLocationID" });
+            DropForeignKey("dbo.Suscriptions", "Suscriber_ID", "dbo.BasicProfiles");
+            DropForeignKey("dbo.Events", "TriggeredBy_ID", "dbo.BasicProfiles");
+            DropForeignKey("dbo.Notifications", "NotifiedTo_ID", "dbo.BasicProfiles");
+            DropForeignKey("dbo.Notifications", "Event_ID", "dbo.Events");
+            DropForeignKey("dbo.MessengerPosts", "Author_ID", "dbo.BasicProfiles");
             DropForeignKey("dbo.SystemAccounts", "Holder_ID", "dbo.BasicProfiles");
+            DropForeignKey("dbo.Bookmarks", "Owner_ID", "dbo.UserAccounts");
             DropForeignKey("dbo.WorkPackages", "Project_ID", "dbo.Projects");
             DropForeignKey("dbo.WorkPackages", "ParentWorkPackageID", "dbo.WorkPackages");
             DropForeignKey("dbo.WorkPackages", "Owner_ID", "dbo.UserAccounts");
             DropForeignKey("dbo.Projects", "Coordinator_ID", "dbo.OrganizationAccounts");
-            DropForeignKey("dbo.Bookmarks", "Owner_ID", "dbo.UserAccounts");
             DropForeignKey("dbo.Documents", "ParentFolder_ID", "dbo.Folders");
             DropForeignKey("dbo.Documents", "Author_ID", "dbo.UserAccounts");
             DropForeignKey("dbo.Folders", "LibraryID", "dbo.Libraries");
             DropForeignKey("dbo.Folders", "ParentFolderID", "dbo.Folders");
             DropForeignKey("dbo.Libraries", "Owner_ID", "dbo.UserAccounts");
-            DropForeignKey("dbo.FriendshipStateInfoes", "ReceiverID", "dbo.UserAccounts");
-            DropForeignKey("dbo.FriendshipStateInfoes", "SenderID", "dbo.UserAccounts");
-            DropForeignKey("dbo.PartnershipStateInfoes", "ReceiverID", "dbo.OrganizationAccounts");
-            DropForeignKey("dbo.PartnershipStateInfoes", "SenderID", "dbo.OrganizationAccounts");
-            DropForeignKey("dbo.Retweets", "Tweet_ID", "dbo.Tweets");
-            DropForeignKey("dbo.Retweets", "Retweeter_ID", "dbo.UserAccounts");
+            DropForeignKey("dbo.Groups", "Wall_ID", "dbo.ContentStreams");
             DropForeignKey("dbo.GroupMembershipStateInfoes", "RequestorAccountID", "dbo.UserAccounts");
             DropForeignKey("dbo.GroupMembershipStateInfoes", "RequestedGroupID", "dbo.Groups");
-            DropForeignKey("dbo.Groups", "Wall_ID", "dbo.ContentStreams");
-            DropForeignKey("dbo.AllianceMembershipStateInfoes", "OrganizationRequestorID", "dbo.OrganizationAccounts");
-            DropForeignKey("dbo.AllianceMembershipStateInfoes", "AllianceRequestedID", "dbo.Alliances");
+            DropForeignKey("dbo.FriendshipStateInfoes", "ReceiverID", "dbo.UserAccounts");
+            DropForeignKey("dbo.FriendshipStateInfoes", "SenderID", "dbo.UserAccounts");
             DropForeignKey("dbo.Alliances", "Wall_ID", "dbo.ContentStreams");
             DropForeignKey("dbo.Alliances", "Coordinator_ID", "dbo.OrganizationAccounts");
-            DropForeignKey("dbo.Hashtags", "GroupContext_ID", "dbo.Groups");
-            DropForeignKey("dbo.Hashtags", "OrganizationContext_ID", "dbo.OrganizationAccounts");
-            DropForeignKey("dbo.Hashtags", "AllianceContext_ID", "dbo.Alliances");
+            DropForeignKey("dbo.AllianceMembershipStateInfoes", "OrganizationRequestorID", "dbo.OrganizationAccounts");
+            DropForeignKey("dbo.AllianceMembershipStateInfoes", "AllianceRequestedID", "dbo.Alliances");
+            DropForeignKey("dbo.PartnershipStateInfoes", "ReceiverID", "dbo.OrganizationAccounts");
+            DropForeignKey("dbo.PartnershipStateInfoes", "SenderID", "dbo.OrganizationAccounts");
+            DropForeignKey("dbo.Retweets", "Wall_ID", "dbo.ContentStreams");
+            DropForeignKey("dbo.Retweets", "Tweet_ID", "dbo.Tweets");
+            DropForeignKey("dbo.Retweets", "Author_ID", "dbo.BasicProfiles");
             DropForeignKey("dbo.Tweets", "Wall_ID", "dbo.ContentStreams");
-            DropForeignKey("dbo.Tweets", "Hashtag_ID", "dbo.Hashtags");
-            DropForeignKey("dbo.Tweets", "AuthorID", "dbo.UserAccounts");
+            DropForeignKey("dbo.Tweets", "Author_ID", "dbo.BasicProfiles");
             DropForeignKey("dbo.PostLikes", "Post_ID", "dbo.Posts");
             DropForeignKey("dbo.PostLikes", "Author_ID", "dbo.BasicProfiles");
             DropForeignKey("dbo.CommentLikes", "Comment_ID", "dbo.Comments");
@@ -556,21 +615,25 @@ namespace FHNWPrototype.Infrastructure.Migrations
             DropForeignKey("dbo.UserAccounts", "Wall_ID", "dbo.ContentStreams");
             DropForeignKey("dbo.UserAccounts", "OrganizationAccountID", "dbo.OrganizationAccounts");
             DropForeignKey("dbo.Users", "GeoLocation_GeoLocationID", "dbo.GeoLocations");
+            DropTable("dbo.Tags");
+            DropTable("dbo.Suscriptions");
+            DropTable("dbo.Events");
+            DropTable("dbo.Notifications");
+            DropTable("dbo.MessengerPosts");
             DropTable("dbo.SystemAccounts");
+            DropTable("dbo.Bookmarks");
             DropTable("dbo.WorkPackages");
             DropTable("dbo.Projects");
-            DropTable("dbo.Bookmarks");
             DropTable("dbo.Documents");
             DropTable("dbo.Folders");
             DropTable("dbo.Libraries");
+            DropTable("dbo.Groups");
+            DropTable("dbo.GroupMembershipStateInfoes");
             DropTable("dbo.FriendshipStateInfoes");
+            DropTable("dbo.Alliances");
+            DropTable("dbo.AllianceMembershipStateInfoes");
             DropTable("dbo.PartnershipStateInfoes");
             DropTable("dbo.Retweets");
-            DropTable("dbo.GroupMembershipStateInfoes");
-            DropTable("dbo.Groups");
-            DropTable("dbo.AllianceMembershipStateInfoes");
-            DropTable("dbo.Alliances");
-            DropTable("dbo.Hashtags");
             DropTable("dbo.Tweets");
             DropTable("dbo.PostLikes");
             DropTable("dbo.CommentLikes");

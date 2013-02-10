@@ -1,7 +1,55 @@
-﻿@{
-    ViewBag.Title = "_partial_notifications";
+﻿@model FHNWPrototype.Application.Controllers.UIViewModels.Notifications.NotificationsView
+@using FHNWPrototype.Application.Controllers.UIViewModels.Notifications
+
+ <h2>Notifications</h2>
+<br />
+@foreach (NotificationView nv in Model.Notifications)
+{
+      <section id="last_notifications_posts">
+       <article class="notification_detail">
+            <div class="notification_avatar">
+            <img src="@Url.Action("GetAvatarPictureByBasicProfile", "Retriever", new { key = @nv.Event.TriggeredBy.BasicProfile.ReferenceKey,accountType= @nv.Event.TriggeredBy.BasicProfile.AccountType   })" alt="picture"  class="profile_picture_notification" />
+           </div>
+           <div class="notification_content">
+              @*  <h2>@Html.ActionLink(nv.Event.TriggeredBy.FullName , "UserAccount", "UserAccounts", new { id = nv.Event.TriggeredBy.BasicProfile.ReferenceKey }, null)</h2>*@
+
+                <p class="notification_text">
+
+                 @switch(nv.Event.Type){
+                     case FHNWPrototype.Domain.Notifications.EventType.LikedMyComment:
+                         <text>@nv.Event.TriggeredBy.FullName liked your comment</text>
+                         break;
+                     case FHNWPrototype.Domain.Notifications.EventType.LikedMyPost:
+                        <text>@nv.Event.TriggeredBy.FullName liked your post</text>
+                         break;
+                     case FHNWPrototype.Domain.Notifications.EventType.NewCommentOnMyPost:
+                        <text>@nv.Event.TriggeredBy.FullName commented on your post</text>
+                         break;
+                     case FHNWPrototype.Domain.Notifications.EventType.NewCommentOnPostILiked:
+                        <text>@nv.Event.TriggeredBy.FullName also commented on a post you liked</text>
+                         break;
+                     case FHNWPrototype.Domain.Notifications.EventType.NewCommentOnPostOnMyWall:
+                      <text>@nv.Event.TriggeredBy.FullName wrote a comment on a post of your wall</text>
+                         break;
+                     case FHNWPrototype.Domain.Notifications.EventType.NewPostOnEmployer:
+                      <text>@nv.Event.TriggeredBy.FullName posted on your employer's wall</text>
+                         break;
+                     case FHNWPrototype.Domain.Notifications.EventType.NewPostOnGroup:
+                      <text>@nv.Event.TriggeredBy.FullName posted on your group's wall</text>
+                         break;
+                     case FHNWPrototype.Domain.Notifications.EventType.NewPostOnMyWall:
+                      <text>@nv.Event.TriggeredBy.FullName wrote in your wall </text>
+                         break;
+                     case FHNWPrototype.Domain.Notifications.EventType.NewPostToMyTag:
+                      <text>@nv.Event.TriggeredBy.FullName wrote something concerning your tag</text>
+                         break;
+                     case FHNWPrototype.Domain.Notifications.EventType.NewTweetForTag:
+                      <text>@nv.Event.TriggeredBy.FullName tweeted something concerning your tag</text>
+                         break;
+                 }
+                </p>
+           </div>
+       </article>
+   </section>
 }
 
-<h2>_partial_notifications</h2>
- 
- 

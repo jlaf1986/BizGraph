@@ -638,8 +638,8 @@ namespace FHNWPrototype.Application.Controllers.Controllers
             //FileInfo file = new FileInfo(Path.Combine(HttpRuntime.AppDomainAppPath, @"Content\visualizationdata.json"));
            // FileInfo file = new FileInfo(Path.Combine(path, @"Content\visualizationdata.json"));
            // FileInfo file = new FileInfo(Server.MapPath("/Content/visualizationdata.json"));
-            FileInfo file = new FileInfo(Server.MapPath("~/Content/visualizationdata.json"));
-            return File(file.Open(FileMode.Open, FileAccess.Read), "application/json", "visualizationdata.json");
+            FileInfo file = new FileInfo(Server.MapPath("~/Content/visualizationdata2.json"));
+            return File(file.Open(FileMode.Open, FileAccess.Read), "application/json", "visualizationdata2.json");
         }
 
     }

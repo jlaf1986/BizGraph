@@ -175,8 +175,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessengerController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\UIViewModels\Messenger\MessengerPostView.cs" />
     <Compile Include="Controllers\UIViewModels\Messenger\MessengerView.cs" />
+    <Compile Include="Controllers\UIViewModels\Notifications\EventView.cs" />
+    <Compile Include="Controllers\UIViewModels\Notifications\NotificationsView.cs" />
+    <Compile Include="Controllers\UIViewModels\Notifications\NotificationView.cs" />
     <Compile Include="Controllers\UIViewModels\Publishing\RetweetView.cs" />
     <Compile Include="Controllers\UIViewModels\Publishing\TweetView.cs" />
     <Compile Include="Controllers\UIViewModels\_Global\ISortingCapable.cs" />
@@ -332,6 +336,9 @@
     <Content Include="favicon.ico" />
     <Content Include="favicon2.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\visualizationdata2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\d3.v2.js" />
     <Content Include="Scripts\d3.v2.min.js" />
@@ -353,6 +360,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\myscripts-notifications.js" />
     <Content Include="Scripts\myscripts-recommendations.js" />
     <Content Include="Scripts\myscripts-chat.js" />
     <Content Include="Scripts\myscripts-friendships.js" />
@@ -439,9 +447,9 @@
     <Content Include="Views\Shared\_partial_profile_link.cshtml" />
     <Content Include="Views\Shared\_partial_section_tweet.cshtml" />
     <Content Include="Views\Shared\_partial_section_retweet.cshtml" />
-    <Content Include="Views\Shared\_partial_notifications.cshtml" />
     <Content Include="Views\Shared\_standalone_visualization.cshtml" />
     <Content Include="Views\UserAccounts\visualizationdata.json" />
+    <Content Include="Views\Shared\_partial_notifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

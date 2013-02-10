@@ -255,7 +255,7 @@ namespace FHNWPrototype.Application.Services.Simple
 
                 thisRetweet.TweetAuthor = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = tweetAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = retweet.Tweet.Author.ReferenceType }, FullName = tweetAuthorProfile.FullName, Description1 = tweetAuthorProfile.Description1, Description2 = tweetAuthorProfile.Description2 };
 
-                thisRetweet.RetweetAuthor = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = retweetAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = retweet.Author.ReferenceType }, FullName = tweetAuthorProfile.FullName, Description1 = retweetAuthorProfile.Description1, Description2 = retweetAuthorProfile.Description2 };
+                thisRetweet.RetweetAuthor = new CompleteProfileViewModel { BasicProfile = new BasicProfileViewModel { ReferenceKey = retweetAuthorProfile.BasicProfile.ReferenceKey.ToString(), AccountType = retweet.Author.ReferenceType }, FullName = retweetAuthorProfile.FullName, Description1 = retweetAuthorProfile.Description1, Description2 = retweetAuthorProfile.Description2 };
 
                 thisRetweet.Text = retweet.Tweet.Text;
 
@@ -263,7 +263,7 @@ namespace FHNWPrototype.Application.Services.Simple
                 thisRetweet.TweetKey = retweet.Tweet.Key.ToString();
 
                 thisRetweet.TweetPublishDateTime = retweet.Tweet.PublishDateTime;
-
+                thisRetweet.PublishDateTime = retweet.PublishDateTime;
 
 
                 result.Retweets.Add(thisRetweet);

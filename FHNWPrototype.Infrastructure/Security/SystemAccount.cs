@@ -13,15 +13,17 @@ namespace FHNWPrototype.Infrastructure.Security
 
         //public virtual Guid Key { get; set; }
 
-        public virtual String Email { get; set; }
+        public  String Email { get; set; }
 
-        public virtual String Password { get; set; }
+        public  String Password { get; set; }
 
         //public Boolean IsCorporateAccount { get; set; }
 
         public virtual BasicProfile  Holder { get; set; }      
 
-        public virtual Boolean IsConfirmed { get; set; }
+        public  Boolean IsConfirmed { get; set; }
+
+        public DateTime LastCheck { get; set; }
 
         //public Boolean IsCurrentlyConnected { get; set; } 
  

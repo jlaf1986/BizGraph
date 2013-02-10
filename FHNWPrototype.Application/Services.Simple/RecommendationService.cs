@@ -63,12 +63,16 @@ namespace FHNWPrototype.Application.Services.Simple
 
             CypherQuery query = new CypherQuery();
 
-            query.query = "START origin=node(" + "10" + ") MATCH origin-[:has_downstream_friend|has_upstream_friend*1..3]-my_partner, " +
-                            "my_partner-[:is_known_for]->tag," + " coworker-[:works_at]->company<-[:works_at]-origin, " +
-                            "my_coworkers_partner-[:has_downstream_friend|has_upstream_friend*1..3]-coworker, " +
-                            "tag<-[:is_known_for]-my_coworkers_partner " +
-                            "RETURN id(coworker) as Id, coworker.Key as Key, coworker.Name as Name " +
-                            "LIMIT 1";
+            query.query = "START origin=node(" + "1" + ") MATCH coworker-[:works_at]->company<-[:works_at]-origin " +
+                          "RETURN id(coworker) as Id, coworker.Key as Key, coworker.Name as Name " +
+                          "LIMIT 1";
+
+            //query.query = "START origin=node(" + "1" + ") MATCH origin-[:has_downstream_friend|has_upstream_friend*1..3]-my_partner, " +
+            //            "my_partner-[:is_known_for]->tag," + " coworker-[:works_at]->company<-[:works_at]-origin, " +
+            //            "my_coworkers_partner-[:has_downstream_friend|has_upstream_friend*1..3]-coworker, " +
+            //            "tag<-[:is_known_for]-my_coworkers_partner " +
+            //            "RETURN id(coworker) as Id, coworker.Key as Key, coworker.Name as Name " +
+            //            "LIMIT 1";
 
             request.AddBody(query);
 
@@ -116,14 +120,21 @@ namespace FHNWPrototype.Application.Services.Simple
 
             CypherQuery query = new CypherQuery();
 
-            query.query = "START origin=node(" + "10" + ") " +
+            query.query = "START origin=node(" + "1" + ") " +
                             "MATCH origin-[:has_downstream_friend|has_upstream_friend]-my_partner, " +
-                            "my_partner-[:is_known_for]->tag, " +
-                            "coworker-[:works_at]->company<-[:works_at]-origin, " +
-                            "my_coworkers_partner-[:has_downstream_friend|has_upstream_friend]-coworker, " +
-                            "tag<-[:is_known_for]-my_coworkers_partner " +
+                            "my_partner-[:is_known_for]->tag " +
                             "RETURN id(my_partner) as Id, my_partner.Key? as Key, my_partner.Name? as Name " +
                             "LIMIT 1";
+
+            //query.query = "START origin=node(" + "61" + ") " +
+            //    "MATCH origin-[:has_downstream_friend|has_upstream_friend]-my_partner, " +
+            //    "my_partner-[:is_known_for]->tag, " +
+            //    "coworker-[:works_at]->company<-[:works_at]-origin, " +
+            //    "my_coworkers_partner-[:has_downstream_friend|has_upstream_friend]-coworker, " +
+            //    "tag<-[:is_known_for]-my_coworkers_partner " +
+            //    "RETURN id(my_partner) as Id, my_partner.Key? as Key, my_partner.Name? as Name " +
+            //    "LIMIT 1";
+
 
             request.AddBody(query);
 
@@ -170,7 +181,7 @@ namespace FHNWPrototype.Application.Services.Simple
 
             CypherQuery query = new CypherQuery();
 
-            query.query = "START origin=node(" + "3" + ") " +
+            query.query = "START origin=node(" + "1" + ") " +
                       "MATCH origin-[:is_known_for]->tag, " +
                       "tag<-[:is_known_for]-colleague, " +
                       "colleague-[:is_group_member_of]-group " +

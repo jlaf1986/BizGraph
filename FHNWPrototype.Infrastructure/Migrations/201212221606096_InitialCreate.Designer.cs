@@ -11,7 +11,7 @@ namespace FHNWPrototype.Infrastructure.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201211141650067_InitialCreate"; }
+            get { return "201212221606096_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

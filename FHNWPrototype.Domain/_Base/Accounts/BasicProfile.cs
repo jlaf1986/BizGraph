@@ -11,5 +11,6 @@ namespace FHNWPrototype.Domain._Base.Accounts
         public virtual int ID { get; set; }
         public virtual Guid ReferenceKey { get; set; }
         public virtual AccountType ReferenceType { get; set; }
+        //public virtual DateTime LastCheck { get; set; }
     }
 }

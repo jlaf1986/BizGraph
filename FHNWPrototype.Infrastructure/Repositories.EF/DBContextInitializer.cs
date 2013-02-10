@@ -28,6 +28,8 @@ using FHNWPrototype.Infrastructure;
 using FHNWPrototype.Infrastructure.Security;
 using FHNWPrototype.Domain._Base.Accounts;
 using FHNWPrototype.Domain._Base.SCMRelationships;
+using FHNWPrototype.Domain.Tags;
+using FHNWPrototype.Domain.Notifications;
 
 namespace FHNWPrototype.Infrastructure.Repositories.EF
 {
@@ -38,6 +40,9 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
 
         protected override void Seed(FHNWPrototypeDB  context)
         {
+
+            
+            DateTime initialDate = DateTime.Now; //set properties for last check
 
             byte[] header_picture_41 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._41);
             byte[] avatar_picture_41 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
@@ -254,7 +259,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
 
             context.Geolocations.Add(location_organization74);
             
-            var organization41 = new Organization { Key= new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E100"), Name= "Organization 41", Description= "Organization 41", EmailSuffix= "org41.com",  HeaderPicture= header_picture_41, HeadquatersLocation=location_organization41 };
+            var organization41 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E100"), Name = "Organization 41", Description = "Organization 41", EmailSuffix = "org41.com", HeaderPicture = header_picture_41, HeadquatersLocation = location_organization41 };
             var organization42 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E101"), Name = "Organization 42", Description = "Organization 42", EmailSuffix = "org42.com", HeaderPicture = header_picture_42, HeadquatersLocation = location_organization42 };
             var organization43 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E102"), Name = "Organization 43", Description = "Organization 43", EmailSuffix = "org43.com", HeaderPicture = header_picture_43, HeadquatersLocation = location_organization44 };
             var organization44 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E103"), Name = "Organization 44", Description = "Organization 44", EmailSuffix = "org44.com", HeaderPicture = header_picture_44, HeadquatersLocation = location_organization43 };
@@ -404,7 +409,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
             context.OrganizationAccounts.Add(organizationAccount73);
             context.OrganizationAccounts.Add(organizationAccount74);
 
-            var organization41_BasicProfile = new BasicProfile { ReferenceKey = organizationAccount41.Key, ReferenceType= AccountType.OrganizationAccount};
+            var organization41_BasicProfile = new BasicProfile { ReferenceKey = organizationAccount41.Key, ReferenceType= AccountType.OrganizationAccount  };
             var organization42_BasicProfile = new BasicProfile { ReferenceKey = organizationAccount42.Key, ReferenceType = AccountType.OrganizationAccount };
             var organization43_BasicProfile = new BasicProfile { ReferenceKey = organizationAccount43.Key, ReferenceType = AccountType.OrganizationAccount };
             var organization44_BasicProfile = new BasicProfile { ReferenceKey = organizationAccount44.Key, ReferenceType = AccountType.OrganizationAccount };
@@ -474,46 +479,46 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
             context.BasicProfiles.Add(organization73_BasicProfile);
             context.BasicProfiles.Add(organization74_BasicProfile);
 
-            byte[] avatar_picture_user1 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user2 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user3 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user4 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user5 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user6 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user7 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user8 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user9 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user10 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user11 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user12 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user13 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user14 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user15 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user16 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user17 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user18 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user19 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user20 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user21 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user22 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user23 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user24 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user25 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user26 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user27 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user28 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user29 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user30 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user31 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user32 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user33 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user34 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user35 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user36 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user37 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user38 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user39 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
-            byte[] avatar_picture_user40 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user_icon);
+            byte[] avatar_picture_user1 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user1);
+            byte[] avatar_picture_user2 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user2);
+            byte[] avatar_picture_user3 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user3);
+            byte[] avatar_picture_user4 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user4);
+            byte[] avatar_picture_user5 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user5);
+            byte[] avatar_picture_user6 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user6);
+            byte[] avatar_picture_user7 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user7);
+            byte[] avatar_picture_user8 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user8);
+            byte[] avatar_picture_user9 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user9);
+            byte[] avatar_picture_user10 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user10);
+            byte[] avatar_picture_user11 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user11);
+            byte[] avatar_picture_user12 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user12);
+            byte[] avatar_picture_user13 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user13);
+            byte[] avatar_picture_user14 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user14);
+            byte[] avatar_picture_user15 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user15);
+            byte[] avatar_picture_user16 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user16);
+            byte[] avatar_picture_user17 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user17);
+            byte[] avatar_picture_user18 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user18);
+            byte[] avatar_picture_user19 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user19);
+            byte[] avatar_picture_user20 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user20);
+            byte[] avatar_picture_user21 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user21);
+            byte[] avatar_picture_user22 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user22);
+            byte[] avatar_picture_user23 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user23);
+            byte[] avatar_picture_user24 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user24);
+            byte[] avatar_picture_user25 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user25);
+            byte[] avatar_picture_user26 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user26);
+            byte[] avatar_picture_user27 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user27);
+            byte[] avatar_picture_user28 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user28);
+            byte[] avatar_picture_user29 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user29);
+            byte[] avatar_picture_user30 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user30);
+            byte[] avatar_picture_user31 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user31);
+            byte[] avatar_picture_user32 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user32);
+            byte[] avatar_picture_user33 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user33);
+            byte[] avatar_picture_user34 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user34);
+            byte[] avatar_picture_user35 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user35);
+            byte[] avatar_picture_user36 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user36);
+            byte[] avatar_picture_user37 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user37);
+            byte[] avatar_picture_user38 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user38);
+            byte[] avatar_picture_user39 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user39);
+            byte[] avatar_picture_user40 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.user40);
 
              
             //Users
@@ -560,47 +565,48 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
             
 
             //Accounts
-        
-            var user_account_1 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E201"), Tag="#EngineAssembler", Email = "user1@org41.com", User = user1, OrganizationAccount= organizationAccount41 }; //Logistics Department
-            var user_account_2 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E202"), Tag = "#PistonsManufacturer", Email = "user2@org42.com", User = user2, OrganizationAccount = organizationAccount42 }; // Logistics Department
-            var user_account_3 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E203"), Tag = "#SteelManufacturer", Email = "user3@org43.com", User = user3, OrganizationAccount = organizationAccount43 }; //Logistics
-            var user_account_4 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E204"), Tag = "#ElectronicsManufacturer", Email = "user4@org44.com", User = user4, OrganizationAccount = organizationAccount44 }; //Logistics
-            var user_account_5 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E205"), Tag = "#InteriorComponentsProcurement", Email = "user5@org41.com", User = user5, OrganizationAccount = organizationAccount42 };// Product Development
-            var user_account_6 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E206"), Tag = "#AirConditionerManufacturer", Email = "user6@org45.com", User = user6, OrganizationAccount = organizationAccount41 }; //Branding
-            var user_account_7 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E207"), Tag = "#ElectronicsManufacturer", Email = "user7@org46.com", User = user7, OrganizationAccount = organizationAccount46 }; //Logistics
-            var user_account_8 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E208"), Tag = "#ElectricSystemProvider", Email = "user8@org47.com", User = user8, OrganizationAccount = organizationAccount51 }; //Logistics
-            var user_account_9 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E209"), Tag = "#ElectricSystemProvider", Email = "user9@org48.com", User = user9, OrganizationAccount = organizationAccount49 }; //Logistics
-            var user_account_10 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E20A"), Tag = "#SeatsAssembler", Email = "user10@org41.com", User = user10, OrganizationAccount = organizationAccount50 }; //Logistics
-            var user_account_11 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E20B"), Tag = "#FabricsProvider", Email = "user11@org49.com", User = user11, OrganizationAccount = organizationAccount49 }; //Logistics
-            var user_account_12 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E20C"), Tag = "#SteelManufacturer", Email = "user12@org50.com", User = user12, OrganizationAccount = organizationAccount50 }; //Logistics
-            var user_account_13 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E20D"), Tag = "#ChassisAssembler", Email = "user13@org41.com", User = user13, OrganizationAccount = organizationAccount44 }; //Losgistics Department
-            var user_account_14 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E20E"), Tag = "#SteelManufacturer", Email = "user14@org51.com", User = user14, OrganizationAccount = organizationAccount51 }; //Logistics
-            var user_account_15 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E20F"), Tag = "#LightningSystemAssembler", Email = "user15@org41.com", User = user15, OrganizationAccount = organizationAccount44 }; //Warehousing
-            var user_account_16 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E210"), Tag = "#EngineAssembler", Email = "user16@org52.com", User = user16, OrganizationAccount = organizationAccount52 }; //Logistics
-            var user_account_17 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E211"), Tag = "#SteeringSystemAssembler", Email = "user17@org41.com", User = user17, OrganizationAccount = organizationAccount41 }; //Warehousing
-            var user_account_18 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E212"), Tag = "#SuspensionProvider", Email = "user18@org53.com", User = user18, OrganizationAccount = organizationAccount53 }; //Procurement
-            var user_account_19 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E213"), Tag = "#SteelManufacturer", Email = "user19@org54.com", User = user19, OrganizationAccount = organizationAccount54 }; //Logistics
-            var user_account_20 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E214"), Tag = "#WheelsProvider", Email = "user20@org55.com", User = user20, OrganizationAccount = organizationAccount55 }; //Logistics
-            var user_account_21 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E215"), Tag = "#TiresProvider", Email = "user21@org56.com", User = user21, OrganizationAccount = organizationAccount46 }; //Product Development
-            var user_account_22 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E216"), Tag = "#FabricsProvider", Email = "user22@org57.com", User = user22, OrganizationAccount = organizationAccount45 };//Marketing
-            var user_account_23 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E217"), Tag = "#Brakes", Email = "user23@org58.com", User = user23, OrganizationAccount = organizationAccount47 }; //in-site logistics
-            var user_account_24 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E218"), Tag = "#FabricsProvider", Email = "user29@org59.com", User = user24, OrganizationAccount = organizationAccount43 }; //Marketing
-            var user_account_25 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E219"), Tag = "#SteelManufacturer", Email = "user25@org60.com", User = user25, OrganizationAccount = organizationAccount60 }; //Logistics
-            var user_account_26 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E21A"), Tag = "#SalesAndDistribution", Email = "user26@org41.com", User = user26, OrganizationAccount = organizationAccount41 }; //Logistics
-            var user_account_27 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E21B"), Tag = "#RegionalSales", Email = "user27@org61.com", User = user27, OrganizationAccount = organizationAccount61 }; //Logistics
-            var user_account_28 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E21C"), Tag = "#Retailer", Email = "user28@org62.com", User = user28, OrganizationAccount = organizationAccount62 }; //Logistics
-            var user_account_29 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E21D"), Tag = "#AutoSparePartsReseller", Email = "user29@org63.com", User = user29, OrganizationAccount = organizationAccount63 }; //Logistics
-            var user_account_30 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E21E"), Tag = "#RegionalSales", Email = "user30@org64.com", User = user30, OrganizationAccount = organizationAccount64 }; //Logistics
-            var user_account_31 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E21F"), Tag = "#Retailer", Email = "user31@org65.com", User = user31, OrganizationAccount = organizationAccount65 }; //Logistics
-            var user_account_32 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E220"), Tag = "#AutoSparePartsReseller", Email = "user32@org66.com", User = user32, OrganizationAccount = organizationAccount66 }; //Logistics
-            var user_account_33 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E221"), Tag = "#RegionalSales", Email = "user33@org67.com", User = user33, OrganizationAccount = organizationAccount46 }; //Logistics
-            var user_account_34 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E222"), Tag = "#Retailer", Email = "user34@org68.com", User = user34, OrganizationAccount = organizationAccount68 }; //Logistics
-            var user_account_35 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E223"), Tag = "#AutoSparePartsReseller", Email = "user35@org69.com", User = user35, OrganizationAccount = organizationAccount69 }; //Logistics
-            var user_account_36 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E224"), Tag = "#RegionalSales", Email = "user36@org70.com", User = user36, OrganizationAccount = organizationAccount70 }; //Logistics
-            var user_account_37 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E225"), Tag = "#Retailer", Email = "user37@org71.com", User = user37, OrganizationAccount = organizationAccount71 }; //Logistics
-            var user_account_38 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E226"), Tag = "#RegionalSales", Email = "user38@org73.com", User = user38, OrganizationAccount = organizationAccount73 }; //Logistics
-            var user_account_39 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E227"), Tag = "#Retailer", Email = "user39@org72.com", User = user39, OrganizationAccount = organizationAccount72 }; //Logistics
-            var user_account_40 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E228"), Tag = "#AutoSparePartsReseller", Email = "user40@org74.com", User = user40, OrganizationAccount = organizationAccount74 }; //Point of Sale
+
+
+            var user_account_1 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E201"), Tag = "#EngineAssembler", Email = "user1@org41.com", User = user1, OrganizationAccount = organizationAccount41, LastAccessOnNotifications = initialDate }; //Logistics Department
+            var user_account_2 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E202"), Tag = "#PistonsManufacturer", Email = "user2@org42.com", User = user2, OrganizationAccount = organizationAccount42, LastAccessOnNotifications = initialDate }; // Logistics Department
+            var user_account_3 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E203"), Tag = "#SteelManufacturer", Email = "user3@org43.com", User = user3, OrganizationAccount = organizationAccount43, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_4 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E204"), Tag = "#ElectronicsManufacturer", Email = "user4@org44.com", User = user4, OrganizationAccount = organizationAccount44, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_5 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E205"), Tag = "#InteriorComponentsProcurement", Email = "user5@org41.com", User = user5, OrganizationAccount = organizationAccount42, LastAccessOnNotifications = initialDate };// Product Development
+            var user_account_6 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E206"), Tag = "#AirConditionerManufacturer", Email = "user6@org45.com", User = user6, OrganizationAccount = organizationAccount41, LastAccessOnNotifications = initialDate }; //Branding
+            var user_account_7 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E207"), Tag = "#ElectronicsManufacturer", Email = "user7@org46.com", User = user7, OrganizationAccount = organizationAccount46, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_8 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E208"), Tag = "#ElectricSystemProvider", Email = "user8@org47.com", User = user8, OrganizationAccount = organizationAccount51, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_9 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E209"), Tag = "#ElectricSystemProvider", Email = "user9@org48.com", User = user9, OrganizationAccount = organizationAccount49, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_10 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E20A"), Tag = "#SeatsAssembler", Email = "user10@org41.com", User = user10, OrganizationAccount = organizationAccount50, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_11 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E20B"), Tag = "#FabricsProvider", Email = "user11@org49.com", User = user11, OrganizationAccount = organizationAccount49, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_12 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E20C"), Tag = "#SteelManufacturer", Email = "user12@org50.com", User = user12, OrganizationAccount = organizationAccount50, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_13 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E20D"), Tag = "#ChassisAssembler", Email = "user13@org41.com", User = user13, OrganizationAccount = organizationAccount44, LastAccessOnNotifications = initialDate }; //Losgistics Department
+            var user_account_14 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E20E"), Tag = "#SteelManufacturer", Email = "user14@org51.com", User = user14, OrganizationAccount = organizationAccount51, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_15 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E20F"), Tag = "#LightningSystemAssembler", Email = "user15@org41.com", User = user15, OrganizationAccount = organizationAccount44, LastAccessOnNotifications = initialDate }; //Warehousing
+            var user_account_16 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E210"), Tag = "#EngineAssembler", Email = "user16@org52.com", User = user16, OrganizationAccount = organizationAccount52, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_17 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E211"), Tag = "#SteeringSystemAssembler", Email = "user17@org41.com", User = user17, OrganizationAccount = organizationAccount41, LastAccessOnNotifications = initialDate }; //Warehousing
+            var user_account_18 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E212"), Tag = "#SuspensionProvider", Email = "user18@org53.com", User = user18, OrganizationAccount = organizationAccount53, LastAccessOnNotifications = initialDate }; //Procurement
+            var user_account_19 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E213"), Tag = "#SteelManufacturer", Email = "user19@org54.com", User = user19, OrganizationAccount = organizationAccount54, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_20 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E214"), Tag = "#WheelsProvider", Email = "user20@org55.com", User = user20, OrganizationAccount = organizationAccount55, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_21 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E215"), Tag = "#TiresProvider", Email = "user21@org56.com", User = user21, OrganizationAccount = organizationAccount46, LastAccessOnNotifications = initialDate }; //Product Development
+            var user_account_22 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E216"), Tag = "#FabricsProvider", Email = "user22@org57.com", User = user22, OrganizationAccount = organizationAccount45, LastAccessOnNotifications = initialDate };//Marketing
+            var user_account_23 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E217"), Tag = "#Brakes", Email = "user23@org58.com", User = user23, OrganizationAccount = organizationAccount47, LastAccessOnNotifications = initialDate }; //in-site logistics
+            var user_account_24 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E218"), Tag = "#FabricsProvider", Email = "user29@org59.com", User = user24, OrganizationAccount = organizationAccount43, LastAccessOnNotifications = initialDate }; //Marketing
+            var user_account_25 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E219"), Tag = "#SteelManufacturer", Email = "user25@org60.com", User = user25, OrganizationAccount = organizationAccount60, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_26 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E21A"), Tag = "#SalesAndDistribution", Email = "user26@org41.com", User = user26, OrganizationAccount = organizationAccount41, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_27 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E21B"), Tag = "#RegionalSales", Email = "user27@org61.com", User = user27, OrganizationAccount = organizationAccount61, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_28 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E21C"), Tag = "#Retailer", Email = "user28@org62.com", User = user28, OrganizationAccount = organizationAccount62, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_29 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E21D"), Tag = "#AutoSparePartsReseller", Email = "user29@org63.com", User = user29, OrganizationAccount = organizationAccount63, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_30 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E21E"), Tag = "#RegionalSales", Email = "user30@org64.com", User = user30, OrganizationAccount = organizationAccount64, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_31 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E21F"), Tag = "#Retailer", Email = "user31@org65.com", User = user31, OrganizationAccount = organizationAccount65, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_32 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E220"), Tag = "#AutoSparePartsReseller", Email = "user32@org66.com", User = user32, OrganizationAccount = organizationAccount66, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_33 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E221"), Tag = "#RegionalSales", Email = "user33@org67.com", User = user33, OrganizationAccount = organizationAccount46, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_34 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E222"), Tag = "#Retailer", Email = "user34@org68.com", User = user34, OrganizationAccount = organizationAccount68, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_35 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E223"), Tag = "#AutoSparePartsReseller", Email = "user35@org69.com", User = user35, OrganizationAccount = organizationAccount69, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_36 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E224"), Tag = "#RegionalSales", Email = "user36@org70.com", User = user36, OrganizationAccount = organizationAccount70, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_37 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E225"), Tag = "#Retailer", Email = "user37@org71.com", User = user37, OrganizationAccount = organizationAccount71, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_38 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E226"), Tag = "#RegionalSales", Email = "user38@org73.com", User = user38, OrganizationAccount = organizationAccount73, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_39 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E227"), Tag = "#Retailer", Email = "user39@org72.com", User = user39, OrganizationAccount = organizationAccount72, LastAccessOnNotifications = initialDate }; //Logistics
+            var user_account_40 = new UserAccount { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E228"), Tag = "#AutoSparePartsReseller", Email = "user40@org74.com", User = user40, OrganizationAccount = organizationAccount74, LastAccessOnNotifications = initialDate }; //Point of Sale
            
 
             var user_account_1_BasicProfile = new BasicProfile { ReferenceKey = user_account_1.Key, ReferenceType = AccountType.UserAccount };
@@ -898,82 +904,82 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
             context.AllianceMemberships.Add(memb_organization53_alliance100);
             context.AllianceMemberships.Add(memb_organization55_alliance100);
             
-            var system_account_user1 = new SystemAccount() {  Email = user_account_1.Email, Password = "login123", Holder=user_account_1_BasicProfile,   IsConfirmed = true,   };
-            var system_account_user2 = new SystemAccount() { Email = user_account_2.Email, Password = "login123", Holder = user_account_2_BasicProfile, IsConfirmed = true, };
-            var system_account_user3 = new SystemAccount() { Email = user_account_3.Email, Password = "login123", Holder = user_account_3_BasicProfile, IsConfirmed = true, };
-            var system_account_user4 = new SystemAccount() { Email = user_account_4.Email, Password = "login123", Holder = user_account_4_BasicProfile, IsConfirmed = true, };
-            var system_account_user5 = new SystemAccount() { Email = user_account_5.Email, Password = "login123", Holder = user_account_5_BasicProfile, IsConfirmed = true, };
-            var system_account_user6 = new SystemAccount() { Email = user_account_6.Email, Password = "login123", Holder = user_account_6_BasicProfile, IsConfirmed = true, };
-            var system_account_user7 = new SystemAccount() { Email = user_account_7.Email, Password = "login123", Holder = user_account_7_BasicProfile, IsConfirmed = true, };
-            var system_account_user8 = new SystemAccount() { Email = user_account_8.Email, Password = "login123", Holder = user_account_8_BasicProfile, IsConfirmed = true, };
-            var system_account_user9 = new SystemAccount() { Email = user_account_9.Email, Password = "login123", Holder = user_account_9_BasicProfile, IsConfirmed = true, };
-            var system_account_user10 = new SystemAccount() { Email = user_account_10.Email, Password = "login123", Holder = user_account_10_BasicProfile, IsConfirmed = true, };
-            var system_account_user11 = new SystemAccount() { Email = user_account_11.Email, Password = "login123", Holder = user_account_11_BasicProfile, IsConfirmed = true, };
-            var system_account_user12 = new SystemAccount() { Email = user_account_12.Email, Password = "login123", Holder = user_account_12_BasicProfile, IsConfirmed = true, };
-            var system_account_user13 = new SystemAccount() { Email = user_account_13.Email, Password = "login123", Holder = user_account_13_BasicProfile, IsConfirmed = true, };
-            var system_account_user14 = new SystemAccount() { Email = user_account_14.Email, Password = "login123", Holder = user_account_14_BasicProfile, IsConfirmed = true, };
-            var system_account_user15 = new SystemAccount() { Email = user_account_15.Email, Password = "login123", Holder = user_account_15_BasicProfile, IsConfirmed = true, };
-            var system_account_user16 = new SystemAccount() { Email = user_account_16.Email, Password = "login123", Holder = user_account_16_BasicProfile, IsConfirmed = true, };
-            var system_account_user17 = new SystemAccount() { Email = user_account_17.Email, Password = "login123", Holder = user_account_17_BasicProfile, IsConfirmed = true, };
-            var system_account_user18 = new SystemAccount() { Email = user_account_18.Email, Password = "login123", Holder = user_account_18_BasicProfile, IsConfirmed = true, };
-            var system_account_user19 = new SystemAccount() { Email = user_account_19.Email, Password = "login123", Holder = user_account_19_BasicProfile, IsConfirmed = true, };
-            var system_account_user20 = new SystemAccount() { Email = user_account_20.Email, Password = "login123", Holder = user_account_20_BasicProfile, IsConfirmed = true, };
-            var system_account_user21 = new SystemAccount() { Email = user_account_21.Email, Password = "login123", Holder = user_account_21_BasicProfile, IsConfirmed = true, };
-            var system_account_user22 = new SystemAccount() { Email = user_account_22.Email, Password = "login123", Holder = user_account_22_BasicProfile, IsConfirmed = true, };
-            var system_account_user23 = new SystemAccount() { Email = user_account_23.Email, Password = "login123", Holder = user_account_23_BasicProfile, IsConfirmed = true, };
-            var system_account_user24 = new SystemAccount() { Email = user_account_24.Email, Password = "login123", Holder = user_account_24_BasicProfile, IsConfirmed = true, };
-            var system_account_user25 = new SystemAccount() { Email = user_account_25.Email, Password = "login123", Holder = user_account_25_BasicProfile, IsConfirmed = true, };
-            var system_account_user26 = new SystemAccount() { Email = user_account_26.Email, Password = "login123", Holder = user_account_26_BasicProfile, IsConfirmed = true, };
-            var system_account_user27 = new SystemAccount() { Email = user_account_27.Email, Password = "login123", Holder = user_account_27_BasicProfile, IsConfirmed = true, };
-            var system_account_user28 = new SystemAccount() { Email = user_account_28.Email, Password = "login123", Holder = user_account_28_BasicProfile, IsConfirmed = true, };
-            var system_account_user29 = new SystemAccount() { Email = user_account_29.Email, Password = "login123", Holder = user_account_29_BasicProfile, IsConfirmed = true, };
-            var system_account_user30 = new SystemAccount() { Email = user_account_30.Email, Password = "login123", Holder = user_account_30_BasicProfile, IsConfirmed = true, };
-            var system_account_user31 = new SystemAccount() { Email = user_account_31.Email, Password = "login123", Holder = user_account_31_BasicProfile, IsConfirmed = true, };
-            var system_account_user32 = new SystemAccount() { Email = user_account_32.Email, Password = "login123", Holder = user_account_32_BasicProfile, IsConfirmed = true, };
-            var system_account_user33 = new SystemAccount() { Email = user_account_33.Email, Password = "login123", Holder = user_account_33_BasicProfile, IsConfirmed = true, };
-            var system_account_user34 = new SystemAccount() { Email = user_account_34.Email, Password = "login123", Holder = user_account_34_BasicProfile, IsConfirmed = true, };
-            var system_account_user35 = new SystemAccount() { Email = user_account_35.Email, Password = "login123", Holder = user_account_35_BasicProfile, IsConfirmed = true, };
-            var system_account_user36 = new SystemAccount() { Email = user_account_36.Email, Password = "login123", Holder = user_account_36_BasicProfile, IsConfirmed = true, };
-            var system_account_user37 = new SystemAccount() { Email = user_account_37.Email, Password = "login123", Holder = user_account_37_BasicProfile, IsConfirmed = true, };
-            var system_account_user38 = new SystemAccount() { Email = user_account_38.Email, Password = "login123", Holder = user_account_38_BasicProfile, IsConfirmed = true, };
-            var system_account_user39 = new SystemAccount() { Email = user_account_39.Email, Password = "login123", Holder = user_account_39_BasicProfile, IsConfirmed = true, };
-            var system_account_user40 = new SystemAccount() { Email = user_account_40.Email, Password = "login123", Holder = user_account_40_BasicProfile, IsConfirmed = true, };
-            
-            
-            var system_account_organization41 = new SystemAccount() { Email = "admin@org41.com", Password = "login123", Holder = organization41_BasicProfile, IsConfirmed = true };
-            var system_account_organization42 = new SystemAccount() { Email = "admin@org42.com", Password = "login123", Holder = organization42_BasicProfile, IsConfirmed = true };
-            var system_account_organization43 = new SystemAccount() { Email = "admin@org43.com", Password = "login123", Holder = organization43_BasicProfile, IsConfirmed = true };
-            var system_account_organization44 = new SystemAccount() { Email = "admin@org44.com", Password = "login123", Holder = organization44_BasicProfile, IsConfirmed = true };
-            var system_account_organization45 = new SystemAccount() { Email = "admin@org45.com", Password = "login123", Holder = organization45_BasicProfile, IsConfirmed = true };
-            var system_account_organization46 = new SystemAccount() { Email = "admin@org46.com", Password = "login123", Holder = organization46_BasicProfile, IsConfirmed = true };
-            var system_account_organization47 = new SystemAccount() { Email = "admin@org47.com", Password = "login123", Holder = organization47_BasicProfile, IsConfirmed = true };
-            var system_account_organization48 = new SystemAccount() { Email = "admin@org48.com", Password = "login123", Holder = organization48_BasicProfile, IsConfirmed = true };
-            var system_account_organization49 = new SystemAccount() { Email = "admin@org49.com", Password = "login123", Holder = organization49_BasicProfile, IsConfirmed = true };
-            var system_account_organization50 = new SystemAccount() { Email = "admin@org50.com", Password = "login123", Holder = organization50_BasicProfile, IsConfirmed = true };
-            var system_account_organization51 = new SystemAccount() { Email = "admin@org51.com", Password = "login123", Holder = organization51_BasicProfile, IsConfirmed = true };
-            var system_account_organization52 = new SystemAccount() { Email = "admin@org52.com", Password = "login123", Holder = organization52_BasicProfile, IsConfirmed = true };
-            var system_account_organization53 = new SystemAccount() { Email = "admin@org53.com", Password = "login123", Holder = organization53_BasicProfile, IsConfirmed = true };
-            var system_account_organization54 = new SystemAccount() { Email = "admin@org54.com", Password = "login123", Holder = organization54_BasicProfile, IsConfirmed = true };
-            var system_account_organization55 = new SystemAccount() { Email = "admin@org55.com", Password = "login123", Holder = organization55_BasicProfile, IsConfirmed = true };
-            var system_account_organization56 = new SystemAccount() { Email = "admin@org56.com", Password = "login123", Holder = organization56_BasicProfile, IsConfirmed = true };
-            var system_account_organization57 = new SystemAccount() { Email = "admin@org57.com", Password = "login123", Holder = organization57_BasicProfile, IsConfirmed = true };
-            var system_account_organization58 = new SystemAccount() { Email = "admin@org58.com", Password = "login123", Holder = organization58_BasicProfile, IsConfirmed = true };
-            var system_account_organization59 = new SystemAccount() { Email = "admin@org59.com", Password = "login123", Holder = organization59_BasicProfile, IsConfirmed = true };
-            var system_account_organization60 = new SystemAccount() { Email = "admin@org60.com", Password = "login123", Holder = organization60_BasicProfile, IsConfirmed = true };
-            var system_account_organization61 = new SystemAccount() { Email = "admin@org61.com", Password = "login123", Holder = organization61_BasicProfile, IsConfirmed = true };
-            var system_account_organization62 = new SystemAccount() { Email = "admin@org62.com", Password = "login123", Holder = organization62_BasicProfile, IsConfirmed = true };
-            var system_account_organization63 = new SystemAccount() { Email = "admin@org63.com", Password = "login123", Holder = organization63_BasicProfile, IsConfirmed = true };
-            var system_account_organization64 = new SystemAccount() { Email = "admin@org64.com", Password = "login123", Holder = organization64_BasicProfile, IsConfirmed = true };
-            var system_account_organization65 = new SystemAccount() { Email = "admin@org65.com", Password = "login123", Holder = organization65_BasicProfile, IsConfirmed = true };
-            var system_account_organization66 = new SystemAccount() { Email = "admin@org66.com", Password = "login123", Holder = organization66_BasicProfile, IsConfirmed = true };
-            var system_account_organization67 = new SystemAccount() { Email = "admin@org67.com", Password = "login123", Holder = organization67_BasicProfile, IsConfirmed = true };
-            var system_account_organization68 = new SystemAccount() { Email = "admin@org68.com", Password = "login123", Holder = organization68_BasicProfile, IsConfirmed = true };
-            var system_account_organization69 = new SystemAccount() { Email = "admin@org69.com", Password = "login123", Holder = organization69_BasicProfile, IsConfirmed = true };
-            var system_account_organization70 = new SystemAccount() { Email = "admin@org70.com", Password = "login123", Holder = organization70_BasicProfile, IsConfirmed = true };
-            var system_account_organization71 = new SystemAccount() { Email = "admin@org71.com", Password = "login123", Holder = organization71_BasicProfile, IsConfirmed = true };
-            var system_account_organization72 = new SystemAccount() { Email = "admin@org72.com", Password = "login123", Holder = organization72_BasicProfile, IsConfirmed = true };
-            var system_account_organization73 = new SystemAccount() { Email = "admin@org73.com", Password = "login123", Holder = organization73_BasicProfile, IsConfirmed = true };
-            var system_account_organization74 = new SystemAccount() { Email = "admin@org74.com", Password = "login123", Holder = organization74_BasicProfile, IsConfirmed = true };
+            var system_account_user1 = new SystemAccount() { Email = user_account_1.Email, Password = "login123", Holder=user_account_1_BasicProfile,   IsConfirmed = true, LastCheck=initialDate   };
+            var system_account_user2 = new SystemAccount() { Email = user_account_2.Email, Password = "login123", Holder = user_account_2_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user3 = new SystemAccount() { Email = user_account_3.Email, Password = "login123", Holder = user_account_3_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user4 = new SystemAccount() { Email = user_account_4.Email, Password = "login123", Holder = user_account_4_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user5 = new SystemAccount() { Email = user_account_5.Email, Password = "login123", Holder = user_account_5_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user6 = new SystemAccount() { Email = user_account_6.Email, Password = "login123", Holder = user_account_6_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user7 = new SystemAccount() { Email = user_account_7.Email, Password = "login123", Holder = user_account_7_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user8 = new SystemAccount() { Email = user_account_8.Email, Password = "login123", Holder = user_account_8_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user9 = new SystemAccount() { Email = user_account_9.Email, Password = "login123", Holder = user_account_9_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user10 = new SystemAccount() { Email = user_account_10.Email, Password = "login123", Holder = user_account_10_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user11 = new SystemAccount() { Email = user_account_11.Email, Password = "login123", Holder = user_account_11_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user12 = new SystemAccount() { Email = user_account_12.Email, Password = "login123", Holder = user_account_12_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user13 = new SystemAccount() { Email = user_account_13.Email, Password = "login123", Holder = user_account_13_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user14 = new SystemAccount() { Email = user_account_14.Email, Password = "login123", Holder = user_account_14_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user15 = new SystemAccount() { Email = user_account_15.Email, Password = "login123", Holder = user_account_15_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user16 = new SystemAccount() { Email = user_account_16.Email, Password = "login123", Holder = user_account_16_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user17 = new SystemAccount() { Email = user_account_17.Email, Password = "login123", Holder = user_account_17_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user18 = new SystemAccount() { Email = user_account_18.Email, Password = "login123", Holder = user_account_18_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user19 = new SystemAccount() { Email = user_account_19.Email, Password = "login123", Holder = user_account_19_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user20 = new SystemAccount() { Email = user_account_20.Email, Password = "login123", Holder = user_account_20_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user21 = new SystemAccount() { Email = user_account_21.Email, Password = "login123", Holder = user_account_21_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user22 = new SystemAccount() { Email = user_account_22.Email, Password = "login123", Holder = user_account_22_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user23 = new SystemAccount() { Email = user_account_23.Email, Password = "login123", Holder = user_account_23_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user24 = new SystemAccount() { Email = user_account_24.Email, Password = "login123", Holder = user_account_24_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user25 = new SystemAccount() { Email = user_account_25.Email, Password = "login123", Holder = user_account_25_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user26 = new SystemAccount() { Email = user_account_26.Email, Password = "login123", Holder = user_account_26_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user27 = new SystemAccount() { Email = user_account_27.Email, Password = "login123", Holder = user_account_27_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user28 = new SystemAccount() { Email = user_account_28.Email, Password = "login123", Holder = user_account_28_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user29 = new SystemAccount() { Email = user_account_29.Email, Password = "login123", Holder = user_account_29_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user30 = new SystemAccount() { Email = user_account_30.Email, Password = "login123", Holder = user_account_30_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user31 = new SystemAccount() { Email = user_account_31.Email, Password = "login123", Holder = user_account_31_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user32 = new SystemAccount() { Email = user_account_32.Email, Password = "login123", Holder = user_account_32_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user33 = new SystemAccount() { Email = user_account_33.Email, Password = "login123", Holder = user_account_33_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user34 = new SystemAccount() { Email = user_account_34.Email, Password = "login123", Holder = user_account_34_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user35 = new SystemAccount() { Email = user_account_35.Email, Password = "login123", Holder = user_account_35_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user36 = new SystemAccount() { Email = user_account_36.Email, Password = "login123", Holder = user_account_36_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user37 = new SystemAccount() { Email = user_account_37.Email, Password = "login123", Holder = user_account_37_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user38 = new SystemAccount() { Email = user_account_38.Email, Password = "login123", Holder = user_account_38_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user39 = new SystemAccount() { Email = user_account_39.Email, Password = "login123", Holder = user_account_39_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_user40 = new SystemAccount() { Email = user_account_40.Email, Password = "login123", Holder = user_account_40_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+
+
+            var system_account_organization41 = new SystemAccount() { Email = "admin@org41.com", Password = "login123", Holder = organization41_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization42 = new SystemAccount() { Email = "admin@org42.com", Password = "login123", Holder = organization42_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization43 = new SystemAccount() { Email = "admin@org43.com", Password = "login123", Holder = organization43_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization44 = new SystemAccount() { Email = "admin@org44.com", Password = "login123", Holder = organization44_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization45 = new SystemAccount() { Email = "admin@org45.com", Password = "login123", Holder = organization45_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization46 = new SystemAccount() { Email = "admin@org46.com", Password = "login123", Holder = organization46_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization47 = new SystemAccount() { Email = "admin@org47.com", Password = "login123", Holder = organization47_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization48 = new SystemAccount() { Email = "admin@org48.com", Password = "login123", Holder = organization48_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization49 = new SystemAccount() { Email = "admin@org49.com", Password = "login123", Holder = organization49_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization50 = new SystemAccount() { Email = "admin@org50.com", Password = "login123", Holder = organization50_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization51 = new SystemAccount() { Email = "admin@org51.com", Password = "login123", Holder = organization51_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization52 = new SystemAccount() { Email = "admin@org52.com", Password = "login123", Holder = organization52_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization53 = new SystemAccount() { Email = "admin@org53.com", Password = "login123", Holder = organization53_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization54 = new SystemAccount() { Email = "admin@org54.com", Password = "login123", Holder = organization54_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization55 = new SystemAccount() { Email = "admin@org55.com", Password = "login123", Holder = organization55_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization56 = new SystemAccount() { Email = "admin@org56.com", Password = "login123", Holder = organization56_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization57 = new SystemAccount() { Email = "admin@org57.com", Password = "login123", Holder = organization57_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization58 = new SystemAccount() { Email = "admin@org58.com", Password = "login123", Holder = organization58_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization59 = new SystemAccount() { Email = "admin@org59.com", Password = "login123", Holder = organization59_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization60 = new SystemAccount() { Email = "admin@org60.com", Password = "login123", Holder = organization60_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization61 = new SystemAccount() { Email = "admin@org61.com", Password = "login123", Holder = organization61_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization62 = new SystemAccount() { Email = "admin@org62.com", Password = "login123", Holder = organization62_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization63 = new SystemAccount() { Email = "admin@org63.com", Password = "login123", Holder = organization63_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization64 = new SystemAccount() { Email = "admin@org64.com", Password = "login123", Holder = organization64_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization65 = new SystemAccount() { Email = "admin@org65.com", Password = "login123", Holder = organization65_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization66 = new SystemAccount() { Email = "admin@org66.com", Password = "login123", Holder = organization66_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization67 = new SystemAccount() { Email = "admin@org67.com", Password = "login123", Holder = organization67_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization68 = new SystemAccount() { Email = "admin@org68.com", Password = "login123", Holder = organization68_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization69 = new SystemAccount() { Email = "admin@org69.com", Password = "login123", Holder = organization69_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization70 = new SystemAccount() { Email = "admin@org70.com", Password = "login123", Holder = organization70_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization71 = new SystemAccount() { Email = "admin@org71.com", Password = "login123", Holder = organization71_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization72 = new SystemAccount() { Email = "admin@org72.com", Password = "login123", Holder = organization72_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization73 = new SystemAccount() { Email = "admin@org73.com", Password = "login123", Holder = organization73_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
+            var system_account_organization74 = new SystemAccount() { Email = "admin@org74.com", Password = "login123", Holder = organization74_BasicProfile, IsConfirmed = true, LastCheck = initialDate };
 
 
             context.SystemAccounts.Add(system_account_user1);
@@ -1139,15 +1145,15 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
            
 
 
-            var wall_organization41 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A01"), Owner=organization41_BasicProfile  };
+            var wall_organization41 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A01"), Owner=organization41_BasicProfile   };
             var wall_organization42 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A02"), Owner=organization42_BasicProfile   };
             var wall_organization43 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A03"), Owner=organization43_BasicProfile   };
-            var wall_organization44 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A04"), Owner=organization44_BasicProfile    };
-            var wall_organization45 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A05"), Owner=organization45_BasicProfile };
+            var wall_organization44 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A04"), Owner=organization44_BasicProfile   };
+            var wall_organization45 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A05"), Owner=organization45_BasicProfile   };
             var wall_organization46 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A06"), Owner=organization46_BasicProfile   };
             var wall_organization47 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A07"), Owner=organization47_BasicProfile   };
             var wall_organization48 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A08"), Owner=organization48_BasicProfile   };
-            var wall_organization49 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A09"), Owner=organization49_BasicProfile  };
+            var wall_organization49 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A09"), Owner=organization49_BasicProfile   };
             var wall_organization50 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A0A"), Owner=organization50_BasicProfile   };
             var wall_organization51 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A0B"), Owner = organization51_BasicProfile };
             var wall_organization52 = new ContentStream() { Key = new Guid("AABBCCEE-DADF-4386-98AA-123456789A0C"), Owner = organization52_BasicProfile };
@@ -1229,7 +1235,152 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
             context.ContentStreams.Add(wall_alliance98);
             context.ContentStreams.Add(wall_alliance99);
             context.ContentStreams.Add(wall_alliance100);
-  
+
+               //"#EngineAssembler",
+               //    "#PistonsManufacturer",
+               //    "#SteelManufacturer",
+               //    "#ElectronicsManufacturer",
+               //    "#InteriorComponentsProcurement",
+               //    "#AirConditionerManufacturer",
+               //    "#ElectricSystemProvider",
+               //    "#SeatsAssembler",
+               //    "#FabricsProvider",
+               //    "#ChassisAssembler",
+               //    "#LightningSystemAssembler",
+               //    "#SteeringSystemAssembler",
+               //    "#SuspensionProvider",
+               //    "#WheelsProvider",
+               //    "#TiresProvider",
+               //    "#Brakes",
+               //    "#SalesAndDistribution",
+               //    "#RegionalSales",
+               //    "#Retailer",
+               //    "#AutoSparePartsReseller"
+
+            var tag75 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789000"), Name = "#EngineAssembler" };
+            var tag76 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789001"), Name = "#PistonsManufacturer" };
+            var tag77 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789002"), Name = "#SteelManufacturer" };
+            var tag78 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789003"), Name = "#ElectronicsManufacturer" };
+            var tag79 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789004"), Name = "#InteriorComponentsProcurement" };
+            var tag80 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789005"), Name = "#AirConditionerManufacturer" };
+            var tag81 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789006"), Name = "#ElectricSystemProvider" };
+            var tag82 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789007"), Name = "#SeatsAssembler" };
+            var tag83 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789008"), Name = "#FabricsProvider" };
+            var tag84 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789009"), Name = "#ChassisAssembler" };
+            var tag85 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-12345678900A"), Name = "#LightningSystemAssembler" };
+            var tag86 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-12345678900B"), Name = "#SteeringSystemAssembler" };
+            var tag87 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-12345678900C"), Name = "#SuspensionProvider" };
+            var tag88 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-12345678900D"), Name = "#WheelsProvider" };
+            var tag89 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-12345678900E"), Name = "#TiresProvider" };
+            var tag90 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-12345678900F"), Name = "#Brakes" };
+            var tag91 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789010"), Name = "#SalesAndDistribution" };
+            var tag92 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789011"), Name = "#RegionalSales" };
+            var tag93 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789012"), Name = "#Retailer" };
+            var tag94 = new Tag { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-123456789013"), Name = "#AutoSparePartsReseller" };
+
+            context.Tags.Add(tag75);
+            context.Tags.Add(tag76);
+            context.Tags.Add(tag77);
+            context.Tags.Add(tag78);
+            context.Tags.Add(tag79);
+            context.Tags.Add(tag80);
+            context.Tags.Add(tag81);
+            context.Tags.Add(tag82);
+            context.Tags.Add(tag83);
+            context.Tags.Add(tag84);
+            context.Tags.Add(tag85);
+            context.Tags.Add(tag86);
+            context.Tags.Add(tag87);
+            context.Tags.Add(tag88);
+            context.Tags.Add(tag89);
+            context.Tags.Add(tag90);
+            context.Tags.Add(tag91);
+            context.Tags.Add(tag92);
+            context.Tags.Add(tag93);
+            context.Tags.Add(tag94);
+
+            var suscription_user1_tag75 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789000"), Suscriber = user_account_1_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag75.Key };
+            var suscription_user2_tag76 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789001"), Suscriber = user_account_2_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag76.Key };
+            var suscription_user3_tag77 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789002"), Suscriber = user_account_3_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag77.Key };
+            var suscription_user4_tag78 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789003"), Suscriber = user_account_4_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag78.Key };
+            var suscription_user5_tag79 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789004"), Suscriber = user_account_5_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag79.Key };
+            var suscription_user6_tag80 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789005"), Suscriber = user_account_6_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag80.Key };
+            var suscription_user7_tag78 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789006"), Suscriber = user_account_7_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag78.Key };
+            var suscription_user8_tag81 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789007"), Suscriber = user_account_8_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag81.Key };
+            var suscription_user9_tag81 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789008"), Suscriber = user_account_9_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag81.Key };
+            var suscription_user10_tag82 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789009"), Suscriber = user_account_10_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag82.Key };
+            var suscription_user11_tag83 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-00345678900A"), Suscriber = user_account_11_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag83.Key };
+            var suscription_user12_tag77 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-00345678900B"), Suscriber = user_account_12_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag77.Key };
+            var suscription_user13_tag84 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-00345678900C"), Suscriber = user_account_13_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag84.Key };
+            var suscription_user14_tag77 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-00345678900D"), Suscriber = user_account_14_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag77.Key };
+            var suscription_user15_tag85 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-00345678900E"), Suscriber = user_account_15_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag85.Key };
+            var suscription_user16_tag81 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-00345678900F"), Suscriber = user_account_16_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag81.Key };
+            var suscription_user17_tag86 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789010"), Suscriber = user_account_17_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag86.Key };
+            var suscription_user18_tag87 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789011"), Suscriber = user_account_18_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag87.Key };
+            var suscription_user19_tag77 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789012"), Suscriber = user_account_19_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag77.Key };
+            var suscription_user20_tag88 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789013"), Suscriber = user_account_20_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag88.Key };
+            var suscription_user21_tag89 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789014"), Suscriber = user_account_21_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag89.Key };
+            var suscription_user22_tag83 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789015"), Suscriber = user_account_22_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag83.Key };
+            var suscription_user23_tag90 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789016"), Suscriber = user_account_23_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag90.Key };
+            var suscription_user24_tag83 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789017"), Suscriber = user_account_24_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag83.Key };
+            var suscription_user25_tag77 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789018"), Suscriber = user_account_25_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag77.Key };
+            var suscription_user26_tag91 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789019"), Suscriber = user_account_26_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag91.Key };
+            var suscription_user27_tag92 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-00345678901A"), Suscriber = user_account_27_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag92.Key };
+            var suscription_user28_tag93 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-00345678901B"), Suscriber = user_account_28_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag93.Key };
+            var suscription_user29_tag94 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-00345678901C"), Suscriber = user_account_29_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag94.Key };
+            var suscription_user30_tag92 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-00345678901D"), Suscriber = user_account_30_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag92.Key };
+            var suscription_user31_tag93 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-00345678901E"), Suscriber = user_account_31_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag93.Key };
+            var suscription_user32_tag94 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-00345678901F"), Suscriber = user_account_32_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag94.Key };
+            var suscription_user33_tag92 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789020"), Suscriber = user_account_33_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag92.Key };
+            var suscription_user34_tag93 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789021"), Suscriber = user_account_34_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag93.Key };
+            var suscription_user35_tag94 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789022"), Suscriber = user_account_35_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag94.Key };
+            var suscription_user36_tag92 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789023"), Suscriber = user_account_36_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag92.Key };
+            var suscription_user37_tag93 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789024"), Suscriber = user_account_37_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag93.Key };
+            var suscription_user38_tag92 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789025"), Suscriber = user_account_38_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag92.Key };
+            var suscription_user39_tag93 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789026"), Suscriber = user_account_39_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag93.Key };
+            var suscription_user40_tag94 = new Suscription { Key = new Guid("AFBFCFDF-AAAA-0123-ABCD-003456789027"), Suscriber = user_account_40_BasicProfile, Type = SuscriptionType.TweetOnTagIBelong, ReferencePoint = tag94.Key };
+
+            context.Suscriptions.Add(suscription_user1_tag75);
+            context.Suscriptions.Add(suscription_user2_tag76);
+            context.Suscriptions.Add(suscription_user3_tag77);
+            context.Suscriptions.Add(suscription_user4_tag78);
+            context.Suscriptions.Add(suscription_user5_tag79);
+            context.Suscriptions.Add(suscription_user6_tag80);
+            context.Suscriptions.Add(suscription_user7_tag78);
+            context.Suscriptions.Add(suscription_user8_tag81);
+            context.Suscriptions.Add(suscription_user9_tag81);
+            context.Suscriptions.Add(suscription_user10_tag82);
+            context.Suscriptions.Add(suscription_user11_tag83);
+            context.Suscriptions.Add(suscription_user12_tag77);
+            context.Suscriptions.Add(suscription_user13_tag84);
+            context.Suscriptions.Add(suscription_user14_tag77);
+            context.Suscriptions.Add(suscription_user15_tag85);
+            context.Suscriptions.Add(suscription_user16_tag81);
+            context.Suscriptions.Add(suscription_user17_tag86);
+            context.Suscriptions.Add(suscription_user18_tag87);
+            context.Suscriptions.Add(suscription_user19_tag77);
+            context.Suscriptions.Add(suscription_user20_tag88);
+            context.Suscriptions.Add(suscription_user21_tag89);
+            context.Suscriptions.Add(suscription_user22_tag83);
+            context.Suscriptions.Add(suscription_user23_tag90);
+            context.Suscriptions.Add(suscription_user24_tag83);
+            context.Suscriptions.Add(suscription_user25_tag77);
+            context.Suscriptions.Add(suscription_user26_tag91);
+            context.Suscriptions.Add(suscription_user27_tag92);
+            context.Suscriptions.Add(suscription_user28_tag93);
+            context.Suscriptions.Add(suscription_user29_tag94);
+            context.Suscriptions.Add(suscription_user30_tag92);
+            context.Suscriptions.Add(suscription_user31_tag93);
+            context.Suscriptions.Add(suscription_user32_tag94);
+            context.Suscriptions.Add(suscription_user33_tag92);
+            context.Suscriptions.Add(suscription_user34_tag93);
+            context.Suscriptions.Add(suscription_user35_tag94);
+            context.Suscriptions.Add(suscription_user36_tag92);
+            context.Suscriptions.Add(suscription_user37_tag93);
+            context.Suscriptions.Add(suscription_user38_tag92);
+            context.Suscriptions.Add(suscription_user39_tag93);
+            context.Suscriptions.Add(suscription_user40_tag94);
+
         }
 
     }

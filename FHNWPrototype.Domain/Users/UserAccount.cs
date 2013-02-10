@@ -49,7 +49,7 @@ namespace FHNWPrototype.Domain.Users
         //    this.Organization = organization;
         //}
   
-        public virtual String Email { get; set; }
+        public String Email { get; set; }
 
         //public virtual int? UserId { get; set; }
         
@@ -57,7 +57,7 @@ namespace FHNWPrototype.Domain.Users
 
         //public virtual int? OrganizationId { get; set; }
 
-
+        public DateTime LastAccessOnNotifications { get; set; }
         
         public virtual OrganizationAccount OrganizationAccount { get; set; }        
          
@@ -73,7 +73,7 @@ namespace FHNWPrototype.Domain.Users
 
         //public virtual List<Bookmark> Bookmarks { get; set; } 
 
-        public virtual String Tag { get; set; }
+        public String Tag { get; set; }
 
         //public Workspace Workspace { get; set; }
         //public List<Workspace> PartnershipWorkspaces { get; set; }

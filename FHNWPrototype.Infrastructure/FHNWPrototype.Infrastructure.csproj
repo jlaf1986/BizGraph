@@ -46,9 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201211141650067_InitialCreate.cs" />
-    <Compile Include="Migrations\201211141650067_InitialCreate.Designer.cs">
-      <DependentUpon>201211141650067_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201212221606096_InitialCreate.cs" />
+    <Compile Include="Migrations\201212221606096_InitialCreate.Designer.cs">
+      <DependentUpon>201212221606096_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,11 +57,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Repositories.EF\DBContextInitializerV2.cs" />
     <Compile Include="Repositories.EF\DBContextInitializer.cs" />
     <Compile Include="Repositories.EF\FHNWPrototypeDB.cs" />
     <Compile Include="Repositories.EF\Repositories\AllianceRepository.cs" />
     <Compile Include="Repositories.EF\Repositories\GraphRepository.cs" />
     <Compile Include="Repositories.EF\Repositories\MessengerRepository.cs" />
+    <Compile Include="Repositories.EF\Repositories\SuscriptionRepository.cs" />
     <Compile Include="Repositories.EF\Repositories\PublishingRepository.cs" />
     <Compile Include="Repositories.EF\Repositories\GroupRepository.cs" />
     <Compile Include="Repositories.EF\Repositories\OrganizationAccountRepository.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Repositories.EF\TypeConfigurations\CommentTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\ContentStreamTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\DocumentTypeConfiguration.cs" />
+    <Compile Include="Repositories.EF\TypeConfigurations\EventTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\FolderTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\FriendshipActionTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\FriendshipTypeConfiguration.cs" />
@@ -86,6 +89,7 @@
     <Compile Include="Repositories.EF\TypeConfigurations\HashtagTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\LibraryTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\LikeTypeConfiguration.cs" />
+    <Compile Include="Repositories.EF\TypeConfigurations\NotificationTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\OrganizationAccountTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\OrganizationTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\PartnershipActionTypeConfiguration.cs" />
@@ -93,6 +97,7 @@
     <Compile Include="Repositories.EF\TypeConfigurations\PostLikeTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\PostTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\ProjectTypeConfiguration.cs" />
+    <Compile Include="Repositories.EF\TypeConfigurations\SuscriptionTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\TweetTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\UserAccountTypeConfiguration.cs" />
     <Compile Include="Repositories.EF\TypeConfigurations\UserTypeConfiguration.cs" />
@@ -143,14 +148,54 @@
     <Content Include="Repositories.EF\ImagesV2\73.png" />
     <Content Include="Repositories.EF\ImagesV2\74.png" />
     <Content Include="Repositories.EF\ImagesV2\logo_company.png" />
+    <Content Include="Repositories.EF\ImagesV2\user1.png" />
+    <Content Include="Repositories.EF\ImagesV2\user10.png" />
+    <Content Include="Repositories.EF\ImagesV2\user11.png" />
+    <Content Include="Repositories.EF\ImagesV2\user12.png" />
+    <Content Include="Repositories.EF\ImagesV2\user13.png" />
+    <Content Include="Repositories.EF\ImagesV2\user14.png" />
+    <Content Include="Repositories.EF\ImagesV2\user15.png" />
+    <Content Include="Repositories.EF\ImagesV2\user16.png" />
+    <Content Include="Repositories.EF\ImagesV2\user17.png" />
+    <Content Include="Repositories.EF\ImagesV2\user18.png" />
+    <Content Include="Repositories.EF\ImagesV2\user19.png" />
+    <Content Include="Repositories.EF\ImagesV2\user2.png" />
+    <Content Include="Repositories.EF\ImagesV2\user20.png" />
+    <Content Include="Repositories.EF\ImagesV2\user21.png" />
+    <Content Include="Repositories.EF\ImagesV2\user22.png" />
+    <Content Include="Repositories.EF\ImagesV2\user23.png" />
+    <Content Include="Repositories.EF\ImagesV2\user24.png" />
+    <Content Include="Repositories.EF\ImagesV2\user25.png" />
+    <Content Include="Repositories.EF\ImagesV2\user26.png" />
+    <Content Include="Repositories.EF\ImagesV2\user27.png" />
+    <Content Include="Repositories.EF\ImagesV2\user28.png" />
+    <Content Include="Repositories.EF\ImagesV2\user29.png" />
+    <Content Include="Repositories.EF\ImagesV2\user3.png" />
+    <Content Include="Repositories.EF\ImagesV2\user30.png" />
+    <Content Include="Repositories.EF\ImagesV2\user31.png" />
+    <Content Include="Repositories.EF\ImagesV2\user32.png" />
+    <Content Include="Repositories.EF\ImagesV2\user33.png" />
+    <Content Include="Repositories.EF\ImagesV2\user34.png" />
+    <Content Include="Repositories.EF\ImagesV2\user35.png" />
+    <Content Include="Repositories.EF\ImagesV2\user36.png" />
+    <Content Include="Repositories.EF\ImagesV2\user37.png" />
+    <Content Include="Repositories.EF\ImagesV2\user38.png" />
+    <Content Include="Repositories.EF\ImagesV2\user39.png" />
+    <Content Include="Repositories.EF\ImagesV2\user4.png" />
+    <Content Include="Repositories.EF\ImagesV2\user40.png" />
+    <Content Include="Repositories.EF\ImagesV2\user5.png" />
+    <Content Include="Repositories.EF\ImagesV2\user6.png" />
+    <Content Include="Repositories.EF\ImagesV2\user7.png" />
+    <Content Include="Repositories.EF\ImagesV2\user8.png" />
+    <Content Include="Repositories.EF\ImagesV2\user9.png" />
     <Content Include="Repositories.EF\ImagesV2\user_icon.png" />
     <Content Include="Repositories.EF\ImagesV2\allianceHeader.jpg" />
     <Content Include="Repositories.EF\ImagesV2\groupHeader.jpg" />
     <Content Include="Repositories.EF\ImagesV2\groupProfile.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201211141650067_InitialCreate.resx">
-      <DependentUpon>201211141650067_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201212221606096_InitialCreate.resx">
+      <DependentUpon>201212221606096_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -139,6 +139,9 @@
     <Compile Include="Groups\Group.cs" />
     <Compile Include="Groups\IGroupFactory.cs" />
     <Compile Include="Groups\IGroupRepository.cs" />
+    <Compile Include="Notifications\Event.cs" />
+    <Compile Include="Notifications\Notification.cs" />
+    <Compile Include="Notifications\Suscription.cs" />
     <Compile Include="Organizations\IOrganizationAccountRepository.cs" />
     <Compile Include="Organizations\IOrganizationFactory.cs" />
     <Compile Include="Organizations\IOrganizationRepository.cs" />

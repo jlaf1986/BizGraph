@@ -77,5 +77,10 @@ namespace FHNWPrototype.Application.Services.Simple
             SecurityRepository.RegisterNewSystemAccount(email, password, isCorporateAccount); 
         }
 
+        public static void RegisterLastCheck(BasicProfile profile)
+        {
+            SecurityRepository.RegisterLastCheck(profile);
+        }
+
     }
 }

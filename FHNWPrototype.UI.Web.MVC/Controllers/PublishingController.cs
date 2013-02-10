@@ -28,11 +28,14 @@ namespace FHNWPrototype.Application.Controllers
 
             var context = GlobalHost.ConnectionManager.GetHubContext<Notifier>();
 
-            context.Clients.Group(postKey).LikedPost( myProfile.FullName + " liked this post");
+            context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), postKey);
 
-            context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), postKey); 
+            var msg = new { success = true, postKey=postKey, counter = counter };
 
-            var msg = new  { success=true, counter=counter };
+            context.Clients.Group(postKey).LikedPost(msg);
+
+            context.Clients.Group(postKey).NotificationReceived(msg);
+           
             return Json(msg);
 
         }
@@ -44,8 +47,15 @@ namespace FHNWPrototype.Application.Controllers
 
           var counter=  PublishingService.UnLikePost(myProfile.BasicProfile.ReferenceKey.ToString(), postKey);
 
-            var msg = new { success = true, counter = counter };
-            return Json(msg);
+          var context = GlobalHost.ConnectionManager.GetHubContext<Notifier>();
+
+          context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), postKey);
+
+          var msg = new { success = true, postKey = postKey, counter = counter };
+
+          context.Clients.Group(postKey).UnLikedPost(msg);
+
+          return Json(msg);
         }
         [HttpPost]
         public JsonResult LikeComment(string commentKey)
@@ -53,11 +63,17 @@ namespace FHNWPrototype.Application.Controllers
             CompleteProfile myProfile = (CompleteProfile)Session["myProfile"];
            var counter= PublishingService.LikeComment(myProfile.BasicProfile.ReferenceKey.ToString(), commentKey);
 
+           var context = GlobalHost.ConnectionManager.GetHubContext<Notifier>();
 
-      
+           context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), commentKey);
 
-            var msg = new { success = true, counter = counter };
-            return Json(msg);
+           var msg = new { success = true, commentKey = commentKey, counter = counter };
+
+           context.Clients.Group(commentKey).LikedComment(msg);
+
+           context.Clients.Group(commentKey).NotificationReceived(msg);
+
+           return Json(msg);
         }
         [HttpPost]
         public JsonResult UnLikeComment(string commentKey)
@@ -65,8 +81,15 @@ namespace FHNWPrototype.Application.Controllers
             CompleteProfile myProfile = (CompleteProfile)Session["myProfile"];
            var counter= PublishingService.UnLikeComment(myProfile.BasicProfile.ReferenceKey.ToString(), commentKey);
 
-            var msg = new { success = true, counter = counter };
-            return Json(msg);
+           var context = GlobalHost.ConnectionManager.GetHubContext<Notifier>();
+
+           context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), commentKey);
+
+           var msg = new { success = true, commentKey = commentKey, counter = counter };
+
+           context.Clients.Group(commentKey).UnLikedComment(msg);
+
+           return Json(msg);
         }
 
         [HttpPost]
@@ -100,6 +123,8 @@ namespace FHNWPrototype.Application.Controllers
 
             context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), returnedGuid);
 
+            context.Clients.Group(returnedGuid).NotificationReceived(msg);
+
             return Json(msg);
            
         }
@@ -131,6 +156,8 @@ namespace FHNWPrototype.Application.Controllers
 
 
             context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), returnedGuid);
+
+            context.Clients.Group(returnedGuid).NotificationReceived(msg);
 
             return Json(msg);
 
@@ -196,8 +223,9 @@ namespace FHNWPrototype.Application.Controllers
             string[] excluded = null;
             context.Clients.Group(wallOwnerAccountKey,excluded).NewCommentReceived(result);
 
-            context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), postKey); 
+            context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), postKey);
 
+            context.Clients.Group(postKey).NotificationReceived(msg);
 
             return Json(msg);
 
@@ -236,6 +264,7 @@ namespace FHNWPrototype.Application.Controllers
 
             context.Groups.Add(SignalRState.GetConnectionByUserId(User.Identity.Name), tweetKey);
 
+            context.Clients.Group(tweetKey).NotificationReceived(msg);
 
             return Json(msg);
 

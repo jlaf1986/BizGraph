@@ -126,7 +126,13 @@ namespace FHNWPrototype.Application.Controllers.Controllers
        // [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            CompleteProfile profile = (CompleteProfile)Session["myProfile"];
+
+            SecurityService.RegisterLastCheck(profile.BasicProfile);
+
             FormsAuthentication.SignOut();
+
+
 
             return RedirectToAction("Login", "Account");
         }
