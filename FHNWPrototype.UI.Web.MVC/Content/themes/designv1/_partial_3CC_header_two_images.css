@@ -97,12 +97,12 @@ header, #header{
     text-align:left;
 }
 
-    #organization_account a 
-    {
-        color:#FFFFFF;
-        font-weight:bold;
-        text-align:left;
-    }
+#organization_account a 
+{
+    color:#FFFFFF;
+    font-weight:bold;
+    text-align:left;
+}
 
 #profile_status {
     position:absolute;

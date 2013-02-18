@@ -12,6 +12,7 @@ using FHNWPrototype.Application.Controllers.UIViewModels.Geographics;
 using FHNWPrototype.Domain.Partnerships.States;
 using FHNWPrototype.Application.Controllers.UIViewModels._Global;
 using FHNWPrototype.Domain._Base.Accounts;
+using FHNWPrototype.UI.Web.MVC.Controllers.UIViewModels._Global;
 
 namespace FHNWPrototype.Application.Controllers.Controllers
 {
@@ -45,12 +46,12 @@ namespace FHNWPrototype.Application.Controllers.Controllers
             OrganizationAccountViewModel organizationAccountRetrieved = OrganizationAccountService.GetOrganizationAccountByKey(myProfile.BasicProfile.ReferenceKey.ToString());
 
             OrganizationAccountView organizationAccountView = new OrganizationAccountView();
-            CompleteProfileView completeProfile = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey=myProfile.BasicProfile.ReferenceKey.ToString(), AccountType=myProfile.BasicProfile.ReferenceType  }, FullName=myProfile.FullName, Description1=myProfile.Description1  };
+            CompleteProfileView completeProfile = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey=myProfile.BasicProfile.ReferenceKey.ToString(), AccountType=myProfile.BasicProfile.ReferenceType  }, FullName=myProfile.FullName, Description1=myProfile.Description1, Description2=myProfile.Description2  };
 
             organizationAccountView.Profile = completeProfile;
             
             organizationAccountView.Email = organizationAccountRetrieved.Email;
-
+            
             organizationAccountView.IsThisMyOwnProfile = true;
 
             organizationAccountView.EmployeesOfThisProfile = Converters.ConvertFromViewModelToView(OrganizationAccountService.GetEmployeesOfOrganizationAccountByKey(organizationAccountRetrieved.Profile.BasicProfile.ReferenceKey));
@@ -63,6 +64,9 @@ namespace FHNWPrototype.Application.Controllers.Controllers
 
             organizationAccountView.WallOfThisProfile = new ContentStreamView();
             organizationAccountView.WallOfThisProfile.Posts = new List<PostView>();
+            organizationAccountView.WallOfThisProfile.Tweets = new List<TweetView>();
+            organizationAccountView.WallOfThisProfile.Retweets = new List<RetweetView>();
+          
 
             var thisViewerKey = myProfile.BasicProfile.ReferenceKey.ToString();
             ContentStreamViewModel wallRetrieved = PublishingService.GetContentStreamAsNewsfeed(thisViewerKey, thisViewerKey);
@@ -98,15 +102,58 @@ namespace FHNWPrototype.Application.Controllers.Controllers
                     organizationAccountView.WallOfThisProfile.Posts.Add(thisPost);
                 }
             }
-          
- 
+
+
+            if (wallRetrieved.Tweets.Count > 0)
+            {
+                foreach (TweetViewModel tweet in wallRetrieved.Tweets)
+                {
+                    TweetView thisTweet = new TweetView();
+
+                    thisTweet.Key = tweet.Key;
+                    thisTweet.Text = tweet.Text;
+                    thisTweet.PublishDateTime = tweet.PublishDateTime;
+                    thisTweet.Author = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = tweet.Author.BasicProfile.ReferenceKey, AccountType = tweet.Author.BasicProfile.AccountType }, FullName = tweet.Author.FullName, Description1 = tweet.Author.Description1, Description2 = tweet.Author.Description2 };
+
+                    organizationAccountView.WallOfThisProfile.Tweets.Add(thisTweet);
+                }
+            }
+
+            if (wallRetrieved.Retweets.Count > 0)
+            {
+                foreach (RetweetViewModel retweet in wallRetrieved.Retweets)
+                {
+                    RetweetView thisRetweet = new RetweetView();
+
+                    thisRetweet.RetweetKey = retweet.RetweetKey;
+                    thisRetweet.TweetKey = retweet.TweetKey;
+
+                    thisRetweet.Text = retweet.Text;
+                    thisRetweet.PublishDateTime = retweet.PublishDateTime;
+                    thisRetweet.TweetPublishDateTime = retweet.TweetPublishDateTime.ToString();
+
+                    thisRetweet.RetweetAuthor = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = retweet.RetweetAuthor.BasicProfile.ReferenceKey, AccountType = retweet.RetweetAuthor.BasicProfile.AccountType }, FullName = retweet.RetweetAuthor.FullName, Description1 = retweet.RetweetAuthor.Description1, Description2 = retweet.RetweetAuthor.Description2 };
+
+                    thisRetweet.TweetAuthor = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = retweet.TweetAuthor.BasicProfile.ReferenceKey, AccountType = retweet.TweetAuthor.BasicProfile.AccountType }, FullName = retweet.TweetAuthor.FullName, Description1 = retweet.TweetAuthor.Description1, Description2 = retweet.TweetAuthor.Description2 };
+
+
+                    organizationAccountView.WallOfThisProfile.Retweets.Add(thisRetweet);
+                }
+            }
+
+            organizationAccountView.WallOfThisProfile.PublishedItems = new List<ISortingCapable>();
+
+            organizationAccountView.WallOfThisProfile.PublishedItems.AddRange(organizationAccountView.WallOfThisProfile.Posts);
+            organizationAccountView.WallOfThisProfile.PublishedItems.AddRange(organizationAccountView.WallOfThisProfile.Tweets);
+            organizationAccountView.WallOfThisProfile.PublishedItems.AddRange(organizationAccountView.WallOfThisProfile.Retweets);
+
+            organizationAccountView.WallOfThisProfile.PublishedItems = organizationAccountView.WallOfThisProfile.PublishedItems.OrderByDescending(x => x.PublishDateTime).ToList();
+             
             Dictionary<string, string> coordinates = new Dictionary<string, string>();
             coordinates.Add("Partner1", "47.548807,7.587820");
             coordinates.Add("Partner2", "46.948432,7.440461");
             coordinates.Add("Partner3", "46.519595,6.632335");
-
-          
-
+             
             return View("Newsfeed",organizationAccountView);
 
         }
@@ -130,8 +177,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
 
             organizationAccountView.MyGeoLocation = new GeoLocationView() { Latitude=organizationAccountRetrieved.Location.Latitude , Longitude=organizationAccountRetrieved.Location.Longitude };
 
-            organizationAccountView.WallOfThisProfile = new ContentStreamView();
-            organizationAccountView.WallOfThisProfile.Posts = new List<PostView>();
+        
 
             Dictionary<string, string> coordinates = new Dictionary<string, string>();
             coordinates.Add("Partner1", "47.548807,7.587820");
@@ -142,6 +188,8 @@ namespace FHNWPrototype.Application.Controllers.Controllers
 
             organizationAccountView.WallOfThisProfile = new ContentStreamView();
             organizationAccountView.WallOfThisProfile.Posts = new List<PostView>();
+            organizationAccountView.WallOfThisProfile.Tweets = new List<TweetView>();
+            organizationAccountView.WallOfThisProfile.Retweets = new List<RetweetView>();
 
             if (User.Identity.Name == organizationAccountRetrieved.Email)
             {
@@ -239,12 +287,62 @@ namespace FHNWPrototype.Application.Controllers.Controllers
              {
                  organizationAccountView.WallOfThisProfile = new ContentStreamView();
                  organizationAccountView.WallOfThisProfile.Posts = new List<PostView>();
+                 organizationAccountView.WallOfThisProfile.Tweets = new List<TweetView>();
+                 organizationAccountView.WallOfThisProfile.Retweets = new List<RetweetView>();
              }
+
+
+
+             if (wallRetrieved.Tweets.Count > 0)
+             {
+                 foreach (TweetViewModel tweet in wallRetrieved.Tweets)
+                 {
+                     TweetView thisTweet = new TweetView();
+
+                     thisTweet.Key = tweet.Key;
+                     thisTweet.Text = tweet.Text;
+                     thisTweet.PublishDateTime = tweet.PublishDateTime;
+                     thisTweet.Author = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = tweet.Author.BasicProfile.ReferenceKey, AccountType = tweet.Author.BasicProfile.AccountType }, FullName = tweet.Author.FullName, Description1 = tweet.Author.Description1, Description2 = tweet.Author.Description2 };
+
+                     organizationAccountView.WallOfThisProfile.Tweets.Add(thisTweet);
+                 }
+             }
+
+             if (wallRetrieved.Retweets.Count > 0)
+             {
+                 foreach (RetweetViewModel retweet in wallRetrieved.Retweets)
+                 {
+                     RetweetView thisRetweet = new RetweetView();
+
+                     thisRetweet.RetweetKey = retweet.RetweetKey;
+                     thisRetweet.TweetKey = retweet.TweetKey;
+
+                     thisRetweet.Text = retweet.Text;
+                     thisRetweet.PublishDateTime = retweet.PublishDateTime;
+                     thisRetweet.TweetPublishDateTime = retweet.TweetPublishDateTime.ToString();
+
+                     thisRetweet.RetweetAuthor = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = retweet.RetweetAuthor.BasicProfile.ReferenceKey, AccountType = retweet.RetweetAuthor.BasicProfile.AccountType }, FullName = retweet.RetweetAuthor.FullName, Description1 = retweet.RetweetAuthor.Description1, Description2 = retweet.RetweetAuthor.Description2 };
+
+                     thisRetweet.TweetAuthor = new CompleteProfileView { BasicProfile = new BasicProfileView { ReferenceKey = retweet.TweetAuthor.BasicProfile.ReferenceKey, AccountType = retweet.TweetAuthor.BasicProfile.AccountType }, FullName = retweet.TweetAuthor.FullName, Description1 = retweet.TweetAuthor.Description1, Description2 = retweet.TweetAuthor.Description2 };
+
+
+                     organizationAccountView.WallOfThisProfile.Retweets.Add(thisRetweet);
+                 }
+             }
+
 
             organizationAccountView.EmployeesOfThisProfile = Converters.ConvertFromViewModelToView(OrganizationAccountService.GetEmployeesOfOrganizationAccountByKey( organizationAccountRetrieved.Profile.BasicProfile.ReferenceKey));
             organizationAccountView.SisterDivisionsOfThisProfile = Converters.ConvertFromViewModelToView(OrganizationAccountService.GetSisterDivisionsOfOrganizationAccountByKey(organizationAccountRetrieved.Profile.BasicProfile.ReferenceKey ));
             organizationAccountView.PartnersOfThisProfile = Converters.ConvertFromViewModelToView(OrganizationAccountService.GetPartnersOfOrganizationAccountByKey(organizationAccountRetrieved.Profile.BasicProfile.ReferenceKey));
             organizationAccountView.AlliancesOfThisProfile = Converters.ConvertFromViewModelToView(OrganizationAccountService.GetAlliancesOfOrganizationAccountByKey(organizationAccountRetrieved.Profile.BasicProfile.ReferenceKey));
+
+            organizationAccountView.WallOfThisProfile.PublishedItems = new List<ISortingCapable>();
+
+            organizationAccountView.WallOfThisProfile.PublishedItems.AddRange(organizationAccountView.WallOfThisProfile.Posts);
+            organizationAccountView.WallOfThisProfile.PublishedItems.AddRange(organizationAccountView.WallOfThisProfile.Tweets);
+            organizationAccountView.WallOfThisProfile.PublishedItems.AddRange(organizationAccountView.WallOfThisProfile.Retweets);
+
+            organizationAccountView.WallOfThisProfile.PublishedItems = organizationAccountView.WallOfThisProfile.PublishedItems.OrderByDescending(x => x.PublishDateTime).ToList();
 
 
             return View("MyWall",organizationAccountView);

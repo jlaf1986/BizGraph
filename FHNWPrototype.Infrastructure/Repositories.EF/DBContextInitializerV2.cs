@@ -44,106 +44,106 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
             
             DateTime initialDate = DateTime.Now; //set properties for last check
 
-            byte[] header_picture_69 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._41);
+            byte[] header_picture_69 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._69);
             byte[] avatar_picture_69 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_70 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._42);
+            byte[] header_picture_70 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._70);
             byte[] avatar_picture_70 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_71 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._43);
+            byte[] header_picture_71 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._71);
             byte[] avatar_picture_71 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_72 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._44);
+            byte[] header_picture_72 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._72);
             byte[] avatar_picture_72 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_73 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._45);
+            byte[] header_picture_73 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._73);
             byte[] avatar_picture_73 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_74 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._46);
+            byte[] header_picture_74 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._74);
             byte[] avatar_picture_74 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_75 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._47);
+            byte[] header_picture_75 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._75);
             byte[] avatar_picture_75 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_76 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._48);
+            byte[] header_picture_76 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._76);
             byte[] avatar_picture_76 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_77 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._49);
+            byte[] header_picture_77 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._77);
             byte[] avatar_picture_77 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_78 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._50);
+            byte[] header_picture_78 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._78);
             byte[] avatar_picture_78 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_79 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._51);
+            byte[] header_picture_79 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._79);
             byte[] avatar_picture_79 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_80 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._52);
+            byte[] header_picture_80 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._80);
             byte[] avatar_picture_80 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_81 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._53);
+            byte[] header_picture_81 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._81);
             byte[] avatar_picture_81 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_82 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._54);
+            byte[] header_picture_82 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._82);
             byte[] avatar_picture_82 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_83 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._55);
+            byte[] header_picture_83 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._83);
             byte[] avatar_picture_83 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_84 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._56);
+            byte[] header_picture_84 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._84);
             byte[] avatar_picture_84 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_85 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._57);
+            byte[] header_picture_85 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._85);
             byte[] avatar_picture_85 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_86 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._58);
+            byte[] header_picture_86 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._86);
             byte[] avatar_picture_86 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_87 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._59);
+            byte[] header_picture_87 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._87);
             byte[] avatar_picture_87 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_88 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._60);
+            byte[] header_picture_88 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._88);
             byte[] avatar_picture_88 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_89 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._61);
+            byte[] header_picture_89 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._89);
             byte[] avatar_picture_89 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_90 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._62);
+            byte[] header_picture_90 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._90);
             byte[] avatar_picture_90 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_91 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._63);
+            byte[] header_picture_91 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._91);
             byte[] avatar_picture_91 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_92 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._64);
+            byte[] header_picture_92 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._92);
             byte[] avatar_picture_92 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_93 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._65);
+            byte[] header_picture_93 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._93);
             byte[] avatar_picture_93 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_94 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._66);
+            byte[] header_picture_94 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._94);
             byte[] avatar_picture_94 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_95 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._67);
+            byte[] header_picture_95 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._95);
             byte[] avatar_picture_95 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_96 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._68);
+            byte[] header_picture_96 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._96);
             byte[] avatar_picture_96 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_97 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._69);
+            byte[] header_picture_97 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._97);
             byte[] avatar_picture_97 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_98 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._70);
+            byte[] header_picture_98 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._98);
             byte[] avatar_picture_98 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_99 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._71);
+            byte[] header_picture_99 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._99);
             byte[] avatar_picture_99 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_100 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._72);
+            byte[] header_picture_100 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._100);
             byte[] avatar_picture_100 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_101 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._73);
+            byte[] header_picture_101 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._101);
             byte[] avatar_picture_101 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
-            byte[] header_picture_102 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._74);
+            byte[] header_picture_102 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources._102);
             byte[] avatar_picture_102 = Utilities.ConvertImageToByteArray(FHNWPrototype.Infrastructure.Properties.Resources.logo_company);
 
            
@@ -223,8 +223,8 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
 
             context.Geolocations.Add(location_organization69);
             context.Geolocations.Add(location_organization70);
-            context.Geolocations.Add(location_organization72);
             context.Geolocations.Add(location_organization71);
+            context.Geolocations.Add(location_organization72);
             context.Geolocations.Add(location_organization73);
             context.Geolocations.Add(location_organization74);
             context.Geolocations.Add(location_organization75);
@@ -259,12 +259,12 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF
 
             context.Geolocations.Add(location_organization102);
             
-            var organization69 = new Organization { Key= new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E100"), Name= "Organization 69", Description= "Organization 69", EmailSuffix= "org69.com",  HeaderPicture= header_picture_97, HeadquatersLocation=location_organization69 };
-            var organization70 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E101"), Name = "Organization 70", Description = "Organization 70", EmailSuffix = "org70.com", HeaderPicture = header_picture_98, HeadquatersLocation = location_organization70 };
-            var organization71 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E102"), Name = "Organization 71", Description = "Organization 71", EmailSuffix = "org71.com", HeaderPicture = header_picture_99, HeadquatersLocation = location_organization72 };
-            var organization72 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E103"), Name = "Organization 72", Description = "Organization 72", EmailSuffix = "org72.com", HeaderPicture = header_picture_100, HeadquatersLocation = location_organization71 };
-            var organization73 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E104"), Name = "Organization 73", Description = "Organization 73", EmailSuffix = "org73.com", HeaderPicture = header_picture_101, HeadquatersLocation = location_organization73 };
-            var organization74 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E105"), Name = "Organization 74", Description = "Organization 74", EmailSuffix = "org74.com", HeaderPicture = header_picture_102, HeadquatersLocation = location_organization74 };
+            var organization69 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E100"), Name = "Organization 69", Description = "Organization 69", EmailSuffix = "org69.com", HeaderPicture = header_picture_69, HeadquatersLocation = location_organization69 };
+            var organization70 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E101"), Name = "Organization 70", Description = "Organization 70", EmailSuffix = "org70.com", HeaderPicture = header_picture_70, HeadquatersLocation = location_organization70 };
+            var organization71 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E102"), Name = "Organization 71", Description = "Organization 71", EmailSuffix = "org71.com", HeaderPicture = header_picture_71, HeadquatersLocation = location_organization71 };
+            var organization72 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E103"), Name = "Organization 72", Description = "Organization 72", EmailSuffix = "org72.com", HeaderPicture = header_picture_72, HeadquatersLocation = location_organization72 };
+            var organization73 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E104"), Name = "Organization 73", Description = "Organization 73", EmailSuffix = "org73.com", HeaderPicture = header_picture_73, HeadquatersLocation = location_organization73 };
+            var organization74 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E105"), Name = "Organization 74", Description = "Organization 74", EmailSuffix = "org74.com", HeaderPicture = header_picture_74, HeadquatersLocation = location_organization74 };
             var organization75 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E106"), Name = "Organization 75", Description = "Organization 75", EmailSuffix = "org75.com", HeaderPicture = header_picture_75, HeadquatersLocation = location_organization75 };
             var organization76 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E107"), Name = "Organization 76", Description = "Organization 76", EmailSuffix = "org76.com", HeaderPicture = header_picture_76, HeadquatersLocation = location_organization76 };
             var organization77 = new Organization { Key = new Guid("BCBCCE0E-7C9F-4386-98AA-1458F308E108"), Name = "Organization 77", Description = "Organization 77", EmailSuffix = "org77.com", HeaderPicture = header_picture_77, HeadquatersLocation = location_organization77 };

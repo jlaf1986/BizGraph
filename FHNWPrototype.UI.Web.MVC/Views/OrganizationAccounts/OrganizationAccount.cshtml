@@ -10,7 +10,7 @@
  
 @if (@Model.WallOfThisProfile  != null)
 {
-    <div id="post_zone">
+    <div id="publishing_zone">
 
         <section id="new_post_section">
             <article id="new_article_post" class="post"  >
@@ -156,12 +156,125 @@
 
 
 @section scripts{
-    <script type="text/javascript">    
+    @*<script type="text/javascript">    
         RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey");  
         RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")");       
         RegisterLikePostEvent("@Url.Action("LikePost","Publishing")");
         RegisterLikeCommentEvent("@Url.Action("LikeComment","Publishing")");
         RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");      
         RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");  
+    </script>*@
+
+    
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.signalR-1.0.0-alpha2.min.js")" ></script>
+
+      <script type="text/javascript" src="@Url.Content("~/signalr/hubs")" ></script>
+      <script>
+
+          $(document).ready(function () {
+
+              var connection = $.hubConnection();
+              var notifier = connection.createHubProxy('notifier');
+              connection.start()
+                  .done(function () {
+
+
+                      RegisterNewPostEvent("@Url.Action("SubmitNewPost","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
+                    RegisterNewCommentEvent("@Url.Action("SubmitNewComment","Publishing")", "@Model.Profile.BasicProfile.ReferenceKey", notifier);
+
+                    RegisterLikePostEvent("@Url.Action("LikePost","Publishing")");
+                    RegisterLikeCommentEvent("@Url.Action("LikeComment","Publishing")");
+
+                    RegisterUnLikePostEvent("@Url.Action("UnLikePost","Publishing")");
+                    RegisterUnLikeCommentEvent("@Url.Action("UnLikeComment","Publishing")");
+
+                    RegisterDeletePostEvent("@Url.Action("DeletePost","Publishing")");
+                    RegisterDeleteCommentEvent("@Url.Action("DeleteComment","Publishing")");
+
+                    notifier.invoke('SuscribeMe', '@Model.Profile.BasicProfile.ReferenceKey')
+                     
+
+                      @foreach(var groupProfile in Model.AlliancesOfThisProfile)
+                  {
+                    <text>
+                    notifier.invoke('SuscribeMe', '@groupProfile.BasicProfile.ReferenceKey')
+                    .done(function () {
+
+                    })
+                    .fail(function () {
+
+                    });
+                    </text>
+                  }
+
+                      @foreach(var workContactProfile in Model.SisterDivisionsOfThisProfile)
+                 {
+                    <text>
+                    notifier.invoke('SuscribeMe', '@workContactProfile.BasicProfile.ReferenceKey')
+                    .done(function () {
+
+                    })
+                    .fail(function () {
+
+                    });
+                    </text>
+                  }
+
+                @foreach(var partnershipContactProfile in Model.PartnersOfThisProfile)
+                 {
+                    <text>
+                    notifier.invoke('SuscribeMe', '@partnershipContactProfile.BasicProfile.ReferenceKey')
+                    .done(function () {
+
+                    })
+                    .fail(function () {
+
+                    });
+                    </text>
+                  }
+
+
+
+
+                    //previosuly
+                   @* notifier.on('NewPostReceived', function (data1) {
+                        var postKey = { postKey: data1 };
+                        // alert('notification received key is: ' + postKey);
+                        $.post("@Url.Action("GetExternalPost","Publishing")", postKey, function (data2) {
+
+                            $(data2).insertAfter('section#new_post_section');
+
+                        });
+
+                       });*@
+
+                })
+                    .fail(function () { alert('connection failed'); });
+
+
+            notifier.on('NewPostReceived', function (data) {
+                var postKey = data.postKey;
+                var processedHtml = data.processedHtml;
+                $(processedHtml).insertAfter('section#new_post_section');
+                var parameter = { postKey: postKey }
+                $.get("@Url.Action("CreateMyInputForThisPost","Publishing")", parameter, function (result) {
+                    $(result).insertAfter('article#post_' + postKey);
+                });
+
+            });
+
+            notifier.on('NewCommentReceived', function (data) {
+
+                var postKey = data.postKey;
+                var processedHtml = data.processedHtml;
+
+                var theNewCommentArticleOfThisPost = $('#post_zone').find('#new_comment_post_' + postKey);
+
+                $(processedHtml).insertBefore(theNewCommentArticleOfThisPost);
+            });
+
+        });
+
     </script>
+
 }

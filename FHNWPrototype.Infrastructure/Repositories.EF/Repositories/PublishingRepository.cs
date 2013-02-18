@@ -80,11 +80,18 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
             newsfeed.Tweets = new List<Tweet>();
             newsfeed.Retweets = new List<Retweet>();
 
-            List<Post> postsFromMe = new List<Post>();
+            //used when the viewer is a user account
+            List<Post> postsFromMyEmployer = new List<Post>();
+            List<Tweet> tweetsFromEmployer = new List<Tweet>();
+            List<Retweet> retweetsFromEmployer = new List<Retweet>();
+
+            List<Post> postsToMe = new List<Post>();
+
             List<Post> postsFromPeersReceived = new List<Post>();
             List<Post> postsFromPeersRequested = new List<Post>();
 
-            List<Tweet> tweetsFromMe = new List<Tweet>();
+            List<Tweet> tweetsToMe = new List<Tweet>();
+
             List<Tweet> tweetsFromPeersReceived = new List<Tweet>();
             List<Tweet> tweetsFromPeersRequested = new List<Tweet>();
 
@@ -114,43 +121,82 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                                             .FirstOrDefault(x => x.Key == OwnerKey);
 
 
-                    var postsFromMyWall = db.ContentStreams
+                    var employer = db.UserAccounts
+                                            .Include("OrganizationAccount")
+                                            .FirstOrDefault(x=> x.Key==owner.Key)
+                                            .OrganizationAccount.Key;
+
+                    var anyPostsOnMyEmployersWall = db.ContentStreams
+                                                    .Include("Owner")
+                                                    .Include("Posts.Author")
+                                                    .Include("Posts.PostLikes.Author")
+                                                    .Include("Posts.Comments.Author")
+                                                    .Include("Posts.Comments.CommentLikes.Author")
+                                                    .FirstOrDefault(x => x.Owner.ReferenceKey == employer)
+                                                    .Posts
+                                                    .OrderByDescending(y=>y.PublishDateTime)
+                                                    .ToList();
+
+                    if (anyPostsOnMyEmployersWall != null) postsFromMyEmployer.AddRange(anyPostsOnMyEmployersWall);
+
+
+                    var anyPostsOnMyWall = db.ContentStreams
                                                 .Include("Owner")
-                                               .Include("Posts.Author")
+                                                .Include("Posts.Author")
                                                 .Include("Posts.PostLikes.Author")
                                                 .Include("Posts.Comments.Author")
                                                 .Include("Posts.Comments.CommentLikes.Author")
                                                 .FirstOrDefault(x => x.Owner.ReferenceKey == OwnerKey)
-                                                .Posts.Where(x => x.Author.ReferenceKey == OwnerKey )
+                                                .Posts 
                                                 .OrderByDescending(y => y.PublishDateTime)
-                                                .Take(3).ToList();
+                                                .ToList();
 
 
-                    if (postsFromMyWall != null) postsFromMe.AddRange(postsFromMyWall);
+                    if (anyPostsOnMyWall != null) postsToMe.AddRange(anyPostsOnMyWall);
+
+              
 
 
+                    var tweetsOnMyEmployerWall = db.ContentStreams
+                                                 .Include("Owner")
+                                                 .Include("Tweets.Author")
+                                                 .FirstOrDefault(x => x.Owner.ReferenceKey == employer)
+                                                 .Tweets.Where(x => x.Author.ReferenceKey == employer)
+                                                 .OrderByDescending(y => y.PublishDateTime)
+                                                 .ToList();
+
+                    if (tweetsOnMyEmployerWall != null) tweetsFromEmployer.AddRange(tweetsOnMyEmployerWall);
 
                     var tweetsFromMyWall = db.ContentStreams
-                                                           .Include("Owner")
-                                                         .Include("Tweets.Author")
+                                                            .Include("Owner")
+                                                            .Include("Tweets.Author")
                                                             .FirstOrDefault(x => x.Owner.ReferenceKey == OwnerKey )
-
-                                                           .Tweets.Where(x => x.Author.ReferenceKey == OwnerKey )
+                                                            .Tweets.Where(x => x.Author.ReferenceKey == OwnerKey )
                                                             .OrderByDescending(y => y.PublishDateTime)
-                                                            .Take(3).ToList();
+                                                            .ToList();
 
-                    if (tweetsFromMyWall != null) tweetsFromMe.AddRange(tweetsFromMyWall);
+                    if (tweetsFromMyWall != null) tweetsToMe.AddRange(tweetsFromMyWall);
 
+
+                    var retweetsFromMyEmployerWall = db.ContentStreams
+                                               .Include("Owner")
+                                               .Include("Retweets.Author")
+                                               .Include("Retweets.Tweet.Author")
+                                               .FirstOrDefault(x => x.Owner.ReferenceKey == employer)
+                                               .Retweets.Where(x => x.Author.ReferenceKey == employer)
+                                               .OrderByDescending(y => y.PublishDateTime)
+                                               .ToList();
+
+                    if (retweetsFromMyEmployerWall != null) retweetsFromEmployer.AddRange(retweetsFromMyEmployerWall);
 
                     var retweetsFromMyWall = db.ContentStreams
-                                                         .Include("Owner")
-                                                       .Include("Retweets.Author")
-                                                       .Include("Retweets.Tweet.Author")
-                                                          .FirstOrDefault(x => x.Owner.ReferenceKey == OwnerKey )
-
-                                                         .Retweets.Where(x => x.Author.ReferenceKey == OwnerKey )
-                                                          .OrderByDescending(y => y.PublishDateTime)
-                                                          .Take(3).ToList();
+                                                            .Include("Owner")
+                                                            .Include("Retweets.Author")
+                                                            .Include("Retweets.Tweet.Author")
+                                                            .FirstOrDefault(x => x.Owner.ReferenceKey == OwnerKey )
+                                                            .Retweets.Where(x => x.Author.ReferenceKey == OwnerKey )
+                                                            .OrderByDescending(y => y.PublishDateTime)
+                                                            .ToList();
 
                     if (retweetsFromMyWall != null) retweetsFromMe.AddRange(retweetsFromMyWall);
 
@@ -172,7 +218,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                                                              
                                                             .Posts.Where(x => x.Author.ReferenceKey == friendship.Sender.Key)
                                                              .OrderByDescending(y => y.PublishDateTime)
-                                                             .Take(3).ToList();
+                                                             .ToList();
 
                         if (postsFromWallOfReceived != null) postsFromPeersReceived.AddRange(postsFromWallOfReceived);
 
@@ -183,7 +229,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
 
                                                              .Tweets.Where(x => x.Author.ReferenceKey == friendship.Sender.Key)
                                                               .OrderByDescending(y => y.PublishDateTime)
-                                                              .Take(3).ToList();
+                                                              .ToList();
 
                         if (tweetsFromWallOfReceived != null) tweetsFromPeersReceived.AddRange(tweetsFromWallOfReceived);
 
@@ -196,7 +242,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
 
                                                              .Retweets.Where(x => x.Author.ReferenceKey == friendship.Sender.Key)
                                                               .OrderByDescending(y => y.PublishDateTime)
-                                                              .Take(3).ToList();
+                                                              .ToList();
 
                         if (retweetsFromWallOfReceived != null) retweetsFromPeersReceived.AddRange(retweetsFromWallOfReceived);
 
@@ -216,7 +262,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                                                                     .FirstOrDefault(x => x.Owner.ReferenceKey == friendship.Receiver.Key)
                                                                      .Posts.Where(x => x.Author.ReferenceKey == friendship.Receiver.Key)
                                                                     .OrderByDescending(y => y.PublishDateTime)
-                                                                    .Take(3).ToList();
+                                                                    .ToList();
 
                         if (postFromWallRequested != null) postsFromPeersRequested.AddRange(postFromWallRequested);
 
@@ -228,7 +274,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                                                                   .FirstOrDefault(x => x.Owner.ReferenceKey == friendship.Receiver.Key)
                                                                    .Tweets.Where(x => x.Author.ReferenceKey == friendship.Receiver.Key)
                                                                   .OrderByDescending(y => y.PublishDateTime)
-                                                                  .Take(3).ToList();
+                                                                  .ToList();
 
                         if (tweetsFromWallRequested != null) tweetsFromPeersRequested.AddRange(tweetsFromWallRequested);
 
@@ -240,7 +286,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                                                               .FirstOrDefault(x => x.Owner.ReferenceKey == friendship.Receiver.Key)
                                                                .Retweets.Where(x => x.Author.ReferenceKey == friendship.Receiver.Key)
                                                               .OrderByDescending(y => y.PublishDateTime)
-                                                              .Take(3).ToList();
+                                                              .ToList();
 
                         if (retweetsFromWallRequested != null) retweetsFromPeersRequested.AddRange(retweetsFromWallRequested);
 
@@ -256,6 +302,44 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                                                     .Include("PartnershipsRequested.Receiver")
                                                     .FirstOrDefault(x => x.Key == OwnerKey);
 
+                    var postsFromMyWall = db.ContentStreams
+                                               .Include("Owner")
+                                               .Include("Posts.Author")
+                                               .Include("Posts.PostLikes.Author")
+                                               .Include("Posts.Comments.Author")
+                                               .Include("Posts.Comments.CommentLikes.Author")
+                                               .FirstOrDefault(x => x.Owner.ReferenceKey == OwnerKey)
+                                               .Posts
+                                               .OrderByDescending(y => y.PublishDateTime)
+                                               .ToList();
+
+
+                    if (postsFromMyWall != null) postsToMe.AddRange(postsFromMyWall);
+
+                    var tweetsFromMyWall = db.ContentStreams
+                                                       .Include("Owner")
+                                                     .Include("Tweets.Author")
+                                                        .FirstOrDefault(x => x.Owner.ReferenceKey == OwnerKey)
+
+                                                       .Tweets
+                                                        .OrderByDescending(y => y.PublishDateTime)
+                                                        .ToList();
+
+                    if (tweetsFromMyWall != null) tweetsToMe.AddRange(tweetsFromMyWall);
+
+
+                    var retweetsFromMyWall = db.ContentStreams
+                                                         .Include("Owner")
+                                                       .Include("Retweets.Author")
+                                                       .Include("Retweets.Tweet.Author")
+                                                          .FirstOrDefault(x => x.Owner.ReferenceKey == OwnerKey)
+
+                                                         .Retweets.Where(x => x.Author.ReferenceKey == OwnerKey)
+                                                          .OrderByDescending(y => y.PublishDateTime)
+                                                          .ToList();
+
+                    if (retweetsFromMyWall != null) retweetsFromMe.AddRange(retweetsFromMyWall);
+                     
                     foreach (PartnershipStateInfo partnership in owner.PartnershipsReceived)
                     {
 
@@ -270,7 +354,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                                                                     .FirstOrDefault(x => x.Owner.ReferenceKey == partnership.Sender.Key)
                                                                     .Posts.Where(x => x.Author.ReferenceKey == partnership.Sender.Key)
                                                                     .OrderByDescending(y => y.PublishDateTime)
-                                                                    .Take(3).ToList();
+                                                                    .ToList();
 
                         if (postsfromWallOfReceived != null) postsFromPeersReceived.AddRange(postsfromWallOfReceived);
 
@@ -282,7 +366,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                                                                   .FirstOrDefault(x => x.Owner.ReferenceKey == partnership.Sender.Key)
                                                                   .Tweets.Where(x => x.Author.ReferenceKey == partnership.Sender.Key)
                                                                   .OrderByDescending(y => y.PublishDateTime)
-                                                                  .Take(3).ToList();
+                                                                  .ToList();
 
                         if (tweetsfromWallOfReceived != null) tweetsFromPeersReceived.AddRange(tweetsfromWallOfReceived);
 
@@ -293,7 +377,7 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                                                                 .FirstOrDefault(x => x.Owner.ReferenceKey == partnership.Sender.Key)
                                                                 .Retweets.Where(x => x.Author.ReferenceKey == partnership.Sender.Key)
                                                                 .OrderByDescending(y => y.PublishDateTime)
-                                                                .Take(3).ToList();
+                                                                .ToList();
 
                         if (retweetsfromWallOfReceived != null) retweetsFromPeersReceived.AddRange(retweetsfromWallOfReceived);
 
@@ -304,23 +388,64 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                     {
                        // var peerProfile = db.BasicProfiles.SingleOrDefault(x => x.ReferenceKey == partnership.Receiver.Key);
 
-                        var temp = db.ContentStreams
-                                                                      .Include("Owner")
-                                                                      .Include("Posts.Author")
-                                                                      .Include("Posts.PostLikes.Author")
-                                                                      .Include("Posts.Comments.Author")
-                                                                      .Include("Posts.Comments.CommentLikes.Author")
+                        //var temp = db.ContentStreams
+                        //                                              .Include("Owner")
+                        //                                              .Include("Posts.Author")
+                        //                                              .Include("Posts.PostLikes.Author")
+                        //                                              .Include("Posts.Comments.Author")
+                        //                                              .Include("Posts.Comments.CommentLikes.Author")
+                        //                                            .FirstOrDefault(x => x.Owner.ReferenceKey == partnership.Receiver.Key)
+                        //                                            .Posts.Where(x => x.Author.ReferenceKey == partnership.Receiver.Key)
+                        //                                            .OrderByDescending(y => y.PublishDateTime)
+                        //                                            .Take(3).ToList();
+
+                        //if (temp != null) postsFromPeersRequested.AddRange(temp);
+
+
+                        var postFromWallRequested = db.ContentStreams
+                                                                    .Include("Owner")
+                                                                    .Include("Posts.Author")
+                                                                    .Include("Posts.PostLikes.Author")
+                                                                    .Include("Posts.Comments.Author")
+                                                                    .Include("Posts.Comments.CommentLikes.Author")
                                                                     .FirstOrDefault(x => x.Owner.ReferenceKey == partnership.Receiver.Key)
                                                                     .Posts.Where(x => x.Author.ReferenceKey == partnership.Receiver.Key)
                                                                     .OrderByDescending(y => y.PublishDateTime)
-                                                                    .Take(3).ToList();
+                                                                    .ToList();
 
-                        if (temp != null) postsFromPeersRequested.AddRange(temp);
+                        if (postFromWallRequested != null) postsFromPeersRequested.AddRange(postFromWallRequested);
+
+
+                        var tweetsFromWallRequested = db.ContentStreams
+                                                                  .Include("Owner")
+                                                                  .Include("Tweets.Author")
+                                                                  .FirstOrDefault(x => x.Owner.ReferenceKey == partnership.Receiver.Key)
+                                                                  .Tweets.Where(x => x.Author.ReferenceKey == partnership.Receiver.Key)
+                                                                  .OrderByDescending(y => y.PublishDateTime)
+                                                                  .ToList();
+
+                        if (tweetsFromWallRequested != null) tweetsFromPeersRequested.AddRange(tweetsFromWallRequested);
+
+
+                        var retweetsFromWallRequested = db.ContentStreams
+                                                                .Include("Owner")
+                                                                .Include("Retweets.Author")
+                                                                .Include("Retweets.Tweet.Author")
+                                                                .FirstOrDefault(x => x.Owner.ReferenceKey == partnership.Receiver.Key)
+                                                                .Retweets.Where(x => x.Author.ReferenceKey == partnership.Receiver.Key)
+                                                                .OrderByDescending(y => y.PublishDateTime)
+                                                                .ToList();
+
+                        if (retweetsFromWallRequested != null) retweetsFromPeersRequested.AddRange(retweetsFromWallRequested);
+
+
                     }
 
                 }
 
-                if (postsFromMe != null) newsfeed.Posts = newsfeed.Posts.Union(postsFromMe).ToList();
+                if (postsToMe != null) newsfeed.Posts = newsfeed.Posts.Union(postsToMe).ToList();
+
+                if (postsFromMyEmployer != null) newsfeed.Posts = newsfeed.Posts.Union(postsFromMyEmployer).ToList();
 
                 if (postsFromPeersReceived != null) newsfeed.Posts= newsfeed.Posts.Union(postsFromPeersReceived).ToList();
 
@@ -329,7 +454,9 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
                 newsfeed.Posts = newsfeed.Posts.OrderByDescending(x => x.PublishDateTime).ToList();
 
 
-                if (tweetsFromMe != null) newsfeed.Tweets= newsfeed.Tweets.Union(tweetsFromMe).ToList();
+                if (tweetsToMe != null) newsfeed.Tweets= newsfeed.Tweets.Union(tweetsToMe).ToList();
+
+                if (tweetsFromEmployer != null) newsfeed.Tweets = newsfeed.Tweets.Union(tweetsFromEmployer).ToList();
 
                 if (tweetsFromPeersReceived != null) newsfeed.Tweets = newsfeed.Tweets.Union(tweetsFromPeersReceived).ToList();
 
@@ -339,6 +466,8 @@ namespace FHNWPrototype.Infrastructure.Repositories.EF.Repositories
 
 
                 if (retweetsFromMe != null) newsfeed.Retweets= newsfeed.Retweets.Union(retweetsFromMe).ToList();
+
+                if (retweetsFromEmployer != null) newsfeed.Retweets = newsfeed.Retweets.Union(retweetsFromEmployer).ToList();
 
                 if (retweetsFromPeersReceived != null) newsfeed.Retweets = newsfeed.Retweets.Union(retweetsFromPeersReceived).ToList();
 

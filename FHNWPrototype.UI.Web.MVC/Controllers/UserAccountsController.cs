@@ -164,7 +164,7 @@ namespace FHNWPrototype.Application.Controllers.Controllers
 
         public ActionResult UserAccount(string id)
         {
-            CompleteProfile  myProfile = (CompleteProfile )Session["myProfile"];
+            CompleteProfile  myProfile = (CompleteProfile ) Session["myProfile"];
 
         
             UserAccountViewModel accountRetrieved = UserAccountService.GetUserAccountByKey(id);

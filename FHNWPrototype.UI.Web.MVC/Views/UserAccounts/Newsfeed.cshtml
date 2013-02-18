@@ -13,12 +13,6 @@
 @using FHNWPrototype.Domain._Base.Accounts
 
 
-@*<div class="ui-widget">    
-    <label for="tags">Tag programming languages: </label>    
-    <input id="tags" size="50" />
-
-</div>*@
-
 @if (@Model.WallOfThisProfile  != null)
 {
     <div id="publishing_zone">
@@ -73,7 +67,7 @@
 
         @foreach(FHNWPrototype.UI.Web.MVC.Controllers.UIViewModels._Global.ISortingCapable item in Model.WallOfThisProfile.PublishedItems)
         {
-            if(item.GetType() ==typeof(PostView) )
+            if(item.GetType() == typeof(PostView) )
             {
                 PostView post = (PostView)item;
                 post.AllowedToDeletePost  = Model.IsThisMyOwnProfile;
